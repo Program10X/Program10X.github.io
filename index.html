@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program10X | Login to Learn C & AI</title>
+    <title>Program10X | Login & Register to Learn C & AI</title>
     <style>
         * {
             margin: 0;
@@ -188,20 +188,68 @@
             z-index: 5;
         }
 
-        .login-box { width: 100%; max-width: 400px; }
-        .login-box h2 { font-size: 2rem; margin-bottom: 8px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-        .login-box p.subtitle { color: #cbd5e1; font-size: 14px; margin-bottom: 30px; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; font-size: 14px; color: #cbd5e1; margin-bottom: 8px; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+        /* 🆕 DYNAMIC SWITCHABLE BOX */
+        .auth-container { 
+            width: 100%; 
+            max-width: 400px; 
+            background: rgba(10, 15, 28, 0.85);
+            border: 1px solid rgba(26, 115, 232, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* MODERN SWITCH TABS */
+        .auth-tabs {
+            display: flex;
+            background: #111625;
+            padding: 4px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            padding: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #1a73e8;
+            color: white;
+            box-shadow: 0 2px 10px rgba(26, 115, 232, 0.4);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .auth-container h2 { font-size: 1.8rem; margin-bottom: 6px; color: #ffffff; }
+        .auth-container p.subtitle { color: #cbd5e1; font-size: 13px; margin-bottom: 20px; }
+        
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; }
         
         .input-group input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 11px 14px;
             background: rgba(15, 22, 38, 0.9); 
             border: 1px solid rgba(26, 115, 232, 0.4);
             border-radius: 8px;
             color: #ffffff;
-            font-size: 15px;
+            font-size: 14px;
             transition: all 0.3s ease;
         }
 
@@ -216,47 +264,40 @@
             justify-content: space-between;
             align-items: center;
             font-size: 13px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .forgot-pass {
             color: #38bdf8;
             text-decoration: none;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
-
         .forgot-pass:hover { text-decoration: underline; }
 
-        /* 🟩 SIGN UP BUTTON STYLING */
-        .signup-link {
-            color: #00ff66;
-            text-decoration: none;
-            font-weight: 600;
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .signup-link:hover {
-            text-decoration: underline;
-            text-shadow: 0 0 15px #00ff66;
-        }
-        
-        .login-btn {
+        .submit-btn {
             width: 100%;
-            padding: 14px;
+            padding: 13px;
             background: #1a73e8;
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .login-btn:hover {
+        .submit-btn:hover {
             background: #155cb8;
             box-shadow: 0 0 20px rgba(26, 115, 232, 0.5);
+        }
+
+        .submit-btn.green-btn {
+            background: #00ff66;
+            color: #020204;
+        }
+        .submit-btn.green-btn:hover {
+            background: #00cc52;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.5);
         }
         
         @media (max-width: 768px) {
@@ -296,155 +337,55 @@
     </div>
 
     <div class="right-side">
-        <div class="login-box">
-            <h2>Hi, Welcome to P10X</h2>
-            <p class="subtitle">Enter your details to log in your account</p>
-            <form onsubmit="startCyberLogin(event)">
-                <div class="input-group">
-                    <label for="username">Username / Email *</label>
-                    <input type="email" id="username" placeholder="name@program10x.com" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password *</label>
-                    <input type="password" id="password" placeholder="Enter your password" required>
-                </div>
-                
-                <div class="form-footer-links">
-                    <a href="#" class="forgot-pass">Forgot password?</a>
-                    <a href="#" class="signup-link" onclick="triggerSignUp(event)">Create account</a>
-                </div>
-                
-                <button type="submit" class="login-btn">Log in</button>
-            </form>
+        <div class="auth-container">
+            
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchAuthTab('login')">Student Login</button>
+                <button class="tab-btn" onclick="switchAuthTab('register')">Register Now</button>
+            </div>
+
+            <div id="loginForm" class="auth-form active">
+                <h2>Welcome Back</h2>
+                <p class="subtitle">Enter your credentials to access your dashboard</p>
+                <form onsubmit="startCyberAnimation(event, 'login')">
+                    <div class="input-group">
+                        <label for="loginEmail">Username / Email *</label>
+                        <input type="email" id="loginEmail" placeholder="name@program10x.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="loginPassword">Password *</label>
+                        <input type="password" id="loginPassword" placeholder="Enter password" required>
+                    </div>
+                    <div class="form-footer-links">
+                        <a href="#" class="forgot-pass">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="submit-btn">Log in</button>
+                </form>
+            </div>
+
+            <div id="registerForm" class="auth-form">
+                <h2>Create Account</h2>
+                <p class="subtitle">Join the 10X coding space and build tech agents</p>
+                <form onsubmit="startCyberAnimation(event, 'register')">
+                    <div class="input-group">
+                        <label for="regName">Full Name *</label>
+                        <input type="text" id="regName" placeholder="Enter full name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="regEmail">Email Address *</label>
+                        <input type="email" id="regEmail" placeholder="you@example.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="regPassword">Create Security Password *</label>
+                        <input type="password" id="regPassword" placeholder="Minimum 6 characters" required>
+                    </div>
+                    <button type="submit" class="submit-btn green-btn">Create 10X Account</button>
+                </form>
+            </div>
+
         </div>
     </div>
 
     <script>
-        const canvas = document.getElementById('coderRain');
-        const ctx = canvas.getContext('2d');
-        
-        function resizeCanvas() { 
-            canvas.width = window.innerWidth; 
-            canvas.height = window.innerHeight; 
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const alphabet = "010101010101010101010101ABCDEFGHIJKLMNOPQRSTUVWXYZ<>[]{}/_=+X%#$@";
-        const fontSize = 12; 
-        const columns = canvas.width / fontSize;
-        const rainDrops = Array(Math.floor(columns)).fill(1);
-
-        for (let x = 0; x < columns; x++) {
-            rainDrops[x] = Math.random() * -100;
-        }
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(2, 2, 4, 0.05)'; 
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = '#00ff66'; 
-            ctx.font = 'bold ' + fontSize + 'px monospace';
-            
-            ctx.shadowBlur = 6;
-            ctx.shadowColor = '#00ff66';
-            
-            for (let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-                
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.985) {
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i]++;
-            }
-            ctx.shadowBlur = 0; 
-        }
-        setInterval(drawMatrix, 28); 
-
-        document.getElementById('terminalOverlay').style.display = 'none';
-
-        function startCyberLogin(e) {
-            e.preventDefault();
-            
-            const overlay = document.getElementById('terminalOverlay');
-            const pBar = document.getElementById('progressBar');
-            const statusSub = document.getElementById('statusSub');
-            const accessText = document.getElementById('accessText');
-            const logBox = document.getElementById('logBox');
-
-            overlay.style.display = 'flex';
-            pBar.style.width = '0%';
-            accessText.style.display = 'none';
-            statusSub.innerText = "AUTHENTICATING SECURITY KEYS...";
-            logBox.innerHTML = "";
-
-            let progress = 0;
-            const logMessages = [
-                "[OK] Connecting to main server nodes...",
-                "[INFO] Checking decryption privileges...",
-                "[OK] Running payload injection...",
-                "[SUCCESS] Token match confirmed.",
-                "[SYS] Fetching 10X developer dashboard assets..."
-            ];
-
-            const interval = setInterval(() => {
-                progress += Math.floor(Math.random() * 8) + 2;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    
-                    pBar.style.width = '100%';
-                    statusSub.innerText = "ADMIN PRIVILEGES: TRUE";
-                    accessText.style.display = 'block';
-                    
-                    setTimeout(() => {
-                        alert("Access Approved! Redirecting Anon to P10X Space...");
-                        overlay.style.display = 'none';
-                    }, 1500);
-                } else {
-                    pBar.style.width = progress + '%';
-                    statusSub.innerText = `DECRYPTING CREDENTIALS: ${progress}%`;
-                    
-                    if (progress % 20 === 0 || Math.random() > 0.7) {
-                        const randomLog = logMessages[Math.floor(Math.random() * logMessages.length)];
-                        logBox.innerHTML += `<div>${randomLog}</div>`;
-                        logBox.scrollTop = logBox.scrollHeight;
-                    }
-                }
-            }, 80);
-        }
-
-        // 🟩 TRIGGER SIGN UP SIMULATION
-        function triggerSignUp(e) {
-            e.preventDefault();
-            const overlay = document.getElementById('terminalOverlay');
-            const pBar = document.getElementById('progressBar');
-            const statusSub = document.getElementById('statusSub');
-            const accessText = document.getElementById('accessText');
-            const logBox = document.getElementById('logBox');
-
-            overlay.style.display = 'flex';
-            pBar.style.width = '0%';
-            accessText.style.display = 'none';
-            statusSub.innerText = "INITIALIZING REGISTRATION_PAYLOAD...";
-            logBox.innerHTML = "<div>[SYS] Opening secure tunnel for new student registration...</div>";
-
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 10;
-                pBar.style.width = progress + '%';
-                if(progress >= 100) {
-                    clearInterval(interval);
-                    statusSub.innerText = "TUNNEL READY";
-                    logBox.innerHTML += "<div>[SUCCESS] Redirection packet packed.</div>";
-                    setTimeout(() => {
-                        alert("P10X Registration Hub is initializing! Connection secure.");
-                        overlay.style.display = 'none';
-                    }, 1000);
-                }
-            }, 50);
-        }
-    </script>
-</body>
-</html>
+        // Matrix Falling Rain Logic
+        const canvas = document
