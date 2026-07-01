@@ -17,12 +17,25 @@
             height: 100vh;
             display: flex;
             overflow: hidden;
+            position: relative;
+        }
+        
+        /* 🟩 CANVAS ANIMATION STYLE */
+        #coderRain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.12; /* Subtle & Classy opacity */
+            pointer-events: none;
+            z-index: 1;
         }
 
         /* Left Side: Premium Banner Box */
         .left-side {
             flex: 1.2;
-            background: linear-gradient(135deg, #101626 0%, #0b0f19 100%);
+            background: linear-gradient(135deg, rgba(16, 22, 38, 0.9) 0%, rgba(11, 15, 25, 0.9) 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -30,6 +43,7 @@
             padding: 40px;
             position: relative;
             border-right: 1px solid rgba(26, 115, 232, 0.1);
+            z-index: 5; /* Form ke upar rhega animation se */
         }
         /* Tech Circle Animation background */
         .left-side::before {
@@ -89,15 +103,15 @@
             border-color: rgba(0, 255, 102, 0.4);
             color: #00ff66;
         }
-
         /* Right Side: Clean Login Form */
         .right-side {
             flex: 1;
-            background-color: #0f1422;
+            background-color: rgba(15, 20, 34, 0.9);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 40px;
+            z-index: 5; /* Form ke upar rhega animation se */
         }
         .login-box {
             width: 100%;
@@ -164,7 +178,7 @@
             background: #155cb8;
             box-shadow: 0 0 15px rgba(26, 115, 232, 0.4);
         }
-
+        
         /* Responsive Design for Mobile */
         @media (max-width: 768px) {
             body {
@@ -180,6 +194,8 @@
     </style>
 </head>
 <body>
+
+    <canvas id="coderRain"></canvas>
 
     <div class="left-side">
         <div class="banner-content">
@@ -198,24 +214,63 @@
         <div class="login-box">
             <h2>Hi, Welcome to P10X</h2>
             <p class="subtitle">Enter your details to log in your account</p>
-            
             <form onsubmit="event.preventDefault(); alert('Login System Connected Successfully!');">
                 <div class="input-group">
                     <label for="username">Username / Email *</label>
                     <input type="email" id="username" placeholder="name@program10x.com" required>
                 </div>
-                
                 <div class="input-group">
                     <label for="password">Password *</label>
                     <input type="password" id="password" placeholder="Enter your password" required>
                 </div>
-                
                 <a href="#" class="forgot-pass">Forgot your password?</a>
-                
                 <button type="submit" class="login-btn">Log in</button>
             </form>
         </div>
     </div>
 
+    <script>
+        const canvas = document.getElementById('coderRain');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Modern binary & tech symbols
+        const alphabet = "01010101ABCDEFGHIJKLMNOPQRSTUVWXYZ<>[]{}/_=+X%#$@";
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+
+        const rainDrops = [];
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+
+        function drawMatrix() {
+            // Background color ke sath fade overlay
+            ctx.fillStyle = 'rgba(11, 15, 25, 0.05)'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Cyber Neon Green
+            ctx.fillStyle = '#00ff66'; 
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 33);
+    </script>
 </body>
 </html>
