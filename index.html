@@ -358,15 +358,11 @@
             }
         }
 
-        // 🟩 DIRECT REDIRECTION LOGIC (NO ANIMATION OVERLAY)
+        // 🟩 DIRECT REDIRECTION LOGIC TO DASHBOARD.HTML
         function directToDashboard(e, processType) {
-    e.preventDefault();
-    if (processType === 'login') {
-        window.location.href = "dashboard.html"; // Redirects to your new dashboard file
-    } else {
-        window.location.href = "dashboard.html"; 
-    }
-}
+            e.preventDefault();
+            window.location.href = "dashboard.html";
+        }
     </script>
 </body>
 </html>
