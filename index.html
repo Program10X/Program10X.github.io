@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program10X | Learn C & AI</title>
+    <title>Program10X | Login to Learn C & AI</title>
     <style>
         * {
             margin: 0;
@@ -12,146 +12,193 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #0b0f19; /* Kali Premium Dark */
+            background-color: #0b0f19; /* Program10X Dark Theme */
             color: #ffffff;
-            overflow-x: hidden;
-        }
-        /* Navbar */
-        .navbar {
+            height: 100vh;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-            background: rgba(11, 15, 25, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(26, 115, 232, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100px;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #1a73e8; /* Kali Blue */
-            letter-spacing: 1px;
-        }
-        .logo span {
-            color: #00ff66; /* Matrix Green */
-        }
-        /* Hero Section */
-        .hero {
-            padding: 100px 8% 60px 8%;
-            text-align: center;
-            background: radial-gradient(circle at 50% 50%, rgba(26, 115, 232, 0.1) 0%, transparent 60%);
-        }
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-        .hero h1 span {
-            color: #1a73e8;
-            text-shadow: 0 0 20px rgba(26, 115, 232, 0.4);
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: #8f9399;
-            max-width: 600px;
-            margin: 0 auto 40px auto;
-            line-height: 1.6;
-        }
-        /* Features/Courses Grid */
-        .course-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 40px 8%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .card {
-            background: #111625;
-            border: 1px solid rgba(26, 115, 232, 0.1);
-            border-radius: 12px;
-            padding: 40px 30px;
-            transition: all 0.3s ease;
-            position: relative;
             overflow: hidden;
         }
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: #1a73e8;
-            box-shadow: 0 10px 30px rgba(26, 115, 232, 0.15);
+
+        /* Left Side: Premium Banner Box */
+        .left-side {
+            flex: 1.2;
+            background: linear-gradient(135deg, #101626 0%, #0b0f19 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+            border-right: 1px solid rgba(26, 115, 232, 0.1);
         }
-        .card-icon {
-            font-size: 40px;
-            margin-bottom: 20px;
+        /* Tech Circle Animation background */
+        .left-side::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(26, 115, 232, 0.15) 0%, transparent 70%);
+            top: 20%;
+            left: 20%;
         }
-        .card h3 {
-            font-size: 22px;
+        .banner-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 500px;
+        }
+        .banner-content h1 {
+            font-size: 3rem;
+            color: #1a73e8;
             margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .banner-content h1 span {
+            color: #00ff66; /* Neon Green */
+        }
+        .banner-content p {
+            color: #8f9399;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .features-badges {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        .badge {
+            background: rgba(26, 115, 232, 0.1);
+            border: 1px solid rgba(26, 115, 232, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
             color: #ffffff;
         }
-        .card p {
-            color: #8f9399;
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 25px;
+
+        /* Right Side: Clean Login Form */
+        .right-side {
+            flex: 1;
+            background-color: #0f1422;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
         }
-        .btn {
-            display: inline-block;
-            background: #1a73e8;
-            color: white;
-            padding: 12px 28px;
+        .login-box {
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-box h2 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        .login-box p.subtitle {
+            color: #8f9399;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            color: #c2c7d0;
+            margin-bottom: 8px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #161c2e;
+            border: 1px solid rgba(26, 115, 232, 0.2);
             border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
+            color: #ffffff;
+            font-size: 15px;
             transition: all 0.3s ease;
         }
-        .btn:hover {
+        .input-group input:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 10px rgba(26, 115, 232, 0.2);
+        }
+        .forgot-pass {
+            display: block;
+            text-align: right;
+            font-size: 13px;
+            color: #1a73e8;
+            text-decoration: none;
+            margin-bottom: 25px;
+        }
+        .forgot-pass:hover {
+            text-decoration: underline;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .login-btn:hover {
             background: #155cb8;
             box-shadow: 0 0 15px rgba(26, 115, 232, 0.4);
         }
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #1a73e8;
-            color: #1a73e8;
-        }
-        .btn-outline:hover {
-            background: rgba(26, 115, 232, 0.1);
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .left-side {
+                display: none; /* Mobile par sirf login form dikhega */
+            }
+            .right-side {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo">PROGRAM<span>10X</span></div>
-        <div>
-            <a href="#courses" class="btn btn-outline" style="padding: 8px 20px; font-size: 14px;">Explore</a>
+    <div class="left-side">
+        <div class="banner-content">
+            <h1>PROGRAM<span>10X</span></h1>
+            <p>Sikhayein apne dimaag ko naye daur ki coding. Learn foundational C Programming and step into the future with Artificial Intelligence.</p>
+            <div class="features-badges">
+                <span class="badge">💻 C Language</span>
+                <span class="badge">🤖 AI & ML</span>
+            </div>
         </div>
-    </nav>
+    </div>
 
-    <section class="hero">
-        <h1>Master <span>Programming & AI</span> Like a Pro</h1>
-        <p>Welcome to Program10X. Code ki shuruat se lekar Artificial Intelligence ki duniya tak, sab kuch seekhein bilkul aasan aur advanced tarike se.</p>
-        <a href="#courses" class="btn">Start Learning</a>
-    </section>
-
-    <section class="course-container" id="courses">
-        <div class="card">
-            <div class="card-icon">💻</div>
-            <h3>C Programming</h3>
-            <p>Programming ki mazboot buniyaad (foundation) banayein. Variables, Loops aur Pointers ko depth mein samajhkar apne coding logic ko 10x behtar karein.</p>
-            <a href="#" class="btn btn-outline">Join Course</a>
+    <div class="right-side">
+        <div class="login-box">
+            <h2>Hi, Welcome to P10X</h2>
+            <p class="subtitle">Enter your details to log in your account</p>
+            
+            <form onsubmit="event.preventDefault(); alert('Login System Connected Successfully!');">
+                <div class="input-group">
+                    <label for="username">Username / Email *</label>
+                    <input type="email" id="username" placeholder="name@program10x.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password *</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                
+                <a href="#" class="forgot-pass">Forgot your password?</a>
+                
+                <button type="submit" class="login-btn">Log in</button>
+            </form>
         </div>
-
-        <div class="card">
-            <div class="card-icon">🤖</div>
-            <h3>Artificial Intelligence (AI)</h3>
-            <p>Future ke liye taiyar hon! AI, Machine Learning aur Large Language Models kaise kaam karte hain aur unke sath smart tools kaise banate hain, sab seekhein.</p>
-            <a href="#" class="btn">Explore AI</a>
-        </div>
-    </section>
+    </div>
 
 </body>
 </html>
