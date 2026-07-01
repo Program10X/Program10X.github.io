@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program10X | Student Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9; /* Soft light background like Amigo */
+            color: #333333;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* 📋 TOP NAVIGATION BAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 65px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            z-index: 100;
+        }
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #1a73e8;
+            letter-spacing: 1px;
+        }
+        .navbar .logo span { color: #00cc52; }
+        .navbar .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #4b5563;
+        }
+        .navbar .avatar {
+            width: 35px;
+            height: 35px;
+            background-color: #1a73e8;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 🗂️ MAIN AREA SPLIT (Left Content + Right Sidebar) */
+        .main-container {
+            margin-top: 65px;
+            width: 100%;
+            display: flex;
+            padding: 30px;
+            gap: 30px;
+        }
+
+        /* LEFT SIDE: COURSE OVERVIEW */
+        .content-area {
+            flex: 3;
+        }
+        .content-area h2 {
+            font-size: 1.6rem;
+            color: #111827;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* COURSE CARDS GRID */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .course-card {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .course-image-placeholder {
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(135deg, #1a73e8 0%, #155cb8 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+        .course-image-placeholder.ai-bg {
+            background: linear-gradient(135deg, #00cc52 0%, #008a36 100%);
+        }
+        .course-info {
+            padding: 20px;
+        }
+        .course-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1f2937;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            min-height: 44px;
+        }
+
+        /* PROGRESS BAR STYLING */
+        .progress-container {
+            margin-bottom: 15px;
+        }
+        .progress-text {
+            font-size: 12px;
+            font-weight: 600;
+            color: #4b5563;
+            margin-bottom: 6px;
+        }
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background-color: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #1a73e8; /* Blue for regular tech */
+            border-radius: 10px;
+        }
+        .progress-bar-fill.complete {
+            background-color: #00cc52; /* Green like Amigo for completed */
+        }
+
+        .view-btn {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background: none;
+            border: 1px solid #1a73e8;
+            color: #1a73e8;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        .view-btn:hover {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        /* RIGHT SIDEBAR: QUICK WIDGETS */
+        .sidebar-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            min-width: 300px;
+        }
+        @media (max-width: 1024px) {
+            .main-container { flex-direction: column; }
+            .sidebar-area { width: 100%; }
+        }
+        .widget-box {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .widget-box h3 {
+            font-size: 1.1rem;
+            color: #111827;
+            margin-bottom: 15px;
+            font-weight: 700;
+            border-bottom: 2px solid #f3f4f6;
+            padding-bottom: 8px;
+        }
+        .recent-list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .recent-list-item:last-child { border-bottom: none; }
+        .icon-circle {
+            width: 32px;
+            height: 32px;
+            background-color: #eff6ff;
+            color: #1a73e8;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+        .recent-info h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+        .recent-info p {
+            font-size: 11px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="logo">PROGRAM<span>10X</span></div>
+        <div class="user-profile">
+            <span>Hi Sana!</span>
+            <div class="avatar">S</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        
+        <div class="content-area">
+            <h2>Course overview</h2>
+            
+            <div class="courses-grid">
+                
+                <div class="course-card">
+                    <div class="course-image-placeholder">💻</div>
+                    <div class="course-info">
+                        <div class="course-title">Data Structure using C (CSIT124) - Semester II</div>
+                        <div class="progress-container">
+                            <div class="progress-text">98% Course Completed</div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 98%;"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="view-btn">View Course</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image-placeholder">⚙️</div>
+                    <div class="course-info">
+                        <div class="course-title">Operating System Concepts (CSIT123) - Semester II</div>
+                        <div class="progress-container">
+                            <div class="progress-text">100% Course Completed</div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill complete" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="view-btn">View Course</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image-placeholder">🤖</div>
+                    <div class="course-info">
+                        <div class="course-title">Software Engineering and Modeling (CSIT142)</div>
+                        <div class="progress-container">
+                            <div class="progress-text">100% Course Completed</div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill complete" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="view-btn">View Course</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="sidebar-area">
+            
+            <div class="widget-box">
+                <h3>Recently accessed items</h3>
+                <div class="recent-list-item">
+                    <div class="icon-circle">📘</div>
+                    <div class="recent-info">
+                        <h4>E-Magazine | March 2026</h4>
+                        <p>Online Classroom</p>
+                    </div>
+                </div>
+                <div class="recent-list-item">
+                    <div class="icon-circle">📂</div>
+                    <div class="recent-info">
+                        <h4>BCA Notes & Syllabus</h4>
+                        <p>Online Classroom</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget-box" style="border-left: 4px solid #00cc52;">
+                <h3>Prof. Ami (AI Assistant)</h3>
+                <p style="font-size: 13px; color: #4b5563; margin-bottom: 10px;">I am your AI Teaching Assistant. Ask me any question anytime, 24/7!</p>
+                <input type="text" placeholder="Ask a question..." style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 13px;">
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
