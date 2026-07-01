@@ -360,18 +360,13 @@
 
         // 🟩 DIRECT REDIRECTION LOGIC (NO ANIMATION OVERLAY)
         function directToDashboard(e, processType) {
-            e.preventDefault();
-            
-            if (processType === 'login') {
-                alert("Login Successful! Opening Dashboard...");
-                // Dashboard URL yahan daalein:
-                // window.location.href = "YOUR_DASHBOARD_PAGE.html";
-            } else {
-                alert("Account Created Successfully! Opening Dashboard...");
-                // Registration ke baad redirect URL yahan daalein:
-                // window.location.href = "YOUR_DASHBOARD_PAGE.html";
-            }
-        }
+    e.preventDefault();
+    if (processType === 'login') {
+        window.location.href = "dashboard.html"; // Redirects to your new dashboard file
+    } else {
+        window.location.href = "dashboard.html"; 
+    }
+}
     </script>
 </body>
 </html>
