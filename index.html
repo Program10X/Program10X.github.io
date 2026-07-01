@@ -20,14 +20,14 @@
             position: relative;
         }
         
-        /* 🟩 MATRIX LIVE CANVAS BACKGROUND */
+        /* 🟩 MATRIX LIVE CANVAS BACKGROUND - FULLY HIGHLIGHTED */
         #coderRain {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.15;
+            opacity: 1.0; /* Full opacity taaki ekdum saaf chamke */
             pointer-events: none;
             z-index: 1;
         }
@@ -41,20 +41,17 @@
             justify-content: center;
             align-items: center;
             z-index: 10;
-            background: rgba(5, 7, 15, 0.6);
+            background: rgba(5, 7, 15, 0.65);
             backdrop-filter: blur(4px);
             pointer-events: none;
         }
 
         .terminal-status-box {
-            background: rgba(8, 12, 22, 0.9);
-            
-            /* High-Intensity Outer Neon Green Glow Box */
+            background: rgba(8, 12, 22, 0.95);
             border: 3px solid #00ff66;
-            box-shadow: 0 0 30px rgba(0, 255, 102, 0.4), 
-                        0 0 100px rgba(0, 255, 102, 0.15),
-                        inset 0 0 20px rgba(0, 255, 102, 0.1);
-            
+            box-shadow: 0 0 40px rgba(0, 255, 102, 0.5), 
+                        0 0 100px rgba(0, 255, 102, 0.2),
+                        inset 0 0 20px rgba(0, 255, 102, 0.2);
             padding: 40px 60px;
             text-align: center;
             border-radius: 12px;
@@ -62,7 +59,6 @@
             position: relative;
         }
 
-        /* Top Bar Glow Effect */
         .terminal-status-box::before {
             content: '';
             position: absolute;
@@ -82,14 +78,11 @@
             font-size: 3.2rem;
             font-weight: bold;
             letter-spacing: 5px;
-            color: #ffffff; /* White center core for realistic brightness */
-            
-            /* Ultra Bright Laser-Like Neon Light Highlight */
+            color: #ffffff;
             text-shadow: 0 0 10px #00ff66, 
                          0 0 25px #00ff66, 
                          0 0 50px #00ff66, 
                          0 0 100px rgba(0, 255, 102, 0.6);
-            
             margin-bottom: 12px;
             display: none; 
             animation: neonBreathing 1.8s ease-in-out infinite;
@@ -103,7 +96,6 @@
             letter-spacing: 1px;
         }
 
-        /* Glowing Progress Bar */
         .cyber-progress-bg {
             width: 100%;
             height: 18px;
@@ -112,7 +104,6 @@
             border-radius: 6px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
         }
 
         .cyber-progress-bar {
@@ -123,7 +114,6 @@
             transition: width 0.1s linear;
         }
 
-        /* Terminal Real-time logs */
         .terminal-logs {
             font-family: monospace;
             color: #00ff66;
@@ -137,7 +127,6 @@
             text-shadow: 0 0 2px rgba(0, 255, 102, 0.5);
         }
 
-        /* Smooth Neon Pulsing Keyframe */
         @keyframes neonBreathing {
             0%, 100% {
                 opacity: 1;
@@ -149,17 +138,18 @@
             }
         }
 
-        /* Left Side Layout */
+        /* Left Side Layout with Frosted Glass Touch */
         .left-side {
             flex: 1.2;
-            background: linear-gradient(135deg, rgba(16, 22, 38, 0.85) 0%, rgba(11, 15, 25, 0.85) 100%);
+            background: linear-gradient(135deg, rgba(10, 15, 30, 0.8) 0%, rgba(5, 7, 15, 0.85) 100%);
+            backdrop-filter: blur(8px); /* Blur lagaya taaki background animation classy lage peeche */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 40px;
             position: relative;
-            border-right: 1px solid rgba(26, 115, 232, 0.1);
+            border-right: 1px solid rgba(0, 255, 102, 0.15);
             z-index: 5;
         }
         .banner-content {
@@ -183,7 +173,7 @@
             line-height: 1.3;
         }
         .banner-content p {
-            color: #8f9399;
+            color: #b0b5c0;
             font-size: 1.05rem;
             line-height: 1.6;
             margin-bottom: 30px;
@@ -203,12 +193,13 @@
             font-weight: 600;
             color: #ffffff;
         }
-        .badge.green { border-color: rgba(0, 255, 102, 0.4); color: #00ff66; }
+        .badge.green { border-color: rgba(0, 255, 102, 0.5); color: #00ff66; box-shadow: 0 0 10px rgba(0, 255, 102, 0.2); }
 
-        /* Right Side: Clean Login Form */
+        /* Right Side Layout with Frosted Glass Touch */
         .right-side {
             flex: 1;
-            background-color: rgba(15, 20, 34, 0.85);
+            background-color: rgba(8, 12, 24, 0.8);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -223,7 +214,7 @@
         .input-group input {
             width: 100%;
             padding: 12px 16px;
-            background: #161c2e;
+            background: rgba(22, 28, 46, 0.9);
             border: 1px solid rgba(26, 115, 232, 0.2);
             border-radius: 6px;
             color: #ffffff;
@@ -261,73 +252,4 @@
             box-shadow: 0 0 15px rgba(26, 115, 232, 0.4);
         }
         
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            .left-side { display: none; }
-            .right-side { padding: 20px; }
-            .terminal-status-box { min-width: 90%; padding: 20px; }
-        }
-    </style>
-</head>
-<body>
-
-    <canvas id="coderRain"></canvas>
-
-    <div id="terminalOverlay">
-        <div class="terminal-status-box">
-            <div id="accessText" class="access-text">ACCESS GRANTED</div>
-            <div id="statusSub" class="sub-status">INITIALIZING SYSTEM_CRACK...</div>
-            <div class="cyber-progress-bg">
-                <div id="progressBar" class="cyber-progress-bar"></div>
-            </div>
-            <div id="logBox" class="terminal-logs"></div>
-        </div>
-    </div>
-
-    <div class="left-side">
-        <div class="banner-content">
-            <h1>PROGRAM<span>10X</span></h1>
-            <h2>One Portal. Infinite Tech.<br>Master Coding to <span style="color: #00ff66;">Next-Gen AI</span>.</h2>
-            <p>Stop jumping from channel to channel. From building your core logic to deploying your own AI agents, master every language the modern industry demands.</p>
-            <div class="features-badges">
-                <span class="badge">🚀 Full-Stack Tech</span>
-                <span class="badge">🧠 AI & Automation</span>
-                <span class="badge green">⚡ Placement Ready</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="right-side">
-        <div class="login-box">
-            <h2>Hi, Welcome to P10X</h2>
-            <p class="subtitle">Enter your details to log in your account</p>
-            <form onsubmit="startCyberLogin(event)">
-                <div class="input-group">
-                    <label for="username">Username / Email *</label>
-                    <input type="email" id="username" placeholder="name@program10x.com" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password *</label>
-                    <input type="password" id="password" placeholder="Enter your password" required>
-                </div>
-                <a href="#" class="forgot-pass">Forgot your password?</a>
-                <button type="submit" class="login-btn">Log in</button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // Matrix Falling Logic
-        const canvas = document.getElementById('coderRain');
-        const ctx = canvas.getContext('2d');
-        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const alphabet = "01010101ABCDEFGHIJKLMNOPQRSTUVWXYZ<>[]{}/_=+X%#$@";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const rainDrops = Array(Math.floor(columns)).fill(1);
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(5, 7, 15, 0
+        @media (max-width: 768px)
