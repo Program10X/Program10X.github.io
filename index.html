@@ -32,83 +32,6 @@
             z-index: 1;
         }
 
-        /* 🟩 CYBERPUNK TERMINAL OVERLAY (ACCESS GRANTED POPUP) */
-        #terminalOverlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 20;
-            background: rgba(2, 2, 4, 0.7);
-            pointer-events: none;
-        }
-
-        .terminal-status-box {
-            background: rgba(10, 15, 28, 0.95);
-            border: 2px solid #00ff66;
-            box-shadow: 0 0 30px rgba(0, 255, 102, 0.4), inset 0 0 15px rgba(0, 255, 102, 0.2); 
-            padding: 40px 60px;
-            text-align: center;
-            border-radius: 12px;
-            min-width: 460px;
-            position: relative;
-        }
-
-        .access-text {
-            font-family: monospace;
-            font-size: 3rem;
-            font-weight: bold;
-            letter-spacing: 4px;
-            color: #ffffff; 
-            text-shadow: 0 0 15px #00ff66, 0 0 30px rgba(0, 255, 102, 0.6);
-            margin-bottom: 12px;
-            display: none;
-            animation: neonBreathing 2s ease-in-out infinite;
-        }
-
-        .sub-status {
-            font-family: monospace;
-            color: #a3a8b3;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
-        .cyber-progress-bg {
-            width: 100%;
-            height: 16px;
-            background: #111625;
-            border: 1px solid rgba(0, 255, 102, 0.3);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .cyber-progress-bar {
-            height: 100%;
-            width: 0%;
-            background: #00ff66;
-            box-shadow: 0 0 15px #00ff66;
-            transition: width 0.1s linear;
-        }
-
-        .terminal-logs {
-            font-family: monospace;
-            color: #00ff66;
-            font-size: 11px;
-            text-align: left;
-            margin-top: 25px;
-            max-height: 80px;
-            overflow: hidden;
-            opacity: 0.85;
-            line-height: 1.6;
-        }
-
-        @keyframes neonBreathing {
-            0%, 100% { opacity: 1; text-shadow: 0 0 15px #00ff66, 0 0 30px #00ff66; }
-            50% { opacity: 0.8; text-shadow: 0 0 8px #00ff66, 0 0 15px #00ff66; }
-        }
-
         /* CRYSTAL CLEAR TRANSPARENT PANELS (NO BLUR) */
         .left-side {
             flex: 1.2;
@@ -188,7 +111,7 @@
             z-index: 5;
         }
 
-        /* DYNAMIC CONTAINER FOR LOGIN & REGISTER */
+        /* CONTAINER FOR LOGIN & REGISTER */
         .auth-container { 
             width: 100%; 
             max-width: 400px; 
@@ -304,24 +227,12 @@
             body { flex-direction: column; }
             .left-side { display: none; }
             .right-side { padding: 20px; }
-            .terminal-status-box { min-width: 90%; padding: 20px; }
         }
     </style>
 </head>
 <body>
 
     <canvas id="coderRain"></canvas>
-
-    <div id="terminalOverlay">
-        <div class="terminal-status-box">
-            <div id="accessText" class="access-text">ACCESS GRANTED</div>
-            <div id="statusSub" class="sub-status">INITIALIZING SYSTEM_CRACK...</div>
-            <div class="cyber-progress-bg">
-                <div id="progressBar" class="cyber-progress-bar"></div>
-            </div>
-            <div id="logBox" class="terminal-logs"></div>
-        </div>
-    </div>
 
     <div class="left-side">
         <div class="banner-content">
@@ -347,7 +258,7 @@
             <div id="loginForm" class="auth-form active">
                 <h2>Welcome Back</h2>
                 <p class="subtitle">Enter your credentials to access your dashboard</p>
-                <form onsubmit="startCyberAnimation(event, 'login')">
+                <form onsubmit="directToDashboard(event, 'login')">
                     <div class="input-group">
                         <label for="loginEmail">Username / Email *</label>
                         <input type="email" id="loginEmail" placeholder="name@program10x.com" required>
@@ -366,7 +277,7 @@
             <div id="registerForm" class="auth-form">
                 <h2>Create Account</h2>
                 <p class="subtitle">Join the 10X coding space and build tech agents</p>
-                <form onsubmit="startCyberAnimation(event, 'register')">
+                <form onsubmit="directToDashboard(event, 'register')">
                     <div class="input-group">
                         <label for="regName">Full Name *</label>
                         <input type="text" id="regName" placeholder="Enter full name" required>
@@ -430,9 +341,6 @@
         }
         setInterval(drawMatrix, 28); 
 
-        // Hide overlay panel initially
-        document.getElementById('terminalOverlay').style.display = 'none';
-
         // Smooth Form Tab Switching Script
         function switchAuthTab(type) {
             const tabs = document.querySelectorAll('.tab-btn');
@@ -450,86 +358,19 @@
             }
         }
 
-        // Cyber System Loading Animation
-        function startCyberAnimation(e, processType) {
+        // 🟩 DIRECT REDIRECTION LOGIC (NO ANIMATION OVERLAY)
+        function directToDashboard(e, processType) {
             e.preventDefault();
             
-            const overlay = document.getElementById('terminalOverlay');
-            const pBar = document.getElementById('progressBar');
-            const statusSub = document.getElementById('statusSub');
-            const accessText = document.getElementById('accessText');
-            const logBox = document.getElementById('logBox');
-
-            overlay.style.display = 'flex';
-            pBar.style.width = '0%';
-            accessText.style.display = 'none';
-            logBox.innerHTML = "";
-
             if (processType === 'login') {
-                statusSub.innerText = "AUTHENTICATING SECURITY KEYS...";
+                alert("Login Successful! Opening Dashboard...");
+                // Dashboard URL yahan daalein:
+                // window.location.href = "YOUR_DASHBOARD_PAGE.html";
             } else {
-                statusSub.innerText = "ALLOCATING NEW SYSTEM NODE...";
+                alert("Account Created Successfully! Opening Dashboard...");
+                // Registration ke baad redirect URL yahan daalein:
+                // window.location.href = "YOUR_DASHBOARD_PAGE.html";
             }
-
-            const logMessages = processType === 'login' ? [
-                "[OK] Connecting to main server nodes...",
-                "[INFO] Checking decryption privileges...",
-                "[OK] Running payload injection...",
-                "[SUCCESS] Token match confirmed.",
-                "[SYS] Fetching 10X developer dashboard assets..."
-            ] : [
-                "[SYS] Opening secure enrollment pipeline...",
-                "[OK] Mapping database directory structures...",
-                "[INFO] Creating local credential encryption...",
-                "[SUCCESS] Node assigned to new developer profile.",
-                "[OK] Deploying workstation setup..."
-            ];
-
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.floor(Math.random() * 8) + 2;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    
-                    pBar.style.width = '100%';
-                    
-                    if (processType === 'login') {
-                        statusSub.innerText = "ADMIN PRIVILEGES: TRUE";
-                        accessText.innerText = "ACCESS GRANTED";
-                        accessText.style.color = "#ffffff";
-                    } else {
-                        statusSub.innerText = "REGISTRATION COMPLETED";
-                        accessText.innerText = "NODE DEPLOYED";
-                        accessText.style.color = "#00ff66";
-                    }
-                    
-                    accessText.style.display = 'block';
-                    
-                    setTimeout(() => {
-                        overlay.style.display = 'none';
-                        if (processType === 'login') {
-                            alert("Access Approved! Redirecting Anon to P10X Space...");
-                        } else {
-                            alert("Account Created! Switching back to Login.");
-                            switchAuthTab('login');
-                        }
-                    }, 1500);
-                } else {
-                    pBar.style.width = progress + '%';
-                    if (processType === 'login') {
-                        statusSub.innerText = `DECRYPTING CREDENTIALS: ${progress}%`;
-                    } else {
-                        statusSub.innerText = `UPLOADING PACKETS: ${progress}%`;
-                    }
-                    
-                    if (progress % 20 === 0 || Math.random() > 0.7) {
-                        const randomLog = logMessages[Math.floor(Math.random() * logMessages.length)];
-                        logBox.innerHTML += `<div>${randomLog}</div>`;
-                        logBox.scrollTop = logBox.scrollHeight;
-                    }
-                }
-            }, 60);
         }
     </script>
 </body>
