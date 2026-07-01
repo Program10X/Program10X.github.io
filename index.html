@@ -12,7 +12,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #0b0f19; /* Program10X Dark Theme */
+            background-color: #05070f;
             color: #ffffff;
             height: 100vh;
             display: flex;
@@ -20,22 +20,103 @@
             position: relative;
         }
         
-        /* 🟩 CANVAS ANIMATION STYLE */
+        /* 🟩 MATRIX LIVE CANVAS BACKGROUND */
         #coderRain {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.12; /* Subtle & Classy opacity */
+            opacity: 0.15;
             pointer-events: none;
             z-index: 1;
+        }
+
+        /* 🟩 CYBERPUNK TERMINAL OVERLAY (ACCESS GRANTED ANIMATION) */
+        #terminalOverlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            background: rgba(5, 7, 15, 0.4);
+            pointer-events: none;
+        }
+
+        .terminal-status-box {
+            background: rgba(16, 22, 38, 0.75);
+            border: 2px solid #00ff66;
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.2);
+            padding: 30px 50px;
+            text-align: center;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+            min-width: 450px;
+        }
+
+        .access-text {
+            font-family: monospace;
+            font-size: 3rem;
+            font-weight: bold;
+            letter-spacing: 4px;
+            color: #00ff66;
+            text-shadow: 0 0 15px #00ff66;
+            margin-bottom: 10px;
+            display: none; /* Starting me hidden rahega */
+            animation: pulse 1.5s infinite;
+        }
+
+        .sub-status {
+            font-family: monospace;
+            color: #8f9399;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* Progress Bar Container */
+        .cyber-progress-bg {
+            width: 100%;
+            height: 16px;
+            background: #161c2e;
+            border: 1px solid rgba(0, 255, 102, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cyber-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #00ff66;
+            box-shadow: 0 0 10px #00ff66;
+            transition: width 0.1s linear;
+        }
+
+        /* Terminal Real-time logs */
+        .terminal-logs {
+            font-family: monospace;
+            color: #00ff66;
+            font-size: 11px;
+            text-align: left;
+            margin-top: 20px;
+            max-height: 80px;
+            overflow: hidden;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
         }
 
         /* Left Side: Premium Banner Box */
         .left-side {
             flex: 1.2;
-            background: linear-gradient(135deg, rgba(16, 22, 38, 0.9) 0%, rgba(11, 15, 25, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(16, 22, 38, 0.85) 0%, rgba(11, 15, 25, 0.85) 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -43,17 +124,7 @@
             padding: 40px;
             position: relative;
             border-right: 1px solid rgba(26, 115, 232, 0.1);
-            z-index: 5; /* Form ke upar rhega animation se */
-        }
-        /* Tech Circle Animation background */
-        .left-side::before {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(26, 115, 232, 0.15) 0%, transparent 70%);
-            top: 20%;
-            left: 20%;
+            z-index: 5;
         }
         .banner-content {
             text-align: center;
@@ -67,9 +138,7 @@
             letter-spacing: 2px;
             font-weight: 900;
         }
-        .banner-content h1 span {
-            color: #00ff66; /* Neon Green */
-        }
+        .banner-content h1 span { color: #00ff66; }
         .banner-content h2 {
             font-size: 1.9rem;
             color: #ffffff;
@@ -97,45 +166,24 @@
             font-size: 13px;
             font-weight: 600;
             color: #ffffff;
-            letter-spacing: 0.5px;
         }
-        .badge.green {
-            border-color: rgba(0, 255, 102, 0.4);
-            color: #00ff66;
-        }
+        .badge.green { border-color: rgba(0, 255, 102, 0.4); color: #00ff66; }
+
         /* Right Side: Clean Login Form */
         .right-side {
             flex: 1;
-            background-color: rgba(15, 20, 34, 0.9);
+            background-color: rgba(15, 20, 34, 0.85);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 40px;
-            z-index: 5; /* Form ke upar rhega animation se */
+            z-index: 5;
         }
-        .login-box {
-            width: 100%;
-            max-width: 400px;
-        }
-        .login-box h2 {
-            font-size: 2rem;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-        .login-box p.subtitle {
-            color: #8f9399;
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-        .input-group {
-            margin-bottom: 20px;
-        }
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            color: #c2c7d0;
-            margin-bottom: 8px;
-        }
+        .login-box { width: 100%; max-width: 400px; }
+        .login-box h2 { font-size: 2rem; margin-bottom: 8px; color: #ffffff; }
+        .login-box p.subtitle { color: #8f9399; font-size: 14px; margin-bottom: 30px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 14px; color: #c2c7d0; margin-bottom: 8px; }
         .input-group input {
             width: 100%;
             padding: 12px 16px;
@@ -159,9 +207,7 @@
             text-decoration: none;
             margin-bottom: 25px;
         }
-        .forgot-pass:hover {
-            text-decoration: underline;
-        }
+        .forgot-pass:hover { text-decoration: underline; }
         .login-btn {
             width: 100%;
             padding: 14px;
@@ -179,17 +225,11 @@
             box-shadow: 0 0 15px rgba(26, 115, 232, 0.4);
         }
         
-        /* Responsive Design for Mobile */
         @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-            .left-side {
-                display: none; /* Mobile par sirf login form dikhega */
-            }
-            .right-side {
-                padding: 20px;
-            }
+            body { flex-direction: column; }
+            .left-side { display: none; }
+            .right-side { padding: 20px; }
+            .terminal-status-box { min-width: 90%; padding: 20px; }
         }
     </style>
 </head>
@@ -197,11 +237,22 @@
 
     <canvas id="coderRain"></canvas>
 
+    <div id="terminalOverlay">
+        <div class="terminal-status-box">
+            <div id="accessText" class="access-text">ACCESS GRANTED</div>
+            <div id="statusSub" class="sub-status">INITIALIZING SYSTEM_CRACK...</div>
+            <div class="cyber-progress-bg">
+                <div id="progressBar" class="cyber-progress-bar"></div>
+            </div>
+            <div id="logBox" class="terminal-logs"></div>
+        </div>
+    </div>
+
     <div class="left-side">
         <div class="banner-content">
             <h1>PROGRAM<span>10X</span></h1>
             <h2>One Portal. Infinite Tech.<br>Master Coding to <span style="color: #00ff66;">Next-Gen AI</span>.</h2>
-            <p>Stop jumping from channel to channel. From building your core logic to deploying your own AI agents, master every language the modern industry demands. Quit chasing tutorials—build a 10X career.</p>
+            <p>Stop jumping from channel to channel. From building your core logic to deploying your own AI agents, master every language the modern industry demands.</p>
             <div class="features-badges">
                 <span class="badge">🚀 Full-Stack Tech</span>
                 <span class="badge">🧠 AI & Automation</span>
@@ -214,7 +265,7 @@
         <div class="login-box">
             <h2>Hi, Welcome to P10X</h2>
             <p class="subtitle">Enter your details to log in your account</p>
-            <form onsubmit="event.preventDefault(); alert('Login System Connected Successfully!');">
+            <form onsubmit="startCyberLogin(event)">
                 <div class="input-group">
                     <label for="username">Username / Email *</label>
                     <input type="email" id="username" placeholder="name@program10x.com" required>
@@ -230,47 +281,89 @@
     </div>
 
     <script>
+        // 1. Matrix Background Logic
         const canvas = document.getElementById('coderRain');
         const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Modern binary & tech symbols
         const alphabet = "01010101ABCDEFGHIJKLMNOPQRSTUVWXYZ<>[]{}/_=+X%#$@";
         const fontSize = 14;
         const columns = canvas.width / fontSize;
-
-        const rainDrops = [];
-        for (let x = 0; x < columns; x++) {
-            rainDrops[x] = 1;
-        }
+        const rainDrops = Array(Math.floor(columns)).fill(1);
 
         function drawMatrix() {
-            // Background color ke sath fade overlay
-            ctx.fillStyle = 'rgba(11, 15, 25, 0.05)'; 
+            ctx.fillStyle = 'rgba(5, 7, 15, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Cyber Neon Green
-            ctx.fillStyle = '#00ff66'; 
+            ctx.fillStyle = '#00ff66';
             ctx.font = fontSize + 'px monospace';
-
             for (let i = 0; i < rainDrops.length; i++) {
                 const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
                 ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    rainDrops[i] = 0;
-                }
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) rainDrops[i] = 0;
                 rainDrops[i]++;
             }
         }
-
         setInterval(drawMatrix, 33);
+
+        // Hide overlay on first load
+        document.getElementById('terminalOverlay').style.display = 'none';
+
+        // 2. Cyberpunk "Access Granted" Form Trigger
+        function startCyberLogin(e) {
+            e.preventDefault();
+            
+            const overlay = document.getElementById('terminalOverlay');
+            const pBar = document.getElementById('progressBar');
+            const statusSub = document.getElementById('statusSub');
+            const accessText = document.getElementById('accessText');
+            const logBox = document.getElementById('logBox');
+
+            // Reset values & show panel
+            overlay.style.display = 'flex';
+            pBar.style.width = '0%';
+            accessText.style.display = 'none';
+            statusSub.innerText = "AUTHENTICATING SECURITY KEYS...";
+            logBox.innerHTML = "";
+
+            let progress = 0;
+            const logMessages = [
+                "[OK] Connecting to main server nodes...",
+                "[INFO] Checking decryption privileges...",
+                "[OK] Running payload injection...",
+                "[SUCCESS] Token match confirmed.",
+                "[SYS] Fetching 10X developer dashboard assets..."
+            ];
+
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 8) + 2;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    // Success Flash Trigger
+                    pBar.style.width = '100%';
+                    statusSub.innerText = "ADMIN PRIVILEGES: TRUE";
+                    accessText.style.display = 'block';
+                    
+                    // Auto redirect simulation after 1.5 seconds
+                    setTimeout(() => {
+                        alert("Access Approved! Redirecting Anon to P10X Space...");
+                        overlay.style.display = 'none';
+                    }, 1500);
+                } else {
+                    pBar.style.width = progress + '%';
+                    statusSub.innerText = `DECRYPTING CREDENTIALS: ${progress}%`;
+                    
+                    if (progress % 20 === 0 || Math.random() > 0.7) {
+                        const randomLog = logMessages[Math.floor(Math.random() * logMessages.length)];
+                        logBox.innerHTML += `<div>${randomLog}</div>`;
+                        logBox.scrollTop = logBox.scrollHeight;
+                    }
+                }
+            }, 80);
+        }
     </script>
 </body>
 </html>
