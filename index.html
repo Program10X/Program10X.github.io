@@ -27,7 +27,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 1.0; /* Full visibility for the intense code rain look */
+            opacity: 1.0; 
             pointer-events: none;
             z-index: 1;
         }
@@ -42,7 +42,6 @@
             align-items: center;
             z-index: 20;
             background: rgba(2, 2, 4, 0.7);
-            backdrop-filter: blur(4px);
             pointer-events: none;
         }
 
@@ -110,19 +109,18 @@
             50% { opacity: 0.8; text-shadow: 0 0 8px #00ff66, 0 0 15px #00ff66; }
         }
 
-        /* UI PANELS WITH HIGH-END GLASSMORPHISM */
+        /* 🆕 CRYSTAL CLEAR TRANSPARENT PANELS (BLUR REMOVED) */
         .left-side {
             flex: 1.2;
-            background: linear-gradient(135deg, rgba(8, 12, 24, 0.5) 0%, rgba(4, 6, 12, 0.6) 100%);
-            backdrop-filter: blur(10px); /* Makes background code elegantly semi-visible behind text */
-            -webkit-backdrop-filter: blur(10px);
+            /* Halka transparent black layer taaki peeche ka code ekdum saaf dikhe */
+            background: linear-gradient(135deg, rgba(8, 12, 24, 0.4) 0%, rgba(4, 6, 12, 0.5) 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 40px;
             position: relative;
-            border-right: 1px solid rgba(0, 255, 102, 0.1);
+            border-right: 1px solid rgba(0, 255, 102, 0.15);
             z-index: 5;
         }
 
@@ -155,7 +153,7 @@
             font-size: 1.05rem;
             line-height: 1.6;
             margin-bottom: 30px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9); /* Text ko readable rakhne ke liye shadow */
         }
 
         .features-badges {
@@ -166,27 +164,24 @@
         }
 
         .badge {
-            background: rgba(2, 2, 4, 0.6);
-            border: 1px solid rgba(26, 115, 232, 0.3);
+            background: rgba(2, 2, 4, 0.75);
+            border: 1px solid rgba(26, 115, 232, 0.4);
             padding: 8px 18px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
             color: #ffffff;
-            backdrop-filter: blur(5px);
         }
 
         .badge.green { 
-            border-color: rgba(0, 255, 102, 0.5); 
+            border-color: rgba(0, 255, 102, 0.6); 
             color: #00ff66; 
-            box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
         }
 
         .right-side {
             flex: 1;
-            background-color: rgba(6, 10, 18, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(6, 10, 18, 0.4); /* Transparent background */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -195,16 +190,16 @@
         }
 
         .login-box { width: 100%; max-width: 400px; }
-        .login-box h2 { font-size: 2rem; margin-bottom: 8px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .login-box p.subtitle { color: #94a3b8; font-size: 14px; margin-bottom: 30px; }
+        .login-box h2 { font-size: 2rem; margin-bottom: 8px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+        .login-box p.subtitle { color: #cbd5e1; font-size: 14px; margin-bottom: 30px; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
         .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; font-size: 14px; color: #cbd5e1; margin-bottom: 8px; }
+        .input-group label { display: block; font-size: 14px; color: #cbd5e1; margin-bottom: 8px; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
         
         .input-group input {
             width: 100%;
             padding: 12px 16px;
-            background: rgba(15, 22, 38, 0.85);
-            border: 1px solid rgba(26, 115, 232, 0.3);
+            background: rgba(15, 22, 38, 0.9); /* Forms are kept solid for usability */
+            border: 1px solid rgba(26, 115, 232, 0.4);
             border-radius: 8px;
             color: #ffffff;
             font-size: 15px;
@@ -214,16 +209,17 @@
         .input-group input:focus {
             outline: none;
             border-color: #00ff66;
-            box-shadow: 0 0 12px rgba(0, 255, 102, 0.3);
+            box-shadow: 0 0 12px rgba(0, 255, 102, 0.4);
         }
 
         .forgot-pass {
             display: block;
             text-align: right;
             font-size: 13px;
-            color: #1a73e8;
+            color: #38bdf8; /* Brighter sky blue for visibility over live code */
             text-decoration: none;
             margin-bottom: 25px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
 
         .forgot-pass:hover { text-decoration: underline; }
@@ -243,7 +239,7 @@
 
         .login-btn:hover {
             background: #155cb8;
-            box-shadow: 0 0 20px rgba(26, 115, 232, 0.4);
+            box-shadow: 0 0 20px rgba(26, 115, 232, 0.5);
         }
         
         @media (max-width: 768px) {
@@ -312,36 +308,27 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Binary streams mixed with tech cypher matrix matrix codes
         const alphabet = "010101010101010101010101ABCDEFGHIJKLMNOPQRSTUVWXYZ<>[]{}/_=+X%#$@";
-        
-        // Decreased font size and spacing to increase rain column density (makes it look fuller/richer)
         const fontSize = 12; 
         const columns = canvas.width / fontSize;
         const rainDrops = Array(Math.floor(columns)).fill(1);
 
-        // Pre-fill rain random vertical starting points for instant continuous dense stream look
         for (let x = 0; x < columns; x++) {
             rainDrops[x] = Math.random() * -100;
         }
 
         function drawMatrix() {
-            // Low clear opacity means characters have long trailing tails
             ctx.fillStyle = 'rgba(2, 2, 4, 0.05)'; 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Neon matrix text green specs
             ctx.fillStyle = '#00ff66'; 
             ctx.font = 'bold ' + fontSize + 'px monospace';
             
-            // 💡 CRITICAL TRICK: Add glowing atmosphere around each code line string
             ctx.shadowBlur = 6;
             ctx.shadowColor = '#00ff66';
             
             for (let i = 0; i < rainDrops.length; i++) {
                 const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                
-                // Draw text string vertical index positioning
                 ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
                 
                 if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.985) {
@@ -349,14 +336,12 @@
                 }
                 rainDrops[i]++;
             }
-            ctx.shadowBlur = 0; // Performance preservation reset
+            ctx.shadowBlur = 0; 
         }
-        setInterval(drawMatrix, 28); // Decreased timeout for a faster falling fluid rain speed
+        setInterval(drawMatrix, 28); 
 
-        // Hide overlay panel initial states
         document.getElementById('terminalOverlay').style.display = 'none';
 
-        // Cyber System Loader Animation Logic
         function startCyberLogin(e) {
             e.preventDefault();
             
