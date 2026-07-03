@@ -164,4 +164,268 @@
 
         /* 📅 SIDEBAR CYBER CALENDAR STYLING */
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
-        .day-name { font-size: 10px; font
+        .day-name { font-size: 10px; font-weight: 800; color: #1a73e8; padding-bottom: 5px; }
+        .date { font-size: 12px; padding: 8px; border-radius: 6px; background: rgba(255, 255, 255, 0.03); }
+        .date.today { background: #00ff66; color: #000; font-weight: 900; box-shadow: 0 0 10px #00ff66; }
+        .date:hover { background: rgba(0, 255, 102, 0.2); }
+
+        .recent-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .recent-item i { color: #00ff66; }
+        .recent-item div h4 { font-size: 13px; margin-bottom: 2px; }
+        .recent-item div p { font-size: 11px; color: #94a3b8; }
+
+        @media (max-width: 1100px) { .main-container { flex-direction: column; } .sidebar { width: 100%; } }
+
+        /* ⚡ DYNAMIC ANIMATION ENGINE KEYFRAMES */
+        @keyframes gridGlow {
+            0%, 100% { opacity: 0.8; background-size: 12px 12px; }
+            50% { opacity: 1; background-size: 14px 14px; filter: hue-rotate(15deg); }
+        }
+        @keyframes cyberBrain {
+            0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 8px #00ff66); color: #00ff66; }
+            33% { transform: scale(1.08) rotate(2deg); filter: drop-shadow(0 0 18px #38bdf8); color: #38bdf8; }
+            66% { transform: scale(0.95) rotate(-2deg); filter: drop-shadow(0 0 12px #00ff66); color: #00ff66; }
+        }
+        @keyframes formulaWave {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.75; }
+            50% { transform: translateY(-8px) translateX(4px) scale(1.05); opacity: 1; }
+        }
+        @keyframes voiceRadar {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 15px #38bdf8); }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+        @keyframes aiPulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px #a855f7); }
+            50% { transform: scale(1.15); filter: drop-shadow(0 0 25px #00ff66); }
+        }
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(3deg); }
+        }
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="coderRain"></canvas>
+
+    <div class="navbar">
+        <div class="logo">PROGRAM<span>10X</span></div>
+        <div class="user-profile">
+            <span style="font-size: 13px; color: #94a3b8;">Welcome, Developer</span>
+            <div class="avatar">S</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="content-area">
+            <h2>Course overview</h2>
+            <div class="courses-grid">
+                
+                <div class="course-card">
+                    <div class="card-img">
+                        <div class="card-img-grid"></div>
+                        <div style="position: absolute; left: 25px; width: 65px; height: 65px; background: radial-gradient(circle, rgba(0, 255, 102, 0.15) 0%, transparent 75%); display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-brain" style="font-size: 2.6rem; color: #00ff66; filter: drop-shadow(0 0 15px #00ff66); animation: cyberBrain 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;"></i>
+                        </div>
+                        <div style="position: absolute; right: 20px; height: 100%; width: 150px; font-family: 'Space Grotesk', monospace; overflow: hidden;">
+                            <span style="position: absolute; top: 12px; left: 5px; color: #38bdf8; font-size: 14px; font-weight: 700; filter: drop-shadow(0 0 8px #1a73e8); animation: formulaWave 3.5s ease-in-out infinite;">&sum; (2ⁿ / n!)</span>
+                            <span style="position: absolute; top: 45px; right: 5px; color: #00ff66; font-size: 15px; font-weight: 700; filter: drop-shadow(0 0 8px #00ff66); animation: formulaWave 4.2s ease-in-out infinite 0.8s;">&int; e<sup>-x²</sup> dx</span>
+                            <span style="position: absolute; bottom: 18px; left: 15px; color: #ffffff; font-size: 12px; font-weight: 600; opacity: 0.9; animation: formulaWave 3.8s ease-in-out infinite 1.5s;">f(x) = &sigma;(Wᵀx)</span>
+                            <span style="position: absolute; top: 78px; left: 25px; color: #c084fc; font-size: 13px; opacity: 0.8; animation: formulaWave 5s ease-in-out infinite 0.3s;">&pi;r² &plusmn; &lambda;</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Math Magic with AI</div>
+                        <div class="tech-badge">Logic Engine v1.0</div>
+                        <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">
+                        <div class="card-img-grid"></div>
+                        <div style="display: flex; gap: 15px; align-items: center; justify-content: center; width: 100%;">
+                            <i class="fa-solid fa-microphone-lines" style="font-size: 3rem; color: #38bdf8; animation: voiceRadar 2s ease-in-out infinite;"></i>
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                <div style="width: 35px; height: 3px; background: #00ff66; animation: voiceRadar 1.2s infinite;"></div>
+                                <div style="width: 55px; height: 3px; background: #38bdf8; animation: voiceRadar 1.6s infinite 0.2s;"></div>
+                                <div style="width: 25px; height: 3px; background: #ffffff; animation: voiceRadar 1s infinite 0.4s;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">English Mouth Driven with AI</div>
+                        <div class="tech-badge">Voice Synthesis</div>
+                        <div class="tracker-box"><div class="tracker-text">98% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 98%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">
+                        <div class="card-img-grid"></div>
+                        <div style="position: relative;">
+                            <i class="fa-solid fa-robot" style="font-size: 3.5rem; color: #a855f7; animation: aiPulse 3s ease-in-out infinite;"></i>
+                            <i class="fa-solid fa-circle-nodes" style="font-size: 1.4rem; color: #00ff66; position: absolute; top: -10px; right: -12px; animation: spinSlow 6s linear infinite;"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Artificial Intelligence</div>
+                        <div class="tech-badge">Neural Networks</div>
+                        <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">
+                        <div class="card-img-grid"></div>
+                        <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-bezier-curve" style="font-size: 3rem; color: #ec4899; animation: floatEffect 4s ease-in-out infinite;"></i>
+                            <i class="fa-solid fa-cloud" style="font-size: 1.5rem; color: #38bdf8; position: absolute; bottom: -12px; right: -15px; opacity: 0.8; animation: floatEffect 4s ease-in-out infinite 1s;"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">UX/UI Design with Cloud AI ML</div>
+                        <div class="tech-badge">Interface Analytics</div>
+                        <div class="tracker-box"><div class="tracker-text">85% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 85%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">
+                        <div class="card-img-grid"></div>
+                        <div style="position: relative; animation: floatEffect 3.5s ease-in-out infinite;">
+                            <i class="fa-solid fa-server" style="font-size: 3.2rem; color: #00ff66; filter: drop-shadow(0 0 10px rgba(0,255,102,0.3));"></i>
+                            <div style="position: absolute; top: 12px; left: 14px; display: flex; gap: 5px;">
+                                <div style="width: 6px; height: 6px; background: #38bdf8; border-radius: 50%; animation: voiceRadar 1s infinite;"></div>
+                                <div style="width: 6px; height: 6px; background: #00ff66; border-radius: 50%; animation: voiceRadar 1s infinite 0.3s;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Computer Science & Info. Technology</div>
+                        <div class="tech-badge">Core Infrastructure</div>
+                        <div class="tracker-box"><div class="tracker-text">70% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 70%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">
+                        <div class="card-img-grid"></div>
+                        <div style="font-family: monospace; font-size: 1.8rem; font-weight: bold; color: #ffffff; display: flex; align-items: center; gap: 5px; animation: floatEffect 4s ease-in-out infinite;">
+                            <span style="color: #38bdf8;">[</span>
+                            <span style="color: #00ff66; font-size: 2.8rem; text-shadow: 0 0 10px #00ff66;">C</span>
+                            <span style="color: #38bdf8;">]</span>
+                            <i class="fa-solid fa-terminal" style="font-size: 1.1rem; color: #cbd5e1; margin-left: 6px; animation: voiceRadar 1.5s infinite;"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Programming C with AI</div>
+                        <div class="tech-badge">Compiler Sandbox</div>
+                        <div class="tracker-box"><div class="tracker-text">50% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 50%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">
+                        <div class="card-img-grid"></div>
+                        <div style="position: relative; animation: floatEffect 4.5s ease-in-out infinite;">
+                            <i class="fa-solid fa-graduation-cap" style="font-size: 3.5rem; color: #eab308; filter: drop-shadow(0 0 12px rgba(234,179,8,0.3));"></i>
+                            <i class="fa-solid fa-star" style="font-size: 1rem; color: #ffffff; position: absolute; top: -5px; right: -5px; animation: voiceRadar 2s infinite;"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Free Courses</div>
+                        <div class="tech-badge">Open Source Library</div>
+                        <div class="tracker-box"><div class="tracker-text">12% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 12%;"></div></div></div>
+                        <a href="#" class="btn-view">EXPLORE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">
+                        <div class="card-img-grid"></div>
+                        <div style="position: relative;">
+                            <i class="fa-solid fa-flask-vial" style="font-size: 3.2rem; color: #26d0ce; animation: floatEffect 3.8s ease-in-out infinite;"></i>
+                            <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center;">
+                                <div style="width: 45px; height: 45px; border: 2px dashed #00ff66; border-radius: 50%; animation: spinSlow 8s linear infinite;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Virtual Lab</div>
+                        <div class="tech-badge">Cloud Environment</div>
+                        <div class="tracker-box"><div class="tracker-text">0% INITIALIZED</div><div class="tracker-bg"><div class="tracker-fill" style="width: 0%;"></div></div></div>
+                        <a href="#" class="btn-view">ENTER LAB</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="widget">
+                <h3>Calendar</h3>
+                <div id="monthLabel" style="font-size: 14px; font-weight: 700; color: #1a73e8; margin-bottom: 12px; text-align: center;">July 2026</div>
+                <div class="calendar-grid">
+                    <div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div><div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div>
+                    <div class="date">28</div><div class="date">29</div><div class="date">30</div><div class="date">1</div><div class="date">2</div><div class="date">3</div><div class="date today">4</div>
+                    <div class="date">5</div><div class="date">6</div><div class="date">7</div><div class="date">8</div><div class="date">9</div><div class="date">10</div><div class="date">11</div>
+                    <div class="date">12</div><div class="date">13</div><div class="date">14</div><div class="date">15</div><div class="date">16</div><div class="date">17</div><div class="date">18</div>
+                    <div class="date">19</div><div class="date">20</div><div class="date">21</div><div class="date">22</div><div class="date">23</div><div class="date">24</div><div class="date">25</div>
+                </div>
+            </div>
+
+            <div class="widget">
+                <h3>Recently Accessed</h3>
+                <div class="recent-item">
+                    <i class="fa-solid fa-file-code"></i>
+                    <div><h4>Assignment_C_Array.pdf</h4><p>Opened 2h ago</p></div>
+                </div>
+                <div class="recent-item">
+                    <i class="fa-solid fa-brain"></i>
+                    <div><h4>AI_Logic_Masterclass.mp4</h4><p>Watched 5h ago</p></div>
+                </div>
+            </div>
+            
+            <div class="widget" style="border-left: 4px solid #00ff66;">
+                <h3>Prof. Ami (AI Assistant)</h3>
+                <input type="text" placeholder="Initiate chat..." style="width: 100%; padding: 12px; background: #000; border: 1px solid #1a73e8; border-radius: 8px; color: #fff; font-size: 13px; outline: none;">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- MATRIX STREAMS ANIMATION DECK ---
+        const canvas = document.getElementById('coderRain');
+        const ctx = canvas.getContext('2d');
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resize();
+        window.onresize = resize;
+        const chars = "01010101ABCDEF<>/[]{}";
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(2, 2, 4, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#00ff66"; ctx.font = fontSize + "px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 35);
+    </script>
+</body>
+</html>
