@@ -3,324 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program10X | Advanced Student Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Program10X | Dashboard</title>
     <style>
-        /* 1. CORE SETUP */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background-color: #020204;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* 🟩 LIVE MATRIX BACKGROUND ANIMATION */
-        #coderRain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.18; 
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* 📋 NEON NAVBAR */
-        .navbar {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            height: 75px;
-            background: rgba(10, 15, 28, 0.85);
-            border-bottom: 1px solid rgba(0, 255, 102, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-            z-index: 100;
-            backdrop-filter: blur(15px);
-        }
-        .navbar .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem; font-weight: 700; color: #1a73e8; letter-spacing: 2px;
-        }
-        .navbar .logo span { color: #00ff66; text-shadow: 0 0 15px rgba(0, 255, 102, 0.5); }
-        .navbar .user-profile { display: flex; align-items: center; gap: 15px; }
-        .navbar .avatar {
-            width: 40px; height: 40px; background: #1a73e8; color: white;
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-weight: 800; box-shadow: 0 0 10px rgba(26, 115, 232, 0.5);
-        }
-
-        /* 🗂️ MAIN AREA */
-        .main-container {
-            margin-top: 75px;
-            width: 100%;
-            display: flex;
-            padding: 40px;
-            gap: 30px;
-            z-index: 5;
-            position: relative;
-        }
-
-        /* LEFT: COURSE OVERVIEW */
-        .content-area { flex: 3; }
-        .content-area h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem; margin-bottom: 30px;
-        }
-
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        /* COURSE CARDS */
-        .course-card {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px;
-            overflow: hidden;
-            transition: 0.3s;
-        }
-        .course-card:hover {
-            transform: translateY(-8px);
-            border-color: #00ff66;
-            box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
-        }
-        .card-img {
-            height: 120px;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex; justify-content: center; align-items: center;
-            font-size: 3rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .card-body { padding: 20px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #020204; color: #ffffff; height: 100vh; display: flex; overflow: hidden; position: relative; }
         
-        /* MODERN STYLISH COURSE TITLES */
-        .card-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; height: 52px;
-            display: flex; align-items: center; line-height: 1.3; color: #ffffff;
-        }
+        /* 🟩 HIGH-DENSITY GLOWING MATRIX BACKGROUND */
+        #coderRain { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1.0; pointer-events: none; z-index: 1; }
 
-        /* ✨ NEW STYLISH FEATURE: TECH BADGES */
-        .tech-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            font-size: 10px;
-            font-weight: 800;
-            background: rgba(26, 115, 232, 0.15);
-            color: #38bdf8;
-            border: 1px solid rgba(26, 115, 232, 0.3);
-            border-radius: 6px;
-            margin-bottom: 15px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-        .course-card:hover .tech-badge {
-            background: rgba(0, 255, 102, 0.1);
-            color: #00ff66;
-            border-color: rgba(0, 255, 102, 0.3);
-        }
+        /* CYBERPUNK TERMINAL OVERLAY */
+        #terminalOverlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 20; background: rgba(2, 2, 4, 0.7); pointer-events: none; display: none; }
+        .terminal-status-box { background: rgba(10, 15, 28, 0.95); border: 2px solid #00ff66; box-shadow: 0 0 30px rgba(0, 255, 102, 0.4), inset 0 0 15px rgba(0, 255, 102, 0.2); padding: 40px 60px; text-align: center; border-radius: 12px; min-width: 460px; position: relative; }
+        .access-text { font-family: monospace; font-size: 3rem; font-weight: bold; letter-spacing: 4px; color: #ffffff; text-shadow: 0 0 15px #00ff66, 0 0 30px rgba(0, 255, 102, 0.6); margin-bottom: 12px; display: none; animation: neonBreathing 2s ease-in-out infinite; }
+        .sub-status { font-family: monospace; color: #a3a8b3; font-size: 14px; margin-bottom: 25px; }
+        .cyber-progress-bg { width: 100%; height: 16px; background: #111625; border: 1px solid rgba(0, 255, 102, 0.3); border-radius: 6px; overflow: hidden; }
+        .cyber-progress-bar { height: 100%; width: 0%; background: #00ff66; box-shadow: 0 0 15px #00ff66; transition: width 0.1s linear; }
+        .terminal-logs { font-family: monospace; color: #00ff66; font-size: 11px; text-align: left; margin-top: 25px; max-height: 80px; overflow: hidden; opacity: 0.85; line-height: 1.6; }
+        @keyframes neonBreathing { 0%, 100% { opacity: 1; text-shadow: 0 0 15px #00ff66, 0 0 30px #00ff66; } 50% { opacity: 0.8; text-shadow: 0 0 8px #00ff66, 0 0 15px #00ff66; } }
 
-        /* 🟩 STUDENT TRACKER GREEN LINE */
-        .tracker-box { margin-bottom: 15px; }
-        .tracker-text { font-size: 11px; font-weight: 800; color: #00ff66; margin-bottom: 6px; }
-        .tracker-bg { width: 100%; height: 6px; background: #000; border-radius: 10px; overflow: hidden; }
-        .tracker-fill { height: 100%; background: #00ff66; box-shadow: 0 0 10px #00ff66; transition: 1s ease; }
+        /* CRYSTAL CLEAR TRANSPARENT PANELS */
+        .left-side { flex: 1.2; background: linear-gradient(135deg, rgba(8, 12, 24, 0.4) 0%, rgba(4, 6, 12, 0.5) 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; position: relative; border-right: 1px solid rgba(0, 255, 102, 0.15); z-index: 5; }
+        .banner-content { text-align: center; z-index: 2; max-width: 520px; }
+        .banner-content h1 { font-size: 3.5rem; color: #1a73e8; margin-bottom: 25px; letter-spacing: 2px; font-weight: 900; }
+        .banner-content h1 span { color: #00ff66; text-shadow: 0 0 15px rgba(0, 255, 102, 0.4); }
+        .banner-content h2 { font-size: 1.9rem; color: #ffffff; margin-bottom: 15px; font-weight: 800; line-height: 1.3; }
+        .banner-content p { color: #e2e8f0; font-size: 1.05rem; line-height: 1.6; margin-bottom: 30px; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
+        .features-badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .badge { background: rgba(2, 2, 4, 0.75); border: 1px solid rgba(26, 115, 232, 0.4); padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; color: #ffffff; }
+        .badge.green { border-color: rgba(0, 255, 102, 0.6); color: #00ff66; box-shadow: 0 0 10px rgba(0, 255, 102, 0.3); }
 
-        .btn-view {
-            display: block; width: 100%; text-align: center; padding: 10px;
-            background: rgba(26, 115, 232, 0.1); border: 1px solid #1a73e8;
-            color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 13px;
-        }
-        .btn-view:hover { background: #00ff66; color: #000; border-color: #00ff66; }
+        .right-side { flex: 1; background-color: rgba(6, 10, 18, 0.4); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; z-index: 5; }
 
-        /* RIGHT SIDEBAR */
-        .sidebar { flex: 1; min-width: 320px; display: flex; flex-direction: column; gap: 25px; }
-        .widget {
-            background: rgba(15, 23, 42, 0.8);
-            border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px; backdrop-filter: blur(10px);
-        }
-        .widget h3 { font-size: 1.1rem; margin-bottom: 15px; border-left: 4px solid #00ff66; padding-left: 10px; }
+        /* 🆕 DYNAMIC SWITCHABLE BOX FOR AUTH & ENROLLMENT */
+        .card-container { width: 100%; max-width: 400px; background: rgba(10, 15, 28, 0.85); border: 1px solid rgba(26, 115, 232, 0.3); border-radius: 12px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .auth-form { display: none; }
+        .auth-form.active { display: block; }
+        .auth-container h2 { font-size: 1.8rem; margin-bottom: 6px; color: #ffffff; }
+        .auth-container p.subtitle { color: #cbd5e1; font-size: 13px; margin-bottom: 20px; }
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; }
+        .input-group input { width: 100%; padding: 11px 14px; background: rgba(15, 22, 38, 0.9); border: 1px solid rgba(26, 115, 232, 0.4); border-radius: 8px; color: #ffffff; font-size: 14px; transition: all 0.3s ease; }
+        .input-group input:focus { outline: none; border-color: #00ff66; box-shadow: 0 0 12px rgba(0, 255, 102, 0.4); }
+        .form-footer-links { display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 20px; }
+        .forgot-pass { color: #38bdf8; text-decoration: none; }
+        .forgot-pass:hover { text-decoration: underline; }
+        .submit-btn { width: 100%; padding: 13px; background: #1a73e8; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .submit-btn:hover { background: #155cb8; box-shadow: 0 0 20px rgba(26, 115, 232, 0.5); }
+        .switch-prompt { text-align: center; font-size: 13px; color: #cbd5e1; margin-top: 20px; }
+        .switch-prompt a { color: #00ff66; text-decoration: none; font-weight: 600; }
+        .switch-prompt a:hover { text-decoration: underline; }
 
-        /* 📅 CYBER CALENDAR STYLING */
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
-        .day-name { font-size: 10px; font-weight: 800; color: #1a73e8; padding-bottom: 5px; }
-        .date { font-size: 12px; padding: 8px; border-radius: 6px; background: rgba(255, 255, 255, 0.03); }
-        .date.today { background: #00ff66; color: #000; font-weight: 900; box-shadow: 0 0 10px #00ff66; }
-        .date:hover { background: rgba(0, 255, 102, 0.2); }
+        /* 🆕 NEW COURSE ENROLLMENT TILE & THUMBNAIL */
+        #enrollmentForm.active { display: flex; flex-direction: column; align-items: center; }
+        .course-enroll-card { display: flex; flex-direction: column; align-items: center; width: 100%; background: #0f1626; border-radius: 12px; padding: 25px; border: 1px solid rgba(0, 255, 102, 0.2); box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.1); }
+        .course-enroll-card h2 { font-size: 1.4rem; color: #00ff66; margin-bottom: 8px; font-weight: 700; }
+        .course-enroll-card p.subtitle { font-size: 12px; color: #a3a8b3; text-align: center; margin-bottom: 25px; }
 
-        .recent-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .recent-item i { color: #00ff66; }
-        .recent-item div h4 { font-size: 13px; margin-bottom: 2px; }
-        .recent-item div p { font-size: 11px; color: #94a3b8; }
+        /* 🟩 GAEL VAROQUAUX-INSPIRED ANIMATED THUMBNAIL */
+        .thumbnail-box { position: relative; width: 100%; height: 180px; background: #020204; border-radius: 8px; overflow: hidden; border: 2px solid rgba(26, 115, 232, 0.3); margin-bottom: 25px; }
+        #courseCanvas { width: 100%; height: 100%; }
 
-        @media (max-width: 1100px) { .main-container { flex-direction: column; } .sidebar { width: 100%; } }
+        .form-action-btn { width: 100%; padding: 13px; background: #00ff66; color: #020204; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.5px; box-shadow: 0 0 15px rgba(0, 255, 102, 0.4); }
+        .form-action-btn:hover { background: #00cc52; box-shadow: 0 0 25px rgba(0, 255, 102, 0.6); }
+
+        @media (max-width: 768px) { body { flex-direction: column; } .left-side { display: none; } .right-side { padding: 20px; } .terminal-status-box { min-width: 90%; padding: 20px; } }
     </style>
 </head>
 <body>
 
     <canvas id="coderRain"></canvas>
 
-    <div class="navbar">
-        <div class="logo">PROGRAM<span>10X</span></div>
-        <div class="user-profile">
-            <span style="font-size: 13px; color: #94a3b8;">Welcome, Developer</span>
-            <div class="avatar">S</div>
+    <div id="terminalOverlay">
+        <div class="terminal-status-box">
+            <div id="accessText" class="access-text">ACCESS GRANTED</div>
+            <div id="statusSub" class="sub-status">INITIALIZING SYSTEM_CRACK...</div>
+            <div class="cyber-progress-bg">
+                <div id="progressBar" class="cyber-progress-bar"></div>
+            </div>
+            <div id="logBox" class="terminal-logs"></div>
         </div>
     </div>
 
-    <div class="main-container">
-        <div class="content-area">
-            <h2>Course overview</h2>
-            <div class="courses-grid">
-                
-                <div class="course-card">
-                    <div class="card-img">🔢</div>
-                    <div class="card-body">
-                        <div class="card-title">Math Magic with AI</div>
-                        <div class="tech-badge">Logic Engine v1.0</div>
-                        <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <div class="course-card">
-                    <div class="card-img">🗣️</div>
-                    <div class="card-body">
-                        <div class="card-title">English Mouth Driven with AI</div>
-                        <div class="tech-badge">Voice Synthesis</div>
-                        <div class="tracker-box"><div class="tracker-text">98% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 98%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <div class="course-card">
-                    <div class="card-img">🤖</div>
-                    <div class="card-body">
-                        <div class="card-title">Artificial Intelligence</div>
-                        <div class="tech-badge">Neural Networks</div>
-                        <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <div class="course-card">
-                    <div class="card-img">🎨</div>
-                    <div class="card-body">
-                        <div class="card-title">UX/UI Design with Cloud AI ML</div>
-                        <div class="tech-badge">Interface Analytics</div>
-                        <div class="tracker-box"><div class="tracker-text">85% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 85%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <div class="course-card">
-                    <div class="card-img">🖥️</div>
-                    <div class="card-body">
-                        <div class="card-title">Computer Science & Info. Technology</div>
-                        <div class="tech-badge">Core Infrastructure</div>
-                        <div class="tracker-box"><div class="tracker-text">70% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 70%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <div class="course-card">
-                    <div class="card-img">💻</div>
-                    <div class="card-body">
-                        <div class="card-title">Programming C with AI</div>
-                        <div class="tech-badge">Compiler Sandbox</div>
-                        <div class="tracker-box"><div class="tracker-text">50% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 50%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <div class="course-card">
-                    <div class="card-img">🎁</div>
-                    <div class="card-body">
-                        <div class="card-title">Free Courses</div>
-                        <div class="tech-badge">Open Source Library</div>
-                        <div class="tracker-box"><div class="tracker-text">12% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 12%;"></div></div></div>
-                        <a href="#" class="btn-view">EXPLORE</a>
-                    </div>
-                </div>
-
-                <div class="course-card">
-                    <div class="card-img">🧪</div>
-                    <div class="card-body">
-                        <div class="card-title">Virtual Lab</div>
-                        <div class="tech-badge">Cloud Environment</div>
-                        <div class="tracker-box"><div class="tracker-text">0% INITIALIZED</div><div class="tracker-bg"><div class="tracker-fill" style="width: 0%;"></div></div></div>
-                        <a href="#" class="btn-view">ENTER LAB</a>
-                    </div>
-                </div>
-
+    <div class="left-side">
+        <div class="banner-content">
+            <h1>PROGRAM<span>10X</span></h1>
+            <h2>One Portal. Infinite Tech.<br>Master Coding to <span style="color: #00ff66; text-shadow: 0 0 15px #00ff66;">Next-Gen AI</span>.</h2>
+            <p>Stop jumping from channel to channel. From building your core logic to deploying your own AI agents, master every language the modern industry demands.</p>
+            <div class="features-badges">
+                <span class="badge">🚀 Full-Stack Tech</span>
+                <span class="badge">🧠 AI & Automation</span>
+                <span class="badge green">⚡ Placement Ready</span>
             </div>
         </div>
+    </div>
 
-        <div class="sidebar">
-            <div class="widget">
-                <h3>Calendar</h3>
-                <div id="monthLabel" style="font-size: 14px; font-weight: 700; color: #1a73e8; margin-bottom: 12px; text-align: center;">July 2026</div>
-                <div class="calendar-grid">
-                    <div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div><div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div>
-                    <div class="date">28</div><div class="date">29</div><div class="date">30</div><div class="date">1</div><div class="date">2</div><div class="date">3</div><div class="date today">4</div>
-                    <div class="date">5</div><div class="date">6</div><div class="date">7</div><div class="date">8</div><div class="date">9</div><div class="date">10</div><div class="date">11</div>
-                    <div class="date">12</div><div class="date">13</div><div class="date">14</div><div class="date">15</div><div class="date">16</div><div class="date">17</div><div class="date">18</div>
-                    <div class="date">19</div><div class="date">20</div><div class="date">21</div><div class="date">22</div><div class="date">23</div><div class="date">24</div><div class="date">25</div>
-                </div>
-            </div>
-
-            <div class="widget">
-                <h3>Recently Accessed</h3>
-                <div class="recent-item">
-                    <i class="fa-solid fa-file-code"></i>
-                    <div><h4>Assignment_C_Array.pdf</h4><p>Opened 2h ago</p></div>
-                </div>
-                <div class="recent-item">
-                    <i class="fa-solid fa-brain"></i>
-                    <div><h4>AI_Logic_Masterclass.mp4</h4><p>Watched 5h ago</p></div>
-                </div>
-            </div>
+    <div class="right-side">
+        <div class="card-container auth-container">
             
-            <div class="widget" style="border-left: 4px solid #00ff66;">
-                <h3>Prof. Ami (AI Assistant)</h3>
-                <input type="text" placeholder="Initiate chat..." style="width: 100%; padding: 12px; background: #000; border: 1px solid #1a73e8; border-radius: 8px; color: #fff; font-size: 13px; outline: none;">
+            <div id="enrollmentForm" class="auth-form active">
+                <div class="course-enroll-card">
+                    <h2>Math Magic with AI</h2>
+                    <p class="subtitle">Quantum Equations & Logic Streams: Unlock the Algorithms of Next-Gen Tech.</p>
+                    
+                    <div class="thumbnail-box">
+                        <canvas id="courseCanvas"></canvas>
+                    </div>
+
+                    <button class="form-action-btn" onclick="startEnrollmentAnimation()">ENROLL NOW</button>
+                    <p class="switch-prompt">Need help? Ask <a href="#" onclick="alert('Prof. Ami: Hello, I am your 10X assistant. This course will master AI Mathematics. Enroll to begin.')">Prof. Ami (AI)</a></p>
+                }
             </div>
+
+            <div id="loginForm" class="auth-form">
+                <h2>Student Login</h2>
+                <p class="subtitle">Enter your credentials to access your dashboard</p>
+                <form onsubmit="startCyberAnimation(event, 'login')">
+                    <div class="input-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="anon@program10x.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Minimum 6 characters" required>
+                    </div>
+                    <div class="form-footer-links">
+                        <a href="#" class="forgot-pass">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="submit-btn">Unlock Portal</button>
+                </form>
+                <p class="switch-prompt">Professor said to enroll in a new core class first.</p>
+            </div>
+
         </div>
     </div>
 
     <script>
-        // --- MATRIX RAIN ENGINE ---
+        // Matrix Falling Rain Logic
         const canvas = document.getElementById('coderRain');
         const ctx = canvas.getContext('2d');
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        resize();
-        window.onresize = resize;
-        const chars = "01010101ABCDEF<>/[]{}";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const alphabet = "010101010101010101010101ABCDEFGHIJKLMNOPQRSTUVWXYZ<>[]{}/_=+X%#$@";
+        const fontSize = 12; const columns = canvas.width / fontSize;
+        const rainDrops = Array(Math.floor(columns)).fill(1);
+        for (let x = 0; x < columns; x++) { rainDrops[x] = Math.random() * -100; }
+
         function drawMatrix() {
-            ctx.fillStyle = "rgba(2, 2, 4, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#00ff66"; ctx.font = fontSize + "px monospace";
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
+            ctx.fillStyle = 'rgba(2, 2, 4, 0.05)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff66'; ctx.font = 'bold ' + fontSize + 'px monospace'; ctx.shadowBlur = 6; ctx.shadowColor = '#00ff66';
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.985) { rainDrops[i] = 0; }
+                rainDrops[i]++;
+            }
+            ctx.shadowBlur = 0; 
+        }
+        setInterval(drawMatrix, 28); 
+
+        // 🟩 COURSE CANVAS ANIMATION: MATH MAGIC WITH AI (GAEL VAROQUAUX STYLE)
+        const courseCanvas = document.getElementById('courseCanvas');
+        const cCtx = courseCanvas.getContext('2d');
+        const mathParticles = [];
+
+        function initCourseCanvas() {
+            courseCanvas.width = courseCanvas.parentElement.clientWidth;
+            courseCanvas.height = courseCanvas.parentElement.clientHeight;
+            for(let i=0; i<80; i++) {
+                mathParticles.push({
+                    x: Math.random() * courseCanvas.width,
+                    y: Math.random() * courseCanvas.height,
+                    vx: (Math.random() - 0.5) * 1.5,
+                    vy: (Math.random() - 0.5) * 1.5,
+                    size: Math.random() * 2.5,
+                    hue: Math.random() > 0.8 ? 130 : 210 // Green and Blue
+                });
             }
         }
-        setInterval(drawMatrix, 35);
+        initCourseCanvas();
+        window.addEventListener('resize', initCourseCanvas);
+
+        const complexFormulas = [
+            '∑ (2ⁿ / n!)',
+            '∇ · J = - ∂ρ/∂t',
+            '∫ e^(-x²) dx',
+            'E = mc²',
+            'z = σ(Wx + b)'
+        ];
+
+        function drawCourseThumbnail() {
+            cCtx.fillStyle = '#010411'; // Elite deep dark blue
+            cCtx.fillRect(0, 0, courseCanvas.width, courseCanvas.height);
+
+            // Animated Quantum Field Particles
+            cCtx.shadowBlur = 10;
+            mathParticles.forEach(p => {
+                cCtx.fillStyle = `hsla(${p.hue}, 90%, 65%, 0.85)`;
+                cCtx.beginPath();
+                cCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                cCtx.fill();
+                p.x += p.vx; p.y += p.vy;
+                if(p.x<0 || p.x>courseCanvas.width) p.vx *= -1;
+                if(p.y<0 || p.y>courseCanvas.height) p.vy *= -1;
+            });
+
+            // Glowing complex equations
+            cCtx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            cCtx.font = 'bold 16px Courier New, monospace';
+            cCtx.shadowColor = 'rgba(26, 115, 232, 1)';
+            cCtx.shadowBlur = 20;
+            complexFormulas.forEach((f, i) => {
+                cCtx.fillText(f, 25 + i*70, 45 + i*25);
+            });
+
+            // "MATH MAGIC" - Animated text effect
+            cCtx.fillStyle = '#ffffff';
+            cCtx.font = 'bold 24px Segoe UI, Tahoma';
+            cCtx.shadowColor = 'rgba(0, 255, 102, 1)';
+            cCtx.shadowBlur = 20;
+            const textY = 120 + Math.sin(Date.now()*0.005) * 5;
+            cCtx.fillText("MATH MAGIC", 10, textY);
+            
+            cCtx.fillStyle = '#1a73e8';
+            cCtx.font = '700 18px Segoe UI, Tahoma';
+            cCtx.shadowColor = 'rgba(26, 115, 232, 0.8)';
+            cCtx.fillText("with AI", 160, textY+5);
+
+            cCtx.shadowBlur = 0;
+            requestAnimationFrame(drawCourseThumbnail);
+        }
+        drawCourseThumbnail();
+
+        // enrollment specific animation
+        function startEnrollmentAnimation() {
+            const overlay = document.getElementById('terminalOverlay');
+            const pBar = document.getElementById('progressBar');
+            const statusSub = document.getElementById('statusSub');
+            const logBox = document.getElementById('logBox');
+            overlay.style.display = 'flex'; pBar.style.width = '0%'; document.getElementById('accessText').style.display = 'none'; logBox.innerHTML = "";
+            statusSub.innerText = "INITIATING QuantumMath_Enrollment v1.4...";
+            
+            const logs = [
+                "[OK] Linking course node: MATH_MAGIC_AI...",
+                "[INFO] Opening system enrollment pipeline...",
+                "[OK] Creating security hash for Anon...",
+                "[SUCCESS] Token match confirmed.",
+                "[SYS] Directing student to dashboard asset loader..."
+            ];
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 5;
+                if(progress >= 100) {
+                    clearInterval(interval); pBar.style.width = '100%'; statusSub.innerText = "Quantum Math Enrollment Complete!";
+                    document.getElementById('accessText').innerText = "ENROLLED";
+                    document.getElementById('accessText').style.display = 'block';
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                        showLoginForm();
+                    }, 1500);
+                } else {
+                    pBar.style.width = progress + '%';
+                    if(progress % 20 === 0) {
+                        logBox.innerHTML += `<div>${logs[Math.floor(progress/20)-1]}</div>`;
+                        logBox.scrollTop = logBox.scrollHeight;
+                    }
+                }
+            }, 60);
+        }
+
+        // Standard Switch Logic
+        function showLoginForm() {
+            document.getElementById('enrollmentForm').classList.remove('active');
+            document.getElementById('loginForm').classList.add('active');
+        }
+
+        // Standard Cracking Animation for Login
+        function startCyberAnimation(e, type) {
+            e.preventDefault();
+            const overlay = document.getElementById('terminalOverlay');
+            const pBar = document.getElementById('progressBar');
+            const statusSub = document.getElementById('statusSub');
+            const logBox = document.getElementById('logBox');
+            overlay.style.display = 'flex'; pBar.style.width = '0%'; document.getElementById('accessText').style.display = 'none'; logBox.innerHTML = "";
+            
+            statusSub.innerText = "AUTHENTICATING SECURITY KEYS...";
+            
+            const logs = [
+                "[OK] Connecting to main server nodes...",
+                "[INFO] Checking decryption privileges...",
+                "[OK] Running payload injection...",
+                "[SUCCESS] Token match confirmed.",
+                "[SYS] Fetching 10X developer dashboard assets..."
+            ];
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 5;
+                if(progress >= 100) {
+                    clearInterval(interval); pBar.style.width = '100%'; statusSub.innerText = "ADMIN PRIVILEGES: TRUE";
+                    document.getElementById('accessText').style.display = 'block';
+                    setTimeout(() => { alert("Access Approved! Redirecting Anon to P10X Space..."); overlay.style.display = 'none'; }, 1500);
+                } else {
+                    pBar.style.width = progress + '%';
+                    if(progress % 20 === 0) {
+                        logBox.innerHTML += `<div>${logs[Math.floor(progress/20)-1]}</div>`;
+                        logBox.scrollTop = logBox.scrollHeight;
+                    }
+                }
+            }, 60);
+        }
     </script>
 </body>
 </html>
