@@ -71,7 +71,7 @@
             box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
         }
 
-        /* 📸 SPECIFIC CANVAS BOX DESIGN FOR MATH MAGIC */
+        /* 📸 CANVAS MULTI-CONTAINER FOR SCIFI MODULE ANIMATIONS */
         .card-img-canvas-box {
             height: 140px; width: 100%; position: relative; background: #01040a;
             border-bottom: 1px solid rgba(26, 115, 232, 0.15); overflow: hidden;
@@ -81,7 +81,19 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
         }
 
-        /* 📸 PREMIUM CONTAINER FOR STATIC CORES */
+        /* 🎙️ CUSTOM STYLING TO KEEP SVG MIC FLOAT ON CANVAS */
+        .neon-mic-overlay-icon {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 70px; height: 70px; filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.85));
+            pointer-events: none; z-index: 10; animation: micFloating 4s ease-in-out infinite;
+        }
+
+        @keyframes micFloating {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0); filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.7)); }
+            50% { transform: translate(-50%, -50%) translateY(-4px); filter: drop-shadow(0 0 22px rgba(56, 189, 248, 0.95)); }
+        }
+
+        /* UNIFORM STATIC CARDS CONTAINER */
         .card-img {
             height: 140px; width: 100%; position: relative; overflow: hidden;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: #060b13;
@@ -95,44 +107,6 @@
         .card-img::after {
             content: ''; position: absolute; inset: 0;
             background: linear-gradient(to bottom, transparent 40%, rgba(15, 23, 42, 0.9));
-        }
-
-        /* 🎙️ CUSTOM PURE CSS VECTOR VECTOR PACK FOR ENGLISH CARD */
-        .neon-mic-container {
-            height: 140px; width: 100%; display: flex; justify-content: center; align-items: center;
-            background: radial-gradient(circle at center, #0a162b 0%, #02050f 100%);
-            position: relative; overflow: hidden; border-bottom: 1px solid rgba(56, 189, 248, 0.2);
-        }
-        .neon-mic-grid {
-            position: absolute; inset: 0;
-            background-image: linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
-            background-size: 15px 15px;
-        }
-        .neon-mic-svg {
-            width: 70px; height: 70px; filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.8));
-            animation: micGlowFloat 4s ease-in-out infinite;
-        }
-
-        @keyframes micGlowFloat {
-            0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.7)); }
-            50% { transform: translateY(-4px) scale(1.04); filter: drop-shadow(0 0 22px rgba(56, 189, 248, 0.95)); }
-        }
-
-        /* 🌊 SUBTLE CYBER SOUND WAVE PULSE BACKGROUND */
-        .wave-pulse {
-            position: absolute; width: 60px; height: 60px; border-radius: 50%; 
-            background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.3); 
-            animation: subtlePulse 3s infinite ease-out;
-        }
-        .wave-pulse-delayed {
-            position: absolute; width: 60px; height: 60px; border-radius: 50%; 
-            background: rgba(0, 255, 102, 0.03); border: 1px solid rgba(0, 255, 102, 0.15); 
-            animation: subtlePulse 3s infinite ease-out 1.5s;
-        }
-
-        @keyframes subtlePulse {
-            0% { transform: scale(0.8); opacity: 0.8; }
-            100% { transform: scale(2.6); opacity: 0; }
         }
 
         .card-body { padding: 20px; }
@@ -209,16 +183,12 @@
                 </div>
 
                 <div class="course-card">
-                    <div class="neon-mic-container">
-                        <div class="neon-mic-grid"></div>
-                        
-                        <div class="wave-pulse"></div>
-                        <div class="wave-pulse-delayed"></div>
-
-                        <svg class="neon-mic-svg" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="z-index: 2;">
-                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" fill="rgba(56, 189, 248, 0.2)"/>
+                    <div class="card-img-canvas-box" id="voiceWrapper">
+                        <svg class="neon-mic-overlay-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" fill="rgba(56, 189, 248, 0.15)"/>
                             <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 19v3M8 22h8"/>
                         </svg>
+                        <canvas id="voiceSynthCanvas"></canvas>
                     </div>
                     <div class="card-body">
                         <div class="card-title">English Mouth Driven with AI</div>
@@ -424,9 +394,88 @@
             });
             requestAnimationFrame(drawMindPalace);
         }
+
+        // --- 🎙️ ACTIVE SCRIPT: DYNAMIC ROTATING ABCD MATRIX SWIRL ENGINE ---
+        const voiceCanvas = document.getElementById('voiceSynthCanvas');
+        const vCtx = voiceCanvas.getContext('2d');
+        const voiceWrapper = document.getElementById('voiceWrapper');
+        let voiceMouse = { x: null, y: null, active: false };
+
+        function setupVoiceCanvas() {
+            voiceCanvas.width = voiceWrapper.clientWidth || 300;
+            voiceCanvas.height = voiceWrapper.clientHeight || 140;
+        }
+        setupVoiceCanvas();
+
+        voiceWrapper.addEventListener('mousemove', (e) => {
+            const rect = voiceCanvas.getBoundingClientRect();
+            voiceMouse.x = e.clientX - rect.left; voiceMouse.y = e.clientY - rect.top; voiceMouse.active = true;
+        });
+        voiceWrapper.addEventListener('mouseleave', () => { voiceMouse.active = false; });
+
+        // Generate specific linguistic characters swirling organically
+        const abcdTokens = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        const abcdParticles = [];
         
-        setTimeout(() => { setupMathCanvas(); drawMindPalace(); }, 150);
-        window.addEventListener('resize', setupMathCanvas);
+        for (let i = 0; i < 45; i++) {
+            let radiusDist = Math.random() * 45 + 25; // Base radial orbit radius around center microphone
+            abcdParticles.push({
+                char: abcdTokens[Math.floor(Math.random() * abcdTokens.length)],
+                angle: Math.random() * Math.PI * 2,
+                orbitRadius: radiusDist,
+                baseOrbit: radiusDist,
+                rotSpeed: (Math.random() * 0.015 + 0.005) * (Math.random() > 0.5 ? 1 : -1),
+                opacity: Math.random() * 0.5 + 0.3,
+                fontSize: Math.floor(Math.random() * 3) + 9
+            });
+        }
+
+        function drawVoiceSynthEngine() {
+            vCtx.fillStyle = '#01040a'; vCtx.fillRect(0, 0, voiceCanvas.width, voiceCanvas.height);
+
+            // Tech Grid background lines
+            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.04)'; vCtx.lineWidth = 1;
+            for(let x = 0; x < voiceCanvas.width; x += 15) { vCtx.beginPath(); vCtx.moveTo(x, 0); vCtx.lineTo(x, voiceCanvas.height); vCtx.stroke(); }
+
+            // Precise Center calculation where Microphone sits overlayed
+            let midX = voiceCanvas.width / 2;
+            let midY = voiceCanvas.height / 2;
+
+            // Outer subtle neon radial sound pulse rings
+            let pulseScale = 45 + Math.sin(Date.now() * 0.005) * 8;
+            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.12)'; vCtx.lineWidth = 1;
+            vCtx.beginPath(); vCtx.arc(midX, midY, pulseScale, 0, Math.PI * 2); vCtx.stroke();
+            
+            vCtx.strokeStyle = 'rgba(0, 255, 102, 0.06)';
+            vCtx.beginPath(); vCtx.arc(midX, midY, pulseScale + 20, 0, Math.PI * 2); vCtx.stroke();
+
+            // Run and rotate ABCD characters in dynamic orbital mechanics
+            abcdParticles.forEach((p) => {
+                p.angle += voiceMouse.active ? p.rotSpeed * 2.2 : p.rotSpeed; // Accelerates dynamically on hover
+
+                // Smooth expansion based on user mouse hover triggers
+                if (voiceMouse.active) {
+                    let mouseDist = Math.hypot(voiceMouse.x - midX, voiceMouse.y - midY);
+                    p.orbitRadius = p.baseOrbit + (mouseDist * 0.12);
+                } else {
+                    p.orbitRadius += (p.baseOrbit - p.orbitRadius) * 0.05; // Ease back to original shape
+                }
+
+                let x = midX + Math.cos(p.angle) * p.orbitRadius;
+                let y = midY + Math.sin(p.angle) * p.orbitRadius + 4; // Shift down slightly for alignment
+
+                // Alternate glowing hue styling between cyan and green strings
+                vCtx.fillStyle = p.orbitRadius % 2 === 0 ? `rgba(56, 189, 248, ${p.opacity})` : `rgba(0, 255, 102, ${p.opacity * 0.8})`;
+                vCtx.font = `${p.fontSize}px 'Space Grotesk', sans-serif`;
+                vCtx.fillText(p.char, x, y);
+            });
+
+            requestAnimationFrame(drawVoiceSynthEngine);
+        }
+
+        // Initialize stable rendering engines together
+        setTimeout(() => { setupMathCanvas(); setupVoiceCanvas(); drawMindPalace(); drawVoiceSynthEngine(); }, 150);
+        window.addEventListener('resize', () => { setupMathCanvas(); setupVoiceCanvas(); });
     </script>
 </body>
 </html>
