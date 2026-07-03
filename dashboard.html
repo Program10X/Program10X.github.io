@@ -96,30 +96,32 @@
             box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
         }
         
-        /* 📸 MODERN BOX DESIGN FOR IMAGES WITH SMOOTH OVERLAY ANIMATION */
+        /* 📸 PREMIUM BOX FOR CYBER IMAGE RENDERING */
         .card-img {
             height: 140px;
             width: 100%;
             position: relative;
             overflow: hidden;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: #060b13;
+            border-bottom: 1px solid rgba(0, 255, 102, 0.1);
         }
         .card-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease, filter 0.3s ease;
-            filter: brightness(0.75) contrast(1.1);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+            filter: brightness(0.8) contrast(1.15) saturate(1.1);
         }
         .course-card:hover .card-img img {
-            transform: scale(1.08);
-            filter: brightness(0.95) contrast(1.1);
+            transform: scale(1.06);
+            filter: brightness(1) contrast(1.2) saturate(1.2);
         }
+        /* Gradient Shadow overlay to blend images with the card */
         .card-img::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, transparent 40%, rgba(15, 23, 42, 0.85));
+            background: linear-gradient(to bottom, transparent 30%, rgba(15, 23, 42, 0.95));
             pointer-events: none;
         }
         
@@ -207,7 +209,7 @@
                 
                 <div class="course-card">
                     <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=600&q=80" alt="Math Magic with AI">
+                        <img src="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?auto=format&fit=crop&w=600&q=80" alt="Math Magic with AI">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Math Magic with AI</div>
@@ -219,7 +221,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=600&q=80" alt="English Mouth Driven with AI">
+                        <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=600&q=80" alt="English Mouth Driven with AI">
                     </div>
                     <div class="card-body">
                         <div class="card-title">English Mouth Driven with AI</div>
@@ -231,7 +233,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=600&q=80" alt="Artificial Intelligence">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Artificial Intelligence">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Artificial Intelligence</div>
@@ -243,7 +245,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1581291518655-9523c932dedf?auto=format&fit=crop&w=600&q=80" alt="UX/UI Design with Cloud AI ML">
+                        <img src="https://images.unsplash.com/photo-1626544827763-d516dce335e2?auto=format&fit=crop&w=600&q=80" alt="UX/UI Design with Cloud AI ML">
                     </div>
                     <div class="card-body">
                         <div class="card-title">UX/UI Design with Cloud AI ML</div>
@@ -255,7 +257,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80" alt="Computer Science & Info. Technology">
+                        <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&q=80" alt="Computer Science & Info. Technology">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Computer Science & Info. Technology</div>
@@ -267,7 +269,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=600&q=80" alt="Programming C with AI">
+                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=600&q=80" alt="Programming C with AI">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Programming C with AI</div>
@@ -279,7 +281,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Free Courses">
+                        <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80" alt="Free Courses">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Free Courses</div>
@@ -291,7 +293,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80" alt="Virtual Lab">
+                        <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=80" alt="Virtual Lab">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Virtual Lab</div>
