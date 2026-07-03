@@ -414,18 +414,15 @@
         function drawVoicePalace() {
             vCtx.fillStyle = '#01040a'; vCtx.fillRect(0, 0, voiceCanvas.width, voiceCanvas.height);
             
-            // Cyber Linguistic Digital Net Background Grid
             vCtx.strokeStyle = 'rgba(56, 189, 248, 0.05)'; vCtx.lineWidth = 1;
             for(let x = 0; x < voiceCanvas.width; x += 15) { vCtx.beginPath(); vCtx.moveTo(x, 0); vCtx.lineTo(x, voiceCanvas.height); vCtx.stroke(); }
 
-            // Center Dynamic Mouth Wave Circle (The Harmonic Sound Ring)
             let coreX = 55;
             let coreY = voiceCanvas.height / 2;
             
             vCtx.fillStyle = 'rgba(56, 189, 248, 0.02)'; vCtx.beginPath(); vCtx.arc(coreX, coreY, 35, 0, Math.PI*2); vCtx.fill();
             vCtx.strokeStyle = 'rgba(56, 189, 248, 0.2)'; vCtx.stroke();
 
-            // Concentric Glowing Audio Energy Nodes
             let pulseScale = 15 + Math.sin(Date.now() * 0.007) * 5;
             let radGrad = vCtx.createRadialGradient(coreX, coreY, 2, coreX, coreY, pulseScale);
             radGrad.addColorStop(0, '#38bdf8');
@@ -433,14 +430,12 @@
             radGrad.addColorStop(1, 'transparent');
             vCtx.fillStyle = radGrad; vCtx.beginPath(); vCtx.arc(coreX, coreY, pulseScale, 0, Math.PI*2); vCtx.fill();
 
-            // Render and process linguistic tokens floating or orbiting
             textParticles.forEach((p, idx) => {
                 p.angle += p.speed;
                 
                 let targetX = p.baseX + Math.cos(p.angle) * 8;
                 let targetY = p.baseY + Math.sin(p.angle) * 8;
 
-                // On mouse interaction, tokens swarm toward the glowing sound core!
                 if (vMouse.active) {
                     let distanceToMouse = Math.hypot(vMouse.x - p.x, vMouse.y - p.y);
                     if (distanceToMouse < 80) {
@@ -449,16 +444,13 @@
                     }
                 }
 
-                // Smooth linear interpolation for kinetic text physics
                 p.x += (targetX - p.x) * 0.08;
                 p.y += (targetY - p.y) * 0.08;
 
-                // Rendering typographic glowing fonts
                 vCtx.fillStyle = vMouse.active && Math.hypot(coreX - p.x, coreY - p.y) < 55 ? '#00ff66' : 'rgba(56, 189, 248, 0.8)';
                 vCtx.font = idx % 3 === 0 ? 'bold 11px "Space Grotesk", sans-serif' : '500 9px "Inter", sans-serif';
                 vCtx.fillText(p.token, p.x, p.y);
 
-                // Drawing micro neon linkage threads
                 if (Math.hypot(coreX - p.x, coreY - p.y) < 95) {
                     vCtx.strokeStyle = `rgba(56, 189, 248, ${0.12 * (1 - Math.hypot(coreX - p.x, coreY - p.y)/95)})`;
                     vCtx.beginPath(); vCtx.moveTo(coreX, coreY); vCtx.lineTo(p.x, p.y); vCtx.stroke();
