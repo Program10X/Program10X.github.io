@@ -379,7 +379,7 @@
             requestAnimationFrame(drawMindPalace);
         }
 
-        // --- 🗣️ ENGLISH MOUTH DRIVEN INTERACTIVE CANVAS ENGINE ---
+        // --- 🗣️ ENGLISH MOUTH DRIVEN TYPOGRAPHY CANVAS ENGINE ---
         const voiceCanvas = document.getElementById('voiceSynthCanvas');
         const vCtx = voiceCanvas.getContext('2d');
         const vWrapper = document.getElementById('voiceWrapper');
@@ -397,58 +397,74 @@
         });
         vWrapper.addEventListener('mouseleave', () => { vMouse.active = false; });
 
-        let audioPhase = 0;
+        const alphabetTokens = ["A", "B", "C", "Voice", "Speak", "Phonetic", "Fluency", "English", "AI", "Say", "Word"];
+        const textParticles = [];
+        for (let i = 0; i < 20; i++) {
+            textParticles.push({
+                x: Math.random() * 200 + 80,
+                y: Math.random() * 100 + 20,
+                baseX: Math.random() * 180 + 100,
+                baseY: Math.random() * 100 + 20,
+                token: alphabetTokens[i % alphabetTokens.length],
+                speed: 0.02 + Math.random() * 0.03,
+                angle: Math.random() * Math.PI * 2
+            });
+        }
+
         function drawVoicePalace() {
-            vCtx.fillStyle = '#020514'; vCtx.fillRect(0, 0, voiceCanvas.width, voiceCanvas.height);
+            vCtx.fillStyle = '#01040a'; vCtx.fillRect(0, 0, voiceCanvas.width, voiceCanvas.height);
             
-            // Cyber Voice Grid lines
-            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.06)'; vCtx.lineWidth = 1;
+            // Cyber Linguistic Digital Net Background Grid
+            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.05)'; vCtx.lineWidth = 1;
             for(let x = 0; x < voiceCanvas.width; x += 15) { vCtx.beginPath(); vCtx.moveTo(x, 0); vCtx.lineTo(x, voiceCanvas.height); vCtx.stroke(); }
 
-            // Left Side: Glowing Tech Microphone/Mouth Radar Pulse
-            vCtx.fillStyle = 'rgba(58, 115, 232, 0.03)'; vCtx.beginPath(); vCtx.arc(45, voiceCanvas.height/2, 38, 0, Math.PI*2); vCtx.fill();
-            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.3)'; vCtx.stroke();
+            // Center Dynamic Mouth Wave Circle (The Harmonic Sound Ring)
+            let coreX = 55;
+            let coreY = voiceCanvas.height / 2;
+            
+            vCtx.fillStyle = 'rgba(56, 189, 248, 0.02)'; vCtx.beginPath(); vCtx.arc(coreX, coreY, 35, 0, Math.PI*2); vCtx.fill();
+            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.2)'; vCtx.stroke();
 
-            let voiceGlow = 12 + Math.sin(Date.now() * 0.008) * 3;
-            let vGrad = vCtx.createRadialGradient(45, voiceCanvas.height/2, 2, 45, voiceCanvas.height/2, voiceGlow);
-            vGrad.addColorStop(0, '#38bdf8'); vGrad.addColorStop(0.5, 'rgba(0, 255, 102, 0.5)'); vGrad.addColorStop(1, 'transparent');
-            vCtx.fillStyle = vGrad; vCtx.beginPath(); vCtx.arc(45, voiceCanvas.height/2, voiceGlow, 0, Math.PI*2); vCtx.fill();
+            // Concentric Glowing Audio Energy Nodes
+            let pulseScale = 15 + Math.sin(Date.now() * 0.007) * 5;
+            let radGrad = vCtx.createRadialGradient(coreX, coreY, 2, coreX, coreY, pulseScale);
+            radGrad.addColorStop(0, '#38bdf8');
+            radGrad.addColorStop(0.4, 'rgba(0, 255, 102, 0.4)');
+            radGrad.addColorStop(1, 'transparent');
+            vCtx.fillStyle = radGrad; vCtx.beginPath(); vCtx.arc(coreX, coreY, pulseScale, 0, Math.PI*2); vCtx.fill();
 
-            // Right Area Fluid Neural Audio Wave Rendering
-            vCtx.lineWidth = 2;
-            let waveCount = 3;
-            for (let w = 0; w < waveCount; w++) {
-                vCtx.strokeStyle = w === 0 ? 'rgba(56, 189, 248, 0.8)' : w === 1 ? 'rgba(0, 255, 102, 0.5)' : 'rgba(255, 255, 255, 0.2)';
-                vCtx.beginPath();
+            // Render and process linguistic tokens floating or orbiting
+            textParticles.forEach((p, idx) => {
+                p.angle += p.speed;
                 
-                let midY = voiceCanvas.height / 2;
-                let amplitude = vMouse.active ? 32 : 18; // Hyper reactive on hover
-                let frequency = vMouse.active ? 0.04 : 0.025;
+                let targetX = p.baseX + Math.cos(p.angle) * 8;
+                let targetY = p.baseY + Math.sin(p.angle) * 8;
 
-                for (let x = 90; x < voiceCanvas.width; x++) {
-                    let angle = (x * frequency) + audioPhase + (w * 1.5);
-                    let y = midY + Math.sin(angle) * amplitude * Math.cos(audioPhase * 0.5);
-                    
-                    // Mouse proximity wave distortion mechanics
-                    if (vMouse.active && Math.abs(vMouse.x - x) < 50) {
-                        y += (vMouse.y - midY) * 0.4;
+                // On mouse interaction, tokens swarm toward the glowing sound core!
+                if (vMouse.active) {
+                    let distanceToMouse = Math.hypot(vMouse.x - p.x, vMouse.y - p.y);
+                    if (distanceToMouse < 80) {
+                        targetX = coreX + Math.cos(p.angle * 1.5) * 45;
+                        targetY = coreY + Math.sin(p.angle * 1.5) * 30;
                     }
-
-                    if (x === 90) vCtx.moveTo(x, y);
-                    else vCtx.lineTo(x, y);
                 }
-                vCtx.stroke();
-            }
 
-            // Floating phonetic data streams
-            vCtx.fillStyle = 'rgba(56, 189, 248, 0.3)';
-            vCtx.font = '9px monospace';
-            if (Math.random() > 0.93) {
-                vCtx.fillText("[ə]", voiceCanvas.width - 50, 30 + Math.random()*80);
-                vCtx.fillText("[tɪk]", voiceCanvas.width - 90, 20 + Math.random()*90);
-            }
+                // Smooth linear interpolation for kinetic text physics
+                p.x += (targetX - p.x) * 0.08;
+                p.y += (targetY - p.y) * 0.08;
 
-            audioPhase += vMouse.active ? 0.09 : 0.05; // Speeds up on mouse contact
+                // Rendering typographic glowing fonts
+                vCtx.fillStyle = vMouse.active && Math.hypot(coreX - p.x, coreY - p.y) < 55 ? '#00ff66' : 'rgba(56, 189, 248, 0.8)';
+                vCtx.font = idx % 3 === 0 ? 'bold 11px "Space Grotesk", sans-serif' : '500 9px "Inter", sans-serif';
+                vCtx.fillText(p.token, p.x, p.y);
+
+                // Drawing micro neon linkage threads
+                if (Math.hypot(coreX - p.x, coreY - p.y) < 95) {
+                    vCtx.strokeStyle = `rgba(56, 189, 248, ${0.12 * (1 - Math.hypot(coreX - p.x, coreY - p.y)/95)})`;
+                    vCtx.beginPath(); vCtx.moveTo(coreX, coreY); vCtx.lineTo(p.x, p.y); vCtx.stroke();
+                }
+            });
+
             requestAnimationFrame(drawVoicePalace);
         }
 
