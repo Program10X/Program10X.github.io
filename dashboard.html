@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program10X | Login to Learn C & AI</title>
+    <title>Program10X | Live Student Tracker</title>
     <style>
         * {
             margin: 0;
@@ -12,210 +12,432 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #0b0f19; /* Program10X Dark Theme */
+            background-color: #020204; /* Ultra Dark Pitch Black */
             color: #ffffff;
-            height: 100vh;
-            display: flex;
-            overflow: hidden;
-        }
-
-        /* Left Side: Premium Banner Box */
-        .left-side {
-            flex: 1.2;
-            background: linear-gradient(135deg, #101626 0%, #0b0f19 100%);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
+            overflow-x: hidden;
             position: relative;
-            border-right: 1px solid rgba(26, 115, 232, 0.1);
         }
-        /* Tech Circle Animation background */
-        .left-side::before {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(26, 115, 232, 0.15) 0%, transparent 70%);
-            top: 20%;
-            left: 20%;
-        }
-        .banner-content {
-            text-align: center;
-            z-index: 2;
-            max-width: 520px;
-        }
-        .banner-content h1 {
-            font-size: 3.5rem;
-            color: #1a73e8;
-            margin-bottom: 25px;
-            letter-spacing: 2px;
-            font-weight: 900;
-        }
-        .banner-content h1 span {
-            color: #00ff66; /* Neon Green */
-        }
-        .banner-content h2 {
-            font-size: 1.9rem;
-            color: #ffffff;
-            margin-bottom: 15px;
-            font-weight: 800;
-            line-height: 1.3;
-        }
-        .banner-content p {
-            color: #8f9399;
-            font-size: 1.05rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        .features-badges {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .badge {
-            background: rgba(26, 115, 232, 0.1);
-            border: 1px solid rgba(26, 115, 232, 0.3);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #ffffff;
-            letter-spacing: 0.5px;
-        }
-        .badge.green {
-            border-color: rgba(0, 255, 102, 0.4);
-            color: #00ff66;
+        
+        /* 🟩 MATRIX BACKGROUND CANVAS */
+        #coderRain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15; 
+            pointer-events: none;
+            z-index: 1;
         }
 
-        /* Right Side: Clean Login Form */
-        .right-side {
-            flex: 1;
-            background-color: #0f1422;
+        /* 📋 TOP NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(10, 15, 28, 0.85);
+            border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .navbar .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #1a73e8;
+            letter-spacing: 2px;
+        }
+        .navbar .logo span { color: #00ff66; text-shadow: 0 0 10px rgba(0, 255, 102, 0.4); }
+        .navbar .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            color: #cbd5e1;
+        }
+        .navbar .avatar {
+            width: 38px;
+            height: 38px;
+            background-color: #1a73e8;
+            color: white;
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: 0 0 10px rgba(26, 115, 232, 0.5);
+        }
+
+        /* 🗂️ MAIN AREA CONTAINER */
+        .main-container {
+            margin-top: 70px;
+            width: 100%;
+            display: flex;
             padding: 40px;
+            gap: 35px;
+            z-index: 5;
+            position: relative;
         }
-        .login-box {
-            width: 100%;
-            max-width: 400px;
+
+        .content-area {
+            flex: 3;
         }
-        .login-box h2 {
-            font-size: 2rem;
-            margin-bottom: 8px;
+        .content-area h2 {
+            font-size: 1.8rem;
             color: #ffffff;
+            margin-bottom: 25px;
+            font-weight: 800;
         }
-        .login-box p.subtitle {
-            color: #8f9399;
-            font-size: 14px;
-            margin-bottom: 30px;
+
+        /* 8-SUBJECT GRID LAYOUT */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 25px;
         }
-        .input-group {
-            margin-bottom: 20px;
+        
+        /* DARK GLASS CARD */
+        .course-card {
+            background: rgba(10, 15, 28, 0.85);
+            border: 1px solid rgba(26, 115, 232, 0.25);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            color: #c2c7d0;
-            margin-bottom: 8px;
+        .course-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 102, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.25);
         }
-        .input-group input {
+        
+        .course-image-placeholder {
             width: 100%;
-            padding: 12px 16px;
-            background: #161c2e;
-            border: 1px solid rgba(26, 115, 232, 0.2);
-            border-radius: 6px;
-            color: #ffffff;
-            font-size: 15px;
+            height: 130px;
+            background: linear-gradient(135deg, rgba(26, 115, 232, 0.1) 0%, rgba(15, 22, 38, 0.9) 100%);
+            border-bottom: 1px solid rgba(26, 115, 232, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #1a73e8;
+            font-size: 2.8rem;
             transition: all 0.3s ease;
         }
-        .input-group input:focus {
-            outline: none;
-            border-color: #1a73e8;
-            box-shadow: 0 0 10px rgba(26, 115, 232, 0.2);
+        .course-card:hover .course-image-placeholder {
+            color: #00ff66;
+            background: linear-gradient(135deg, rgba(0, 255, 102, 0.1) 0%, rgba(10, 15, 28, 0.9) 100%);
         }
-        .forgot-pass {
-            display: block;
-            text-align: right;
-            font-size: 13px;
-            color: #1a73e8;
-            text-decoration: none;
-            margin-bottom: 25px;
+        
+        .course-info {
+            padding: 22px;
         }
-        .forgot-pass:hover {
-            text-decoration: underline;
-        }
-        .login-btn {
-            width: 100%;
-            padding: 14px;
-            background: #1a73e8;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        .login-btn:hover {
-            background: #155cb8;
-            box-shadow: 0 0 15px rgba(26, 115, 232, 0.4);
+        .course-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.5;
+            margin-bottom: 18px;
+            min-height: 48px;
         }
 
-        /* Responsive Design for Mobile */
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-            .left-side {
-                display: none; /* Mobile par sirf login form dikhega */
-            }
-            .right-side {
-                padding: 20px;
-            }
+        /* 🟩 DYNAMIC STUDENT TRACKER SYSTEM */
+        .progress-container {
+            margin-bottom: 18px;
+        }
+        .progress-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: #00ff66; /* Pure Amigo Tracker Green */
+            margin-bottom: 6px;
+            text-shadow: 0 0 5px rgba(0, 255, 102, 0.2);
+        }
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background-color: #111625;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #00ff66; /* Green Tracker Line */
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+            width: 0%; /* Default 0% - Controlled dynamically via style="" attribute */
+            transition: width 0.6s ease-in-out;
+        }
+
+        .view-btn {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 11px;
+            background: #111625;
+            border: 1px solid rgba(26, 115, 232, 0.4);
+            color: #38bdf8;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        .view-btn:hover {
+            background-color: #00ff66;
+            color: #020204;
+            border-color: #00ff66;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+        }
+
+        /* RIGHT SIDEBAR */
+        .sidebar-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            min-width: 320px;
+        }
+        @media (max-width: 1150px) {
+            .main-container { flex-direction: column; }
+            .sidebar-area { width: 100%; }
+        }
+        
+        .widget-box {
+            background: rgba(10, 15, 28, 0.85);
+            border: 1px solid rgba(26, 115, 232, 0.25);
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .widget-box h3 {
+            font-size: 1.15rem;
+            color: #ffffff;
+            margin-bottom: 18px;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+        }
+        .recent-list-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .recent-list-item:last-child { border-bottom: none; }
+        .icon-circle {
+            width: 34px;
+            height: 34px;
+            background-color: #111625;
+            color: #00ff66;
+            border: 1px solid rgba(0, 255, 102, 0.3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+        .recent-info h4 {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .recent-info p {
+            font-size: 11.5px;
+            color: #94a3b8;
+        }
+
+        .ai-assistant-box {
+            border-left: 4px solid #00ff66;
+        }
+        .ai-assistant-box input {
+            width: 100%;
+            padding: 11px 14px;
+            background: #0f1626;
+            border: 1px solid rgba(26, 115, 232, 0.4);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 13.5px;
+            outline: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="left-side">
-        <div class="banner-content">
-            <h1>PROGRAM<span>10X</span></h1>
-            <h2>One Portal. Infinite Tech.<br>Master Coding to <span style="color: #00ff66;">Next-Gen AI</span>.</h2>
-            <p>Stop jumping from channel to channel. From building your core logic to deploying your own AI agents, master every language the modern industry demands. Quit chasing tutorials—build a 10X career.</p>
-            <div class="features-badges">
-                <span class="badge">🚀 Full-Stack Tech</span>
-                <span class="badge">🧠 AI & Automation</span>
-                <span class="badge green">⚡ Placement Ready</span>
+    <canvas id="coderRain"></canvas>
+
+    <div class="navbar">
+        <div class="logo">PROGRAM<span>10X</span></div>
+        <div class="user-profile">
+            <span>Hi, Student!</span>
+            <div class="avatar">S</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        
+        <div class="content-area">
+            <h2>Course overview</h2>
+            <div class="courses-grid">
+                
+                <div class="course-card">
+                    <div class="course-image-placeholder">🌟</div>
+                    <div class="course-info">
+                        <div class="course-title">Individual Excellence and Social Dynamic (BS105)</div>
+                        <div class="progress-container">
+                            <div class="progress-text">100% Course Completed</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <a href="#" class="view-btn">View Course</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image-placeholder">⚙️</div>
+                    <div class="course-info">
+                        <div class="course-title">Operating System Concepts (CSIT123)</div>
+                        <div class="progress-container">
+                            <div class="progress-text">100% Course Completed</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <a href="#" class="view-btn">View Course</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image-placeholder">📊</div>
+                    <div class="course-info">
+                        <div class="course-title">Data Structure using C (CSIT124)</div>
+                        <div class="progress-container">
+                            <div class="progress-text">98% Course Completed</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 98%;"></div></div>
+                        </div>
+                        <a href="#" class="view-btn">View Course</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image-placeholder">🛠️</div>
+                    <div class="course-info">
+                        <div class="course-title">Software Engineering and Modeling (CSIT142)</div>
+                        <div class="progress-container">
+                            <div class="progress-text">100% Course Completed</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <a href="#" class="view-btn">View Course</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image-placeholder">🌱</div>
+                    <div class="course-info">
+                        <div class="course-title">Environmental Studies (EVS101)</div>
+                        <div class="progress-container">
+                            <div class="progress-text">100% Course Completed</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <a href="#" class="view-btn">View Course</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image-placeholder">📐</div>
+                    <div class="course-info">
+                        <div class="course-title">Basic Mathematics I (MATH111)</div>
+                        <div class="progress-container">
+                            <div class="progress-text">50% Course Completed</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 50%;"></div></div>
+                        </div>
+                        <a href="#" class="view-btn">View Course</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image-placeholder">🎓</div>
+                    <div class="course-info">
+                        <div class="course-title">Free Certificate Courses</div>
+                        <div class="progress-container">
+                            <div class="progress-text">12% Course Completed</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 12%;"></div></div>
+                        </div>
+                        <a href="#" class="view-btn">View Course</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image-placeholder">🤖</div>
+                    <div class="course-info">
+                        <div class="course-title">AI Mathematics & Logic 10X</div>
+                        <div class="progress-container">
+                            <div class="progress-text">85% Course Completed</div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 85%;"></div></div>
+                        </div>
+                        <a href="#" class="view-btn">View Course</a>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </div>
 
-    <div class="right-side">
-        <div class="login-box">
-            <h2>Hi, Welcome to P10X</h2>
-            <p class="subtitle">Enter your details to log in your account</p>
-            
-            <form onsubmit="event.preventDefault(); alert('Login System Connected Successfully!');">
-                <div class="input-group">
-                    <label for="username">Username / Email *</label>
-                    <input type="email" id="username" placeholder="name@program10x.com" required>
+        <div class="sidebar-area">
+            <div class="widget-box">
+                <h3>Recently accessed items</h3>
+                <div class="recent-list-item">
+                    <div class="icon-circle">📘</div>
+                    <div class="recent-info">
+                        <h4>E-Magazine | VOL 4 (1)</h4>
+                        <p>Online Classroom</p>
+                    </div>
                 </div>
-                
-                <div class="input-group">
-                    <label for="password">Password *</label>
-                    <input type="password" id="password" placeholder="Enter your password" required>
+                <div class="recent-list-item">
+                    <div class="icon-circle">📂</div>
+                    <div class="recent-info">
+                        <h4>BCA Documents</h4>
+                        <p>Online Classroom</p>
+                    </div>
                 </div>
-                
-                <a href="#" class="forgot-pass">Forgot your password?</a>
-                
-                <button type="submit" class="login-btn">Log in</button>
-            </form>
+            </div>
+
+            <div class="widget-box ai-assistant-box">
+                <h3>Prof. Ami (AI Assistant)</h3>
+                <p style="font-size: 13px; color: #94a3b8; margin-bottom: 12px;">Track your core modules or clear doubts here.</p>
+                <input type="text" placeholder="Ask a question...">
+            </div>
         </div>
+
     </div>
 
+    <script>
+        const canvas = document.getElementById('coderRain');
+        const ctx = canvas.getContext('2d');
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const alphabet = "010101010101010101010101ABCDEFGHIJKLMNOPQRSTUVWXYZ<>/_=+X%#$@";
+        const fontSize = 12; 
+        const columns = canvas.width / fontSize;
+        const rainDrops = Array(Math.floor(columns)).fill(1);
+        for (let x = 0; x < columns; x++) { rainDrops[x] = Math.random() * -100; }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(2, 2, 4, 0.05)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff66'; ctx.font = 'bold ' + fontSize + 'px monospace';
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.985) { rainDrops[i] = 0; }
+                rainDrops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 30); 
+    </script>
 </body>
 </html>
