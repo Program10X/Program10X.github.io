@@ -1,32 +1,118 @@
-<div class="course-card">
-    <div class="card-img" style="background: #02050e; display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid rgba(0, 255, 102, 0.15);">
-        
-        <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(26, 115, 232, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 115, 232, 0.08) 1px, transparent 1px); background-size: 12px 12px; animation: gridGlow 8s linear infinite;"></div>
-        
-        <div style="position: absolute; left: 25px; width: 65px; height: 65px; background: radial-gradient(circle, rgba(0, 255, 102, 0.15) 0%, transparent 75%); display: flex; align-items: center; justify-content: center;">
-            <i class="fa-solid fa-brain" style="font-size: 2.6rem; color: #00ff66; filter: drop-shadow(0 0 15px #00ff66); animation: cyberBrain 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;"></i>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program10X | Advanced Student Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. CORE SETUP */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #020204;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-        <div style="position: absolute; right: 20px; height: 100%; width: 150px; font-family: 'Space Grotesk', monospace; overflow: hidden;">
-            <span style="position: absolute; top: 12px; left: 5px; color: #38bdf8; font-size: 14px; font-weight: 700; filter: drop-shadow(0 0 8px #1a73e8); animation: formulaWave 3.5s ease-in-out infinite;">&sum; (2ⁿ / n!)</span>
-            <span style="position: absolute; top: 45px; right: 5px; color: #00ff66; font-size: 15px; font-weight: 700; filter: drop-shadow(0 0 8px #00ff66); animation: formulaWave 4.2s ease-in-out infinite 0.8s;">&int; e<sup>-x²</sup> dx</span>
-            <span style="position: absolute; bottom: 18px; left: 15px; color: #ffffff; font-size: 12px; font-weight: 600; opacity: 0.9; animation: formulaWave 3.8s ease-in-out infinite 1.5s;">f(x) = &sigma;(Wᵀx)</span>
-            <span style="position: absolute; top: 78px; left: 25px; color: #c084fc; font-size: 13px; opacity: 0.8; animation: formulaWave 5s ease-in-out infinite 0.3s;">&pi;r² &plusmn; &lambda;</span>
-        </div>
+        /* 🟩 LIVE MATRIX BACKGROUND ANIMATION */
+        #coderRain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.18; 
+            pointer-events: none;
+            z-index: 1;
+        }
 
-        <style>
-            @keyframes gridGlow {
-                0%, 100% { opacity: 0.8; background-size: 12px 12px; }
-                50% { opacity: 1; background-size: 14px 14px; filter: hue-rotate(15deg); }
-            }
-            @keyframes cyberBrain {
-                0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 8px #00ff66); color: #00ff66; }
-                33% { transform: scale(1.08) rotate(2deg); filter: drop-shadow(0 0 18px #38bdf8); color: #38bdf8; }
-                66% { transform: scale(0.95) rotate(-2deg); filter: drop-shadow(0 0 12px #00ff66); color: #00ff66; }
-            }
-            @keyframes formulaWave {
-                0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.75; }
-                50% { transform: translateY(-8px) translateX(4px) scale(1.05); opacity: 1; filter: saturate(1.5); }
-            }
-        </style>
-    </div>
+        /* 📋 NEON NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 75px;
+            background: rgba(10, 15, 28, 0.85);
+            border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            z-index: 100;
+            backdrop-filter: blur(15px);
+        }
+        .navbar .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem; font-weight: 700; color: #1a73e8; letter-spacing: 2px;
+        }
+        .navbar .logo span { color: #00ff66; text-shadow: 0 0 15px rgba(0, 255, 102, 0.5); }
+        .navbar .user-profile { display: flex; align-items: center; gap: 15px; }
+        .navbar .avatar {
+            width: 40px; height: 40px; background: #1a73e8; color: white;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-weight: 800; box-shadow: 0 0 10px rgba(26, 115, 232, 0.5);
+        }
+
+        /* 🗂️ MAIN AREA */
+        .main-container {
+            margin-top: 75px;
+            width: 100%;
+            display: flex;
+            padding: 40px;
+            gap: 30px;
+            z-index: 5;
+            position: relative;
+        }
+
+        /* LEFT: COURSE OVERVIEW */
+        .content-area { flex: 3; }
+        .content-area h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem; margin-bottom: 30px;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* COURSE CARDS */
+        .course-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .course-card:hover {
+            transform: translateY(-8px);
+            border-color: #00ff66;
+            box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
+        }
+        .card-img {
+            height: 130px;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex; justify-content: center; align-items: center;
+            font-size: 3rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .card-body { padding: 20px; }
+        
+        /* MODERN STYLISH COURSE TITLES */
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; height: 52px;
+            display: flex; align-items: center; line-height: 1.3; color: #ffffff;
+        }
+
+        /* TECH BADGES */
+        .tech-badge {
+            display: inline-block;
+            padding: 4px 10px;
