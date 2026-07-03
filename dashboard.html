@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* 1. CORE LAYOUT */
+        /* 1. CORE LAYOUT SETUP */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background-color: #020204;
@@ -20,7 +20,7 @@
             position: relative;
         }
 
-        /* 🟩 LIVE BACKGROUND MATRIX STREAMS */
+        /* 🟩 LIVE BACKGROUND MATRIX ANIMATION */
         #coderRain {
             position: fixed;
             top: 0;
@@ -32,7 +32,7 @@
             z-index: 1;
         }
 
-        /* 📋 NEON CONTEMPORARY NAVBAR */
+        /* 📋 CYBER NEON NAVBAR */
         .navbar {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -58,7 +58,7 @@
             font-weight: 800; box-shadow: 0 0 10px rgba(26, 115, 232, 0.5);
         }
 
-        /* 🗂️ MAIN HOUSING CONTAINER */
+        /* 🗂️ HOUSING WORKSPACE STRUCTURE */
         .main-container {
             margin-top: 75px;
             width: 100%;
@@ -69,7 +69,7 @@
             position: relative;
         }
 
-        /* LEFT CONTENT BOARD */
+        /* CONTENT PANEL */
         .content-area { flex: 3; }
         .content-area h2 {
             font-family: 'Space Grotesk', sans-serif;
@@ -82,7 +82,7 @@
             gap: 25px;
         }
 
-        /* MODERN HIGH-TECH GRID CARDS */
+        /* GLASS CARD ENGINE */
         .course-card {
             background: rgba(15, 23, 42, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -111,7 +111,7 @@
             display: flex; align-items: center; line-height: 1.3; color: #ffffff;
         }
 
-        /* METADATA TECH BADGES */
+        /* METADATA SHIELDS (BADGES) */
         .tech-badge {
             display: inline-block;
             padding: 4px 10px;
@@ -131,7 +131,7 @@
             border-color: rgba(0, 255, 102, 0.3);
         }
 
-        /* 🟩 DYNAMIC COMPACT GREEN PROGRESS TRACKER */
+        /* 🟩 ORIGINAL SYNCED GREEN TRACKER SYSTEM */
         .tracker-box { margin-bottom: 15px; }
         .tracker-text { font-size: 11px; font-weight: 800; color: #00ff66; margin-bottom: 6px; }
         .tracker-bg { width: 100%; height: 6px; background: #000; border-radius: 10px; overflow: hidden; }
@@ -144,7 +144,7 @@
         }
         .btn-view:hover { background: #00ff66; color: #000; border-color: #00ff66; }
 
-        /* RIGHT SIDEBAR MODULES */
+        /* RIGHT DOCK PANEL */
         .sidebar { flex: 1; min-width: 320px; display: flex; flex-direction: column; gap: 25px; }
         .widget {
             background: rgba(15, 23, 42, 0.8);
@@ -153,7 +153,7 @@
         }
         .widget h3 { font-size: 1.1rem; margin-bottom: 15px; border-left: 4px solid #00ff66; padding-left: 10px; }
 
-        /* 📅 SIDEBAR COMPACT CYBER CALENDAR */
+        /* 📅 SIDEBAR CYBER CALENDAR STYLING */
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
         .day-name { font-size: 10px; font-weight: 800; color: #1a73e8; padding-bottom: 5px; }
         .date { font-size: 12px; padding: 8px; border-radius: 6px; background: rgba(255, 255, 255, 0.03); }
@@ -167,7 +167,7 @@
 
         @media (max-width: 1100px) { .main-container { flex-direction: column; } .sidebar { width: 100%; } }
 
-        /* ⚡ RE-ENGINEERED PREMIUM GLITCH KEYFRAMES FOR MATH THUMBNAIL */
+        /* ⚡ ANIMATION MATRIX KEYFRAMES FOR THE DYNAMIC MATH CORE */
         @keyframes gridGlow {
             0%, 100% { opacity: 0.8; background-size: 12px 12px; }
             50% { opacity: 1; background-size: 14px 14px; filter: hue-rotate(15deg); }
@@ -203,5 +203,151 @@
                 <div class="course-card">
                     <div class="card-img" style="background: #02050e; display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid rgba(0, 255, 102, 0.15);">
                         <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(26, 115, 232, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 115, 232, 0.08) 1px, transparent 1px); background-size: 12px 12px; animation: gridGlow 8s linear infinite;"></div>
-                        
-                        <div style="position: absolute; left: 25px; width: 65px; height: 65
+                        <div style="position: absolute; left: 25px; width: 65px; height: 65px; background: radial-gradient(circle, rgba(0, 255, 102, 0.15) 0%, transparent 75%); display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-brain" style="font-size: 2.6rem; color: #00ff66; filter: drop-shadow(0 0 15px #00ff66); animation: cyberBrain 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;"></i>
+                        </div>
+                        <div style="position: absolute; right: 20px; height: 100%; width: 150px; font-family: 'Space Grotesk', monospace; overflow: hidden;">
+                            <span style="position: absolute; top: 12px; left: 5px; color: #38bdf8; font-size: 14px; font-weight: 700; filter: drop-shadow(0 0 8px #1a73e8); animation: formulaWave 3.5s ease-in-out infinite;">&sum; (2ⁿ / n!)</span>
+                            <span style="position: absolute; top: 45px; right: 5px; color: #00ff66; font-size: 15px; font-weight: 700; filter: drop-shadow(0 0 8px #00ff66); animation: formulaWave 4.2s ease-in-out infinite 0.8s;">&int; e<sup>-x²</sup> dx</span>
+                            <span style="position: absolute; bottom: 18px; left: 15px; color: #ffffff; font-size: 12px; font-weight: 600; opacity: 0.9; animation: formulaWave 3.8s ease-in-out infinite 1.5s;">f(x) = &sigma;(Wᵀx)</span>
+                            <span style="position: absolute; top: 78px; left: 25px; color: #c084fc; font-size: 13px; opacity: 0.8; animation: formulaWave 5s ease-in-out infinite 0.3s;">&pi;r² &plusmn; &lambda;</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Math Magic with AI</div>
+                        <div class="tech-badge">Logic Engine v1.0</div>
+                        <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">🗣️</div>
+                    <div class="card-body">
+                        <div class="card-title">English Mouth Driven with AI</div>
+                        <div class="tech-badge">Voice Synthesis</div>
+                        <div class="tracker-box"><div class="tracker-text">98% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 98%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">🤖</div>
+                    <div class="card-body">
+                        <div class="card-title">Artificial Intelligence</div>
+                        <div class="tech-badge">Neural Networks</div>
+                        <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">🎨</div>
+                    <div class="card-body">
+                        <div class="card-title">UX/UI Design with Cloud AI ML</div>
+                        <div class="tech-badge">Interface Analytics</div>
+                        <div class="tracker-box"><div class="tracker-text">85% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 85%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">🖥️</div>
+                    <div class="card-body">
+                        <div class="card-title">Computer Science & Info. Technology</div>
+                        <div class="tech-badge">Core Infrastructure</div>
+                        <div class="tracker-box"><div class="tracker-text">70% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 70%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">💻</div>
+                    <div class="card-body">
+                        <div class="card-title">Programming C with AI</div>
+                        <div class="tech-badge">Compiler Sandbox</div>
+                        <div class="tracker-box"><div class="tracker-text">50% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 50%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">🎁</div>
+                    <div class="card-body">
+                        <div class="card-title">Free Courses</div>
+                        <div class="tech-badge">Open Source Library</div>
+                        <div class="tracker-box"><div class="tracker-text">12% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 12%;"></div></div></div>
+                        <a href="#" class="btn-view">EXPLORE</a>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="card-img">🧪</div>
+                    <div class="card-body">
+                        <div class="card-title">Virtual Lab</div>
+                        <div class="tech-badge">Cloud Environment</div>
+                        <div class="tracker-box"><div class="tracker-text">0% INITIALIZED</div><div class="tracker-bg"><div class="tracker-fill" style="width: 0%;"></div></div></div>
+                        <a href="#" class="btn-view">ENTER LAB</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="widget">
+                <h3>Calendar</h3>
+                <div id="monthLabel" style="font-size: 14px; font-weight: 700; color: #1a73e8; margin-bottom: 12px; text-align: center;">July 2026</div>
+                <div class="calendar-grid">
+                    <div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div><div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div>
+                    <div class="date">28</div><div class="date">29</div><div class="date">30</div><div class="date">1</div><div class="date">2</div><div class="date">3</div><div class="date today">4</div>
+                    <div class="date">5</div><div class="date">6</div><div class="date">7</div><div class="date">8</div><div class="date">9</div><div class="date">10</div><div class="date">11</div>
+                    <div class="date">12</div><div class="date">13</div><div class="date">14</div><div class="date">15</div><div class="date">16</div><div class="date">17</div><div class="date">18</div>
+                    <div class="date">19</div><div class="date">20</div><div class="date">21</div><div class="date">22</div><div class="date">23</div><div class="date">24</div><div class="date">25</div>
+                </div>
+            </div>
+
+            <div class="widget">
+                <h3>Recently Accessed</h3>
+                <div class="recent-item">
+                    <i class="fa-solid fa-file-code"></i>
+                    <div><h4>Assignment_C_Array.pdf</h4><p>Opened 2h ago</p></div>
+                </div>
+                <div class="recent-item">
+                    <i class="fa-solid fa-brain"></i>
+                    <div><h4>AI_Logic_Masterclass.mp4</h4><p>Watched 5h ago</p></div>
+                </div>
+            </div>
+            
+            <div class="widget" style="border-left: 4px solid #00ff66;">
+                <h3>Prof. Ami (AI Assistant)</h3>
+                <input type="text" placeholder="Initiate chat..." style="width: 100%; padding: 12px; background: #000; border: 1px solid #1a73e8; border-radius: 8px; color: #fff; font-size: 13px; outline: none;">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- MATRIX STREAMS ANIMATION DECK ---
+        const canvas = document.getElementById('coderRain');
+        const ctx = canvas.getContext('2d');
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resize();
+        window.onresize = resize;
+        const chars = "01010101ABCDEF<>/[]{}";
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(2, 2, 4, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#00ff66"; ctx.font = fontSize + "px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 35);
+    </script>
+</body>
+</html>
