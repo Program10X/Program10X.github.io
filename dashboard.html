@@ -97,6 +97,27 @@
             background: linear-gradient(to bottom, transparent 40%, rgba(15, 23, 42, 0.9));
         }
 
+        /* 🎙️ CUSTOM PURE CSS VECTOR VECTOR PACK FOR ENGLISH CARD */
+        .neon-mic-container {
+            height: 140px; width: 100%; display: flex; justify-content: center; align-items: center;
+            background: radial-gradient(circle at center, #0a162b 0%, #02050f 100%);
+            position: relative; overflow: hidden; border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        .neon-mic-grid {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+            background-size: 15px 15px;
+        }
+        .neon-mic-svg {
+            width: 70px; height: 70px; filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.8));
+            animation: micGlowFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes micGlowFloat {
+            0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.7)); }
+            50% { transform: translateY(-4px) scale(1.04); filter: drop-shadow(0 0 22px rgba(56, 189, 248, 0.95)); }
+        }
+
         .card-body { padding: 20px; }
         .card-title {
             font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700;
@@ -171,8 +192,12 @@
                 </div>
 
                 <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1614680376593-902f74fa0d41?auto=format&fit=crop&w=600&q=80" alt="English Voice Neon Blue Microphone Studio">
+                    <div class="neon-mic-container">
+                        <div class="neon-mic-grid"></div>
+                        <svg class="neon-mic-svg" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" fill="rgba(56, 189, 248, 0.2)"/>
+                            <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 19v3M8 22h8"/>
+                        </svg>
                     </div>
                     <div class="card-body">
                         <div class="card-title">English Mouth Driven with AI</div>
