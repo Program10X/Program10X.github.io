@@ -71,10 +71,11 @@
             box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
         }
 
-        /* 📸 SPECIFIC HIGH-TECH BOX ENGINE FOR RESPONSIVE CANVAS */
+        /* 📸 SPECIFIC DYNAMIC CONTAINER FOR SCI-FI INTERACTIVE CANVAS */
         .card-img-canvas-box {
-            height: 140px; width: 100%; position: relative; background: #030611;
+            height: 140px; width: 100%; position: relative; background: #01040a;
             border-bottom: 1px solid rgba(0, 255, 102, 0.15); overflow: hidden;
+            cursor: pointer;
         }
         .card-img-canvas-box canvas {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -158,7 +159,7 @@
             <div class="courses-grid">
                 
                 <div class="course-card">
-                    <div class="card-img-canvas-box">
+                    <div class="card-img-canvas-box" id="canvasWrapper">
                         <canvas id="mindPalaceMathCanvas"></canvas>
                     </div>
                     <div class="card-body">
@@ -311,104 +312,131 @@
         }
         setInterval(drawMatrix, 35);
 
-        // --- 🧠 HARNESSING THE MATH MAGIC DYNAMIC HOVER GRAPHIC ---
+        // --- 🧠 ULTRA CREATIVE MATH MINDPALACE ENGINE (INTERACTIVE) ---
         const mathCanvas = document.getElementById('mindPalaceMathCanvas');
         const mCtx = mathCanvas.getContext('2d');
+        const wrapper = document.getElementById('canvasWrapper');
+
+        let mouse = { x: null, y: null, active: false };
 
         function setupMathCanvas() {
-            mathCanvas.width = mathCanvas.parentElement.clientWidth || 300;
-            mathCanvas.height = mathCanvas.parentElement.clientHeight || 140;
+            mathCanvas.width = wrapper.clientWidth || 300;
+            mathCanvas.height = wrapper.clientHeight || 140;
         }
         setupMathCanvas();
 
-        const mathFormulas = ["E = mc²", "∫ f(x)dx", "∑ xᵢ", "∇ × B", "f(x)=σ(Wᵀx)", "πr²", "λ = v/f"];
-        const particleNodes = [];
-        for (let i = 0; i < 22; i++) {
-            particleNodes.push({
+        // Mouse Listeners for Real-time Quantum Interactivity
+        wrapper.addEventListener('mousemove', (e) => {
+            const rect = mathCanvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+            mouse.active = true;
+        });
+        wrapper.addEventListener('mouseleave', () => { mouse.active = false; });
+
+        const formulas = ["f(x)=σ(Wᵀx)", "E = mc²", "∫ e^{-x²}dx", "∇ × E = -∂B/∂t", "∑ xᵢ", "Ψ(x,t)", "λ = v/f"];
+        const nodes = [];
+        
+        for (let i = 0; i < 28; i++) {
+            nodes.push({
                 x: Math.random() * 300,
                 y: Math.random() * 140,
-                vx: (Math.random() - 0.5) * 0.8,
-                vy: (Math.random() - 0.5) * 0.8,
-                formula: mathFormulas[Math.floor(Math.random() * mathFormulas.length)]
+                baseVx: (Math.random() - 0.5) * 0.7,
+                baseVy: (Math.random() - 0.5) * 0.7,
+                vx: 0,
+                vy: 0,
+                formula: formulas[Math.floor(Math.random() * formulas.length)],
+                size: Math.random() * 1.5 + 1
             });
         }
 
-        function drawMindPalaceAnimation() {
-            mCtx.fillStyle = '#030612';
+        function drawMindPalace() {
+            mCtx.fillStyle = '#01050f';
             mCtx.fillRect(0, 0, mathCanvas.width, mathCanvas.height);
 
-            // Draw glowing 3D Space Background Net Grids
-            mCtx.strokeStyle = 'rgba(26, 115, 232, 0.08)';
+            // Tech 3D Vector Laser Grid Background
+            mCtx.strokeStyle = 'rgba(26, 115, 232, 0.07)';
             mCtx.lineWidth = 1;
-            for(let x=0; x<mathCanvas.width; x+=15) {
+            for(let x = 0; x < mathCanvas.width; x += 14) {
                 mCtx.beginPath(); mCtx.moveTo(x, 0); mCtx.lineTo(x, mathCanvas.height); mCtx.stroke();
             }
-            for(let y=0; y<mathCanvas.height; y+=15) {
+            for(let y = 0; y < mathCanvas.height; y += 14) {
                 mCtx.beginPath(); mCtx.moveTo(0, y); mCtx.lineTo(mathCanvas.width, y); mCtx.stroke();
             }
 
-            // Left Side: Mathematically drawn Profile Face/Brain Node Silhouette Concept
-            mCtx.fillStyle = 'rgba(0, 255, 102, 0.03)';
-            mCtx.beginPath();
-            mCtx.arc(50, mathCanvas.height/2, 45, 0, Math.PI*2);
-            mCtx.fill();
-            mCtx.strokeStyle = 'rgba(0, 255, 102, 0.3)';
-            mCtx.lineWidth = 2;
+            // Left Side Neural Silhouette Mapping Base
+            mCtx.fillStyle = 'rgba(0, 255, 102, 0.02)';
+            mCtx.beginPath(); mCtx.arc(45, mathCanvas.height/2, 42, 0, Math.PI*2); mCtx.fill();
+            mCtx.strokeStyle = 'rgba(0, 255, 102, 0.25)';
             mCtx.stroke();
 
-            // Profile Face inner core light
-            let glowPulse = 15 + Math.sin(Date.now() * 0.005) * 4;
-            let gradientCore = mCtx.createRadialGradient(50, mathCanvas.height/2, 2, 50, mathCanvas.height/2, glowPulse);
-            gradientCore.addColorStop(0, '#00ff66');
-            gradientCore.addColorStop(1, 'transparent');
-            mCtx.fillStyle = gradientCore;
-            mCtx.beginPath(); mCtx.arc(50, mathCanvas.height/2, glowPulse, 0, Math.PI*2); mCtx.fill();
+            // Radiant Core Pulsing Light Wave Emission
+            let pulseRadius = 14 + Math.sin(Date.now() * 0.006) * 4;
+            let gradient = mCtx.createRadialGradient(45, mathCanvas.height/2, 2, 45, mathCanvas.height/2, pulseRadius);
+            gradient.addColorStop(0, '#00ff66');
+            gradient.addColorStop(0.3, 'rgba(56, 189, 248, 0.6)');
+            gradient.addColorStop(1, 'transparent');
+            mCtx.fillStyle = gradient;
+            mCtx.beginPath(); mCtx.arc(45, mathCanvas.height/2, pulseRadius, 0, Math.PI*2); mCtx.fill();
 
-            // Right Side Quantum Calculations Network
-            particleNodes.forEach((node, index) => {
+            // Right Area Node System Processing
+            nodes.forEach((node, i) => {
+                node.vx = node.baseVx;
+                node.vy = node.baseVy;
+
+                // Interactive attraction mechanics if mouse is active inside the column box
+                if (mouse.active) {
+                    let dx = mouse.x - node.x;
+                    let dy = mouse.y - node.y;
+                    let dist = Math.hypot(dx, dy);
+                    if (dist < 75) {
+                        let force = (75 - dist) / 75;
+                        node.vx += (dx / dist) * force * 1.5;
+                        node.vy += (dy / dist) * force * 1.5;
+                    }
+                }
+
                 node.x += node.vx;
                 node.y += node.vy;
 
-                if (node.x < 0 || node.x > mathCanvas.width) node.vx *= -1;
-                if (node.y < 0 || node.y > mathCanvas.height) node.vy *= -1;
+                // Boundary collision handlers
+                if (node.x < 0 || node.x > mathCanvas.width) node.baseVx *= -1;
+                if (node.y < 0 || node.y > mathCanvas.height) node.baseVy *= -1;
 
-                // Create glowing linking lines between mathematical nodes
-                particleNodes.forEach((targetNode, tIndex) => {
-                    if (index === tIndex) return;
-                    let distance = Math.hypot(node.x - targetNode.x, node.y - targetNode.y);
-                    if (distance < 55) {
-                        mCtx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - distance/55)})`;
-                        mCtx.lineWidth = 0.8;
-                        mCtx.beginPath();
-                        mCtx.moveTo(node.x, node.y);
-                        mCtx.lineTo(targetNode.x, targetNode.y);
-                        mCtx.stroke();
+                // Drawing lines between network cells
+                nodes.forEach((target, j) => {
+                    if (i === j) return;
+                    let lineDist = Math.hypot(node.x - target.x, node.y - target.y);
+                    if (lineDist < 50) {
+                        mCtx.strokeStyle = `rgba(56, 189, 248, ${0.18 * (1 - lineDist/50)})`;
+                        mCtx.lineWidth = 0.7;
+                        mCtx.beginPath(); mCtx.moveTo(node.x, node.y); mCtx.lineTo(target.x, target.y); mCtx.stroke();
                     }
                 });
 
-                // Laser connection from Profile Brain Core to Space Calculations
-                let coreDistance = Math.hypot(node.x - 50, node.y - (mathCanvas.height/2));
-                if (coreDistance < 110) {
-                    mCtx.strokeStyle = `rgba(0, 255, 102, ${0.12 * (1 - coreDistance/110)})`;
-                    mCtx.beginPath(); mCtx.moveTo(50, mathCanvas.height/2); mCtx.lineTo(node.x, node.y); mCtx.stroke();
+                // Laser communication pathways linking profile core to numbers space
+                let distanceToCore = Math.hypot(node.x - 45, node.y - (mathCanvas.height/2));
+                if (distanceToCore < 100) {
+                    mCtx.strokeStyle = `rgba(0, 255, 102, ${0.1 * (1 - distanceToCore/100)})`;
+                    mCtx.beginPath(); mCtx.moveTo(45, mathCanvas.height/2); mCtx.lineTo(node.x, node.y); mCtx.stroke();
                 }
 
-                // Render floating science symbols & text
-                if (index % 4 === 0) {
-                    mCtx.fillStyle = 'rgba(56, 189, 248, 0.85)';
-                    mCtx.font = 'bold 10px Inter, sans-serif';
-                    mCtx.fillText(node.formula, node.x, node.y + Math.sin(Date.now() * 0.003 + index) * 3);
+                // Render specific floating text layers vs matrix points
+                if (i % 4 === 0) {
+                    mCtx.fillStyle = 'rgba(56, 189, 248, 0.9)';
+                    mCtx.font = 'bold 9px "Space Grotesk", sans-serif';
+                    mCtx.fillText(node.formula, node.x, node.y + Math.sin(Date.now() * 0.004 + i) * 2.5);
                 } else {
-                    mCtx.fillStyle = '#00ff66';
-                    mCtx.fillRect(node.x, node.y, 2, 2);
+                    mCtx.fillStyle = mouse.active && Math.hypot(mouse.x - node.x, mouse.y - node.y) < 75 ? '#00ff66' : 'rgba(0, 255, 102, 0.6)';
+                    mCtx.beginPath(); mCtx.arc(node.x, node.y, node.size, 0, Math.PI*2); mCtx.fill();
                 }
             });
 
-            requestAnimationFrame(drawMindPalaceAnimation);
+            requestAnimationFrame(drawMindPalace);
         }
-        
-        // Initialize once layout is stable
-        setTimeout(() => { setupMathCanvas(); drawMindPalaceAnimation(); }, 150);
+
+        setTimeout(() => { setupMathCanvas(); drawMindPalace(); }, 150);
+        window.addEventListener('resize', setupMathCanvas);
     </script>
 </body>
 </html>
