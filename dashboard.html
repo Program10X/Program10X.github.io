@@ -71,10 +71,10 @@
             box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
         }
 
-        /* 📸 SPECIFIC DYNAMIC CONTAINER FOR SCI-FI INTERACTIVE CANVAS */
+        /* 📸 SPECIFIC DYNAMIC CONTAINER FOR SCI-FI INTERACTIVE CANVAS PACKAGES */
         .card-img-canvas-box {
             height: 140px; width: 100%; position: relative; background: #01040a;
-            border-bottom: 1px solid rgba(0, 255, 102, 0.15); overflow: hidden;
+            border-bottom: 1px solid rgba(26, 115, 232, 0.15); overflow: hidden;
             cursor: pointer;
         }
         .card-img-canvas-box canvas {
@@ -171,8 +171,8 @@
                 </div>
 
                 <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=600&q=80" alt="English Mouth Driven with AI">
+                    <div class="card-img-canvas-box" id="voiceWrapper">
+                        <canvas id="voiceSynthCanvas"></canvas>
                     </div>
                     <div class="card-body">
                         <div class="card-title">English Mouth Driven with AI</div>
@@ -312,11 +312,10 @@
         }
         setInterval(drawMatrix, 35);
 
-        // --- 🧠 ULTRA CREATIVE MATH MINDPALACE ENGINE (INTERACTIVE) ---
+        // --- 🧠 MATH MAGIC INTERACTIVE CANVAS ENGINE ---
         const mathCanvas = document.getElementById('mindPalaceMathCanvas');
         const mCtx = mathCanvas.getContext('2d');
         const wrapper = document.getElementById('canvasWrapper');
-
         let mouse = { x: null, y: null, active: false };
 
         function setupMathCanvas() {
@@ -325,118 +324,137 @@
         }
         setupMathCanvas();
 
-        // Mouse Listeners for Real-time Quantum Interactivity
         wrapper.addEventListener('mousemove', (e) => {
             const rect = mathCanvas.getBoundingClientRect();
-            mouse.x = e.clientX - rect.left;
-            mouse.y = e.clientY - rect.top;
-            mouse.active = true;
+            mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top; mouse.active = true;
         });
         wrapper.addEventListener('mouseleave', () => { mouse.active = false; });
 
-        const formulas = ["f(x)=σ(Wᵀx)", "E = mc²", "∫ e^{-x²}dx", "∇ × E = -∂B/∂t", "∑ xᵢ", "Ψ(x,t)", "λ = v/f"];
+        const formulas = ["f(x)=σ(Wᵀx)", "E = mc²", "∫ e^{-x²}dx", "∇ × E", "∑ xᵢ", "πr²", "λ = v/f"];
         const nodes = [];
-        
         for (let i = 0; i < 28; i++) {
             nodes.push({
-                x: Math.random() * 300,
-                y: Math.random() * 140,
-                baseVx: (Math.random() - 0.5) * 0.7,
-                baseVy: (Math.random() - 0.5) * 0.7,
-                vx: 0,
-                vy: 0,
-                formula: formulas[Math.floor(Math.random() * formulas.length)],
-                size: Math.random() * 1.5 + 1
+                x: Math.random() * 300, y: Math.random() * 140,
+                baseVx: (Math.random() - 0.5) * 0.7, baseVy: (Math.random() - 0.5) * 0.7,
+                vx: 0, vy: 0, formula: formulas[Math.floor(Math.random() * formulas.length)], size: Math.random() * 1.5 + 1
             });
         }
 
         function drawMindPalace() {
-            mCtx.fillStyle = '#01050f';
-            mCtx.fillRect(0, 0, mathCanvas.width, mathCanvas.height);
+            mCtx.fillStyle = '#01050f'; mCtx.fillRect(0, 0, mathCanvas.width, mathCanvas.height);
+            mCtx.strokeStyle = 'rgba(26, 115, 232, 0.07)'; mCtx.lineWidth = 1;
+            for(let x = 0; x < mathCanvas.width; x += 14) { mCtx.beginPath(); mCtx.moveTo(x, 0); mCtx.lineTo(x, mathCanvas.height); mCtx.stroke(); }
+            for(let y = 0; y < mathCanvas.height; y += 14) { mCtx.beginPath(); mCtx.moveTo(0, y); mCtx.lineTo(mathCanvas.width, y); mCtx.stroke(); }
 
-            // Tech 3D Vector Laser Grid Background
-            mCtx.strokeStyle = 'rgba(26, 115, 232, 0.07)';
-            mCtx.lineWidth = 1;
-            for(let x = 0; x < mathCanvas.width; x += 14) {
-                mCtx.beginPath(); mCtx.moveTo(x, 0); mCtx.lineTo(x, mathCanvas.height); mCtx.stroke();
-            }
-            for(let y = 0; y < mathCanvas.height; y += 14) {
-                mCtx.beginPath(); mCtx.moveTo(0, y); mCtx.lineTo(mathCanvas.width, y); mCtx.stroke();
-            }
+            mCtx.fillStyle = 'rgba(0, 255, 102, 0.02)'; mCtx.beginPath(); mCtx.arc(45, mathCanvas.height/2, 42, 0, Math.PI*2); mCtx.fill();
+            mCtx.strokeStyle = 'rgba(0, 255, 102, 0.25)'; mCtx.stroke();
 
-            // Left Side Neural Silhouette Mapping Base
-            mCtx.fillStyle = 'rgba(0, 255, 102, 0.02)';
-            mCtx.beginPath(); mCtx.arc(45, mathCanvas.height/2, 42, 0, Math.PI*2); mCtx.fill();
-            mCtx.strokeStyle = 'rgba(0, 255, 102, 0.25)';
-            mCtx.stroke();
-
-            // Radiant Core Pulsing Light Wave Emission
             let pulseRadius = 14 + Math.sin(Date.now() * 0.006) * 4;
             let gradient = mCtx.createRadialGradient(45, mathCanvas.height/2, 2, 45, mathCanvas.height/2, pulseRadius);
-            gradient.addColorStop(0, '#00ff66');
-            gradient.addColorStop(0.3, 'rgba(56, 189, 248, 0.6)');
-            gradient.addColorStop(1, 'transparent');
-            mCtx.fillStyle = gradient;
-            mCtx.beginPath(); mCtx.arc(45, mathCanvas.height/2, pulseRadius, 0, Math.PI*2); mCtx.fill();
+            gradient.addColorStop(0, '#00ff66'); gradient.addColorStop(0.3, 'rgba(56, 189, 248, 0.6)'); gradient.addColorStop(1, 'transparent');
+            mCtx.fillStyle = gradient; mCtx.beginPath(); mCtx.arc(45, mathCanvas.height/2, pulseRadius, 0, Math.PI*2); mCtx.fill();
 
-            // Right Area Node System Processing
             nodes.forEach((node, i) => {
-                node.vx = node.baseVx;
-                node.vy = node.baseVy;
-
-                // Interactive attraction mechanics if mouse is active inside the column box
+                node.vx = node.baseVx; node.vy = node.baseVy;
                 if (mouse.active) {
-                    let dx = mouse.x - node.x;
-                    let dy = mouse.y - node.y;
-                    let dist = Math.hypot(dx, dy);
-                    if (dist < 75) {
-                        let force = (75 - dist) / 75;
-                        node.vx += (dx / dist) * force * 1.5;
-                        node.vy += (dy / dist) * force * 1.5;
-                    }
+                    let dx = mouse.x - node.x; let dy = mouse.y - node.y; let dist = Math.hypot(dx, dy);
+                    if (dist < 75) { let force = (75 - dist) / 75; node.vx += (dx / dist) * force * 1.5; node.vy += (dy / dist) * force * 1.5; }
                 }
-
-                node.x += node.vx;
-                node.y += node.vy;
-
-                // Boundary collision handlers
+                node.x += node.vx; node.y += node.vy;
                 if (node.x < 0 || node.x > mathCanvas.width) node.baseVx *= -1;
                 if (node.y < 0 || node.y > mathCanvas.height) node.baseVy *= -1;
 
-                // Drawing lines between network cells
                 nodes.forEach((target, j) => {
                     if (i === j) return;
                     let lineDist = Math.hypot(node.x - target.x, node.y - target.y);
-                    if (lineDist < 50) {
-                        mCtx.strokeStyle = `rgba(56, 189, 248, ${0.18 * (1 - lineDist/50)})`;
-                        mCtx.lineWidth = 0.7;
-                        mCtx.beginPath(); mCtx.moveTo(node.x, node.y); mCtx.lineTo(target.x, target.y); mCtx.stroke();
-                    }
+                    if (lineDist < 50) { mCtx.strokeStyle = `rgba(56, 189, 248, ${0.18 * (1 - lineDist/50)})`; mCtx.beginPath(); mCtx.moveTo(node.x, node.y); mCtx.lineTo(target.x, target.y); mCtx.stroke(); }
                 });
 
-                // Laser communication pathways linking profile core to numbers space
                 let distanceToCore = Math.hypot(node.x - 45, node.y - (mathCanvas.height/2));
-                if (distanceToCore < 100) {
-                    mCtx.strokeStyle = `rgba(0, 255, 102, ${0.1 * (1 - distanceToCore/100)})`;
-                    mCtx.beginPath(); mCtx.moveTo(45, mathCanvas.height/2); mCtx.lineTo(node.x, node.y); mCtx.stroke();
-                }
+                if (distanceToCore < 100) { mCtx.strokeStyle = `rgba(0, 255, 102, ${0.1 * (1 - distanceToCore/100)})`; mCtx.beginPath(); mCtx.moveTo(45, mathCanvas.height/2); mCtx.lineTo(node.x, node.y); mCtx.stroke(); }
 
-                // Render specific floating text layers vs matrix points
-                if (i % 4 === 0) {
-                    mCtx.fillStyle = 'rgba(56, 189, 248, 0.9)';
-                    mCtx.font = 'bold 9px "Space Grotesk", sans-serif';
-                    mCtx.fillText(node.formula, node.x, node.y + Math.sin(Date.now() * 0.004 + i) * 2.5);
-                } else {
-                    mCtx.fillStyle = mouse.active && Math.hypot(mouse.x - node.x, mouse.y - node.y) < 75 ? '#00ff66' : 'rgba(0, 255, 102, 0.6)';
-                    mCtx.beginPath(); mCtx.arc(node.x, node.y, node.size, 0, Math.PI*2); mCtx.fill();
-                }
+                if (i % 4 === 0) { mCtx.fillStyle = 'rgba(56, 189, 248, 0.9)'; mCtx.font = 'bold 9px "Space Grotesk", sans-serif'; mCtx.fillText(node.formula, node.x, node.y + Math.sin(Date.now() * 0.004 + i) * 2.5); }
+                else { mCtx.fillStyle = mouse.active && Math.hypot(mouse.x - node.x, mouse.y - node.y) < 75 ? '#00ff66' : 'rgba(0, 255, 102, 0.6)'; mCtx.beginPath(); mCtx.arc(node.x, node.y, node.size, 0, Math.PI*2); mCtx.fill(); }
             });
-
             requestAnimationFrame(drawMindPalace);
         }
 
-        setTimeout(() => { setupMathCanvas(); drawMindPalace(); }, 150);
-        window.addEventListener('resize', setupMathCanvas);
+        // --- 🗣️ ENGLISH MOUTH DRIVEN INTERACTIVE CANVAS ENGINE ---
+        const voiceCanvas = document.getElementById('voiceSynthCanvas');
+        const vCtx = voiceCanvas.getContext('2d');
+        const vWrapper = document.getElementById('voiceWrapper');
+        let vMouse = { x: null, y: null, active: false };
+
+        function setupVoiceCanvas() {
+            voiceCanvas.width = vWrapper.clientWidth || 300;
+            voiceCanvas.height = vWrapper.clientHeight || 140;
+        }
+        setupVoiceCanvas();
+
+        vWrapper.addEventListener('mousemove', (e) => {
+            const rect = voiceCanvas.getBoundingClientRect();
+            vMouse.x = e.clientX - rect.left; vMouse.y = e.clientY - rect.top; vMouse.active = true;
+        });
+        vWrapper.addEventListener('mouseleave', () => { vMouse.active = false; });
+
+        let audioPhase = 0;
+        function drawVoicePalace() {
+            vCtx.fillStyle = '#020514'; vCtx.fillRect(0, 0, voiceCanvas.width, voiceCanvas.height);
+            
+            // Cyber Voice Grid lines
+            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.06)'; vCtx.lineWidth = 1;
+            for(let x = 0; x < voiceCanvas.width; x += 15) { vCtx.beginPath(); vCtx.moveTo(x, 0); vCtx.lineTo(x, voiceCanvas.height); vCtx.stroke(); }
+
+            // Left Side: Glowing Tech Microphone/Mouth Radar Pulse
+            vCtx.fillStyle = 'rgba(58, 115, 232, 0.03)'; vCtx.beginPath(); vCtx.arc(45, voiceCanvas.height/2, 38, 0, Math.PI*2); vCtx.fill();
+            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.3)'; vCtx.stroke();
+
+            let voiceGlow = 12 + Math.sin(Date.now() * 0.008) * 3;
+            let vGrad = vCtx.createRadialGradient(45, voiceCanvas.height/2, 2, 45, voiceCanvas.height/2, voiceGlow);
+            vGrad.addColorStop(0, '#38bdf8'); vGrad.addColorStop(0.5, 'rgba(0, 255, 102, 0.5)'); vGrad.addColorStop(1, 'transparent');
+            vCtx.fillStyle = vGrad; vCtx.beginPath(); vCtx.arc(45, voiceCanvas.height/2, voiceGlow, 0, Math.PI*2); vCtx.fill();
+
+            // Right Area Fluid Neural Audio Wave Rendering
+            vCtx.lineWidth = 2;
+            let waveCount = 3;
+            for (let w = 0; w < waveCount; w++) {
+                vCtx.strokeStyle = w === 0 ? 'rgba(56, 189, 248, 0.8)' : w === 1 ? 'rgba(0, 255, 102, 0.5)' : 'rgba(255, 255, 255, 0.2)';
+                vCtx.beginPath();
+                
+                let midY = voiceCanvas.height / 2;
+                let amplitude = vMouse.active ? 32 : 18; // Hyper reactive on hover
+                let frequency = vMouse.active ? 0.04 : 0.025;
+
+                for (let x = 90; x < voiceCanvas.width; x++) {
+                    let angle = (x * frequency) + audioPhase + (w * 1.5);
+                    let y = midY + Math.sin(angle) * amplitude * Math.cos(audioPhase * 0.5);
+                    
+                    // Mouse proximity wave distortion mechanics
+                    if (vMouse.active && Math.abs(vMouse.x - x) < 50) {
+                        y += (vMouse.y - midY) * 0.4;
+                    }
+
+                    if (x === 90) vCtx.moveTo(x, y);
+                    else vCtx.lineTo(x, y);
+                }
+                vCtx.stroke();
+            }
+
+            // Floating phonetic data streams
+            vCtx.fillStyle = 'rgba(56, 189, 248, 0.3)';
+            vCtx.font = '9px monospace';
+            if (Math.random() > 0.93) {
+                vCtx.fillText("[ə]", voiceCanvas.width - 50, 30 + Math.random()*80);
+                vCtx.fillText("[tɪk]", voiceCanvas.width - 90, 20 + Math.random()*90);
+            }
+
+            audioPhase += vMouse.active ? 0.09 : 0.05; // Speeds up on mouse contact
+            requestAnimationFrame(drawVoicePalace);
+        }
+
+        // Initialize stable rendering engines together
+        setTimeout(() => { setupMathCanvas(); setupVoiceCanvas(); drawMindPalace(); drawVoicePalace(); }, 150);
+        window.addEventListener('resize', () => { setupMathCanvas(); setupVoiceCanvas(); });
     </script>
 </body>
 </html>
