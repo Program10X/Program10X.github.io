@@ -6,7 +6,7 @@
     <title>Program10X | Advanced Student Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=500;700&family=Inter:wght=400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* CORE LAYOUT INITIALIZATION */
@@ -71,7 +71,7 @@
             box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
         }
 
-        /* 📸 SPECIFIC DYNAMIC CONTAINER FOR SCI-FI INTERACTIVE CANVAS PACKAGES */
+        /* 📸 SPECIFIC CANVAS BOX DESIGN FOR MATH MAGIC */
         .card-img-canvas-box {
             height: 140px; width: 100%; position: relative; background: #01040a;
             border-bottom: 1px solid rgba(26, 115, 232, 0.15); overflow: hidden;
@@ -81,7 +81,7 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
         }
 
-        /* UNIFORM IMAGES ARCHITECTURE FOR REST OF THE CARDS */
+        /* 📸 PREMIUM MULTI-LAYER CONTAINER FOR COMPACT SCIFI IMAGES */
         .card-img {
             height: 140px; width: 100%; position: relative; overflow: hidden;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: #060b13;
@@ -89,7 +89,7 @@
         .card-img img {
             width: 100%; height: 100%; object-fit: cover;
             transition: transform 0.5s ease, filter 0.3s ease;
-            filter: brightness(0.75) contrast(1.15);
+            filter: brightness(0.8) contrast(1.1);
         }
         .course-card:hover .card-img img { transform: scale(1.06); filter: brightness(0.95); }
         .card-img::after {
@@ -122,7 +122,7 @@
         }
         .btn-view:hover { background: #00ff66; color: #000; border-color: #00ff66; }
 
-        /* RIGHT DOCK */
+        /* RIGHT SIDEBAR */
         .sidebar { flex: 1; min-width: 320px; display: flex; flex-direction: column; gap: 25px; }
         .widget {
             background: rgba(15, 23, 42, 0.8); border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.1);
@@ -171,8 +171,8 @@
                 </div>
 
                 <div class="course-card">
-                    <div class="card-img-canvas-box" id="voiceWrapper">
-                        <canvas id="voiceSynthCanvas"></canvas>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1614680376593-902f74fa0d41?auto=format&fit=crop&w=600&q=80" alt="English Voice Neon Blue Microphone Studio">
                     </div>
                     <div class="card-body">
                         <div class="card-title">English Mouth Driven with AI</div>
@@ -378,89 +378,9 @@
             });
             requestAnimationFrame(drawMindPalace);
         }
-
-        // --- 🗣️ RE-ENGINEERED ENGLISH BEAUTY PROFILE CANVAS MODEL ---
-        const voiceCanvas = document.getElementById('voiceSynthCanvas');
-        const vCtx = voiceCanvas.getContext('2d');
-        const vWrapper = document.getElementById('voiceWrapper');
-        let vMouse = { x: null, y: null, active: false };
-
-        function setupVoiceCanvas() {
-            voiceCanvas.width = vWrapper.clientWidth || 300;
-            voiceCanvas.height = vWrapper.clientHeight || 140;
-        }
-        setupVoiceCanvas();
-
-        vWrapper.addEventListener('mousemove', (e) => {
-            const rect = voiceCanvas.getBoundingClientRect();
-            vMouse.x = e.clientX - rect.left; vMouse.y = e.clientY - rect.top; vMouse.active = true;
-        });
-        vWrapper.addEventListener('mouseleave', () => { vMouse.active = false; });
-
-        const words = ["Fluency", "Accent", "Conjugate", "Phonetics", "Listen", "AI Tutor", "Perfect"];
-        const wavePoints = [];
-        for(let i=0; i<30; i++) {
-            wavePoints.push({
-                x: 120 + (i * 5),
-                baseY: 70,
-                offset: i * 0.2
-            });
-        }
-
-        function drawVoicePalace() {
-            vCtx.fillStyle = '#02040b'; vCtx.fillRect(0, 0, voiceCanvas.width, voiceCanvas.height);
-            
-            // Cyber Grid mapping
-            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.06)'; vCtx.lineWidth = 1;
-            for(let x = 0; x < voiceCanvas.width; x += 15) { vCtx.beginPath(); vCtx.moveTo(x, 0); vCtx.lineTo(x, voiceCanvas.height); vCtx.stroke(); }
-
-            // 👩 MATHEMAtICALLY DRAWING EXTRAORDINARY FEMALE MODEL PROFILE (Beauty Face Nodes)
-            vCtx.strokeStyle = vMouse.active ? '#00ff66' : '#38bdf8';
-            vCtx.lineWidth = 2;
-            vCtx.beginPath();
-            
-            // Mathematical curve drawing representing face outline (Forehead, Nose, Lips, Chin)
-            vCtx.moveTo(25, 25);   // Forehead top
-            vCtx.bezierCurveTo(45, 25, 45, 45, 40, 55);  // Forehead to bridge of nose
-            vCtx.lineTo(52, 65);   // Nose tip point
-            vCtx.lineTo(44, 70);   // Nose bottom line
-            vCtx.bezierCurveTo(48, 73, 48, 78, 43, 82);  // Upper lip curve
-            vCtx.bezierCurveTo(47, 85, 45, 90, 38, 93);  // Lower lip & chin accent
-            vCtx.quadraticCurveTo(32, 115, 20, 120);    // Neck alignment line
-            vCtx.stroke();
-
-            // Glowing Cognitive Node Eyes
-            vCtx.fillStyle = '#ffffff';
-            vCtx.beginPath(); vCtx.arc(32, 50, 2, 0, Math.PI*2); vCtx.fill();
-            
-            // Real-Time Interaction Waveform coming out from the lips
-            vCtx.lineWidth = 1.5;
-            vCtx.strokeStyle = 'rgba(0, 255, 102, 0.8)';
-            vCtx.beginPath();
-            
-            let time = Date.now() * 0.005;
-            wavePoints.forEach((pt, i) => {
-                let amp = vMouse.active ? 25 : 12;
-                let y = pt.baseY + Math.sin(time + pt.offset) * amp;
-                
-                if(i === 0) vCtx.moveTo(43, 76); // Attached straight to mouth core!
-                else vCtx.lineTo(pt.x, y);
-            });
-            vCtx.stroke();
-
-            // Floating English AI Translation Subtext overlays
-            vCtx.fillStyle = 'rgba(56, 189, 248, 0.4)';
-            vCtx.font = '8px monospace';
-            if(Math.random() > 0.95) {
-                vCtx.fillText(words[Math.floor(Math.random()*words.length)], voiceCanvas.width - 65, 30 + Math.random()*70);
-            }
-
-            requestAnimationFrame(drawVoicePalace);
-        }
-
-        // Initialize stable rendering engines together
-        setTimeout(() => { setupMathCanvas(); setupVoiceCanvas(); drawMindPalace(); drawVoicePalace(); }, 150);
-        window.addEventListener('resize', () => { setupMathCanvas(); setupVoiceCanvas(); });
+        
+        setTimeout(() => { setupMathCanvas(); drawMindPalace(); }, 150);
+        window.addEventListener('resize', setupMathCanvas);
     </script>
 </body>
 </html>
