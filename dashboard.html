@@ -58,7 +58,7 @@
             font-weight: 800; box-shadow: 0 0 10px rgba(26, 115, 232, 0.5);
         }
 
-        /* 🗂 "HOUSING WORKSPACE STRUCTURE" */
+        /* 🗂 WORKSPACE HOUSING */
         .main-container {
             margin-top: 75px;
             width: 100%;
@@ -96,20 +96,31 @@
             box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
         }
         
-        /* FIXED UNIFORM GRID FOR CARD IMAGES WITH LASER NET BACKGROUND */
+        /* 📸 MODERN BOX DESIGN FOR IMAGES WITH SMOOTH OVERLAY ANIMATION */
         .card-img {
-            height: 130px;
-            background: #02050e;
-            display: flex; justify-content: center; align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            height: 140px;
+            width: 100%;
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .card-img-grid {
-            position: absolute; inset: 0; 
-            background-image: linear-gradient(rgba(26, 115, 232, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 115, 232, 0.06) 1px, transparent 1px); 
-            background-size: 12px 12px;
-            animation: gridGlow 8s linear infinite;
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.3s ease;
+            filter: brightness(0.75) contrast(1.1);
+        }
+        .course-card:hover .card-img img {
+            transform: scale(1.08);
+            filter: brightness(0.95) contrast(1.1);
+        }
+        .card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 40%, rgba(15, 23, 42, 0.85));
+            pointer-events: none;
         }
         
         .card-body { padding: 20px; }
@@ -120,7 +131,7 @@
             display: flex; align-items: center; line-height: 1.3; color: #ffffff;
         }
 
-        /* METADATA SHIELDS (BADGES) */
+        /* METADATA TECH BADGES */
         .tech-badge {
             display: inline-block;
             padding: 4px 10px;
@@ -140,7 +151,7 @@
             border-color: rgba(0, 255, 102, 0.3);
         }
 
-        /* 🟩 TRACKER TRACK FILL SYSTEM */
+        /* 🟩 DYNAMIC CONNECTED PROGRESS TRACKER */
         .tracker-box { margin-bottom: 15px; }
         .tracker-text { font-size: 11px; font-weight: 800; color: #00ff66; margin-bottom: 6px; }
         .tracker-bg { width: 100%; height: 6px; background: #000; border-radius: 10px; overflow: hidden; }
@@ -153,7 +164,7 @@
         }
         .btn-view:hover { background: #00ff66; color: #000; border-color: #00ff66; }
 
-        /* RIGHT DOCK PANEL */
+        /* RIGHT DOCK SIDEBAR */
         .sidebar { flex: 1; min-width: 320px; display: flex; flex-direction: column; gap: 25px; }
         .widget {
             background: rgba(15, 23, 42, 0.8);
@@ -162,7 +173,7 @@
         }
         .widget h3 { font-size: 1.1rem; margin-bottom: 15px; border-left: 4px solid #00ff66; padding-left: 10px; }
 
-        /* 📅 SIDEBAR CYBER CALENDAR STYLING */
+        /* 📅 SIDEBAR CYBER CALENDAR */
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
         .day-name { font-size: 10px; font-weight: 800; color: #1a73e8; padding-bottom: 5px; }
         .date { font-size: 12px; padding: 8px; border-radius: 6px; background: rgba(255, 255, 255, 0.03); }
@@ -175,37 +186,6 @@
         .recent-item div p { font-size: 11px; color: #94a3b8; }
 
         @media (max-width: 1100px) { .main-container { flex-direction: column; } .sidebar { width: 100%; } }
-
-        /* ⚡ DYNAMIC ANIMATION ENGINE KEYFRAMES */
-        @keyframes gridGlow {
-            0%, 100% { opacity: 0.8; background-size: 12px 12px; }
-            50% { opacity: 1; background-size: 14px 14px; filter: hue-rotate(15deg); }
-        }
-        @keyframes cyberBrain {
-            0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 8px #00ff66); color: #00ff66; }
-            33% { transform: scale(1.08) rotate(2deg); filter: drop-shadow(0 0 18px #38bdf8); color: #38bdf8; }
-            66% { transform: scale(0.95) rotate(-2deg); filter: drop-shadow(0 0 12px #00ff66); color: #00ff66; }
-        }
-        @keyframes formulaWave {
-            0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.75; }
-            50% { transform: translateY(-8px) translateX(4px) scale(1.05); opacity: 1; }
-        }
-        @keyframes voiceRadar {
-            0% { transform: scale(0.8); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 15px #38bdf8); }
-            100% { transform: scale(0.8); opacity: 0.5; }
-        }
-        @keyframes aiPulse {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px #a855f7); }
-            50% { transform: scale(1.15); filter: drop-shadow(0 0 25px #00ff66); }
-        }
-        @keyframes floatEffect {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(3deg); }
-        }
-        @keyframes spinSlow {
-            from { transform: rotate(0deg); } to { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
@@ -227,16 +207,7 @@
                 
                 <div class="course-card">
                     <div class="card-img">
-                        <div class="card-img-grid"></div>
-                        <div style="position: absolute; left: 25px; width: 65px; height: 65px; background: radial-gradient(circle, rgba(0, 255, 102, 0.15) 0%, transparent 75%); display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-brain" style="font-size: 2.6rem; color: #00ff66; filter: drop-shadow(0 0 15px #00ff66); animation: cyberBrain 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;"></i>
-                        </div>
-                        <div style="position: absolute; right: 20px; height: 100%; width: 150px; font-family: 'Space Grotesk', monospace; overflow: hidden;">
-                            <span style="position: absolute; top: 12px; left: 5px; color: #38bdf8; font-size: 14px; font-weight: 700; filter: drop-shadow(0 0 8px #1a73e8); animation: formulaWave 3.5s ease-in-out infinite;">&sum; (2ⁿ / n!)</span>
-                            <span style="position: absolute; top: 45px; right: 5px; color: #00ff66; font-size: 15px; font-weight: 700; filter: drop-shadow(0 0 8px #00ff66); animation: formulaWave 4.2s ease-in-out infinite 0.8s;">&int; e<sup>-x²</sup> dx</span>
-                            <span style="position: absolute; bottom: 18px; left: 15px; color: #ffffff; font-size: 12px; font-weight: 600; opacity: 0.9; animation: formulaWave 3.8s ease-in-out infinite 1.5s;">f(x) = &sigma;(Wᵀx)</span>
-                            <span style="position: absolute; top: 78px; left: 25px; color: #c084fc; font-size: 13px; opacity: 0.8; animation: formulaWave 5s ease-in-out infinite 0.3s;">&pi;r² &plusmn; &lambda;</span>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=600&q=80" alt="Math Magic with AI">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Math Magic with AI</div>
@@ -248,15 +219,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <div class="card-img-grid"></div>
-                        <div style="display: flex; gap: 15px; align-items: center; justify-content: center; width: 100%;">
-                            <i class="fa-solid fa-microphone-lines" style="font-size: 3rem; color: #38bdf8; animation: voiceRadar 2s ease-in-out infinite;"></i>
-                            <div style="display: flex; flex-direction: column; gap: 4px;">
-                                <div style="width: 35px; height: 3px; background: #00ff66; animation: voiceRadar 1.2s infinite;"></div>
-                                <div style="width: 55px; height: 3px; background: #38bdf8; animation: voiceRadar 1.6s infinite 0.2s;"></div>
-                                <div style="width: 25px; height: 3px; background: #ffffff; animation: voiceRadar 1s infinite 0.4s;"></div>
-                            </div>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=600&q=80" alt="English Mouth Driven with AI">
                     </div>
                     <div class="card-body">
                         <div class="card-title">English Mouth Driven with AI</div>
@@ -268,11 +231,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <div class="card-img-grid"></div>
-                        <div style="position: relative;">
-                            <i class="fa-solid fa-robot" style="font-size: 3.5rem; color: #a855f7; animation: aiPulse 3s ease-in-out infinite;"></i>
-                            <i class="fa-solid fa-circle-nodes" style="font-size: 1.4rem; color: #00ff66; position: absolute; top: -10px; right: -12px; animation: spinSlow 6s linear infinite;"></i>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=600&q=80" alt="Artificial Intelligence">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Artificial Intelligence</div>
@@ -284,11 +243,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <div class="card-img-grid"></div>
-                        <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-bezier-curve" style="font-size: 3rem; color: #ec4899; animation: floatEffect 4s ease-in-out infinite;"></i>
-                            <i class="fa-solid fa-cloud" style="font-size: 1.5rem; color: #38bdf8; position: absolute; bottom: -12px; right: -15px; opacity: 0.8; animation: floatEffect 4s ease-in-out infinite 1s;"></i>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1581291518655-9523c932dedf?auto=format&fit=crop&w=600&q=80" alt="UX/UI Design with Cloud AI ML">
                     </div>
                     <div class="card-body">
                         <div class="card-title">UX/UI Design with Cloud AI ML</div>
@@ -300,14 +255,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <div class="card-img-grid"></div>
-                        <div style="position: relative; animation: floatEffect 3.5s ease-in-out infinite;">
-                            <i class="fa-solid fa-server" style="font-size: 3.2rem; color: #00ff66; filter: drop-shadow(0 0 10px rgba(0,255,102,0.3));"></i>
-                            <div style="position: absolute; top: 12px; left: 14px; display: flex; gap: 5px;">
-                                <div style="width: 6px; height: 6px; background: #38bdf8; border-radius: 50%; animation: voiceRadar 1s infinite;"></div>
-                                <div style="width: 6px; height: 6px; background: #00ff66; border-radius: 50%; animation: voiceRadar 1s infinite 0.3s;"></div>
-                            </div>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80" alt="Computer Science & Info. Technology">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Computer Science & Info. Technology</div>
@@ -319,13 +267,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <div class="card-img-grid"></div>
-                        <div style="font-family: monospace; font-size: 1.8rem; font-weight: bold; color: #ffffff; display: flex; align-items: center; gap: 5px; animation: floatEffect 4s ease-in-out infinite;">
-                            <span style="color: #38bdf8;">[</span>
-                            <span style="color: #00ff66; font-size: 2.8rem; text-shadow: 0 0 10px #00ff66;">C</span>
-                            <span style="color: #38bdf8;">]</span>
-                            <i class="fa-solid fa-terminal" style="font-size: 1.1rem; color: #cbd5e1; margin-left: 6px; animation: voiceRadar 1.5s infinite;"></i>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=600&q=80" alt="Programming C with AI">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Programming C with AI</div>
@@ -337,11 +279,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <div class="card-img-grid"></div>
-                        <div style="position: relative; animation: floatEffect 4.5s ease-in-out infinite;">
-                            <i class="fa-solid fa-graduation-cap" style="font-size: 3.5rem; color: #eab308; filter: drop-shadow(0 0 12px rgba(234,179,8,0.3));"></i>
-                            <i class="fa-solid fa-star" style="font-size: 1rem; color: #ffffff; position: absolute; top: -5px; right: -5px; animation: voiceRadar 2s infinite;"></i>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Free Courses">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Free Courses</div>
@@ -353,13 +291,7 @@
 
                 <div class="course-card">
                     <div class="card-img">
-                        <div class="card-img-grid"></div>
-                        <div style="position: relative;">
-                            <i class="fa-solid fa-flask-vial" style="font-size: 3.2rem; color: #26d0ce; animation: floatEffect 3.8s ease-in-out infinite;"></i>
-                            <div style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center;">
-                                <div style="width: 45px; height: 45px; border: 2px dashed #00ff66; border-radius: 50%; animation: spinSlow 8s linear infinite;"></div>
-                            </div>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80" alt="Virtual Lab">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Virtual Lab</div>
@@ -405,7 +337,7 @@
     </div>
 
     <script>
-        // --- MATRIX STREAMS ANIMATION DECK ---
+        // --- MATRIX BACKGROUND ENGINE ---
         const canvas = document.getElementById('coderRain');
         const ctx = canvas.getContext('2d');
         function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
