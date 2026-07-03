@@ -95,8 +95,6 @@
             border-color: #00ff66;
             box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
         }
-        
-        /* STANDARD CARD IMAGE AREA */
         .card-img {
             height: 130px;
             background: rgba(0, 0, 0, 0.4);
@@ -105,15 +103,6 @@
             position: relative;
             overflow: hidden;
         }
-
-        /* 🤖 MATH MAGIC WITH AI SPECIAL THUMBNAIL CANVAS */
-        #mathMagicCanvas {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: #02040a;
-        }
-
         .card-body { padding: 20px; }
         
         /* MODERN STYLISH COURSE TITLES */
@@ -178,6 +167,16 @@
         .recent-item div p { font-size: 11px; color: #94a3b8; }
 
         @media (max-width: 1100px) { .main-container { flex-direction: column; } .sidebar { width: 100%; } }
+
+        /* ⚡ CUSTOM ANIMATION KEYFRAMES FOR MATH THUMBNAIL */
+        @keyframes brainPulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px #1a73e8); opacity: 0.9; }
+            50% { transform: scale(1.06); filter: drop-shadow(0 0 20px #00ff66); color: #00ff66; opacity: 1; }
+        }
+        @keyframes mathFloat {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+            50% { transform: translateY(-6px) scale(1.03); opacity: 1; text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+        }
     </style>
 </head>
 <body>
@@ -198,8 +197,19 @@
             <div class="courses-grid">
                 
                 <div class="course-card">
-                    <div class="card-img">
-                        <canvas id="mathMagicCanvas"></canvas>
+                    <div class="card-img" style="background: #030712; display: flex; align-items: center; justify-content: center;">
+                        <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(26, 115, 232, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 115, 232, 0.05) 1px, transparent 1px); background-size: 15px 15px;"></div>
+                        
+                        <div style="position: absolute; left: 20px; width: 70px; height: 70px; background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%); display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-brain" style="font-size: 2.8rem; color: #38bdf8; filter: drop-shadow(0 0 12px #1a73e8); animation: brainPulse 3s ease-in-out infinite;"></i>
+                        </div>
+
+                        <div style="position: absolute; right: 25px; height: 100%; width: 140px; font-family: 'Space Grotesk', monospace; overflow: hidden;">
+                            <span style="position: absolute; top: 15px; left: 10px; color: #00ff66; font-size: 15px; font-weight: bold; opacity: 0.8; animation: mathFloat 4s ease-in-out infinite;">&sum; (2ⁿ / n!)</span>
+                            <span style="position: absolute; top: 45px; right: 10px; color: #38bdf8; font-size: 16px; font-weight: bold; opacity: 0.9; animation: mathFloat 5s ease-in-out infinite 1s;">&int; e<sup>-x²</sup> dx</span>
+                            <span style="position: absolute; bottom: 20px; left: 20px; color: #ffffff; font-size: 13px; font-family: sans-serif; opacity: 0.7; animation: mathFloat 4.5s ease-in-out infinite 0.5s;">f(x) = &sigma;(Wᵀx)</span>
+                            <span style="position: absolute; top: 75px; left: 5px; color: #a855f7; font-size: 12px; opacity: 0.6; animation: mathFloat 6s ease-in-out infinite 2s;">&pi;r²</span>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="card-title">Math Magic with AI</div>
@@ -315,7 +325,7 @@
     </div>
 
     <script>
-        // --- 🟩 BACKGROUND MATRIX RAIN ENGINE ---
+        // --- MATRIX RAIN ENGINE ---
         const canvas = document.getElementById('coderRain');
         const ctx = canvas.getContext('2d');
         function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
@@ -336,86 +346,6 @@
             }
         }
         setInterval(drawMatrix, 35);
-
-        // --- 🤖 MATH MAGIC CARD: ROBOTICS & QUANTUM EQUATION SIMULATOR ---
-        const mathCanvas = document.getElementById('mathMagicCanvas');
-        const mCtx = mathCanvas.getContext('2d');
-        
-        function resizeMathCanvas() {
-            mathCanvas.width = mathCanvas.parentElement.clientWidth;
-            mathCanvas.height = mathCanvas.parentElement.clientHeight;
-        }
-        resizeMathCanvas();
-
-        const formulas = ['f(x) = σ(Wᵀx + b)', '∇ × E = -∂B/∂t', '∫ e^{-x²}dx', 'Ψ(x,t)', 'E = mc²'];
-        const nodes = [];
-        for(let i=0; i<15; i++) {
-            nodes.push({
-                x: Math.random() * 260,
-                y: Math.random() * 130,
-                vx: (Math.random() - 0.5) * 1,
-                vy: (Math.random() - 0.5) * 1
-            });
-        }
-
-        function drawMathMagicThumbnail() {
-            // Background grid style
-            mCtx.fillStyle = '#060a13';
-            mCtx.fillRect(0, 0, mathCanvas.width, mathCanvas.height);
-            
-            mCtx.strokeStyle = 'rgba(26, 115, 232, 0.1)';
-            mCtx.lineWidth = 1;
-            for(let i=0; i<mathCanvas.width; i+=20) {
-                mCtx.beginPath(); mCtx.moveTo(i, 0); mCtx.lineTo(i, mathCanvas.height); mCtx.stroke();
-            }
-            for(let j=0; j<mathCanvas.height; j+=20) {
-                mCtx.beginPath(); mCtx.moveTo(0, j); mCtx.lineTo(mathCanvas.width, j); mCtx.stroke();
-            }
-
-            // Draw Robotic Cyber Nodes & Connection Lines
-            mCtx.strokeStyle = 'rgba(0, 255, 102, 0.25)';
-            mCtx.beginPath();
-            nodes.forEach((n, idx) => {
-                n.x += n.vx; n.y += n.vy;
-                if(n.x < 0 || n.x > mathCanvas.width) n.vx *= -1;
-                if(n.y < 0 || n.y > mathCanvas.height) n.vy *= -1;
-                
-                mCtx.fillStyle = '#00ff66';
-                mCtx.fillRect(n.x, n.y, 3, 3);
-                
-                if(idx > 0) mCtx.lineTo(nodes[idx-1].x, nodes[idx-1].y);
-            });
-            mCtx.stroke();
-
-            // Draw Complex Scientific Formulas floating around
-            mCtx.fillStyle = 'rgba(56, 189, 248, 0.85)';
-            mCtx.font = 'bold 11px monospace';
-            formulas.forEach((f, idx) => {
-                const xPos = 15 + (idx * 50) % (mathCanvas.width - 60);
-                const yPos = 30 + (idx * 22) % (mathCanvas.height - 40);
-                mCtx.fillText(f, xPos, yPos + Math.sin(Date.now() * 0.002 + idx) * 3);
-            });
-
-            // Center Premium Cyber Core Emblem (The Robot Brain Concept)
-            const pulse = 25 + Math.sin(Date.now() * 0.005) * 3;
-            mCtx.strokeStyle = '#00ff66';
-            mCtx.lineWidth = 2;
-            mCtx.beginPath();
-            mCtx.arc(mathCanvas.width/2, mathCanvas.height/2, pulse, 0, Math.PI*2);
-            mCtx.stroke();
-
-            mCtx.fillStyle = 'rgba(26, 115, 232, 0.2)';
-            mCtx.beginPath();
-            mCtx.arc(mathCanvas.width/2, mathCanvas.height/2, pulse - 5, 0, Math.PI*2);
-            mCtx.fill();
-
-            mCtx.fillStyle = '#ffffff';
-            mCtx.font = '16px sans-serif';
-            mCtx.fillText('🤖', mathCanvas.width/2 - 10, mathCanvas.height/2 + 6);
-
-            requestAnimationFrame(drawMathMagicThumbnail);
-        }
-        drawMathMagicThumbnail();
     </script>
 </body>
 </html>
