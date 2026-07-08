@@ -63,11 +63,17 @@
             gap: 25px;
         }
 
-        /* GEMINI GRADIENT ANIMATION KEYFRAMES */
+        /* GEMINI REAL-TIME GRADIENT SHIFT ANIMATIONS */
         @keyframes geminiGlow {
-            0% { border-color: #38bdf8; box-shadow: 0 10px 30px rgba(56, 189, 248, 0.25); }
-            50% { border-color: #a855f7; box-shadow: 0 10px 30px rgba(168, 85, 247, 0.25); }
-            100% { border-color: #ec4899; box-shadow: 0 10px 30px rgba(236, 72, 153, 0.25); }
+            0% { border-color: #38bdf8; box-shadow: 0 10px 30px rgba(56, 189, 248, 0.35); }
+            50% { border-color: #a855f7; box-shadow: 0 10px 30px rgba(168, 85, 247, 0.35); }
+            100% { border-color: #ec4899; box-shadow: 0 10px 30px rgba(236, 72, 153, 0.35); }
+        }
+
+        @keyframes geminiButtonBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* FULL IMAGE BACKGROUND CARD DESIGN */
@@ -77,7 +83,7 @@
             border-radius: 18px; 
             height: 380px; 
             overflow: hidden; 
-            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
             justify-content: flex-end; 
@@ -85,10 +91,10 @@
             cursor: pointer;
         }
 
-        /* GREEN EFFECT REPLACED WITH GEMINI ANIMATION */
+        /* CARD ACTIVE HOVER STATE WITH LIVE GEMINI GLOW */
         .course-card:hover {
-            transform: translateY(-8px);
-            animation: geminiGlow 3s linear infinite alternate;
+            transform: translateY(-10px);
+            animation: geminiGlow 3s ease-in-out infinite alternate;
         }
 
         /* BACKGROUND IMAGE CONTAINER WHICH SPANS 100% CARD */
@@ -101,10 +107,10 @@
         .card-bg-layer img {
             width: 100%; height: 100%;
             object-fit: cover; 
-            transition: transform 0.4s ease;
+            transition: transform 0.5s ease;
         }
         .course-card:hover .card-bg-layer img {
-            transform: scale(1.06);
+            transform: scale(1.08);
         }
 
         /* GRADIENT OVERLAY TO MAKE TEXT READABLE OVER FULL IMAGE */
@@ -135,9 +141,8 @@
             display: inline-block; padding: 4px 10px; font-size: 10px; font-weight: 800;
             background: rgba(4, 7, 16, 0.8); color: #38bdf8; border: 1px solid rgba(26, 115, 232, 0.5);
             border-radius: 6px; margin-bottom: 15px; text-transform: uppercase; align-self: flex-start;
-            transition: 0.3s;
+            transition: 0.3s ease;
         }
-        /* Hover state badge updates dynamically to match Gemini themes instead of hardcoded green */
         .course-card:hover .tech-badge { background: rgba(0, 0, 0, 0.8); color: #a855f7; border-color: #a855f7; }
 
         .tracker-box { margin-bottom: 15px; width: 100%; }
@@ -149,14 +154,17 @@
             display: block; width: 100%; text-align: center; padding: 11px;
             background: rgba(10, 15, 28, 0.8); border: 1px solid rgba(26, 115, 232, 0.6);
             color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 13px;
-            transition: 0.2s; backdrop-filter: blur(4px);
+            transition: 0.3s ease; backdrop-filter: blur(4px);
         }
-        /* Smooth Gemini gradient background shift on button hover */
+        
+        /* ACTIVATE LIVE MOTION GEMINI MULTICOLOR GRADIENT BUTTON ON HOVER */
         .course-card:hover .btn-view { 
-            background: linear-gradient(90deg, #38bdf8, #a855f7, #ec4899); 
+            background: linear-gradient(270deg, #38bdf8, #a855f7, #ec4899, #38bdf8);
+            background-size: 600% 600%;
+            animation: geminiButtonBg 4s ease infinite;
             color: #fff; 
             border-color: transparent; 
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); 
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.6); 
         }
 
         /* RIGHT SIDEBAR */
