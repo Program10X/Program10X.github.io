@@ -633,15 +633,26 @@ function drawUxuiPortfolioEngine() {
     requestAnimationFrame(drawUxuiPortfolioEngine);
 }
         // Initialize all stable rendering engines together
-        setTimeout(() => { 
-            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas();
-            initAiNodes();
-            drawMindPalace(); drawVoiceSynthEngine(); drawAiNeuralEngine(); 
-        }, 150);
-
-        window.addEventListener('resize', () => { 
-            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas(); initAiNodes();
-        });
+       // Initialize all stable rendering engines together
+setTimeout(() => {
+    setupMathCanvas(); 
+    setupVoiceCanvas(); 
+    setupAiCanvas(); 
+    setupUxuiCanvas(); // <- Yeh line honi chahiye
+    
+    initAiNodes();
+    
+    drawMindPalace(); 
+    drawVoiceSynthEngine(); 
+    drawAiNeuralEngine(); 
+    drawUxuiPortfolioEngine(); // <- Aur yeh line call honi chahiye
+}, 150);
+       window.addEventListener('resize', () => {
+    setupMathCanvas();
+    setupVoiceCanvas();
+    setupAiCanvas();
+    setupUxuiCanvas(); // <- Yeh line yahan bhi jodni hai
+});
     </script>
 </body>
 </html>
