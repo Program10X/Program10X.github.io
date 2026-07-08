@@ -68,12 +68,12 @@
             background: #0b0f19;
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 18px; 
-            height: 380px; /* Fixed height for beautiful full layout */
+            height: 380px; 
             overflow: hidden; 
             transition: 0.3s;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; /* Text sets at bottom */
+            justify-content: flex-end; 
             position: relative;
         }
 
@@ -90,7 +90,7 @@
         }
         .card-bg-layer img {
             width: 100%; height: 100%;
-            object-fit: cover; /* Poore card me space cover karega */
+            object-fit: cover; 
             transition: transform 0.4s ease;
         }
         .course-card:hover .card-bg-layer img {
@@ -105,13 +105,13 @@
             background: linear-gradient(to top, rgba(4, 7, 16, 0.95) 20%, rgba(4, 7, 16, 0.6) 60%, transparent 100%);
         }
         
-        /* OVERLAY TEXT BODY (Sits on top of image background) */
+        /* OVERLAY TEXT BODY */
         .card-body { 
             padding: 20px; 
             width: 100%;
             display: flex; 
             flex-direction: column; 
-            z-index: 2; /* Forces above background layer */
+            z-index: 2; 
             position: relative;
         }
         
@@ -177,7 +177,7 @@
             <h2>Course overview</h2>
             <div class="courses-grid">
                 
-                <!-- 🔮 CARD 1: MATH MAGIC WITH AI (FULL BACKROUND COVER) -->
+                <!-- 🔮 CARD 1: MATH MAGIC WITH AI -->
                 <div class="course-card">
                     <div class="card-bg-layer">
                         <img src="https://indianai.in/wp-content/uploads/2021/06/math-ai.jpg" alt="Math Magic with AI">
@@ -192,10 +192,10 @@
                     </div>
                 </div>
 
-                <!-- 🎙️ CARD 2: ENGLISH MOUTH DRIVEN WITH AI -->
+                <!-- 🎙️ CARD 2: ENGLISH MOUTH DRIVEN WITH AI (NEW IMAGE DETAILED) -->
                 <div class="course-card">
                     <div class="card-bg-layer">
-                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=600&q=80" alt="English Mouth Driven with AI">
+                        <img src="https://thumbs.dreamstime.com/b/businessman-holding-tablet-ai-icons-multiple-language-translations-showcasing-technology-communication-global-458429765.jpg?w=992" alt="English Mouth Driven with AI">
                     </div>
                     <div class="card-body">
                         <div>
