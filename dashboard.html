@@ -215,8 +215,8 @@
 
                 <!-- Card 4 -->
                 <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1626544827763-d516dce335e2?auto=format&fit=crop&w=600&q=80" alt="UX/UI Design Platform on Tablet">
+                    <div class="card-img-canvas-box" id="uxuiWrapper">
+                        <canvas id="uxuiInterfaceCanvas"></canvas>
                     </div>
                     <div class="card-body">
                         <div class="card-title">UX/UI Design with Cloud AI ML</div>
@@ -564,7 +564,74 @@
 
             requestAnimationFrame(drawAiNeuralEngine);
         }
+        // --- 📊 UX/UI DESIGN WITH CLOUD AI ML ENGINE (SHUTTERSTOCK MOCKUP REPLICA) ---
+const uxuiCanvas = document.getElementById('uxuiInterfaceCanvas');
+const uxCtx = uxuiCanvas.getContext('2d');
+const uxuiWrapper = document.getElementById('uxuiWrapper');
+let uxMouse = { x: null, y: null, active: false };
 
+function setupUxuiCanvas() {
+    uxuiCanvas.width = uxuiWrapper.clientWidth || 300;
+    uxuiCanvas.height = uxuiWrapper.clientHeight || 150;
+}
+setupUxuiCanvas();
+
+uxuiWrapper.addEventListener('mousemove', (e) => {
+    const rect = uxuiCanvas.getBoundingClientRect();
+    uxMouse.x = e.clientX - rect.left; 
+    uxMouse.y = e.clientY - rect.top; 
+    uxMouse.active = true;
+});
+uxuiWrapper.addEventListener('mouseleave', () => { uxMouse.active = false; });
+
+const uiGlowElements = [];
+for (let i = 0; i < 20; i++) {
+    uiGlowElements.push({
+        x: Math.random() * 300, y: Math.random() * 150, size: Math.random() * 2 + 1,
+        speedY: -(Math.random() * 0.2 + 0.1), alpha: Math.random() * 0.5 + 0.2
+    });
+}
+
+function drawUxuiPortfolioEngine() {
+    uxCtx.fillStyle = '#050a14'; uxCtx.fillRect(0, 0, uxuiCanvas.width, uxuiCanvas.height);
+    let w = uxuiCanvas.width, h = uxuiCanvas.height;
+
+    // Grid System
+    uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.03)'; uxCtx.lineWidth = 0.5;
+    for(let g = 0; g < w; g += 20) { uxCtx.beginPath(); uxCtx.moveTo(g, 0); uxCtx.lineTo(g, h); uxCtx.stroke(); }
+    for(let g = 0; g < h; g += 20) { uxCtx.beginPath(); uxCtx.moveTo(0, g); uxCtx.lineTo(w, g); uxCtx.stroke(); }
+
+    // Center Panel Box
+    uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.2)'; uxCtx.lineWidth = 1;
+    uxCtx.strokeRect(40, 25, w - 80, h - 50);
+
+    // Glowing Headers
+    uxCtx.font = '900 14px "Orbitron", sans-serif'; uxCtx.fillStyle = '#38bdf8';
+    uxCtx.fillText("UI", w / 2 - 28, h / 2 + 5);
+    uxCtx.fillStyle = '#00ffcc'; uxCtx.fillText("UX", w / 2 + 4, h / 2 + 5);
+
+    // Sidebar Data Mockup
+    uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.15)'; uxCtx.strokeRect(46, 32, 24, 26);
+    uxCtx.fillStyle = 'rgba(56, 189, 248, 0.2)'; uxCtx.fillRect(46, 64, 24, 2); uxCtx.fillRect(46, 69, 16, 2);
+
+    // Analytics Right Bars
+    uxCtx.strokeStyle = 'rgba(0, 255, 204, 0.15)'; uxCtx.strokeRect(w - 70, 32, 24, 38);
+    uxCtx.fillStyle = '#00ffcc';
+    let chartValues = [10, 22, 14, 28];
+    chartValues.forEach((val, index) => {
+        if (uxMouse.active) val += Math.sin(Date.now() * 0.005 + index) * 4;
+        uxCtx.fillRect(w - 66 + (index * 5), 66 - val, 3, val);
+    });
+
+    // Floating Lights
+    uiGlowElements.forEach((el) => {
+        el.y += el.speedY; if (el.y < 20) el.y = h - 20;
+        uxCtx.fillStyle = `rgba(0, 255, 204, ${el.alpha})`;
+        uxCtx.beginPath(); uxCtx.arc(el.x, el.y, el.size, 0, Math.PI * 2); uxCtx.fill();
+    });
+
+    requestAnimationFrame(drawUxuiPortfolioEngine);
+}
         // Initialize all stable rendering engines together
         setTimeout(() => { 
             setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas();
