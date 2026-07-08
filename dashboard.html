@@ -78,7 +78,7 @@
             cursor: pointer;
         }
         .card-img-canvas-box canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
         }
 
         /* 🎙️ CUSTOM STYLING TO KEEP SVG MIC FLOAT ON CANVAS */
@@ -93,14 +93,6 @@
             50% { transform: translate(-50%, -50%) translateY(-4px); filter: drop-shadow(0 0 22px rgba(56, 189, 248, 0.95)); }
         }
 
-        /* SPECIAL CONTAINER FOR AI WITH IMAGE BACKGROUND + CANVAS OVERLAY */
-        .ai-image-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; filter: brightness(0.5) contrast(1.2); z-index: 1;
-            transition: transform 0.5s ease;
-        }
-        .course-card:hover .ai-image-bg { transform: scale(1.06); filter: brightness(0.65); }
-
         /* UNIFORM STATIC CARDS CONTAINER */
         .card-img {
             height: 140px; width: 100%; position: relative; overflow: hidden;
@@ -109,9 +101,9 @@
         .card-img img {
             width: 100%; height: 100%; object-fit: cover;
             transition: transform 0.5s ease, filter 0.3s ease;
-            filter: brightness(0.8) contrast(1.1);
+            filter: brightness(0.85) contrast(1.05);
         }
-        .course-card:hover .card-img img { transform: scale(1.06); filter: brightness(0.95); }
+        .course-card:hover .card-img img { transform: scale(1.06); filter: brightness(1); }
         .card-img::after {
             content: ''; position: absolute; inset: 0;
             background: linear-gradient(to bottom, transparent 40%, rgba(15, 23, 42, 0.9));
@@ -206,12 +198,10 @@
                     </div>
                 </div>
 
+                <!-- 🔮 ARTIFICIAL INTELLIGENCE CARD UPDATED WITH YOUR NEW IMAGE LINK -->
                 <div class="course-card">
-                    <div class="card-img-canvas-box" id="aiWrapper">
-                        <!-- 🌌 KEEPING THE ORIGINAL EXACT IMAGE SAFE HERE -->
-                        <img class="ai-image-bg" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Artificial Intelligence Neural Network Grid">
-                        <!-- ⚡ TRANSPARENT ANIMATION CANVAS ON TOP -->
-                        <canvas id="aiNeuralCanvas" style="background: transparent;"></canvas>
+                    <div class="card-img">
+                        <img src="https://datos.gob.es/sites/default/files/styles/wide/public/2025-09/imagen-IAcalidad.jpg?itok=T_fiwk2C" alt="Artificial Intelligence Service Quality">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Artificial Intelligence</div>
@@ -471,75 +461,17 @@
             requestAnimationFrame(drawVoiceSynthEngine);
         }
 
-        // --- 🧠 ARTIFICIAL INTELLIGENCE NEURAL ENGINE (WITH OVERLAY SUPPORT) ---
-        const aiCanvas = document.getElementById('aiNeuralCanvas');
-        const aiCtx = aiCanvas.getContext('2d');
-        const aiWrapper = document.getElementById('aiWrapper');
-        let aiNodes = [];
-
-        function setupAiCanvas() {
-            aiCanvas.width = aiWrapper.clientWidth || 300;
-            aiCanvas.height = aiWrapper.clientHeight || 140;
-        }
-
-        function initAiNodes() {
-            aiNodes = [];
-            // Generates an interactive floating cloud grid
-            for(let i=0; i<5; i++) {
-                for(let j=0; j<4; j++) {
-                    aiNodes.push({
-                        x: 25 + i * (aiCanvas.width / 5.2),
-                        y: 18 + j * (aiCanvas.height / 4.5),
-                        seed: Math.random() * 100
-                    });
-                }
-            }
-        }
-
-        function drawAiNeuralEngine() {
-            // Clear rect transparently to let original image look crystal clear behind it
-            aiCtx.clearRect(0, 0, aiCanvas.width, aiCanvas.height);
-            
-            aiCtx.strokeStyle = 'rgba(0, 255, 102, 0.2)'; aiCtx.lineWidth = 0.9;
-            
-            aiNodes.forEach((n, idx) => {
-                let floatY = n.y + Math.sin(Date.now() * 0.0025 + n.seed) * 5;
-                let floatX = n.x + Math.cos(Date.now() * 0.0015 + n.seed) * 3;
-                
-                aiNodes.forEach((t, tIdx) => {
-                    if(t.x > n.x && t.x - n.x < 85) {
-                        let targetFloatY = t.y + Math.sin(Date.now() * 0.0025 + t.seed) * 5;
-                        let targetFloatX = t.x + Math.cos(Date.now() * 0.0015 + t.seed) * 3;
-                        aiCtx.beginPath(); aiCtx.moveTo(floatX, floatY); aiCtx.lineTo(targetFloatX, targetFloatY); aiCtx.stroke();
-                    }
-                });
-                
-                // Cyan/Green pulsing network nodes
-                aiCtx.fillStyle = idx % 2 === 0 ? '#38bdf8' : '#00ff66';
-                aiCtx.shadowColor = aiCtx.fillStyle;
-                aiCtx.shadowBlur = 6;
-                aiCtx.beginPath(); aiCtx.arc(floatX, floatY, 2.5, 0, Math.PI*2); aiCtx.fill();
-                aiCtx.shadowBlur = 0; // Reset blur
-            });
-            requestAnimationFrame(drawAiNeuralEngine);
-        }
-
         // Initialize stable rendering engines together
         setTimeout(() => { 
             setupMathCanvas(); 
             setupVoiceCanvas(); 
-            setupAiCanvas();
-            initAiNodes();
             drawMindPalace(); 
             drawVoiceSynthEngine(); 
-            drawAiNeuralEngine();
         }, 150);
 
         window.addEventListener('resize', () => { 
             setupMathCanvas(); 
             setupVoiceCanvas(); 
-            setupAiCanvas();
-            initAiNodes();
         });
     </script>
 </body>
