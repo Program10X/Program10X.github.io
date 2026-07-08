@@ -56,24 +56,23 @@
         .content-area { flex: 3; }
         .content-area h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 30px; }
         
+        /* UNIFORM GRID SYSTEM FOR ALL CARDS */
         .courses-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 25px;
         }
 
         /* STRUCTURE FOR DASHBOARD GLASS CARDS */
         .course-card {
             background: rgba(15, 23, 42, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px; overflow: hidden; transition: 0.3s;
-            position: relative;
-        }
-        
-        /* SPECIAL FULL-BACKGROUND CARD MODIFIER FOR CARD 1 & CARD 2 */
-        .full-bg-card {
+            border-radius: 18px; 
+            overflow: hidden; 
+            transition: 0.3s;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            min-height: 330px;
+            height: 100%; /* Saare cards ek barabar height ke rahenge */
         }
 
         .course-card:hover {
@@ -81,46 +80,45 @@
             box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
         }
 
-        /* UNIFORM STATIC CARDS CONTAINER */
+        /* UNIFORM STATIC CARDS IMAGES CONTAINER */
         .card-img {
-            height: 140px; width: 100%; position: relative; overflow: hidden;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: #060b13;
-        }
-        
-        /* OVERRIDE: Makes image cover the ENTIRE space for Full BG Cards */
-        .full-bg-card .card-img {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border-bottom: none; z-index: 1;
+            height: 150px; 
+            width: 100%; 
+            position: relative; 
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+            background: #060b13;
         }
 
         .card-img img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.5s ease, filter 0.3s ease;
-            filter: brightness(0.55) contrast(1.1); /* Forbes image high-quality hai, text contrast perfect aayega */
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
-        .course-card:hover .card-img img { transform: scale(1.06); filter: brightness(0.7); }
+        .course-card:hover .card-img img { transform: scale(1.06); }
         
-        /* Dark gradient shade layer so the white text pops out perfectly */
-        .card-img::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(to bottom, transparent 10%, rgba(10, 15, 28, 0.4) 50%, rgba(15, 23, 42, 0.95) 90%);
+        .card-body { 
+            padding: 20px; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
         }
-
-        .card-body { padding: 20px; position: relative; z-index: 2; }
+        
         .card-title {
             font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700;
-            margin-bottom: 10px; height: 52px; display: flex; align-items: center; color: #ffffff;
+            margin-bottom: 10px; min-height: 52px; display: flex; align-items: center; color: #ffffff;
         }
 
         .tech-badge {
             display: inline-block; padding: 4px 10px; font-size: 10px; font-weight: 800;
             background: rgba(26, 115, 232, 0.15); color: #38bdf8; border: 1px solid rgba(26, 115, 232, 0.3);
-            border-radius: 6px; margin-bottom: 15px; text-transform: uppercase;
+            border-radius: 6px; margin-bottom: 15px; text-transform: uppercase; align-self: flex-start;
         }
         .course-card:hover .tech-badge { background: rgba(0, 255, 102, 0.1); color: #00ff66; border-color: rgba(0, 255, 102, 0.3); }
 
-        .tracker-box { margin-bottom: 15px; }
+        .tracker-box { margin-bottom: 15px; width: 100%; }
         .tracker-text { font-size: 11px; font-weight: 800; color: #00ff66; margin-bottom: 6px; }
         .tracker-bg { width: 100%; height: 6px; background: #000; border-radius: 10px; overflow: hidden; }
         .tracker-fill { height: 100%; background: #00ff66; box-shadow: 0 0 10px #00ff66; }
@@ -129,6 +127,7 @@
             display: block; width: 100%; text-align: center; padding: 10px;
             background: rgba(26, 115, 232, 0.1); border: 1px solid #1a73e8;
             color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 13px;
+            margin-top: auto;
         }
         .btn-view:hover { background: #00ff66; color: #000; border-color: #00ff66; }
 
@@ -169,103 +168,120 @@
             <div class="courses-grid">
                 
                 <!-- 🔮 CARD 1: MATH MAGIC WITH AI -->
-                <div class="course-card full-bg-card">
+                <div class="course-card">
                     <div class="card-img">
                         <img src="https://indianai.in/wp-content/uploads/2021/06/math-ai.jpg" alt="Math Magic with AI Cyber Concepts">
                     </div>
                     <div class="card-body">
-                        <div class="card-title">Math Magic with AI</div>
-                        <div class="tech-badge">Logic Engine v1.0</div>
+                        <div>
+                            <div class="card-title">Math Magic with AI</div>
+                            <div class="tech-badge">Logic Engine v1.0</div>
+                        </div>
                         <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
                         <a href="#" class="btn-view">OPEN MODULE</a>
                     </div>
                 </div>
 
-                <!-- 🎙️ CARD 2: ENGLISH MOUTH DRIVEN WITH AI (FORBES ROBOT IMAGE BACKGROUND) -->
-                <div class="course-card full-bg-card">
+                <!-- 🎙️ CARD 2: ENGLISH MOUTH DRIVEN WITH AI (PERFECTLY ALIGNED) -->
+                <div class="course-card">
                     <div class="card-img">
-                        <img src="https://imageio.forbes.com/specials-images/imageserve/663aa48e0291cc99986bbcf2/The-Future-Of-Oratory--AI-Enhanced-Public-Speaking/960x0.jpg" alt="AI-Enhanced Public Speaking Robot">
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=600&q=80" alt="AI-Enhanced Public Speaking Robot">
                     </div>
-                    <!-- 🎙️ CARD 2: ENGLISH MOUTH DRIVEN WITH AI -->
-<div class="course-card full-bg-card">
-    <div class="card-img">
-        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80" alt="AI-Enhanced Public Speaking Robot">
-    </div>
-    <div class="card-body">
-        <div class="card-title">English Mouth Driven with AI</div>
-        <div class="tech-badge">Voice Synthesis</div>
-        <div class="tracker-box"><div class="tracker-text">98% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 98%;"></div></div></div>
-        <a href="#" class="btn-view">OPEN MODULE</a>
-    </div>
-</div>
+                    <div class="card-body">
+                        <div>
+                            <div class="card-title">English Mouth Driven with AI</div>
+                            <div class="tech-badge">Voice Synthesis</div>
+                        </div>
+                        <div class="tracker-box"><div class="tracker-text">98% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 98%;"></div></div></div>
+                        <a href="#" class="btn-view">OPEN MODULE</a>
+                    </div>
+                </div>
 
+                <!-- 🤖 CARD 3: ARTIFICIAL INTELLIGENCE -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://datos.gob.es/sites/default/files/styles/wide/public/2025-09/imagen-IAcalidad.jpg?itok=T_fiwk2C" alt="Artificial Intelligence Service Quality">
                     </div>
                     <div class="card-body">
-                        <div class="card-title">Artificial Intelligence</div>
-                        <div class="tech-badge">Neural Networks</div>
+                        <div>
+                            <div class="card-title">Artificial Intelligence</div>
+                            <div class="tech-badge">Neural Networks</div>
+                        </div>
                         <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
                         <a href="#" class="btn-view">OPEN MODULE</a>
                     </div>
                 </div>
 
+                <!-- 🎨 CARD 4: UX/UI DESIGN -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1626544827763-d516dce335e2?auto=format&fit=crop&w=600&q=80" alt="UX/UI Design Platform on Tablet">
                     </div>
                     <div class="card-body">
-                        <div class="card-title">UX/UI Design with Cloud AI ML</div>
-                        <div class="tech-badge">Interface Analytics</div>
+                        <div>
+                            <div class="card-title">UX/UI Design with Cloud AI ML</div>
+                            <div class="tech-badge">Interface Analytics</div>
+                        </div>
                         <div class="tracker-box"><div class="tracker-text">85% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 85%;"></div></div></div>
                         <a href="#" class="btn-view">OPEN MODULE</a>
                     </div>
                 </div>
 
+                <!-- 🖥️ CARD 5: COMPUTER SCIENCE -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&q=80" alt="Computer Science and Server Rack Infrastructure">
                     </div>
                     <div class="card-body">
-                        <div class="card-title">Computer Science & Info. Technology</div>
-                        <div class="tech-badge">Core Infrastructure</div>
+                        <div>
+                            <div class="card-title">Computer Science & Info. Technology</div>
+                            <div class="tech-badge">Core Infrastructure</div>
+                        </div>
                         <div class="tracker-box"><div class="tracker-text">70% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 70%;"></div></div></div>
                         <a href="#" class="btn-view">OPEN MODULE</a>
                     </div>
                 </div>
 
+                <!-- 💻 CARD 6: PROGRAMMING C WITH AI -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=600&q=80" alt="C Programming Language with AI code assist">
                     </div>
                     <div class="card-body">
-                        <div class="card-title">Programming C with AI</div>
-                        <div class="tech-badge">Compiler Sandbox</div>
+                        <div>
+                            <div class="card-title">Programming C with AI</div>
+                            <div class="tech-badge">Compiler Sandbox</div>
+                        </div>
                         <div class="tracker-box"><div class="tracker-text">50% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 50%;"></div></div></div>
                         <a href="#" class="btn-view">OPEN MODULE</a>
                     </div>
                 </div>
 
+                <!-- 📚 CARD 7: FREE COURSES -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80" alt="Free Courses Open Source Book Stack">
                     </div>
                     <div class="card-body">
-                        <div class="card-title">Free Courses</div>
-                        <div class="tech-badge">Open Source Library</div>
+                        <div>
+                            <div class="card-title">Free Courses</div>
+                            <div class="tech-badge">Open Source Library</div>
+                        </div>
                         <div class="tracker-box"><div class="tracker-text">12% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 12%;"></div></div></div>
                         <a href="#" class="btn-view">EXPLORE</a>
                     </div>
                 </div>
 
+                <!-- 🧪 CARD 8: VIRTUAL LAB -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=80" alt="Virtual Lab environment with AI diagnostics">
                     </div>
                     <div class="card-body">
-                        <div class="card-title">Virtual Lab</div>
-                        <div class="tech-badge">Cloud Environment</div>
+                        <div>
+                            <div class="card-title">Virtual Lab</div>
+                            <div class="tech-badge">Cloud Environment</div>
+                        </div>
                         <div class="tracker-box"><div class="tracker-text">0% INITIALIZED</div><div class="tracker-bg"><div class="tracker-fill" style="width: 0%;"></div></div></div>
                         <a href="#" class="btn-view">ENTER LAB</a>
                     </div>
@@ -274,6 +290,7 @@
             </div>
         </div>
 
+        <!-- RIGHT SIDEBAR SECTION -->
         <div class="sidebar">
             <div class="widget">
                 <h3>Calendar</h3>
