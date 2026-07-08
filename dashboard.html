@@ -119,7 +119,7 @@
             display: flex;
             flex-direction: column;
             height: 380px;
-            cursor: pointer;
+            cursor: pointer; /* 👈 यहाँ सिर्फ यह एक लाइन जोड़ी है ताकि पूरे कार्ड पर हाथ का निशान बने */
             transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
         }
 
@@ -128,41 +128,33 @@
             border-color: rgba(0, 255, 102, 0.3);
         }
 
-        /* ─── इमेज अब पूरे कार्ड पर आएगी ─── */
         .card-bg-layer {
-            height: 100%;
+            height: 45%;
             width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
             background: #1e293b;
             overflow: hidden;
-            z-index: 1;
         }
 
         .card-bg-layer img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.35; /* टेक्स्ट साफ दिखे इसलिए ओपेसिटी थोड़ी कम की है */
+            opacity: 0.8;
             transition: transform 0.5s;
         }
 
         .course-card:hover .card-bg-layer img {
             transform: scale(1.05);
-            opacity: 0.5;
         }
 
-        /* ─── टेक्स्ट और बटन को इमेज के ऊपर सेट किया ─── */
         .card-body {
-            position: relative;
-            z-index: 2;
             padding: 24px;
-            height: 100%;
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            background: linear-gradient(to bottom, rgba(2,2,4,0.2) 0%, rgba(2,2,4,0.85) 100%);
+            background: linear-gradient(to bottom, transparent, rgba(2,2,4,0.4));
         }
 
         .card-title {
@@ -172,7 +164,6 @@
             line-height: 1.3;
             margin-bottom: 8px;
             color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         .tech-badge {
@@ -181,10 +172,10 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #00ff66;
-            background: rgba(2, 2, 4, 0.7);
+            background: rgba(0, 255, 102, 0.06);
             padding: 4px 8px;
             border-radius: 4px;
-            border: 1px solid rgba(0, 255, 102, 0.3);
+            border: 1px solid rgba(0, 255, 102, 0.15);
         }
 
         /* PERSISTENT TRACKER BAR */
@@ -194,16 +185,15 @@
 
         .tracker-text {
             font-size: 0.75rem;
-            color: #cbd5e1;
+            color: #64748b;
             margin-bottom: 6px;
             display: flex;
             justify-content: space-between;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
 
         .tracker-bg {
             height: 4px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 2px;
             overflow: hidden;
         }
@@ -218,8 +208,8 @@
         .btn-view {
             width: 100%;
             padding: 12px;
-            background: rgba(2, 2, 4, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #ffffff;
             border-radius: 8px;
             text-align: center;
@@ -228,7 +218,6 @@
             font-weight: 600;
             letter-spacing: 0.5px;
             transition: all 0.2s;
-            backdrop-filter: blur(4px);
         }
 
         .course-card:hover .btn-view {
@@ -272,13 +261,11 @@
                         <div class="card-title">Math Magic with AI</div>
                         <div class="tech-badge">Logic Engine v1.0</div>
                     </div>
-                    <div>
-                        <div class="tracker-box">
-                            <div class="tracker-text">100% COMPLETE</div>
-                            <div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div>
-                        </div>
-                        <a href="course-view.html?course=math" class="btn-view">OPEN MODULE</a>
+                    <div class="tracker-box">
+                        <div class="tracker-text">100% COMPLETE</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div>
                     </div>
+                    <a href="course-view.html?course=math" class="btn-view">OPEN MODULE</a>
                 </div>
             </div>
 
@@ -292,13 +279,11 @@
                         <div class="card-title">English Mouth Driven with AI</div>
                         <div class="tech-badge">Voice Synthesis</div>
                     </div>
-                    <div>
-                        <div class="tracker-box">
-                            <div class="tracker-text">98% PROGRESS</div>
-                            <div class="tracker-bg"><div class="tracker-fill" style="width: 98%;"></div></div>
-                        </div>
-                        <a href="course-view.html?course=english" class="btn-view">OPEN MODULE</a>
+                    <div class="tracker-box">
+                        <div class="tracker-text">98% PROGRESS</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 98%;"></div></div>
                     </div>
+                    <a href="course-view.html?course=english" class="btn-view">OPEN MODULE</a>
                 </div>
             </div>
 
@@ -312,13 +297,11 @@
                         <div class="card-title">Artificial Intelligence</div>
                         <div class="tech-badge">Neural Networks</div>
                     </div>
-                    <div>
-                        <div class="tracker-box">
-                            <div class="tracker-text">100% COMPLETE</div>
-                            <div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div>
-                        </div>
-                        <a href="course-view.html?course=ai" class="btn-view">OPEN MODULE</a>
+                    <div class="tracker-box">
+                        <div class="tracker-text">100% COMPLETE</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div>
                     </div>
+                    <a href="course-view.html?course=ai" class="btn-view">OPEN MODULE</a>
                 </div>
             </div>
 
@@ -332,13 +315,11 @@
                         <div class="card-title">UX/UI Design with AI</div>
                         <div class="tech-badge">Interface Analytics</div>
                     </div>
-                    <div>
-                        <div class="tracker-box">
-                            <div class="tracker-text">85% PROGRESS</div>
-                            <div class="tracker-bg"><div class="tracker-fill" style="width: 85%;"></div></div>
-                        </div>
-                        <a href="course-view.html?course=uxui" class="btn-view">OPEN MODULE</a>
+                    <div class="tracker-box">
+                        <div class="tracker-text">85% PROGRESS</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 85%;"></div></div>
                     </div>
+                    <a href="course-view.html?course=uxui" class="btn-view">OPEN MODULE</a>
                 </div>
             </div>
 
@@ -352,13 +333,11 @@
                         <div class="card-title">Computer Science & Info. Technology</div>
                         <div class="tech-badge">Core Infrastructure</div>
                     </div>
-                    <div>
-                        <div class="tracker-box">
-                            <div class="tracker-text">70% PROGRESS</div>
-                            <div class="tracker-bg"><div class="tracker-fill" style="width: 70%;"></div></div>
-                        </div>
-                        <a href="course-view.html?course=cs" class="btn-view">OPEN MODULE</a>
+                    <div class="tracker-box">
+                        <div class="tracker-text">70% PROGRESS</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 70%;"></div></div>
                     </div>
+                    <a href="course-view.html?course=cs" class="btn-view">OPEN MODULE</a>
                 </div>
             </div>
 
@@ -372,13 +351,11 @@
                         <div class="card-title">Programming C with AI</div>
                         <div class="tech-badge">Compiler Sandbox</div>
                     </div>
-                    <div>
-                        <div class="tracker-box">
-                            <div class="tracker-text">50% PROGRESS</div>
-                            <div class="tracker-bg"><div class="tracker-fill" style="width: 50%;"></div></div>
-                        </div>
-                        <a href="course-view.html?course=cprog" class="btn-view">OPEN MODULE</a>
+                    <div class="tracker-box">
+                        <div class="tracker-text">50% PROGRESS</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 50%;"></div></div>
                     </div>
+                    <a href="course-view.html?course=cprog" class="btn-view">OPEN MODULE</a>
                 </div>
             </div>
 
@@ -392,13 +369,11 @@
                         <div class="card-title">Open Source Library</div>
                         <div class="tech-badge">Free Courses</div>
                     </div>
-                    <div>
-                        <div class="tracker-box">
-                            <div class="tracker-text">12% PROGRESS</div>
-                            <div class="tracker-bg"><div class="tracker-fill" style="width: 12%;"></div></div>
-                        </div>
-                        <a href="course-view.html?course=open-source" class="btn-view">EXPLORE</a>
+                    <div class="tracker-box">
+                        <div class="tracker-text">12% PROGRESS</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 12%;"></div></div>
                     </div>
+                    <a href="course-view.html?course=open-source" class="btn-view">EXPLORE</a>
                 </div>
             </div>
 
@@ -412,13 +387,11 @@
                         <div class="card-title">Virtual Lab</div>
                         <div class="tech-badge">Cloud Environment</div>
                     </div>
-                    <div>
-                        <div class="tracker-box">
-                            <div class="tracker-text">0% INITIALIZED</div>
-                            <div class="tracker-bg"><div class="tracker-fill" style="width: 0%;"></div></div>
-                        </div>
-                        <a href="course-view.html?course=virtual-lab" class="btn-view">ENTER LAB</a>
+                    <div class="tracker-box">
+                        <div class="tracker-text">0% INITIALIZED</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 0%;"></div></div>
                     </div>
+                    <a href="course-view.html?course=virtual-lab" class="btn-view">ENTER LAB</a>
                 </div>
             </div>
 
