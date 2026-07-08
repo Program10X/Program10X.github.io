@@ -4,806 +4,490 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Program10X | Advanced Student Dashboard</title>
+    <!-- Google Fonts for High-Tech Aesthetic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=500;700&family=Inter:wght=400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* CORE LAYOUT INITIALIZATION */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* --- 🎨 SYSTEM VARIABLES & THEME --- */
+        :root {
+            --bg-deep: #030712;
+            --bg-card: rgba(15, 23, 42, 0.7);
+            --bg-card-hover: #111c44;
+            --text-primary: #f3f4f6;
+            --text-muted: #9ca3af;
+            --neon-blue: #38bdf8;
+            --neon-green: #00ffcc;
+            --neon-glow: 0 0 15px rgba(56, 189, 248, 0.4);
+            --border-glow: rgba(255, 255, 255, 0.1);
+            --sidebar-width: 260px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
         body {
-            background-color: #020204;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* 🟩 LIVE BACKGROUND MATRIX STREAM */
-        #coderRain {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0.15; pointer-events: none; z-index: 1;
-        }
-
-        /* 📋 CYBER NAVBAR */
-        .navbar {
-            position: fixed;
-            top: 0; left: 0; right: 0; height: 75px;
-            background: rgba(10, 15, 28, 0.85);
-            border-bottom: 1px solid rgba(0, 255, 102, 0.2);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 40px; z-index: 100; backdrop-filter: blur(15px);
-        }
-        .navbar .logo {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem; font-weight: 700; color: #1a73e8; letter-spacing: 2px;
-        }
-        .navbar .logo span { color: #00ff66; text-shadow: 0 0 15px rgba(0, 255, 102, 0.5); }
-        .navbar .user-profile { display: flex; align-items: center; gap: 15px; }
-        .navbar .avatar {
-            width: 40px; height: 40px; background: #1a73e8; color: white;
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-weight: 800; box-shadow: 0 0 10px rgba(26, 115, 232, 0.5);
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            display: flex;
         }
 
-        /* WORKSPACE MODULES HOUSING */
-        .main-container {
-            margin-top: 75px; width: 100%; display: flex;
-            padding: 40px; gap: 30px; z-index: 5; position: relative;
+        /* --- 📁 SIDEBAR NAVIGATION SYSTEM --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(180deg, #070a1e 0%, #030712 100%);
+            border-right: 1px solid rgba(56, 189, 248, 0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            z-index: 100;
         }
-        .content-area { flex: 3; }
-        .content-area h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 30px; }
-        
+
+        .brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand span {
+            color: var(--neon-blue);
+            text-shadow: var(--neon-glow);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active a, .nav-item a:hover {
+            color: var(--text-primary);
+            background: rgba(56, 189, 248, 0.08);
+            border-left: 3px solid var(--neon-blue);
+        }
+
+        /* --- 💻 MAIN DASHBOARD LAYOUT --- */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            min-height: 100vh;
+            padding: 2.5rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 1.5rem;
+        }
+
+        .welcome-box h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .welcome-box p {
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+
+        /* --- 🗂️ GRID ARCHITECTURE --- */
         .courses-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
         }
 
-        /* STRUCTURE FOR DASHBOARD GLASS CARDS */
         .course-card {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px; overflow: hidden; transition: 0.3s;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
         }
+
         .course-card:hover {
-            transform: translateY(-8px); border-color: #00ff66;
+            transform: translateY(-8px);
+            border-color: #00ff66;
             box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
         }
 
-        /* 📸 CANVAS MULTI-CONTAINER FOR SCIFI MODULE ANIMATIONS */
         .card-img-canvas-box {
-            height: 140px; width: 100%; position: relative; background: #01040a;
-            border-bottom: 1px solid rgba(26, 115, 232, 0.15); overflow: hidden;
+            height: 140px;
+            width: 100%;
+            position: relative;
+            background: #01040a;
+            border-bottom: 1px solid rgba(26, 115, 232, 0.15);
+            overflow: hidden;
             cursor: pointer;
         }
+
         .card-img-canvas-box canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
-        /* 🎙️ CUSTOM STYLING TO KEEP SVG MIC FLOAT ON CANVAS */
-        .neon-mic-overlay-icon {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 70px; height: 70px; filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.85));
-            pointer-events: none; z-index: 10; animation: micFloating 4s ease-in-out infinite;
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
-        @keyframes micFloating {
-            0%, 100% { transform: translate(-50%, -50%) translateY(0); filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.7)); }
-            50% { transform: translate(-50%, -50%) translateY(-4px); filter: drop-shadow(0 0 22px rgba(56, 189, 248, 0.95)); }
-        }
-
-        /* UNIFORM STATIC CARDS CONTAINER */
-        .card-img {
-            height: 140px; width: 100%; position: relative; overflow: hidden;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: #060b13;
-        }
-        .card-img img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.5s ease, filter 0.3s ease;
-            filter: brightness(0.8) contrast(1.1);
-        }
-        .course-card:hover .card-img img { transform: scale(1.06); filter: brightness(0.95); }
-        .card-img::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(to bottom, transparent 40%, rgba(15, 23, 42, 0.9));
-        }
-
-        .card-body { padding: 20px; }
         .card-title {
-            font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700;
-            margin-bottom: 10px; height: 52px; display: flex; align-items: center; color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
         .tech-badge {
-            display: inline-block; padding: 4px 10px; font-size: 10px; font-weight: 800;
-            background: rgba(26, 115, 232, 0.15); color: #38bdf8; border: 1px solid rgba(26, 115, 232, 0.3);
-            border-radius: 6px; margin-bottom: 15px; text-transform: uppercase;
+            display: inline-block;
+            align-self: flex-start;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: var(--neon-blue);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
         }
-        .course-card:hover .tech-badge { background: rgba(0, 255, 102, 0.1); color: #00ff66; border-color: rgba(0, 255, 102, 0.3); }
 
-        .tracker-box { margin-bottom: 15px; }
-        .tracker-text { font-size: 11px; font-weight: 800; color: #00ff66; margin-bottom: 6px; }
-        .tracker-bg { width: 100%; height: 6px; background: #000; border-radius: 10px; overflow: hidden; }
-        .tracker-fill { height: 100%; background: #00ff66; box-shadow: 0 0 10px #00ff66; }
+        .tracker-box {
+            margin-top: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .tracker-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .tracker-bg {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .tracker-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
+            border-radius: 10px;
+        }
 
         .btn-view {
-            display: block; width: 100%; text-align: center; padding: 10px;
-            background: rgba(26, 115, 232, 0.1); border: 1px solid #1a73e8;
-            color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 13px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
-        .btn-view:hover { background: #00ff66; color: #000; border-color: #00ff66; }
 
-        /* RIGHT SIDEBAR */
-        .sidebar { flex: 1; min-width: 320px; display: flex; flex-direction: column; gap: 25px; }
-        .widget {
-            background: rgba(15, 23, 42, 0.8); border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px; backdrop-filter: blur(10px);
+        .course-card:hover .btn-view {
+            background: #00ff66;
+            color: #000;
+            font-weight: 700;
         }
-        .widget h3 { font-size: 1.1rem; margin-bottom: 15px; border-left: 4px solid #00ff66; padding-left: 10px; }
-
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
-        .day-name { font-size: 10px; font-weight: 800; color: #1a73e8; padding-bottom: 5px; }
-        .date { font-size: 12px; padding: 8px; border-radius: 6px; background: rgba(255, 255, 255, 0.03); }
-        .date.today { background: #00ff66; color: #000; font-weight: 900; box-shadow: 0 0 10px #00ff66; }
-        
-        .recent-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .recent-item i { color: #00ff66; }
-        
-        @media (max-width: 1100px) { .main-container { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
 </head>
 <body>
 
-    <canvas id="coderRain"></canvas>
+    <!-- 📁 SIDEBAR NAVIGATION SYSTEM -->
+    <nav class="sidebar">
+        <div class="brand">PROG<span>10X</span></div>
+        <ul class="nav-links">
+            <li class="nav-item active"><a href="#">Dashboard</a></li>
+            <li class="nav-item"><a href="#">Core Modules</a></li>
+            <li class="nav-item"><a href="#">AI Labs</a></li>
+            <li class="nav-item"><a href="#">Settings</a></li>
+        </ul>
+    </nav>
 
-    <div class="navbar">
-        <div class="logo">PROGRAM<span>10X</span></div>
-        <div class="user-profile">
-            <span style="font-size: 13px; color: #94a3b8;">Welcome, Developer</span>
-            <div class="avatar">S</div>
-        </div>
-    </div>
-
-    <div class="main-container">
-        <div class="content-area">
-            <h2>Course overview</h2>
-            <div class="courses-grid">
-                
-                <!-- Card 1: Math Magic with AI -->
-                <div class="course-card">
-                    <div class="card-img-canvas-box" id="canvasWrapper">
-                        <canvas id="mindPalaceMathCanvas"></canvas>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">Math Magic with AI</div>
-                        <div class="tech-badge">Logic Engine v1.0</div>
-                        <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- Card 2: English Mouth Driven with AI -->
-                <div class="course-card">
-                    <div class="card-img-canvas-box" id="voiceWrapper">
-                        <svg class="neon-mic-overlay-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" fill="rgba(56, 189, 248, 0.15)"/>
-                            <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 19v3M8 22h8"/>
-                        </svg>
-                        <canvas id="voiceSynthCanvas"></canvas>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">English Mouth Driven with AI</div>
-                        <div class="tech-badge">Voice Synthesis</div>
-                        <div class="tracker-box"><div class="tracker-text">98% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 98%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- Card 3: Artificial Intelligence (NEW DYNAMIC INTERACTIVE NEURAL NETWORK CANVAS) -->
-                <div class="course-card">
-                    <div class="card-img-canvas-box" id="aiNetworkWrapper">
-                        <canvas id="aiNeuralNetworkCanvas"></canvas>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">Artificial Intelligence</div>
-                        <div class="tech-badge">Neural Networks</div>
-                        <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="course-card">
-                    <div class="card-img-canvas-box" id="uxuiWrapper">
-                        <canvas id="uxuiInterfaceCanvas"></canvas>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">UX/UI Design with Cloud AI ML</div>
-                        <div class="tech-badge">Interface Analytics</div>
-                        <div class="tracker-box"><div class="tracker-text">85% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 85%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&q=80" alt="Computer Science and Server Rack Infrastructure">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">Computer Science & Info. Technology</div>
-                        <div class="tech-badge">Core Infrastructure</div>
-                        <div class="tracker-box"><div class="tracker-text">70% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 70%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=600&q=80" alt="C Programming Language with AI code assist">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">Programming C with AI</div>
-                        <div class="tech-badge">Compiler Sandbox</div>
-                        <div class="tracker-box"><div class="tracker-text">50% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 50%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- Card 7 -->
-                <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80" alt="Free Courses Open Source Book Stack">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">Free Courses</div>
-                        <div class="tech-badge">Open Source Library</div>
-                        <div class="tracker-box"><div class="tracker-text">12% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 12%;"></div></div></div>
-                        <a href="#" class="btn-view">EXPLORE</a>
-                    </div>
-                </div>
-
-                <!-- Card 8 -->
-                <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=80" alt="Virtual Lab environment with AI diagnostics">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">Virtual Lab</div>
-                        <div class="tech-badge">Cloud Environment</div>
-                        <div class="tracker-box"><div class="tracker-text">0% INITIALIZED</div><div class="tracker-bg"><div class="tracker-fill" style="width: 0%;"></div></div></div>
-                        <a href="#" class="btn-view">ENTER LAB</a>
-                    </div>
-                </div>
-
+    <!-- 💻 MAIN DASHBOARD LAYOUT -->
+    <main class="main-content">
+        <header>
+            <div class="welcome-box">
+                <h1>Welcome, Developer S</h1>
+                <p>Neural dashboard status optimal.</p>
             </div>
-        </div>
+        </header>
 
-        <div class="sidebar">
-            <div class="widget">
-                <h3>Calendar</h3>
-                <div id="monthLabel" style="font-size: 14px; font-weight: 700; color: #1a73e8; margin-bottom: 12px; text-align: center;">July 2026</div>
-                <div class="calendar-grid">
-                    <div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div><div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div>
-                    <div class="date">28</div><div class="date">29</div><div class="date">30</div><div class="date">1</div><div class="date">2</div><div class="date">3</div><div class="date today">4</div>
-                    <div class="date">5</div><div class="date">6</div><div class="date">7</div><div class="date">8</div><div class="date">9</div><div class="date">10</div><div class="date">11</div>
-                    <div class="date">12</div><div class="date">13</div><div class="date">14</div><div class="date">15</div><div class="date">16</div><div class="date">17</div><div class="date">18</div>
-                    <div class="date">19</div><div class="date">20</div><div class="date">21</div><div class="date">22</div><div class="date">23</div><div class="date">24</div><div class="date">25</div>
-                </div>
-            </div>
-
-            <div class="widget">
-                <h3>Recently Accessed</h3>
-                <div class="recent-item">
-                    <i class="fa-solid fa-file-code"></i>
-                    <div><h4>Assignment_C_Array.pdf</h4><p>Opened 2h ago</p></div>
-                </div>
-                <div class="recent-item">
-                    <i class="fa-solid fa-brain"></i>
-                    <div><h4>AI_Logic_Masterclass.mp4</h4><p>Watched 5h ago</p></div>
-                </div>
-            </div>
+        <!-- 🗂️ GRID ARCHITECTURE & CARDS -->
+        <div class="courses-grid">
             
-            <div class="widget" style="border-left: 4px solid #00ff66;">
-                <h3>Prof. Ami (AI Assistant)</h3>
-                <input type="text" placeholder="Initiate chat..." style="width: 100%; padding: 12px; background: #000; border: 1px solid #1a73e8; border-radius: 8px; color: #fff; font-size: 13px; outline: none;">
+            <!-- Card 1 -->
+            <div class="course-card">
+                <div class="card-img-canvas-box" id="mathWrapper">
+                    <canvas id="discreteMathCanvas"></canvas>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Math Magic with AI</div>
+                    <div class="tech-badge">LOGIC ENGINE V1.0</div>
+                    <div class="tracker-box">
+                        <div class="tracker-text"><span>PROGRESS</span><span>100%</span></div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div>
+                    </div>
+                    <a href="#" class="btn-view">OPEN MODULE</a>
+                </div>
             </div>
+
+            <!-- Card 2 -->
+            <div class="course-card">
+                <div class="card-img-canvas-box" id="voiceWrapper">
+                    <canvas id="voiceSynthCanvas"></canvas>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">English Mouth Driven with AI</div>
+                    <div class="tech-badge">VOICE SYNTHESIS</div>
+                    <div class="tracker-box">
+                        <div class="tracker-text"><span>PROGRESS</span><span>98%</span></div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 98%;"></div></div>
+                    </div>
+                    <a href="#" class="btn-view">OPEN MODULE</a>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="course-card">
+                <div class="card-img-canvas-box" id="aiWrapper">
+                    <canvas id="aiNeuralCanvas"></canvas>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Artificial Intelligence</div>
+                    <div class="tech-badge">NEURAL NETWORKS</div>
+                    <div class="tracker-box">
+                        <div class="tracker-text"><span>PROGRESS</span><span>100%</span></div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div>
+                    </div>
+                    <a href="#" class="btn-view">OPEN MODULE</a>
+                </div>
+            </div>
+
+            <!-- Card 4 (Upgraded Premium Layout from Mockup) -->
+            <div class="course-card">
+                <div class="card-img-canvas-box" id="uxuiWrapper">
+                    <canvas id="uxuiInterfaceCanvas"></canvas>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">UX/UI Design with Cloud AI ML</div>
+                    <div class="tech-badge">Interface Analytics</div>
+                    <div class="tracker-box">
+                        <div class="tracker-text"><span>PROGRESS</span><span>85%</span></div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <a href="#" class="btn-view">OPEN MODULE</a>
+                </div>
+            </div>
+
         </div>
-    </div>
+    </main>
 
+    <!-- ⚡ HIGH PERFORMANCE ENGINES -->
     <script>
-        // --- MATRIX RAIN BACKGROUND ---
-        const canvas = document.getElementById('coderRain');
-        const ctx = canvas.getContext('2d');
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        resize();
-        window.onresize = resize;
-        const chars = "01010101ABCDEF<>/[]{}";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-        function drawMatrix() {
-            ctx.fillStyle = "rgba(2, 2, 4, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#00ff66"; ctx.font = fontSize + "px monospace";
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(drawMatrix, 35);
-
-        // --- 🧠 MATH MAGIC INTERACTIVE CANVAS ENGINE ---
-        const mathCanvas = document.getElementById('mindPalaceMathCanvas');
+        // --- Card 1 Engine ---
+        const mathCanvas = document.getElementById('discreteMathCanvas');
         const mCtx = mathCanvas.getContext('2d');
-        const wrapper = document.getElementById('canvasWrapper');
-        let mouse = { x: null, y: null, active: false };
-
+        const mathWrapper = document.getElementById('mathWrapper');
+        let nodes = [];
         function setupMathCanvas() {
-            mathCanvas.width = wrapper.clientWidth || 300;
-            mathCanvas.height = wrapper.clientHeight || 140;
+            mathCanvas.width = mathWrapper.clientWidth || 300;
+            mathCanvas.height = mathWrapper.clientHeight || 140;
         }
         setupMathCanvas();
-
-        wrapper.addEventListener('mousemove', (e) => {
-            const rect = mathCanvas.getBoundingClientRect();
-            mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top; mouse.active = true;
-        });
-        wrapper.addEventListener('mouseleave', () => { mouse.active = false; });
-
-        const formulas = ["f(x)=σ(Wᵀx)", "E = mc²", "∫ e^{-x²}dx", "∇ × E", "∑ xᵢ", "πr²", "λ = v/f"];
-        const nodes = [];
-        for (let i = 0; i < 28; i++) {
-            nodes.push({
-                x: Math.random() * 300, y: Math.random() * 140,
-                baseVx: (Math.random() - 0.5) * 0.7, baseVy: (Math.random() - 0.5) * 0.7,
-                vx: 0, vy: 0, formula: formulas[Math.floor(Math.random() * formulas.length)], size: Math.random() * 1.5 + 1
-            });
+        for (let i = 0; i < 15; i++) {
+            nodes.push({ x: Math.random() * 300, y: Math.random() * 140, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5 });
         }
-
         function drawMindPalace() {
-            mCtx.fillStyle = '#01050f'; mCtx.fillRect(0, 0, mathCanvas.width, mathCanvas.height);
-            mCtx.strokeStyle = 'rgba(26, 115, 232, 0.07)'; mCtx.lineWidth = 1;
-            for(let x = 0; x < mathCanvas.width; x += 14) { mCtx.beginPath(); mCtx.moveTo(x, 0); mCtx.lineTo(x, mathCanvas.height); mCtx.stroke(); }
-            for(let y = 0; y < mathCanvas.height; y += 14) { mCtx.beginPath(); mCtx.moveTo(0, y); mCtx.lineTo(mathCanvas.width, y); mCtx.stroke(); }
-
-            mCtx.fillStyle = 'rgba(0, 255, 102, 0.02)'; mCtx.beginPath(); mCtx.arc(45, mathCanvas.height/2, 42, 0, Math.PI*2); mCtx.fill();
-            mCtx.strokeStyle = 'rgba(0, 255, 102, 0.25)'; mCtx.stroke();
-
-            let pulseRadius = 14 + Math.sin(Date.now() * 0.006) * 4;
-            let gradient = mCtx.createRadialGradient(45, mathCanvas.height/2, 2, 45, mathCanvas.height/2, pulseRadius);
-            gradient.addColorStop(0, '#00ff66'); gradient.addColorStop(0.3, 'rgba(56, 189, 248, 0.6)'); gradient.addColorStop(1, 'transparent');
-            mCtx.fillStyle = gradient; mCtx.beginPath(); mCtx.arc(45, mathCanvas.height/2, pulseRadius, 0, Math.PI*2); mCtx.fill();
-
-            nodes.forEach((node, i) => {
-                node.vx = node.baseVx; node.vy = node.baseVy;
-                if (mouse.active) {
-                    let dx = mouse.x - node.x; let dy = mouse.y - node.y; let dist = Math.hypot(dx, dy);
-                    if (dist < 75) { let force = (75 - dist) / 75; node.vx += (dx / dist) * force * 1.5; node.vy += (dy / dist) * force * 1.5; }
-                }
-                node.x += node.vx; node.y += node.vy;
-                if (node.x < 0 || node.x > mathCanvas.width) node.baseVx *= -1;
-                if (node.y < 0 || node.y > mathCanvas.height) node.baseVy *= -1;
-
-                nodes.forEach((target, j) => {
-                    if (i === j) return;
-                    let lineDist = Math.hypot(node.x - target.x, node.y - target.y);
-                    if (lineDist < 50) { mCtx.strokeStyle = `rgba(56, 189, 248, ${0.18 * (1 - lineDist/50)})`; mCtx.beginPath(); mCtx.moveTo(node.x, node.y); mCtx.lineTo(target.x, target.y); mCtx.stroke(); }
-                });
-
-                let distanceToCore = Math.hypot(node.x - 45, node.y - (mathCanvas.height/2));
-                if (distanceToCore < 100) { mCtx.strokeStyle = `rgba(0, 255, 102, ${0.1 * (1 - distanceToCore/100)})`; mCtx.beginPath(); mCtx.moveTo(45, mathCanvas.height/2); mCtx.lineTo(node.x, node.y); mCtx.stroke(); }
-
-                if (i % 4 === 0) { mCtx.fillStyle = 'rgba(56, 189, 248, 0.9)'; mCtx.font = 'bold 9px "Space Grotesk", sans-serif'; mCtx.fillText(node.formula, node.x, node.y + Math.sin(Date.now() * 0.004 + i) * 2.5); }
-                else { mCtx.fillStyle = mouse.active && Math.hypot(mouse.x - node.x, mouse.y - node.y) < 75 ? '#00ff66' : 'rgba(0, 255, 102, 0.6)'; mCtx.beginPath(); mCtx.arc(node.x, node.y, node.size, 0, Math.PI*2); mCtx.fill(); }
+            mCtx.fillStyle = '#01040a'; mCtx.fillRect(0, 0, mathCanvas.width, mathCanvas.height);
+            mCtx.fillStyle = '#00ff66'; mCtx.strokeStyle = 'rgba(0, 255, 102, 0.15)';
+            nodes.forEach(n => {
+                n.x += n.vx; n.y += n.vy;
+                if(n.x < 0 || n.x > mathCanvas.width) n.vx *= -1;
+                if(n.y < 0 || n.y > mathCanvas.height) n.vy *= -1;
+                mCtx.beginPath(); mCtx.arc(n.x, n.y, 2, 0, Math.PI*2); mCtx.fill();
             });
             requestAnimationFrame(drawMindPalace);
         }
 
-        // --- 🎙️ ENGLISH MOUTH DRIVEN WITH AI ENGINE ---
+        // --- Card 2 Engine ---
         const voiceCanvas = document.getElementById('voiceSynthCanvas');
         const vCtx = voiceCanvas.getContext('2d');
         const voiceWrapper = document.getElementById('voiceWrapper');
-        let voiceMouse = { x: null, y: null, active: false };
-
         function setupVoiceCanvas() {
             voiceCanvas.width = voiceWrapper.clientWidth || 300;
             voiceCanvas.height = voiceWrapper.clientHeight || 140;
         }
         setupVoiceCanvas();
-
-        voiceWrapper.addEventListener('mousemove', (e) => {
-            const rect = voiceCanvas.getBoundingClientRect();
-            voiceMouse.x = e.clientX - rect.left; voiceMouse.y = e.clientY - rect.top; voiceMouse.active = true;
-        });
-        voiceWrapper.addEventListener('mouseleave', () => { voiceMouse.active = false; });
-
-        const abcdTokens = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        const abcdParticles = [];
-        
-        for (let i = 0; i < 45; i++) {
-            let radiusDist = Math.random() * 45 + 25;
-            abcdParticles.push({
-                char: abcdTokens[Math.floor(Math.random() * abcdTokens.length)],
-                angle: Math.random() * Math.PI * 2,
-                orbitRadius: radiusDist,
-                baseOrbit: radiusDist,
-                rotSpeed: (Math.random() * 0.015 + 0.005) * (Math.random() > 0.5 ? 1 : -1),
-                opacity: Math.random() * 0.5 + 0.3,
-                fontSize: Math.floor(Math.random() * 3) + 9
-            });
+        let vAudioOffset = 0;
+        function drawVoiceSynthEngine() {
+            vCtx.fillStyle = '#01040a'; vCtx.fillRect(0, 0, voiceCanvas.width, voiceCanvas.height);
+            vAudioOffset += 0.05;
+            vCtx.strokeStyle = '#38bdf8'; vCtx.lineWidth = 1.5;
+            vCtx.beginPath();
+            for(let i=0; i<voiceCanvas.width; i++) {
+                let y = voiceCanvas.height/2 + Math.sin(i*0.03 + vAudioOffset) * 20 * Math.sin(i*0.01);
+                if(i===0) vCtx.moveTo(i, y); else vCtx.lineTo(i, y);
+            }
+            vCtx.stroke();
+            requestAnimationFrame(drawVoiceSynthEngine);
         }
 
-        function drawUxuiPortfolioEngine() {
-    // 1. Dark Futuristic Workspace Background
-    uxCtx.fillStyle = '#0b0f19'; 
-    uxCtx.fillRect(0, 0, uxuiCanvas.width, uxuiCanvas.height);
-    
-    let w = uxuiCanvas.width;
-    let h = uxuiCanvas.height;
-    let time = Date.now() * 0.0015;
-
-    // 2. High-Tech Grid & Perspective Accent
-    uxCtx.strokeStyle = 'rgba(0, 245, 255, 0.03)';
-    uxCtx.lineWidth = 0.5;
-    for(let g = 0; g < w; g += 15) {
-        uxCtx.beginPath(); uxCtx.moveTo(g, 0); uxCtx.lineTo(g, h); uxCtx.stroke();
-    }
-
-    // 3. Left Side: Mobile UI Wireframe (As seen in mockup)
-    let phoneX = 25, phoneY = 20, phoneW = 55, phoneH = 110;
-    uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
-    uxCtx.lineWidth = 1.5;
-    uxCtx.strokeRect(phoneX, phoneY, phoneW, phoneH); // Phone body
-    
-    // UI elements inside phone
-    uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
-    uxCtx.strokeRect(phoneX + 5, phoneY + 8, phoneW - 10, 15); // Header wireframe
-    uxCtx.fillStyle = 'rgba(0, 245, 255, 0.1)';
-    uxCtx.fillRect(phoneX + 5, phoneY + 30, phoneW - 10, 35); // Main Banner Card
-    
-    // Small profile circle inside phone banner
-    uxCtx.fillStyle = 'rgba(0, 245, 255, 0.3)';
-    uxCtx.beginPath(); uxCtx.arc(phoneX + phoneW/2, phoneY + 48, 8, 0, Math.PI*2); uxCtx.fill();
-    
-    // Toggle switches / buttons in phone
-    uxCtx.fillStyle = 'rgba(236, 72, 153, 0.4)'; // Pink/Magenta UI Accent
-    uxCtx.fillRect(phoneX + 8, phoneY + 75, 12, 6);
-    uxCtx.fillStyle = 'rgba(56, 189, 248, 0.4)';
-    uxCtx.fillRect(phoneX + 25, phoneY + 75, 22, 6);
-    uxCtx.fillRect(phoneX + 8, phoneY + 88, 39, 6);
-
-    // 4. Center: Main Core UI/UX Interactive Hex/Circle Hub
-    let cx = w / 2 + 5, cy = h / 2;
-    
-    // Rotating HUD Ring
-    uxCtx.strokeStyle = 'rgba(236, 72, 153, 0.25)';
-    uxCtx.lineWidth = 1;
-    uxCtx.setLineDash([5, 5]);
-    uxCtx.beginPath(); uxCtx.arc(cx, cy, 32, time, time + Math.PI * 1.5); uxCtx.stroke();
-    uxCtx.setLineDash([]); // Reset dash
-
-    // Inner Glowing Core
-    let coreGlow = Math.sin(time * 2) * 3 + 22;
-    uxCtx.strokeStyle = 'rgba(0, 245, 255, 0.4)';
-    uxCtx.beginPath(); uxCtx.arc(cx, cy, coreGlow, 0, Math.PI * 2); uxCtx.stroke();
-
-    // Central Typography Branding
-    uxCtx.font = '900 13px "Orbitron", sans-serif';
-    uxCtx.fillStyle = '#00f5ff';
-    uxCtx.shadowColor = 'rgba(0, 245, 255, 0.6)'; uxCtx.shadowBlur = 6;
-    uxCtx.fillText("UI", cx - 22, cy + 5);
-    
-    uxCtx.fillStyle = '#ec4899'; // Premium Mockup Pink
-    uxCtx.shadowColor = 'rgba(236, 72, 153, 0.6)';
-    uxCtx.fillText("UX", cx + 4, cy + 5);
-    uxCtx.shadowBlur = 0; // Reset blur
-
-    // 5. Right Side: Floating Glass Dashboard Analytics Panel
-    let dashX = w - 85, dashY = 25, dashW = 65, dashH = 95;
-    uxCtx.fillStyle = 'rgba(11, 15, 25, 0.6)';
-    uxCtx.strokeStyle = 'rgba(0, 245, 255, 0.2)';
-    uxCtx.lineWidth = 1;
-    uxCtx.strokeRect(dashX, dashY, dashW, dashH);
-    
-    // Header Line
-    uxCtx.fillStyle = 'rgba(0, 245, 255, 0.25)';
-    uxCtx.fillRect(dashX + 6, dashY + 8, dashW - 12, 4);
-    
-    // Analytics Radial Progress Tracker (Mini Ring)
-    uxCtx.strokeStyle = '#ec4899';
-    uxCtx.lineWidth = 2;
-    uxCtx.beginPath(); uxCtx.arc(dashX + 20, dashY + 32, 10, -Math.PI/2, Math.PI * 0.7); uxCtx.stroke();
-    uxCtx.font = '800 7px sans-serif'; uxCtx.fillStyle = '#ffffff';
-    uxCtx.fillText("72%", dashX + 14, dashY + 35);
-
-    // Multi-Layer Data Stats (Horizontal bars)
-    uxCtx.fillStyle = 'rgba(56, 189, 248, 0.3)';
-    uxCtx.fillRect(dashX + 6, dashY + 54, dashW - 12, 6); // Total users bar
-    
-    // Equalizer Grid Component
-    let eqBars = [12, 26, 18, 30];
-    eqBars.forEach((val, i) => {
-        let dynamicH = val + Math.sin(time * 3 + i) * 5;
-        if (uxMouse.active) dynamicH += 4;
-        uxCtx.fillStyle = '#00f5ff';
-        uxCtx.fillRect(dashX + 8 + (i * 12), dashY + 88 - dynamicH, 7, dynamicH);
-    });
-
-    // 6. Interactive Laser Scanning Target
-    if (uxMouse.active) {
-        uxCtx.strokeStyle = 'rgba(236, 72, 153, 0.3)';
-        uxCtx.lineWidth = 0.5;
-        uxCtx.beginPath(); uxCtx.moveTo(0, uxMouse.y); uxCtx.lineTo(w, uxMouse.y); uxCtx.stroke();
-        uxCtx.beginPath(); uxCtx.moveTo(uxMouse.x, 0); uxCtx.lineTo(uxMouse.x, h); uxCtx.stroke();
-        
-        uxCtx.fillStyle = 'rgba(0, 245, 255, 0.05)';
-        uxCtx.beginPath(); uxCtx.arc(uxMouse.x, uxMouse.y, 15, 0, Math.PI*2); uxCtx.fill();
-    }
-
-    requestAnimationFrame(drawUxuiPortfolioEngine);
-}
-
-        // --- 🤖 ARTIFICIAL INTELLIGENCE NEURAL NETWORK ENGINE ---
-        const aiCanvas = document.getElementById('aiNeuralNetworkCanvas');
+        // --- Card 3 Engine ---
+        const aiCanvas = document.getElementById('aiNeuralCanvas');
         const aiCtx = aiCanvas.getContext('2d');
-        const aiWrapper = document.getElementById('aiNetworkWrapper');
-        let aiMouse = { x: null, y: null, active: false };
-
+        const aiWrapper = document.getElementById('aiWrapper');
         function setupAiCanvas() {
             aiCanvas.width = aiWrapper.clientWidth || 300;
             aiCanvas.height = aiWrapper.clientHeight || 140;
         }
         setupAiCanvas();
-
-        aiWrapper.addEventListener('mousemove', (e) => {
-            const rect = aiCanvas.getBoundingClientRect();
-            aiMouse.x = e.clientX - rect.left; aiMouse.y = e.clientY - rect.top; aiMouse.active = true;
-        });
-        aiWrapper.addEventListener('mouseleave', () => { aiMouse.active = false; });
-
-        // Build Multi-layered Connected Neural Network System
-        const aiNodes = [];
-        const layers = [4, 6, 6, 4]; // Neural layers structure
-        const layerSpacing = 300 / (layers.length + 1);
-
-        function initAiNodes() {
-            aiNodes.length = 0;
-            layers.forEach((count, layerIndex) => {
-                const x = (layerIndex + 1) * (aiCanvas.width / (layers.length + 1));
-                const verticalSpacing = aiCanvas.height / (count + 1);
-                for (let i = 0; i < count; i++) {
-                    aiNodes.push({
-                        x: x + (Math.random() - 0.5) * 8,
-                        y: (i + 1) * verticalSpacing + (Math.random() - 0.5) * 8,
-                        baseX: x,
-                        baseY: (i + 1) * verticalSpacing,
-                        layer: layerIndex,
-                        pulsePhase: Math.random() * Math.PI * 2,
-                        pulseSpeed: 0.03 + Math.random() * 0.04
-                    });
-                }
-            });
+        let aiNodes = [];
+        for(let i=0; i<4; i++) {
+            for(let j=0; j<4; j++) aiNodes.push({x: 50 + i*60, y: 25 + j*30});
         }
-        initAiNodes();
-
         function drawAiNeuralEngine() {
-            aiCtx.fillStyle = '#02040a'; aiCtx.fillRect(0, 0, aiCanvas.width, aiCanvas.height);
-
-            // Draw synaptic signal pathways
-            aiNodes.forEach((node) => {
-                node.pulsePhase += node.pulseSpeed;
-                
-                // Mouse magnetism pull effect
-                if (aiMouse.active) {
-                    let dx = aiMouse.x - node.x; let dy = aiMouse.y - node.y; let dist = Math.hypot(dx, dy);
-                    if (dist < 80) {
-                        let force = (80 - dist) / 80;
-                        node.x += (dx / dist) * force * 2; node.y += (dy / dist) * force * 2;
-                    }
-                } else {
-                    node.x += (node.baseX - node.x) * 0.08; node.y += (node.baseY - node.y) * 0.08;
-                }
-
-                // Connect forward synapses lines
-                aiNodes.forEach((target) => {
-                    if (target.layer === node.layer + 1) {
-                        let distance = Math.hypot(target.x - node.x, target.y - node.y);
-                        if (distance < 85) {
-                            let alpha = 0.15 * (1 - distance / 85);
-                            aiCtx.strokeStyle = `rgba(0, 255, 102, ${alpha})`;
-                            aiCtx.lineWidth = 1;
-                            aiCtx.beginPath(); aiCtx.moveTo(node.x, node.y); aiCtx.lineTo(target.x, target.y); aiCtx.stroke();
-                            
-                            // Synaptic data impulse animation along lines
-                            let travelPercent = (Date.now() * 0.0015 + node.pulsePhase) % 1;
-                            let pulseX = node.x + (target.x - node.x) * travelPercent;
-                            let pulseY = node.y + (target.y - node.y) * travelPercent;
-                            aiCtx.fillStyle = 'rgba(56, 189, 248, 0.6)';
-                            aiCtx.beginPath(); aiCtx.arc(pulseX, pulseY, 1.5, 0, Math.PI * 2); aiCtx.fill();
-                        }
+            aiCtx.fillStyle = '#01040a'; aiCtx.fillRect(0, 0, aiCanvas.width, aiCanvas.height);
+            aiCtx.strokeStyle = 'rgba(56, 189, 248, 0.1)'; aiCtx.lineWidth = 0.5;
+            aiNodes.forEach((n, idx) => {
+                aiNodes.forEach((t, tIdx) => {
+                    if(t.x > n.x && t.x - n.x < 70) {
+                        aiCtx.beginPath(); aiCtx.moveTo(n.x, n.y); aiCtx.lineTo(t.x, t.y); aiCtx.stroke();
                     }
                 });
-
-                // Render individual neuron nodes
-                let sizeRad = 2.5 + Math.sin(node.pulsePhase) * 1;
-                let isHovered = aiMouse.active && Math.hypot(aiMouse.x - node.x, aiMouse.y - node.y) < 40;
-                
-                aiCtx.fillStyle = isHovered ? '#00ff66' : 'rgba(56, 189, 248, 0.85)';
-                aiCtx.beginPath(); aiCtx.arc(node.x, node.y, sizeRad, 0, Math.PI * 2); aiCtx.fill();
-                
-                if (isHovered || node.pulsePhase % 5 < 0.2) {
-                    aiCtx.strokeStyle = 'rgba(0, 255, 102, 0.4)'; aiCtx.lineWidth = 0.5;
-                    aiCtx.beginPath(); aiCtx.arc(node.x, node.y, sizeRad + 4, 0, Math.PI * 2); aiCtx.stroke();
-                }
+                aiCtx.fillStyle = '#38bdf8'; aiCtx.beginPath(); aiCtx.arc(n.x, n.y, 2.5, 0, Math.PI*2); aiCtx.fill();
             });
-
             requestAnimationFrame(drawAiNeuralEngine);
         }
-        // --- 📊 UX/UI DESIGN WITH CLOUD AI ML ENGINE (SHUTTERSTOCK MOCKUP REPLICA) ---
-const uxuiCanvas = document.getElementById('uxuiInterfaceCanvas');
-const uxCtx = uxuiCanvas.getContext('2d');
-const uxuiWrapper = document.getElementById('uxuiWrapper');
-let uxMouse = { x: null, y: null, active: false };
 
-function setupUxuiCanvas() {
-    uxuiCanvas.width = uxuiWrapper.clientWidth || 300;
-    uxuiCanvas.height = uxuiWrapper.clientHeight || 150;
-}
-setupUxuiCanvas();
+        // --- Card 4 Engine (Premium Layout Replica) ---
+        const uxuiCanvas = document.getElementById('uxuiInterfaceCanvas');
+        const uxCtx = uxuiCanvas.getContext('2d');
+        const uxuiWrapper = document.getElementById('uxuiWrapper');
+        let uxMouse = { x: null, y: null, active: false };
 
-uxuiWrapper.addEventListener('mousemove', (e) => {
-    const rect = uxuiCanvas.getBoundingClientRect();
-    uxMouse.x = e.clientX - rect.left; 
-    uxMouse.y = e.clientY - rect.top; 
-    uxMouse.active = true;
-});
-uxuiWrapper.addEventListener('mouseleave', () => { uxMouse.active = false; });
-
-const uiGlowElements = [];
-for (let i = 0; i < 20; i++) {
-    uiGlowElements.push({
-        x: Math.random() * 300, y: Math.random() * 150, size: Math.random() * 2 + 1,
-        speedY: -(Math.random() * 0.2 + 0.1), alpha: Math.random() * 0.5 + 0.2
-    });
-}
-
-function drawUxuiPortfolioEngine() {
-    // Premium dark sci-fi background
-    uxCtx.fillStyle = '#020617'; 
-    uxCtx.fillRect(0, 0, uxuiCanvas.width, uxuiCanvas.height);
-    
-    let w = uxuiCanvas.width;
-    let h = uxuiCanvas.height;
-    let time = Date.now() * 0.002;
-
-    // 1. Cyberpunk Grid Layer with subtle animation
-    uxCtx.strokeStyle = 'rgba(6, 182, 212, 0.04)';
-    uxCtx.lineWidth = 1;
-    for(let g = 0; g < w; g += 15) {
-        uxCtx.beginPath(); uxCtx.moveTo(g, 0); uxCtx.lineTo(g, h); uxCtx.stroke();
-    }
-    for(let g = 0; g < h; g += 15) {
-        uxCtx.beginPath(); uxCtx.moveTo(0, g); uxCtx.lineTo(w, g); uxCtx.stroke();
-    }
-
-    // 2. Central Target Reticle & Circular HUD (Mockup Core)
-    uxCtx.shadowBlur = 0;
-    uxCtx.strokeStyle = 'rgba(6, 182, 212, 0.15)';
-    uxCtx.lineWidth = 1;
-    
-    // Outer dashed tech circle
-    uxCtx.setLineDash([4, 8]);
-    uxCtx.beginPath(); uxCtx.arc(w / 2, h / 2, 45, 0, Math.PI * 2); uxCtx.stroke();
-    
-    // Inner solid precision circle
-    uxCtx.setLineDash([]);
-    uxCtx.strokeStyle = 'rgba(0, 245, 255, 0.25)';
-    uxCtx.beginPath(); uxCtx.arc(w / 2, h / 2, 35, time, time + Math.PI * 1.2); uxCtx.stroke();
-
-    // Center Crosshair lines
-    uxCtx.strokeStyle = 'rgba(6, 182, 212, 0.3)';
-    uxCtx.beginPath(); uxCtx.moveTo(w/2 - 5, h/2); uxCtx.lineTo(w/2 + 5, h/2); uxCtx.stroke();
-    uxCtx.beginPath(); uxCtx.moveTo(w/2, h/2 - 5); uxCtx.lineTo(w/2, h/2 + 5); uxCtx.stroke();
-
-    // 3. Glowing Bold UI/UX Text Branding
-    uxCtx.font = '900 15px "Orbitron", sans-serif';
-    uxCtx.shadowColor = 'rgba(6, 182, 212, 0.8)';
-    uxCtx.shadowBlur = 8;
-    uxCtx.fillStyle = '#06b6d4';
-    uxCtx.fillText("UI", w / 2 - 28, h / 2 + 5);
-    
-    uxCtx.shadowColor = 'rgba(16, 185, 129, 0.8)';
-    uxCtx.fillStyle = '#10b981';
-    uxCtx.fillText("UX", w / 2 + 6, h / 2 + 5);
-    uxCtx.shadowBlur = 0; // Reset blur
-
-    // 4. Left Sidebar: Tech Interface Nodes & Data Blocks
-    uxCtx.strokeStyle = 'rgba(6, 182, 212, 0.2)';
-    uxCtx.strokeRect(25, 25, 30, 35); // Profile Box Mock
-    uxCtx.fillStyle = 'rgba(6, 182, 212, 0.1)';
-    uxCtx.fillRect(28, 28, 24, 12);
-    
-    // Audio/Data waves mockup on left
-    uxCtx.fillStyle = 'rgba(6, 182, 212, 0.4)';
-    for(let i = 0; i < 4; i++) {
-        let barH = 10 + Math.sin(time + i) * 6;
-        uxCtx.fillRect(25 + (i * 8), 75, 5, barH);
-    }
-
-    // 5. Right Sidebar: Futuristic Analytics Charts (Shutterstock Style)
-    let chartX = w - 65;
-    uxCtx.strokeStyle = 'rgba(16, 185, 129, 0.2)';
-    uxCtx.strokeRect(chartX, 25, 45, 50); // Container
-    
-    // Diagonal scanning line inside chart
-    uxCtx.strokeStyle = 'rgba(16, 185, 129, 0.1)';
-    uxCtx.beginPath(); uxCtx.moveTo(chartX, 25); uxCtx.lineTo(chartX + 45, 75); uxCtx.stroke();
-
-    // Equalizer style tech chart bars
-    let mockMetrics = [15, 32, 22, 40, 18];
-    mockMetrics.forEach((val, idx) => {
-        // Continuous animation loop for realism
-        let dynamicVal = val + Math.sin(time * 2 + idx) * 6;
-        if (uxMouse.active) dynamicVal += 5; // Interaction shift
-        
-        uxCtx.fillStyle = `rgba(16, 185, 129, ${0.4 + (idx*0.1)})`;
-        uxCtx.fillRect(chartX + 4 + (idx * 8), 70 - dynamicVal, 5, dynamicVal);
-    });
-
-    // 6. Floating Cyber Matrix Particles
-    uiGlowElements.forEach((el) => {
-        el.y += el.speedY;
-        if (el.y < 15) {
-            el.y = h - 15;
-            el.x = Math.random() * (w - 20) + 10;
+        function setupUxuiCanvas() {
+            uxuiCanvas.width = uxuiWrapper.clientWidth || 300;
+            uxuiCanvas.height = uxuiWrapper.clientHeight || 140;
         }
-        uxCtx.shadowColor = '#10b981';
-        uxCtx.shadowBlur = 4;
-        uxCtx.fillStyle = `rgba(16, 185, 129, ${el.alpha})`;
-        uxCtx.beginPath(); uxCtx.arc(el.x, el.y, el.size, 0, Math.PI * 2); uxCtx.fill();
-    });
-    uxCtx.shadowBlur = 0;
+        setupUxuiCanvas();
 
-    // Interactive Mouse HUD Tracker
-    if (uxMouse.active) {
-        uxCtx.strokeStyle = '#06b6d4';
-        uxCtx.lineWidth = 0.5;
-        // Drawing crosshair lines tracking the cursor
-        uxCtx.beginPath(); uxCtx.moveTo(0, uxMouse.y); uxCtx.lineTo(w, uxMouse.y); uxCtx.stroke();
-        uxCtx.beginPath(); uxCtx.moveTo(uxMouse.x, 0); uxCtx.lineTo(uxMouse.x, h); uxCtx.stroke();
-        
-        // Ring around cursor
-        uxCtx.strokeStyle = '#10b981';
-        uxCtx.beginPath(); uxCtx.arc(uxMouse.x, uxMouse.y, 12, 0, Math.PI * 2); uxCtx.stroke();
-    }
+        uxuiWrapper.addEventListener('mousemove', (e) => {
+            const rect = uxuiCanvas.getBoundingClientRect();
+            uxMouse.x = e.clientX - rect.left; uxMouse.y = e.clientY - rect.top; uxMouse.active = true;
+        });
+        uxuiWrapper.addEventListener('mouseleave', () => { uxMouse.active = false; });
 
-    requestAnimationFrame(drawUxuiPortfolioEngine);
-}
-        // Initialize all stable rendering engines together
-       // Initialize all stable rendering engines together
-setTimeout(() => {
-    setupMathCanvas(); 
-    setupVoiceCanvas(); 
-    setupAiCanvas(); 
-    setupUxuiCanvas(); // <- Yeh line honi chahiye
-    
-    initAiNodes();
-    
-    drawMindPalace(); 
-    drawVoiceSynthEngine(); 
-    drawAiNeuralEngine(); 
-    drawUxuiPortfolioEngine(); // <- Aur yeh line call honi chahiye
-}, 150);
-       window.addEventListener('resize', () => {
-    setupMathCanvas();
-    setupVoiceCanvas();
-    setupAiCanvas();
-    setupUxuiCanvas(); // <- Yeh line yahan bhi jodni hai
-});
+        function drawUxuiPortfolioEngine() {
+            uxCtx.fillStyle = '#0b0f19'; uxCtx.fillRect(0, 0, uxuiCanvas.width, uxuiCanvas.height);
+            let w = uxuiCanvas.width, h = uxuiCanvas.height;
+            let time = Date.now() * 0.0015;
+
+            // 1. Tech Grid Background
+            uxCtx.strokeStyle = 'rgba(0, 245, 255, 0.03)'; uxCtx.lineWidth = 0.5;
+            for(let g = 0; g < w; g += 15) { uxCtx.beginPath(); uxCtx.moveTo(g, 0); uxCtx.lineTo(g, h); uxCtx.stroke(); }
+
+            // 2. Left Side: Mobile UI Wireframe
+            let phoneX = 25, phoneY = 15, phoneW = 50, phoneH = 110;
+            uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.3)'; uxCtx.lineWidth = 1.5;
+            uxCtx.strokeRect(phoneX, phoneY, phoneW, phoneH);
+            uxCtx.fillStyle = 'rgba(0, 245, 255, 0.08)'; uxCtx.fillRect(phoneX + 5, phoneY + 25, phoneW - 10, 30);
+            uxCtx.fillStyle = 'rgba(236, 72, 153, 0.4)'; uxCtx.fillRect(phoneX + 8, phoneY + 65, 12, 6);
+            uxCtx.fillStyle = 'rgba(56, 189, 248, 0.4)'; uxCtx.fillRect(phoneX + 25, phoneY + 65, 18, 6);
+
+            // 3. Center: Main Core UI/UX Interactive Hub
+            let cx = w / 2 + 5, cy = h / 2;
+            uxCtx.strokeStyle = 'rgba(236, 72, 153, 0.25)'; uxCtx.setLineDash([4, 4]);
+            uxCtx.beginPath(); uxCtx.arc(cx, cy, 30, time, time + Math.PI * 1.5); uxCtx.stroke();
+            uxCtx.setLineDash([]);
+            uxCtx.strokeStyle = 'rgba(0, 245, 255, 0.4)';
+            uxCtx.beginPath(); uxCtx.arc(cx, cy, 22 + Math.sin(time*2)*2, 0, Math.PI * 2); uxCtx.stroke();
+
+            uxCtx.font = '900 12px "Orbitron", sans-serif'; uxCtx.fillStyle = '#00f5ff';
+            uxCtx.fillText("UI", cx - 20, cy + 4);
+            uxCtx.fillStyle = '#ec4899'; uxCtx.fillText("UX", cx + 4, cy + 4);
+
+            // 4. Right Side: Floating Glass Dashboard Analytics Panel
+            let dashX = w - 80, dashY = 20, dashW = 60, dashH = 95;
+            uxCtx.strokeStyle = 'rgba(0, 245, 255, 0.2)'; uxCtx.strokeRect(dashX, dashY, dashW, dashH);
+            uxCtx.strokeStyle = '#ec4899'; uxCtx.lineWidth = 2;
+            uxCtx.beginPath(); uxCtx.arc(dashX + 18, dashY + 28, 8, -Math.PI/2, Math.PI * 0.7); uxCtx.stroke();
+
+            let eqBars = [10, 22, 15, 28];
+            eqBars.forEach((val, i) => {
+                let dynamicH = val + Math.sin(time * 3 + i) * 4;
+                if (uxMouse.active) dynamicH += 3;
+                uxCtx.fillStyle = '#00f5ff';
+                uxCtx.fillRect(dashX + 6 + (i * 12), dashY + 85 - dynamicH, 6, dynamicH);
+            });
+
+            // 5. Interactive Laser Scanning Target
+            if (uxMouse.active) {
+                uxCtx.strokeStyle = 'rgba(236, 72, 153, 0.2)'; uxCtx.lineWidth = 0.5;
+                uxCtx.beginPath(); uxCtx.moveTo(0, uxMouse.y); uxCtx.lineTo(w, uxMouse.y); uxCtx.stroke();
+                uxCtx.beginPath(); uxCtx.moveTo(uxMouse.x, 0); uxCtx.lineTo(uxMouse.x, h); uxCtx.stroke();
+            }
+            requestAnimationFrame(drawUxuiPortfolioEngine);
+        }
+
+        // --- 🚀 INITIALIZE SYSTEM ENGINES ---
+        setTimeout(() => {
+            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas(); setupUxuiCanvas();
+            drawMindPalace(); drawVoiceSynthEngine(); drawAiNeuralEngine(); drawUxuiPortfolioEngine();
+        }, 150);
+
+        window.addEventListener('resize', () => {
+            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas(); setupUxuiCanvas();
+        });
     </script>
 </body>
 </html>
