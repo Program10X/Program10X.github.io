@@ -93,15 +93,7 @@
             border-color: rgba(56, 189, 248, 0.3);
             box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
         }
-        .nav-links a.highlight {
-            color: #ffcc00; background: rgba(255, 204, 0, 0.06);
-            border-color: rgba(255, 204, 0, 0.25);
-        }
-        .nav-links a.highlight:hover {
-            background: rgba(255, 204, 0, 0.15); box-shadow: 0 0 20px rgba(255, 204, 0, 0.25);
-            color: #fff; border-color: #ffcc00;
-        }
-
+        
         .nav-right { display: flex; align-items: center; gap: 15px; flex-shrink: 0; margin-left: 15px; }
         .navbar .user-profile { display: flex; align-items: center; gap: 12px; }
         .navbar .user-profile span { display: none; } 
@@ -129,36 +121,6 @@
             font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 25px; 
             letter-spacing: 1px; background: linear-gradient(90deg, #fff, var(--text-muted));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
-        /* 🏫 CAMPUS HUB GRID */
-        .campus-hub {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .campus-btn {
-            background: rgba(255,255,255,0.02); 
-            padding: 16px; 
-            border-radius: 14px; 
-            text-decoration: none; 
-            color: #fff; 
-            text-align: center; 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(5px);
-        }
-        .campus-btn:hover {
-            background: rgba(56, 189, 248, 0.08);
-            border-color: rgba(56, 189, 248, 0.4);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.1);
-        }
-        .campus-btn i {
-            font-size: 22px;
-            margin-bottom: 8px;
-            display: block;
         }
         
         /* SELF-ADJUSTING AUTO GRID SYSTEM */
@@ -309,7 +271,7 @@
 
     <canvas id="coderRain"></canvas>
 
-    <!-- 🌐 NEW DYNAMIC NAVIGATION BAR -->
+    <!-- 🌐 NAVIGATION BAR -->
     <div class="navbar">
         <div class="nav-left">
             <!-- 🔗 Clickable Glowing Logo to reload/open Dashboard -->
@@ -318,7 +280,6 @@
             </a>
             
             <ul class="nav-links">
-                <li><a href="#digital-campus"><i class="fa-solid fa-graduation-cap"></i> Digital Campus Hub</a></li>
                 <li><a href="#dashboard" class="active"><i class="fa-solid fa-gauge-high"></i> Platform Updates</a></li>
                 <li><a href="#planner"><i class="fa-solid fa-calendar-days"></i> Strategic Planner</a></li>
             </ul>
@@ -334,30 +295,6 @@
 
     <div class="main-container">
         <div class="content-area">
-            
-            <!-- 🏫 CAMPUS HUB SECTION -->
-            <div id="digital-campus" class="widget" style="margin-bottom: 30px;">
-                <h3><i class="fa-solid fa-network-wired" style="color: #38bdf8;"></i> Campus Command Center</h3>
-                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 15px;">Access critical student tools and resources instantly.</p>
-                
-                <div class="campus-hub">
-                    <a href="#timetable" class="campus-btn">
-                        <i class="fa-solid fa-clock-seven" style="color: #38bdf8;"></i>
-                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">Class Routine</div>
-                        <div style="font-size: 10px; color: var(--text-muted);">Today's Schedule</div>
-                    </a>
-                    <a href="#resources" class="campus-btn">
-                        <i class="fa-solid fa-folder-open" style="color: #a855f7;"></i>
-                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">Study Material</div>
-                        <div style="font-size: 10px; color: var(--text-muted);">Notes & Resources</div>
-                    </a>
-                    <a href="#notices" class="campus-btn">
-                        <i class="fa-solid fa-circle-exclamation" style="color: #ec4899;"></i>
-                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">Platform Notices</div>
-                        <div style="font-size: 10px; color: var(--text-muted);">Important Updates</div>
-                    </a>
-                </div>
-            </div>
 
             <h2>Course overview</h2>
             <div class="courses-grid">
