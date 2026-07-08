@@ -437,36 +437,115 @@
             });
         }
 
-        function drawVoiceSynthEngine() {
-            vCtx.fillStyle = '#01040a'; vCtx.fillRect(0, 0, voiceCanvas.width, voiceCanvas.height);
-            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.04)'; vCtx.lineWidth = 1;
-            for(let x = 0; x < voiceCanvas.width; x += 15) { vCtx.beginPath(); vCtx.moveTo(x, 0); vCtx.lineTo(x, voiceCanvas.height); vCtx.stroke(); }
+        function drawUxuiPortfolioEngine() {
+    // 1. Dark Futuristic Workspace Background
+    uxCtx.fillStyle = '#0b0f19'; 
+    uxCtx.fillRect(0, 0, uxuiCanvas.width, uxuiCanvas.height);
+    
+    let w = uxuiCanvas.width;
+    let h = uxuiCanvas.height;
+    let time = Date.now() * 0.0015;
 
-            let midX = voiceCanvas.width / 2;
-            let midY = voiceCanvas.height / 2;
+    // 2. High-Tech Grid & Perspective Accent
+    uxCtx.strokeStyle = 'rgba(0, 245, 255, 0.03)';
+    uxCtx.lineWidth = 0.5;
+    for(let g = 0; g < w; g += 15) {
+        uxCtx.beginPath(); uxCtx.moveTo(g, 0); uxCtx.lineTo(g, h); uxCtx.stroke();
+    }
 
-            let pulseScale = 45 + Math.sin(Date.now() * 0.005) * 8;
-            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.12)'; vCtx.lineWidth = 1;
-            vCtx.beginPath(); vCtx.arc(midX, midY, pulseScale, 0, Math.PI * 2); vCtx.stroke();
-            vCtx.strokeStyle = 'rgba(0, 255, 102, 0.06)';
-            vCtx.beginPath(); vCtx.arc(midX, midY, pulseScale + 20, 0, Math.PI * 2); vCtx.stroke();
+    // 3. Left Side: Mobile UI Wireframe (As seen in mockup)
+    let phoneX = 25, phoneY = 20, phoneW = 55, phoneH = 110;
+    uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+    uxCtx.lineWidth = 1.5;
+    uxCtx.strokeRect(phoneX, phoneY, phoneW, phoneH); // Phone body
+    
+    // UI elements inside phone
+    uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+    uxCtx.strokeRect(phoneX + 5, phoneY + 8, phoneW - 10, 15); // Header wireframe
+    uxCtx.fillStyle = 'rgba(0, 245, 255, 0.1)';
+    uxCtx.fillRect(phoneX + 5, phoneY + 30, phoneW - 10, 35); // Main Banner Card
+    
+    // Small profile circle inside phone banner
+    uxCtx.fillStyle = 'rgba(0, 245, 255, 0.3)';
+    uxCtx.beginPath(); uxCtx.arc(phoneX + phoneW/2, phoneY + 48, 8, 0, Math.PI*2); uxCtx.fill();
+    
+    // Toggle switches / buttons in phone
+    uxCtx.fillStyle = 'rgba(236, 72, 153, 0.4)'; // Pink/Magenta UI Accent
+    uxCtx.fillRect(phoneX + 8, phoneY + 75, 12, 6);
+    uxCtx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+    uxCtx.fillRect(phoneX + 25, phoneY + 75, 22, 6);
+    uxCtx.fillRect(phoneX + 8, phoneY + 88, 39, 6);
 
-            abcdParticles.forEach((p) => {
-                p.angle += voiceMouse.active ? p.rotSpeed * 2.2 : p.rotSpeed;
-                if (voiceMouse.active) {
-                    let mouseDist = Math.hypot(voiceMouse.x - midX, voiceMouse.y - midY);
-                    p.orbitRadius = p.baseOrbit + (mouseDist * 0.12);
-                } else {
-                    p.orbitRadius += (p.baseOrbit - p.orbitRadius) * 0.05;
-                }
-                let x = midX + Math.cos(p.angle) * p.orbitRadius;
-                let y = midY + Math.sin(p.angle) * p.orbitRadius + 4;
-                vCtx.fillStyle = p.orbitRadius % 2 === 0 ? `rgba(56, 189, 248, ${p.opacity})` : `rgba(0, 255, 102, ${p.opacity * 0.8})`;
-                vCtx.font = `${p.fontSize}px 'Space Grotesk', sans-serif`;
-                vCtx.fillText(p.char, x, y);
-            });
-            requestAnimationFrame(drawVoiceSynthEngine);
-        }
+    // 4. Center: Main Core UI/UX Interactive Hex/Circle Hub
+    let cx = w / 2 + 5, cy = h / 2;
+    
+    // Rotating HUD Ring
+    uxCtx.strokeStyle = 'rgba(236, 72, 153, 0.25)';
+    uxCtx.lineWidth = 1;
+    uxCtx.setLineDash([5, 5]);
+    uxCtx.beginPath(); uxCtx.arc(cx, cy, 32, time, time + Math.PI * 1.5); uxCtx.stroke();
+    uxCtx.setLineDash([]); // Reset dash
+
+    // Inner Glowing Core
+    let coreGlow = Math.sin(time * 2) * 3 + 22;
+    uxCtx.strokeStyle = 'rgba(0, 245, 255, 0.4)';
+    uxCtx.beginPath(); uxCtx.arc(cx, cy, coreGlow, 0, Math.PI * 2); uxCtx.stroke();
+
+    // Central Typography Branding
+    uxCtx.font = '900 13px "Orbitron", sans-serif';
+    uxCtx.fillStyle = '#00f5ff';
+    uxCtx.shadowColor = 'rgba(0, 245, 255, 0.6)'; uxCtx.shadowBlur = 6;
+    uxCtx.fillText("UI", cx - 22, cy + 5);
+    
+    uxCtx.fillStyle = '#ec4899'; // Premium Mockup Pink
+    uxCtx.shadowColor = 'rgba(236, 72, 153, 0.6)';
+    uxCtx.fillText("UX", cx + 4, cy + 5);
+    uxCtx.shadowBlur = 0; // Reset blur
+
+    // 5. Right Side: Floating Glass Dashboard Analytics Panel
+    let dashX = w - 85, dashY = 25, dashW = 65, dashH = 95;
+    uxCtx.fillStyle = 'rgba(11, 15, 25, 0.6)';
+    uxCtx.strokeStyle = 'rgba(0, 245, 255, 0.2)';
+    uxCtx.lineWidth = 1;
+    uxCtx.strokeRect(dashX, dashY, dashW, dashH);
+    
+    // Header Line
+    uxCtx.fillStyle = 'rgba(0, 245, 255, 0.25)';
+    uxCtx.fillRect(dashX + 6, dashY + 8, dashW - 12, 4);
+    
+    // Analytics Radial Progress Tracker (Mini Ring)
+    uxCtx.strokeStyle = '#ec4899';
+    uxCtx.lineWidth = 2;
+    uxCtx.beginPath(); uxCtx.arc(dashX + 20, dashY + 32, 10, -Math.PI/2, Math.PI * 0.7); uxCtx.stroke();
+    uxCtx.font = '800 7px sans-serif'; uxCtx.fillStyle = '#ffffff';
+    uxCtx.fillText("72%", dashX + 14, dashY + 35);
+
+    // Multi-Layer Data Stats (Horizontal bars)
+    uxCtx.fillStyle = 'rgba(56, 189, 248, 0.3)';
+    uxCtx.fillRect(dashX + 6, dashY + 54, dashW - 12, 6); // Total users bar
+    
+    // Equalizer Grid Component
+    let eqBars = [12, 26, 18, 30];
+    eqBars.forEach((val, i) => {
+        let dynamicH = val + Math.sin(time * 3 + i) * 5;
+        if (uxMouse.active) dynamicH += 4;
+        uxCtx.fillStyle = '#00f5ff';
+        uxCtx.fillRect(dashX + 8 + (i * 12), dashY + 88 - dynamicH, 7, dynamicH);
+    });
+
+    // 6. Interactive Laser Scanning Target
+    if (uxMouse.active) {
+        uxCtx.strokeStyle = 'rgba(236, 72, 153, 0.3)';
+        uxCtx.lineWidth = 0.5;
+        uxCtx.beginPath(); uxCtx.moveTo(0, uxMouse.y); uxCtx.lineTo(w, uxMouse.y); uxCtx.stroke();
+        uxCtx.beginPath(); uxCtx.moveTo(uxMouse.x, 0); uxCtx.lineTo(uxMouse.x, h); uxCtx.stroke();
+        
+        uxCtx.fillStyle = 'rgba(0, 245, 255, 0.05)';
+        uxCtx.beginPath(); uxCtx.arc(uxMouse.x, uxMouse.y, 15, 0, Math.PI*2); uxCtx.fill();
+    }
+
+    requestAnimationFrame(drawUxuiPortfolioEngine);
+}
 
         // --- 🤖 ARTIFICIAL INTELLIGENCE NEURAL NETWORK ENGINE ---
         const aiCanvas = document.getElementById('aiNeuralNetworkCanvas');
