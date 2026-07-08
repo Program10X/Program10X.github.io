@@ -4,479 +4,461 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Program10X | Advanced Student Dashboard</title>
+    <!-- Google Fonts for High-Tech Aesthetic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=500;700&family=Inter:wght=400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* CORE LAYOUT INITIALIZATION */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* --- 🎨 SYSTEM VARIABLES & THEME --- */
+        :root {
+            --bg-deep: #030712;
+            --bg-card: #0b1329;
+            --bg-card-hover: #111c44;
+            --text-primary: #f3f4f6;
+            --text-muted: #9ca3af;
+            --neon-blue: #38bdf8;
+            --neon-green: #00ffcc;
+            --neon-glow: 0 0 15px rgba(56, 189, 248, 0.4);
+            --border-glow: rgba(56, 189, 248, 0.15);
+            --sidebar-width: 260px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
         body {
-            background-color: #020204;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
             overflow-x: hidden;
+            display: flex;
+        }
+
+        /* --- 📁 SIDEBAR NAVIGATION SYSTEM --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(180deg, #070a1e 0%, #030712 100%);
+            border-right: 1px solid var(--border-glow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            z-index: 100;
+        }
+
+        .brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand span {
+            color: var(--neon-blue);
+            text-shadow: var(--neon-glow);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-item.active a, .nav-item a:hover {
+            color: var(--text-primary);
+            background: rgba(56, 189, 248, 0.08);
+            border-left: 3px solid var(--neon-blue);
+            box-shadow: inset 10px 0 20px rgba(56, 189, 248, 0.03);
+        }
+
+        /* --- 💻 MAIN DASHBOARD LAYOUT --- */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            min-height: 100vh;
+            padding: 2.5rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 1.5rem;
+        }
+
+        .welcome-box h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .welcome-box p {
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+
+        /* --- 🗂️ GRID ARCHITECTURE & INTERACTIVE CARDS --- */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
         }
 
-        /* 🟩 LIVE BACKGROUND MATRIX STREAM */
-        #coderRain {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0.15; pointer-events: none; z-index: 1;
-        }
-
-        /* 📋 CYBER NAVBAR */
-        .navbar {
-            position: fixed;
-            top: 0; left: 0; right: 0; height: 75px;
-            background: rgba(10, 15, 28, 0.85);
-            border-bottom: 1px solid rgba(0, 255, 102, 0.2);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 40px; z-index: 100; backdrop-filter: blur(15px);
-        }
-        .navbar .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem; font-weight: 700; color: #1a73e8; letter-spacing: 2px;
-        }
-        .navbar .logo span { color: #00ff66; text-shadow: 0 0 15px rgba(0, 255, 102, 0.5); }
-        .navbar .user-profile { display: flex; align-items: center; gap: 15px; }
-        .navbar .avatar {
-            width: 40px; height: 40px; background: #1a73e8; color: white;
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-weight: 800; box-shadow: 0 0 10px rgba(26, 115, 232, 0.5);
-        }
-
-        /* WORKSPACE MODULES HOUSING */
-        .main-container {
-            margin-top: 75px; width: 100%; display: flex;
-            padding: 40px; gap: 30px; z-index: 5; position: relative;
-        }
-        .content-area { flex: 3; }
-        .content-area h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 30px; }
-        
-        .courses-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;
-        }
-
-        /* STRUCTURE FOR DASHBOARD GLASS CARDS */
-        .course-card {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px; overflow: hidden; transition: 0.3s;
-        }
         .course-card:hover {
-            transform: translateY(-8px); border-color: #00ff66;
-            box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
+            transform: translateY(-8px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.1);
+            background-color: var(--bg-card-hover);
         }
 
-        /* 📸 CANVAS MULTI-CONTAINER FOR SCIFI MODULE ANIMATIONS */
+        /* Canvas Interactive Wrapper */
         .card-img-canvas-box {
-            height: 140px; width: 100%; position: relative; background: #01040a;
-            border-bottom: 1px solid rgba(26, 115, 232, 0.15); overflow: hidden;
-            cursor: pointer;
+            width: 100%;
+            height: 180px;
+            background-color: #050a14;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden;
         }
+
         .card-img-canvas-box canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
         }
 
-        /* 🎙️ CUSTOM STYLING TO KEEP SVG MIC FLOAT ON CANVAS */
-        .neon-mic-overlay-icon {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 70px; height: 70px; filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.85));
-            pointer-events: none; z-index: 10; animation: micFloating 4s ease-in-out infinite;
+        /* Card Content Styling */
+        .card-body {
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
-        @keyframes micFloating {
-            0%, 100% { transform: translate(-50%, -50%) translateY(0); filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.7)); }
-            50% { transform: translate(-50%, -50%) translateY(-4px); filter: drop-shadow(0 0 22px rgba(56, 189, 248, 0.95)); }
-        }
-
-        /* UNIFORM STATIC CARDS CONTAINER */
-        .card-img {
-            height: 140px; width: 100%; position: relative; overflow: hidden;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: #060b13;
-        }
-        .card-img img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.5s ease, filter 0.3s ease;
-            filter: brightness(0.8) contrast(1.1);
-        }
-        .course-card:hover .card-img img { transform: scale(1.06); filter: brightness(0.95); }
-        .card-img::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(to bottom, transparent 40%, rgba(15, 23, 42, 0.9));
-        }
-
-        .card-body { padding: 20px; }
         .card-title {
-            font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700;
-            margin-bottom: 10px; height: 52px; display: flex; align-items: center; color: #ffffff;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
         }
 
         .tech-badge {
-            display: inline-block; padding: 4px 10px; font-size: 10px; font-weight: 800;
-            background: rgba(26, 115, 232, 0.15); color: #38bdf8; border: 1px solid rgba(26, 115, 232, 0.3);
-            border-radius: 6px; margin-bottom: 15px; text-transform: uppercase;
+            display: inline-block;
+            align-self: flex-start;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: var(--neon-blue);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
         }
-        .course-card:hover .tech-badge { background: rgba(0, 255, 102, 0.1); color: #00ff66; border-color: rgba(0, 255, 102, 0.3); }
 
-        .tracker-box { margin-bottom: 15px; }
-        .tracker-text { font-size: 11px; font-weight: 800; color: #00ff66; margin-bottom: 6px; }
-        .tracker-bg { width: 100%; height: 6px; background: #000; border-radius: 10px; overflow: hidden; }
-        .tracker-fill { height: 100%; background: #00ff66; box-shadow: 0 0 10px #00ff66; }
+        /* Progress Metrics System */
+        .tracker-box {
+            margin-top: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .tracker-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .tracker-bg {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .tracker-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+        }
 
         .btn-view {
-            display: block; width: 100%; text-align: center; padding: 10px;
-            background: rgba(26, 115, 232, 0.1); border: 1px solid #1a73e8;
-            color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 13px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
-        .btn-view:hover { background: #00ff66; color: #000; border-color: #00ff66; }
 
-        /* RIGHT SIDEBAR */
-        .sidebar { flex: 1; min-width: 320px; display: flex; flex-direction: column; gap: 25px; }
-        .widget {
-            background: rgba(15, 23, 42, 0.8); border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px; backdrop-filter: blur(10px);
+        .course-card:hover .btn-view {
+            background: var(--neon-blue);
+            color: #000;
+            font-weight: 700;
+            border-color: var(--neon-blue);
+            box-shadow: var(--neon-glow);
         }
-        .widget h3 { font-size: 1.1rem; margin-bottom: 15px; border-left: 4px solid #00ff66; padding-left: 10px; }
-
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
-        .day-name { font-size: 10px; font-weight: 800; color: #1a73e8; padding-bottom: 5px; }
-        .date { font-size: 12px; padding: 8px; border-radius: 6px; background: rgba(255, 255, 255, 0.03); }
-        .date.today { background: #00ff66; color: #000; font-weight: 900; box-shadow: 0 0 10px #00ff66; }
-        
-        .recent-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .recent-item i { color: #00ff66; }
-        
-        @media (max-width: 1100px) { .main-container { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
 </head>
 <body>
 
-    <canvas id="coderRain"></canvas>
+    <!-- 📁 SIDEBAR NAVIGATION SYSTEM -->
+    <nav class="sidebar">
+        <div class="brand">PROG<span>10X</span></div>
+        <ul class="nav-links">
+            <li class="nav-item active"><a href="#">Dashboard</a></li>
+            <li class="nav-item"><a href="#">Core Modules</a></li>
+            <li class="nav-item"><a href="#">AI Labs</a></li>
+            <li class="nav-item"><a href="#">Analytics</a></li>
+            <li class="nav-item"><a href="#">Settings</a></li>
+        </ul>
+    </nav>
 
-    <div class="navbar">
-        <div class="logo">PROGRAM<span>10X</span></div>
-        <div class="user-profile">
-            <span style="font-size: 13px; color: #94a3b8;">Welcome, Developer</span>
-            <div class="avatar">S</div>
-        </div>
-    </div>
-
-    <div class="main-container">
-        <div class="content-area">
-            <h2>Course overview</h2>
-            <div class="courses-grid">
-                
-                <!-- Card 1: Math Magic with AI -->
-                <div class="course-card">
-                    <div class="card-img-canvas-box" id="canvasWrapper">
-                        <canvas id="mindPalaceMathCanvas"></canvas>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">Math Magic with AI</div>
-                        <div class="tech-badge">Logic Engine v1.0</div>
-                        <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- Card 2: English Mouth Driven with AI -->
-                <div class="course-card">
-                    <div class="card-img-canvas-box" id="voiceWrapper">
-                        <svg class="neon-mic-overlay-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" fill="rgba(56, 189, 248, 0.15)"/>
-                            <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 19v3M8 22h8"/>
-                        </svg>
-                        <canvas id="voiceSynthCanvas"></canvas>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">English Mouth Driven with AI</div>
-                        <div class="tech-badge">Voice Synthesis</div>
-                        <div class="tracker-box"><div class="tracker-text">98% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 98%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- Card 3: Artificial Intelligence (NEW DYNAMIC INTERACTIVE NEURAL NETWORK CANVAS) -->
-                <div class="course-card">
-                    <div class="card-img-canvas-box" id="aiNetworkWrapper">
-                        <canvas id="aiNeuralNetworkCanvas"></canvas>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">Artificial Intelligence</div>
-                        <div class="tech-badge">Neural Networks</div>
-                        <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1626544827763-d516dce335e2?auto=format&fit=crop&w=600&q=80" alt="UX/UI Design Platform on Tablet">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">UX/UI Design with Cloud AI ML</div>
-                        <div class="tech-badge">Interface Analytics</div>
-                        <div class="tracker-box"><div class="tracker-text">85% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 85%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&q=80" alt="Computer Science and Server Rack Infrastructure">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">Computer Science & Info. Technology</div>
-                        <div class="tech-badge">Core Infrastructure</div>
-                        <div class="tracker-box"><div class="tracker-text">70% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 70%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=600&q=80" alt="C Programming Language with AI code assist">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">Programming C with AI</div>
-                        <div class="tech-badge">Compiler Sandbox</div>
-                        <div class="tracker-box"><div class="tracker-text">50% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 50%;"></div></div></div>
-                        <a href="#" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- Card 7 -->
-                <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80" alt="Free Courses Open Source Book Stack">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">Free Courses</div>
-                        <div class="tech-badge">Open Source Library</div>
-                        <div class="tracker-box"><div class="tracker-text">12% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 12%;"></div></div></div>
-                        <a href="#" class="btn-view">EXPLORE</a>
-                    </div>
-                </div>
-
-                <!-- Card 8 -->
-                <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=80" alt="Virtual Lab environment with AI diagnostics">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title">Virtual Lab</div>
-                        <div class="tech-badge">Cloud Environment</div>
-                        <div class="tracker-box"><div class="tracker-text">0% INITIALIZED</div><div class="tracker-bg"><div class="tracker-fill" style="width: 0%;"></div></div></div>
-                        <a href="#" class="btn-view">ENTER LAB</a>
-                    </div>
-                </div>
-
+    <!-- 💻 MAIN DASHBOARD LAYOUT -->
+    <main class="main-content">
+        <header>
+            <div class="welcome-box">
+                <h1>Quantum Core Dashboard</h1>
+                <p>Welcome back, Operative. Neural links are running optimal.</p>
             </div>
-        </div>
+        </header>
 
-        <div class="sidebar">
-            <div class="widget">
-                <h3>Calendar</h3>
-                <div id="monthLabel" style="font-size: 14px; font-weight: 700; color: #1a73e8; margin-bottom: 12px; text-align: center;">July 2026</div>
-                <div class="calendar-grid">
-                    <div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div><div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div>
-                    <div class="date">28</div><div class="date">29</div><div class="date">30</div><div class="date">1</div><div class="date">2</div><div class="date">3</div><div class="date today">4</div>
-                    <div class="date">5</div><div class="date">6</div><div class="date">7</div><div class="date">8</div><div class="date">9</div><div class="date">10</div><div class="date">11</div>
-                    <div class="date">12</div><div class="date">13</div><div class="date">14</div><div class="date">15</div><div class="date">16</div><div class="date">17</div><div class="date">18</div>
-                    <div class="date">19</div><div class="date">20</div><div class="date">21</div><div class="date">22</div><div class="date">23</div><div class="date">24</div><div class="date">25</div>
-                </div>
-            </div>
-
-            <div class="widget">
-                <h3>Recently Accessed</h3>
-                <div class="recent-item">
-                    <i class="fa-solid fa-file-code"></i>
-                    <div><h4>Assignment_C_Array.pdf</h4><p>Opened 2h ago</p></div>
-                </div>
-                <div class="recent-item">
-                    <i class="fa-solid fa-brain"></i>
-                    <div><h4>AI_Logic_Masterclass.mp4</h4><p>Watched 5h ago</p></div>
-                </div>
-            </div>
+        <!-- 🗂️ GRID ARCHITECTURE & CARDS -->
+        <div class="courses-grid">
             
-            <div class="widget" style="border-left: 4px solid #00ff66;">
-                <h3>Prof. Ami (AI Assistant)</h3>
-                <input type="text" placeholder="Initiate chat..." style="width: 100%; padding: 12px; background: #000; border: 1px solid #1a73e8; border-radius: 8px; color: #fff; font-size: 13px; outline: none;">
+            <!-- Card 1: Discrete Mathematics -->
+            <div class="course-card">
+                <div class="card-img-canvas-box" id="mathWrapper">
+                    <canvas id="discreteMathCanvas"></canvas>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Discrete Mathematics Structures</div>
+                    <div class="tech-badge">Logic & Graph Theory</div>
+                    <div class="tracker-box">
+                        <div class="tracker-text"><span>PROGRESS</span><span>72%</span></div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 72%;"></div></div>
+                    </div>
+                    <a href="#" class="btn-view">OPEN MODULE</a>
+                </div>
             </div>
+
+            <!-- Card 2: Voice Synthesizer -->
+            <div class="course-card">
+                <div class="card-img-canvas-box" id="voiceWrapper">
+                    <canvas id="voiceSynthCanvas"></canvas>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">AI Voice Synthesizer Pro</div>
+                    <div class="tech-badge">DSP & Neural Audio</div>
+                    <div class="tracker-box">
+                        <div class="tracker-text"><span>PROGRESS</span><span>45%</span></div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 45%;"></div></div>
+                    </div>
+                    <a href="#" class="btn-view">OPEN MODULE</a>
+                </div>
+            </div>
+
+            <!-- Card 3: Deep Learning Neural Link -->
+            <div class="course-card">
+                <div class="card-img-canvas-box" id="aiWrapper">
+                    <canvas id="aiNeuralCanvas"></canvas>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Deep Learning & Neural Networks</div>
+                    <div class="tech-badge">Transformers & LLMs</div>
+                    <div class="tracker-box">
+                        <div class="tracker-text"><span>PROGRESS</span><span>91%</span></div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 91%;"></div></div>
+                    </div>
+                    <a href="#" class="btn-view">OPEN MODULE</a>
+                </div>
+            </div>
+
+            <!-- Card 4: UX/UI Design with Cloud AI ML -->
+            <div class="course-card">
+                <div class="card-img-canvas-box" id="uxuiWrapper">
+                    <canvas id="uxuiInterfaceCanvas"></canvas>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">UX/UI Design with Cloud AI ML</div>
+                    <div class="tech-badge">Interface Analytics</div>
+                    <div class="tracker-box">
+                        <div class="tracker-text"><span>PROGRESS</span><span>85%</span></div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <a href="#" class="btn-view">OPEN MODULE</a>
+                </div>
+            </div>
+
         </div>
-    </div>
+    </main>
 
+    <!-- ⚡ HIGH PERFORMANCE CANVAS MATHEMATICS ENGINES -->
     <script>
-        // --- MATRIX RAIN BACKGROUND ---
-        const canvas = document.getElementById('coderRain');
-        const ctx = canvas.getContext('2d');
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        resize();
-        window.onresize = resize;
-        const chars = "01010101ABCDEF<>/[]{}";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-        function drawMatrix() {
-            ctx.fillStyle = "rgba(2, 2, 4, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#00ff66"; ctx.font = fontSize + "px monospace";
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(drawMatrix, 35);
-
-        // --- 🧠 MATH MAGIC INTERACTIVE CANVAS ENGINE ---
-        const mathCanvas = document.getElementById('mindPalaceMathCanvas');
+        // --- 📐 DISCRETE MATHEMATICS (GRAPH THEORY MATRIX ENGINE) ---
+        const mathCanvas = document.getElementById('discreteMathCanvas');
         const mCtx = mathCanvas.getContext('2d');
-        const wrapper = document.getElementById('canvasWrapper');
-        let mouse = { x: null, y: null, active: false };
+        const mathWrapper = document.getElementById('mathWrapper');
+        let mMouse = { x: null, y: null, active: false };
 
         function setupMathCanvas() {
-            mathCanvas.width = wrapper.clientWidth || 300;
-            mathCanvas.height = wrapper.clientHeight || 140;
+            mathCanvas.width = mathWrapper.clientWidth || 300;
+            mathCanvas.height = mathWrapper.clientHeight || 150;
         }
         setupMathCanvas();
 
-        wrapper.addEventListener('mousemove', (e) => {
+        mathWrapper.addEventListener('mousemove', (e) => {
             const rect = mathCanvas.getBoundingClientRect();
-            mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top; mouse.active = true;
+            mMouse.x = e.clientX - rect.left; mMouse.y = e.clientY - rect.top; mMouse.active = true;
         });
-        wrapper.addEventListener('mouseleave', () => { mouse.active = false; });
+        mathWrapper.addEventListener('mouseleave', () => mMouse.active = false);
 
-        const formulas = ["f(x)=σ(Wᵀx)", "E = mc²", "∫ e^{-x²}dx", "∇ × E", "∑ xᵢ", "πr²", "λ = v/f"];
         const nodes = [];
-        for (let i = 0; i < 28; i++) {
+        for (let i = 0; i < 18; i++) {
             nodes.push({
-                x: Math.random() * 300, y: Math.random() * 140,
-                baseVx: (Math.random() - 0.5) * 0.7, baseVy: (Math.random() - 0.5) * 0.7,
-                vx: 0, vy: 0, formula: formulas[Math.floor(Math.random() * formulas.length)], size: Math.random() * 1.5 + 1
+                x: Math.random() * mathCanvas.width, y: Math.random() * mathCanvas.height,
+                vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, radius: Math.random() * 2 + 1.5
             });
         }
 
-        function drawMindPalace() {
-            mCtx.fillStyle = '#01050f'; mCtx.fillRect(0, 0, mathCanvas.width, mathCanvas.height);
-            mCtx.strokeStyle = 'rgba(26, 115, 232, 0.07)'; mCtx.lineWidth = 1;
-            for(let x = 0; x < mathCanvas.width; x += 14) { mCtx.beginPath(); mCtx.moveTo(x, 0); mCtx.lineTo(x, mathCanvas.height); mCtx.stroke(); }
-            for(let y = 0; y < mathCanvas.height; y += 14) { mCtx.beginPath(); mCtx.moveTo(0, y); mCtx.lineTo(mathCanvas.width, y); mCtx.stroke(); }
+        function drawDiscreteMathEngine() {
+            mCtx.fillStyle = '#050a14'; mCtx.fillRect(0, 0, mathCanvas.width, mathCanvas.height);
+            mCtx.lineWidth = 0.5;
 
-            mCtx.fillStyle = 'rgba(0, 255, 102, 0.02)'; mCtx.beginPath(); mCtx.arc(45, mathCanvas.height/2, 42, 0, Math.PI*2); mCtx.fill();
-            mCtx.strokeStyle = 'rgba(0, 255, 102, 0.25)'; mCtx.stroke();
+            for (let i = 0; i < nodes.length; i++) {
+                let n1 = nodes[i];
+                n1.x += n1.vx; n1.y += n1.vy;
+                if (n1.x < 0 || n1.x > mathCanvas.width) n1.vx *= -1;
+                if (n1.y < 0 || n1.y > mathCanvas.height) n1.vy *= -1;
 
-            let pulseRadius = 14 + Math.sin(Date.now() * 0.006) * 4;
-            let gradient = mCtx.createRadialGradient(45, mathCanvas.height/2, 2, 45, mathCanvas.height/2, pulseRadius);
-            gradient.addColorStop(0, '#00ff66'); gradient.addColorStop(0.3, 'rgba(56, 189, 248, 0.6)'); gradient.addColorStop(1, 'transparent');
-            mCtx.fillStyle = gradient; mCtx.beginPath(); mCtx.arc(45, mathCanvas.height/2, pulseRadius, 0, Math.PI*2); mCtx.fill();
-
-            nodes.forEach((node, i) => {
-                node.vx = node.baseVx; node.vy = node.baseVy;
-                if (mouse.active) {
-                    let dx = mouse.x - node.x; let dy = mouse.y - node.y; let dist = Math.hypot(dx, dy);
-                    if (dist < 75) { let force = (75 - dist) / 75; node.vx += (dx / dist) * force * 1.5; node.vy += (dy / dist) * force * 1.5; }
+                if (mMouse.active) {
+                    let dx = mMouse.x - n1.x, dy = mMouse.y - n1.y, dist = Math.hypot(dx, dy);
+                    if (dist < 60) { n1.x -= (dx / dist) * 0.6; n1.y -= (dy / dist) * 0.6; }
                 }
-                node.x += node.vx; node.y += node.vy;
-                if (node.x < 0 || node.x > mathCanvas.width) node.baseVx *= -1;
-                if (node.y < 0 || node.y > mathCanvas.height) node.baseVy *= -1;
 
-                nodes.forEach((target, j) => {
-                    if (i === j) return;
-                    let lineDist = Math.hypot(node.x - target.x, node.y - target.y);
-                    if (lineDist < 50) { mCtx.strokeStyle = `rgba(56, 189, 248, ${0.18 * (1 - lineDist/50)})`; mCtx.beginPath(); mCtx.moveTo(node.x, node.y); mCtx.lineTo(target.x, target.y); mCtx.stroke(); }
-                });
-
-                let distanceToCore = Math.hypot(node.x - 45, node.y - (mathCanvas.height/2));
-                if (distanceToCore < 100) { mCtx.strokeStyle = `rgba(0, 255, 102, ${0.1 * (1 - distanceToCore/100)})`; mCtx.beginPath(); mCtx.moveTo(45, mathCanvas.height/2); mCtx.lineTo(node.x, node.y); mCtx.stroke(); }
-
-                if (i % 4 === 0) { mCtx.fillStyle = 'rgba(56, 189, 248, 0.9)'; mCtx.font = 'bold 9px "Space Grotesk", sans-serif'; mCtx.fillText(node.formula, node.x, node.y + Math.sin(Date.now() * 0.004 + i) * 2.5); }
-                else { mCtx.fillStyle = mouse.active && Math.hypot(mouse.x - node.x, mouse.y - node.y) < 75 ? '#00ff66' : 'rgba(0, 255, 102, 0.6)'; mCtx.beginPath(); mCtx.arc(node.x, node.y, node.size, 0, Math.PI*2); mCtx.fill(); }
-            });
-            requestAnimationFrame(drawMindPalace);
+                for (let j = i + 1; j < nodes.length; j++) {
+                    let n2 = nodes[j];
+                    let dist = Math.hypot(n1.x - n2.x, n1.y - n2.y);
+                    if (dist < 65) {
+                        mCtx.strokeStyle = `rgba(56, 189, 248, ${0.18 * (1 - dist / 65)})`;
+                        mCtx.beginPath(); mCtx.moveTo(n1.x, n1.y); mCtx.lineTo(n2.x, n2.y); mCtx.stroke();
+                    }
+                }
+                mCtx.fillStyle = 'rgba(56, 189, 248, 0.8)';
+                mCtx.beginPath(); mCtx.arc(n1.x, n1.y, n1.radius, 0, Math.PI * 2); mCtx.fill();
+            }
+            requestAnimationFrame(drawDiscreteMathEngine);
         }
 
-        // --- 🎙️ ENGLISH MOUTH DRIVEN WITH AI ENGINE ---
+        // --- 🔊 AI VOICE SYNTHESIZER (FREQUENCY DOMAIN WAVE ENGINE) ---
         const voiceCanvas = document.getElementById('voiceSynthCanvas');
         const vCtx = voiceCanvas.getContext('2d');
         const voiceWrapper = document.getElementById('voiceWrapper');
-        let voiceMouse = { x: null, y: null, active: false };
+        let vMouse = { x: null, y: null, active: false };
 
         function setupVoiceCanvas() {
             voiceCanvas.width = voiceWrapper.clientWidth || 300;
-            voiceCanvas.height = voiceWrapper.clientHeight || 140;
+            voiceCanvas.height = voiceWrapper.clientHeight || 150;
         }
         setupVoiceCanvas();
 
         voiceWrapper.addEventListener('mousemove', (e) => {
             const rect = voiceCanvas.getBoundingClientRect();
-            voiceMouse.x = e.clientX - rect.left; voiceMouse.y = e.clientY - rect.top; voiceMouse.active = true;
+            vMouse.x = e.clientX - rect.left; vMouse.y = e.clientY - rect.top; vMouse.active = true;
         });
-        voiceWrapper.addEventListener('mouseleave', () => { voiceMouse.active = false; });
+        voiceWrapper.addEventListener('mouseleave', () => vMouse.active = false);
 
-        const abcdTokens = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        const abcdParticles = [];
-        
-        for (let i = 0; i < 45; i++) {
-            let radiusDist = Math.random() * 45 + 25;
-            abcdParticles.push({
-                char: abcdTokens[Math.floor(Math.random() * abcdTokens.length)],
-                angle: Math.random() * Math.PI * 2,
-                orbitRadius: radiusDist,
-                baseOrbit: radiusDist,
-                rotSpeed: (Math.random() * 0.015 + 0.005) * (Math.random() > 0.5 ? 1 : -1),
-                opacity: Math.random() * 0.5 + 0.3,
-                fontSize: Math.floor(Math.random() * 3) + 9
-            });
-        }
-
+        let waveOffset = 0;
         function drawVoiceSynthEngine() {
-            vCtx.fillStyle = '#01040a'; vCtx.fillRect(0, 0, voiceCanvas.width, voiceCanvas.height);
-            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.04)'; vCtx.lineWidth = 1;
-            for(let x = 0; x < voiceCanvas.width; x += 15) { vCtx.beginPath(); vCtx.moveTo(x, 0); vCtx.lineTo(x, voiceCanvas.height); vCtx.stroke(); }
+            vCtx.fillStyle = '#050a14'; vCtx.fillRect(0, 0, voiceCanvas.width, voiceCanvas.height);
+            waveOffset += 0.04;
+            let totalBars = 36;
+            let barWidth = (voiceCanvas.width / totalBars) * 0.65;
+            let gap = (voiceCanvas.width / totalBars) * 0.35;
 
-            let midX = voiceCanvas.width / 2;
-            let midY = voiceCanvas.height / 2;
+            for (let i = 0; i < totalBars; i++) {
+                let x = i * (barWidth + gap) + gap / 2;
+                let baseNoise = Math.sin(i * 0.2 + waveOffset) * Math.cos(i * 0.05 + waveOffset * 0.5);
+                let amplitude = Math.abs(baseNoise) * (voiceCanvas.height * 0.55) + 4;
 
-            let pulseScale = 45 + Math.sin(Date.now() * 0.005) * 8;
-            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.12)'; vCtx.lineWidth = 1;
-            vCtx.beginPath(); vCtx.arc(midX, midY, pulseScale, 0, Math.PI * 2); vCtx.stroke();
-            vCtx.strokeStyle = 'rgba(0, 255, 102, 0.06)';
-            vCtx.beginPath(); vCtx.arc(midX, midY, pulseScale + 20, 0, Math.PI * 2); vCtx.stroke();
-
-            abcdParticles.forEach((p) => {
-                p.angle += voiceMouse.active ? p.rotSpeed * 2.2 : p.rotSpeed;
-                if (voiceMouse.active) {
-                    let mouseDist = Math.hypot(voiceMouse.x - midX, voiceMouse.y - midY);
-                    p.orbitRadius = p.baseOrbit + (mouseDist * 0.12);
-                } else {
-                    p.orbitRadius += (p.baseOrbit - p.orbitRadius) * 0.05;
+                if (vMouse.active) {
+                    let dX = Math.abs(vMouse.x - x);
+                    if (dX < 50) amplitude += (1 - dX / 50) * 28;
                 }
-                let x = midX + Math.cos(p.angle) * p.orbitRadius;
-                let y = midY + Math.sin(p.angle) * p.orbitRadius + 4;
-                vCtx.fillStyle = p.orbitRadius % 2 === 0 ? `rgba(56, 189, 248, ${p.opacity})` : `rgba(0, 255, 102, ${p.opacity * 0.8})`;
-                vCtx.font = `${p.fontSize}px 'Space Grotesk', sans-serif`;
-                vCtx.fillText(p.char, x, y);
-            });
+                if (amplitude > voiceCanvas.height - 20) amplitude = voiceCanvas.height - 20;
+
+                let grad = vCtx.createLinearGradient(x, voiceCanvas.height / 2 - amplitude / 2, x, voiceCanvas.height / 2 + amplitude / 2);
+                grad.addColorStop(0, '#38bdf8'); grad.addColorStop(0.5, '#00ffcc'); grad.addColorStop(1, '#38bdf8');
+                vCtx.fillStyle = grad;
+                vCtx.fillRect(x, voiceCanvas.height / 2 - amplitude / 2, barWidth, amplitude);
+            }
             requestAnimationFrame(drawVoiceSynthEngine);
         }
 
-        // --- 🤖 ARTIFICIAL INTELLIGENCE NEURAL NETWORK ENGINE ---
-        const aiCanvas = document.getElementById('aiNeuralNetworkCanvas');
+        // --- 🧠 DEEP LEARNING & NEURAL LINK LAYER ENGINE ---
+        const aiCanvas = document.getElementById('aiNeuralCanvas');
         const aiCtx = aiCanvas.getContext('2d');
-        const aiWrapper = document.getElementById('aiNetworkWrapper');
+        const aiWrapper = document.getElementById('aiWrapper');
         let aiMouse = { x: null, y: null, active: false };
 
         function setupAiCanvas() {
             aiCanvas.width = aiWrapper.clientWidth || 300;
-            aiCanvas.height = aiWrapper.clientHeight || 140;
+            aiCanvas.height = aiWrapper.clientHeight || 150;
         }
         setupAiCanvas();
 
@@ -484,96 +466,146 @@
             const rect = aiCanvas.getBoundingClientRect();
             aiMouse.x = e.clientX - rect.left; aiMouse.y = e.clientY - rect.top; aiMouse.active = true;
         });
-        aiWrapper.addEventListener('mouseleave', () => { aiMouse.active = false; });
+        aiWrapper.addEventListener('mouseleave', () => aiMouse.active = false);
 
-        // Build Multi-layered Connected Neural Network System
+        const aiLayers = [4, 6, 6, 4];
         const aiNodes = [];
-        const layers = [4, 6, 6, 4]; // Neural layers structure
-        const layerSpacing = 300 / (layers.length + 1);
-
         function initAiNodes() {
             aiNodes.length = 0;
-            layers.forEach((count, layerIndex) => {
-                const x = (layerIndex + 1) * (aiCanvas.width / (layers.length + 1));
-                const verticalSpacing = aiCanvas.height / (count + 1);
-                for (let i = 0; i < count; i++) {
-                    aiNodes.push({
-                        x: x + (Math.random() - 0.5) * 8,
-                        y: (i + 1) * verticalSpacing + (Math.random() - 0.5) * 8,
-                        baseX: x,
-                        baseY: (i + 1) * verticalSpacing,
-                        layer: layerIndex,
-                        pulsePhase: Math.random() * Math.PI * 2,
-                        pulseSpeed: 0.03 + Math.random() * 0.04
-                    });
+            let layerGap = aiCanvas.width / (aiLayers.length + 1);
+            for (let l = 0; l < aiLayers.length; l++) {
+                let x = layerGap * (l + 1);
+                let nodeGap = aiCanvas.height / (aiLayers[l] + 1);
+                for (let n = 0; n < aiLayers[l]; n++) {
+                    let y = nodeGap * (n + 1);
+                    aiNodes.push({ x: x, y: y, layer: l, pulsePhase: Math.random() * Math.PI * 2 });
                 }
-            });
+            }
         }
         initAiNodes();
 
         function drawAiNeuralEngine() {
-            aiCtx.fillStyle = '#02040a'; aiCtx.fillRect(0, 0, aiCanvas.width, aiCanvas.height);
+            aiCtx.fillStyle = '#050a14'; aiCtx.fillRect(0, 0, aiCanvas.width, aiCanvas.height);
+            aiCtx.lineWidth = 0.4;
 
-            // Draw synaptic signal pathways
-            aiNodes.forEach((node) => {
-                node.pulsePhase += node.pulseSpeed;
-                
-                // Mouse magnetism pull effect
-                if (aiMouse.active) {
-                    let dx = aiMouse.x - node.x; let dy = aiMouse.y - node.y; let dist = Math.hypot(dx, dy);
-                    if (dist < 80) {
-                        let force = (80 - dist) / 80;
-                        node.x += (dx / dist) * force * 2; node.y += (dy / dist) * force * 2;
-                    }
-                } else {
-                    node.x += (node.baseX - node.x) * 0.08; node.y += (node.baseY - node.y) * 0.08;
-                }
-
-                // Connect forward synapses lines
-                aiNodes.forEach((target) => {
+            aiNodes.forEach(node => {
+                aiNodes.forEach(target => {
                     if (target.layer === node.layer + 1) {
-                        let distance = Math.hypot(target.x - node.x, target.y - node.y);
-                        if (distance < 85) {
-                            let alpha = 0.15 * (1 - distance / 85);
-                            aiCtx.strokeStyle = `rgba(0, 255, 102, ${alpha})`;
-                            aiCtx.lineWidth = 1;
-                            aiCtx.beginPath(); aiCtx.moveTo(node.x, node.y); aiCtx.lineTo(target.x, target.y); aiCtx.stroke();
-                            
-                            // Synaptic data impulse animation along lines
-                            let travelPercent = (Date.now() * 0.0015 + node.pulsePhase) % 1;
-                            let pulseX = node.x + (target.x - node.x) * travelPercent;
-                            let pulseY = node.y + (target.y - node.y) * travelPercent;
-                            aiCtx.fillStyle = 'rgba(56, 189, 248, 0.6)';
-                            aiCtx.beginPath(); aiCtx.arc(pulseX, pulseY, 1.5, 0, Math.PI * 2); aiCtx.fill();
-                        }
+                        let d = Math.hypot(target.x - node.x, target.y - node.y);
+                        aiCtx.strokeStyle = 'rgba(56, 189, 248, 0.06)';
+                        aiCtx.beginPath(); aiCtx.moveTo(node.x, node.y); aiCtx.lineTo(target.x, target.y); aiCtx.stroke();
+                        let travelPercent = (Date.now() * 0.0015 + node.pulsePhase) % 1;
+                        let pX = node.x + (target.x - node.x) * travelPercent;
+                        let pY = node.y + (target.y - node.y) * travelPercent;
+                        aiCtx.fillStyle = 'rgba(56, 189, 248, 0.6)';
+                        aiCtx.beginPath(); aiCtx.arc(pX, pY, 1.2, 0, Math.PI * 2); aiCtx.fill();
                     }
                 });
-
-                // Render individual neuron nodes
-                let sizeRad = 2.5 + Math.sin(node.pulsePhase) * 1;
-                let isHovered = aiMouse.active && Math.hypot(aiMouse.x - node.x, aiMouse.y - node.y) < 40;
-                
-                aiCtx.fillStyle = isHovered ? '#00ff66' : 'rgba(56, 189, 248, 0.85)';
+                let sizeRad = 2.2 + Math.sin(node.pulsePhase + Date.now() * 0.003) * 0.6;
+                let isHovered = aiMouse.active && Math.hypot(aiMouse.x - node.x, aiMouse.y - node.y) < 25;
+                aiCtx.fillStyle = isHovered ? '#00ff66' : 'rgba(56, 189, 248, 0.8)';
                 aiCtx.beginPath(); aiCtx.arc(node.x, node.y, sizeRad, 0, Math.PI * 2); aiCtx.fill();
-                
-                if (isHovered || node.pulsePhase % 5 < 0.2) {
-                    aiCtx.strokeStyle = 'rgba(0, 255, 102, 0.4)'; aiCtx.lineWidth = 0.5;
-                    aiCtx.beginPath(); aiCtx.arc(node.x, node.y, sizeRad + 4, 0, Math.PI * 2); aiCtx.stroke();
-                }
             });
-
             requestAnimationFrame(drawAiNeuralEngine);
         }
 
-        // Initialize all stable rendering engines together
-        setTimeout(() => { 
-            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas();
-            initAiNodes();
-            drawMindPalace(); drawVoiceSynthEngine(); drawAiNeuralEngine(); 
+        // --- 📊 UX/UI DESIGN WITH CLOUD AI ML ENGINE (SCREENSHOT REPLICA) ---
+        const uxuiCanvas = document.getElementById('uxuiInterfaceCanvas');
+        const uxCtx = uxuiCanvas.getContext('2d');
+        const uxuiWrapper = document.getElementById('uxuiWrapper');
+        let uxMouse = { x: null, y: null, active: false };
+
+        function setupUxuiCanvas() {
+            uxuiCanvas.width = uxuiWrapper.clientWidth || 300;
+            uxuiCanvas.height = uxuiWrapper.clientHeight || 150;
+        }
+        setupUxuiCanvas();
+
+        uxuiWrapper.addEventListener('mousemove', (e) => {
+            const rect = uxuiCanvas.getBoundingClientRect();
+            uxMouse.x = e.clientX - rect.left; 
+            uxMouse.y = e.clientY - rect.top; 
+            uxMouse.active = true;
+        });
+        uxuiWrapper.addEventListener('mouseleave', () => { uxMouse.active = false; });
+
+        const waveParticles = [];
+        for (let i = 0; i < 75; i++) {
+            waveParticles.push({
+                angle: Math.random() * Math.PI * 2,
+                speed: 0.008 + Math.random() * 0.012,
+                orbitX: 85 + Math.random() * 30,  
+                orbitY: 32 + Math.random() * 12,  
+                size: Math.random() * 1.5 + 0.6,
+                color: Math.random() > 0.35 ? '#00ffcc' : '#00ff66', 
+                phaseOffset: Math.random() * Math.PI
+            });
+        }
+
+        function drawUxuiPortfolioEngine() {
+            uxCtx.fillStyle = '#050a14'; 
+            uxCtx.fillRect(0, 0, uxuiCanvas.width, uxuiCanvas.height);
+            
+            let cx = uxuiCanvas.width / 2;
+            let cy = uxuiCanvas.height / 2 - 5;
+
+            uxCtx.lineWidth = 1;
+            
+            // Wireframe outer window from screenshot
+            uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.15)'; 
+            uxCtx.strokeRect(cx - 75, cy - 40, 150, 80); 
+            uxCtx.beginPath(); 
+            uxCtx.moveTo(cx - 75, cy - 28); uxCtx.lineTo(cx + 75, cy - 28); 
+            uxCtx.stroke();
+
+            // Inner design panels grid layout
+            uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+            uxCtx.strokeRect(cx - 68, cy - 22, 32, 54); 
+            uxCtx.strokeRect(cx - 30, cy - 22, 65, 26); 
+            uxCtx.strokeRect(cx - 30, cy + 9, 65, 23);  
+            uxCtx.strokeRect(cx + 40, cy - 22, 28, 54); 
+
+            // Text labels exact tracking
+            uxCtx.font = '6px sans-serif';
+            uxCtx.fillStyle = 'rgba(56, 189, 248, 0.35)';
+            uxCtx.fillText("User Interface", cx - 75, cy - 45);
+            uxCtx.fillText("Adaptive design", cx - 4, cy - 45);
+
+            // Swirling particles orbital mathematical rendering pipeline
+            waveParticles.forEach((p) => {
+                p.angle += p.speed;
+                
+                let currentRx = p.orbitX;
+                let currentRy = p.orbitY;
+
+                if (uxMouse.active) {
+                    let dx = uxMouse.x - cx;
+                    let dy = uxMouse.y - cy;
+                    let mouseDist = Math.hypot(dx, dy);
+                    currentRx += Math.sin(p.angle + mouseDist * 0.02) * 8;
+                    currentRy += Math.cos(p.angle + mouseDist * 0.02) * 4;
+                }
+
+                let x = cx + Math.cos(p.angle) * currentRx - Math.sin(p.angle) * 15;
+                let y = cy + Math.sin(p.angle) * currentRy + Math.cos(p.angle) * 6;
+
+                uxCtx.fillStyle = p.color;
+                uxCtx.beginPath();
+                uxCtx.arc(x, y, p.size, 0, Math.PI * 2);
+                uxCtx.fill();
+            });
+
+            requestAnimationFrame(drawUxuiPortfolioEngine);
+        }
+
+        // --- ⚡ RUN ALL GRAPHICS ENGINE SYSTEMS ---
+        setTimeout(() => {
+            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas(); setupUxuiCanvas();
+            drawDiscreteMathEngine(); drawVoiceSynthEngine(); drawAiNeuralEngine(); drawUxuiPortfolioEngine();
         }, 150);
 
-        window.addEventListener('resize', () => { 
-            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas(); initAiNodes();
+        window.addEventListener('resize', () => {
+            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas(); setupUxuiCanvas(); initAiNodes();
         });
     </script>
 </body>
