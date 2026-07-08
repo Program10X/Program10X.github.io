@@ -63,90 +63,85 @@
             gap: 25px;
         }
 
-        /* MODIFIED CYBER CARDS (POORE CARD ME IMAGE WALA LOOK) */
+        /* CYBER CARDS - CLEAN DESIGN */
         .course-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #0b0f19;
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 18px; 
             overflow: hidden; 
             transition: 0.3s;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            min-height: 340px; /* Thoda depth badha diya premium look ke liye */
             position: relative;
         }
 
         .course-card:hover {
             transform: translateY(-8px); border-color: #00ff66;
-            box-shadow: 0 10px 30px rgba(0, 255, 102, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 255, 102, 0.25);
         }
 
-        /* IMAGE STRETCHED TO FULL CARD BACKGROUND */
+        /* IMAGE CONTAINER WITH BLACK BACKGROUND FOR FITTING */
         .card-img {
-            position: absolute;
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            z-index: 1;
-            background: #060b13;
+            width: 100%; 
+            height: 180px; 
+            background: #040814; 
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
+        /* 100% FULL IMAGE SHOWING - NO CLIPPING / NO CATTING */
         .card-img img {
             width: 100%; 
             height: 100%; 
-            object-fit: cover;
-            transition: transform 0.5s ease, filter 0.3s ease;
-            filter: brightness(0.35) contrast(1.1); /* Image thodi dark rakhi taaki upar ka text saaf chamke */
+            object-fit: contain; 
+            transition: transform 0.4s ease;
+            filter: none !important; 
         }
+        
         .course-card:hover .card-img img { 
-            transform: scale(1.05); 
-            filter: brightness(0.45) contrast(1.15);
+            transform: scale(1.03); 
         }
         
-        /* DARK GRADIENT OVERLAY SO TEXT IS ALWAYS READABLE */
+        /* OVERLAYS & SHADES COMPLETELY REMOVED */
         .card-img::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(10, 15, 28, 0.95) 40%, rgba(15, 23, 42, 0.4) 100%);
-            pointer-events: none;
+            display: none !important;
         }
         
-        /* CONTENT OVERLAY LAYER */
+        /* SEPARATE CLEAN TEXT BODY BELOW IMAGE */
         .card-body { 
             padding: 20px; 
-            position: relative;
-            z-index: 2; /* Content ko image aur gradient ke upar rakhne ke liye */
             width: 100%;
-            height: 100%;
             display: flex; 
             flex-direction: column; 
-            justify-content: flex-end; 
+            background: #0b0f19;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
         
         .card-title {
             font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700;
             margin-bottom: 8px; min-height: 52px; display: flex; align-items: center; color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .tech-badge {
             display: inline-block; padding: 4px 10px; font-size: 10px; font-weight: 800;
-            background: rgba(26, 115, 232, 0.25); color: #38bdf8; border: 1px solid rgba(26, 115, 232, 0.4);
+            background: rgba(26, 115, 232, 0.15); color: #38bdf8; border: 1px solid rgba(26, 115, 232, 0.3);
             border-radius: 6px; margin-bottom: 15px; text-transform: uppercase; align-self: flex-start;
         }
-        .course-card:hover .tech-badge { background: rgba(0, 255, 102, 0.15); color: #00ff66; border-color: rgba(0, 255, 102, 0.4); }
+        .course-card:hover .tech-badge { background: rgba(0, 255, 102, 0.1); color: #00ff66; border-color: rgba(0, 255, 102, 0.3); }
 
         .tracker-box { margin-bottom: 15px; width: 100%; }
         .tracker-text { font-size: 11px; font-weight: 800; color: #00ff66; margin-bottom: 6px; }
-        .tracker-bg { width: 100%; height: 6px; background: #000; border-radius: 10px; overflow: hidden; }
+        .tracker-bg { width: 100%; height: 6px; background: #020204; border-radius: 10px; overflow: hidden; }
         .tracker-fill { height: 100%; background: #00ff66; box-shadow: 0 0 10px #00ff66; }
 
         .btn-view {
             display: block; width: 100%; text-align: center; padding: 11px;
-            background: rgba(26, 115, 232, 0.15); border: 1px solid #1a73e8;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(26, 115, 232, 0.5);
             color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 13px;
-            backdrop-filter: blur(5px);
+            transition: 0.2s;
         }
         .btn-view:hover { background: #00ff66; color: #000; border-color: #00ff66; box-shadow: 0 0 15px rgba(0,255,102,0.4); }
 
@@ -186,10 +181,10 @@
             <h2>Course overview</h2>
             <div class="courses-grid">
                 
-                <!-- 🔮 CARD 1: MATH MAGIC WITH AI -->
+                <!-- 🔮 CARD 1: MATH MAGIC WITH AI (IMAGE UPDATED) -->
                 <div class="course-card">
                     <div class="card-img">
-                        <img src="https://indianai.in/wp-content/uploads/2021/06/math-ai.jpg" alt="Math Magic with AI Cyber Concepts">
+                        <img src="https://indianai.in/wp-content/uploads/2021/06/math-ai.jpg" alt="Math Magic with AI New Concept Banner">
                     </div>
                     <div class="card-body">
                         <div>
