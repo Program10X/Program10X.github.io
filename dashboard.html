@@ -170,6 +170,7 @@
             <h2>Course overview</h2>
             <div class="courses-grid">
                 
+                <!-- Card 1: Math Magic with AI -->
                 <div class="course-card">
                     <div class="card-img-canvas-box" id="canvasWrapper">
                         <canvas id="mindPalaceMathCanvas"></canvas>
@@ -182,6 +183,7 @@
                     </div>
                 </div>
 
+                <!-- Card 2: English Mouth Driven with AI -->
                 <div class="course-card">
                     <div class="card-img-canvas-box" id="voiceWrapper">
                         <svg class="neon-mic-overlay-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -198,9 +200,10 @@
                     </div>
                 </div>
 
+                <!-- Card 3: Artificial Intelligence (NEW DYNAMIC INTERACTIVE NEURAL NETWORK CANVAS) -->
                 <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Artificial Intelligence Neural Network Grid">
+                    <div class="card-img-canvas-box" id="aiNetworkWrapper">
+                        <canvas id="aiNeuralNetworkCanvas"></canvas>
                     </div>
                     <div class="card-body">
                         <div class="card-title">Artificial Intelligence</div>
@@ -210,6 +213,7 @@
                     </div>
                 </div>
 
+                <!-- Card 4 -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1626544827763-d516dce335e2?auto=format&fit=crop&w=600&q=80" alt="UX/UI Design Platform on Tablet">
@@ -222,6 +226,7 @@
                     </div>
                 </div>
 
+                <!-- Card 5 -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&q=80" alt="Computer Science and Server Rack Infrastructure">
@@ -234,6 +239,7 @@
                     </div>
                 </div>
 
+                <!-- Card 6 -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=600&q=80" alt="C Programming Language with AI code assist">
@@ -246,6 +252,7 @@
                     </div>
                 </div>
 
+                <!-- Card 7 -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80" alt="Free Courses Open Source Book Stack">
@@ -258,6 +265,7 @@
                     </div>
                 </div>
 
+                <!-- Card 8 -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=80" alt="Virtual Lab environment with AI diagnostics">
@@ -395,7 +403,7 @@
             requestAnimationFrame(drawMindPalace);
         }
 
-        // --- 🎙️ ACTIVE SCRIPT: DYNAMIC ROTATING ABCD MATRIX SWIRL ENGINE ---
+        // --- 🎙️ ENGLISH MOUTH DRIVEN WITH AI ENGINE ---
         const voiceCanvas = document.getElementById('voiceSynthCanvas');
         const vCtx = voiceCanvas.getContext('2d');
         const voiceWrapper = document.getElementById('voiceWrapper');
@@ -413,12 +421,11 @@
         });
         voiceWrapper.addEventListener('mouseleave', () => { voiceMouse.active = false; });
 
-        // Generate specific linguistic characters swirling organically
         const abcdTokens = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         const abcdParticles = [];
         
         for (let i = 0; i < 45; i++) {
-            let radiusDist = Math.random() * 45 + 25; // Base radial orbit radius around center microphone
+            let radiusDist = Math.random() * 45 + 25;
             abcdParticles.push({
                 char: abcdTokens[Math.floor(Math.random() * abcdTokens.length)],
                 angle: Math.random() * Math.PI * 2,
@@ -432,50 +439,142 @@
 
         function drawVoiceSynthEngine() {
             vCtx.fillStyle = '#01040a'; vCtx.fillRect(0, 0, voiceCanvas.width, voiceCanvas.height);
-
-            // Tech Grid background lines
             vCtx.strokeStyle = 'rgba(56, 189, 248, 0.04)'; vCtx.lineWidth = 1;
             for(let x = 0; x < voiceCanvas.width; x += 15) { vCtx.beginPath(); vCtx.moveTo(x, 0); vCtx.lineTo(x, voiceCanvas.height); vCtx.stroke(); }
 
-            // Precise Center calculation where Microphone sits overlayed
             let midX = voiceCanvas.width / 2;
             let midY = voiceCanvas.height / 2;
 
-            // Outer subtle neon radial sound pulse rings
             let pulseScale = 45 + Math.sin(Date.now() * 0.005) * 8;
             vCtx.strokeStyle = 'rgba(56, 189, 248, 0.12)'; vCtx.lineWidth = 1;
             vCtx.beginPath(); vCtx.arc(midX, midY, pulseScale, 0, Math.PI * 2); vCtx.stroke();
-            
             vCtx.strokeStyle = 'rgba(0, 255, 102, 0.06)';
             vCtx.beginPath(); vCtx.arc(midX, midY, pulseScale + 20, 0, Math.PI * 2); vCtx.stroke();
 
-            // Run and rotate ABCD characters in dynamic orbital mechanics
             abcdParticles.forEach((p) => {
-                p.angle += voiceMouse.active ? p.rotSpeed * 2.2 : p.rotSpeed; // Accelerates dynamically on hover
-
-                // Smooth expansion based on user mouse hover triggers
+                p.angle += voiceMouse.active ? p.rotSpeed * 2.2 : p.rotSpeed;
                 if (voiceMouse.active) {
                     let mouseDist = Math.hypot(voiceMouse.x - midX, voiceMouse.y - midY);
                     p.orbitRadius = p.baseOrbit + (mouseDist * 0.12);
                 } else {
-                    p.orbitRadius += (p.baseOrbit - p.orbitRadius) * 0.05; // Ease back to original shape
+                    p.orbitRadius += (p.baseOrbit - p.orbitRadius) * 0.05;
                 }
-
                 let x = midX + Math.cos(p.angle) * p.orbitRadius;
-                let y = midY + Math.sin(p.angle) * p.orbitRadius + 4; // Shift down slightly for alignment
-
-                // Alternate glowing hue styling between cyan and green strings
+                let y = midY + Math.sin(p.angle) * p.orbitRadius + 4;
                 vCtx.fillStyle = p.orbitRadius % 2 === 0 ? `rgba(56, 189, 248, ${p.opacity})` : `rgba(0, 255, 102, ${p.opacity * 0.8})`;
                 vCtx.font = `${p.fontSize}px 'Space Grotesk', sans-serif`;
                 vCtx.fillText(p.char, x, y);
             });
-
             requestAnimationFrame(drawVoiceSynthEngine);
         }
 
-        // Initialize stable rendering engines together
-        setTimeout(() => { setupMathCanvas(); setupVoiceCanvas(); drawMindPalace(); drawVoiceSynthEngine(); }, 150);
-        window.addEventListener('resize', () => { setupMathCanvas(); setupVoiceCanvas(); });
+        // --- 🤖 ARTIFICIAL INTELLIGENCE NEURAL NETWORK ENGINE ---
+        const aiCanvas = document.getElementById('aiNeuralNetworkCanvas');
+        const aiCtx = aiCanvas.getContext('2d');
+        const aiWrapper = document.getElementById('aiNetworkWrapper');
+        let aiMouse = { x: null, y: null, active: false };
+
+        function setupAiCanvas() {
+            aiCanvas.width = aiWrapper.clientWidth || 300;
+            aiCanvas.height = aiWrapper.clientHeight || 140;
+        }
+        setupAiCanvas();
+
+        aiWrapper.addEventListener('mousemove', (e) => {
+            const rect = aiCanvas.getBoundingClientRect();
+            aiMouse.x = e.clientX - rect.left; aiMouse.y = e.clientY - rect.top; aiMouse.active = true;
+        });
+        aiWrapper.addEventListener('mouseleave', () => { aiMouse.active = false; });
+
+        // Build Multi-layered Connected Neural Network System
+        const aiNodes = [];
+        const layers = [4, 6, 6, 4]; // Neural layers structure
+        const layerSpacing = 300 / (layers.length + 1);
+
+        function initAiNodes() {
+            aiNodes.length = 0;
+            layers.forEach((count, layerIndex) => {
+                const x = (layerIndex + 1) * (aiCanvas.width / (layers.length + 1));
+                const verticalSpacing = aiCanvas.height / (count + 1);
+                for (let i = 0; i < count; i++) {
+                    aiNodes.push({
+                        x: x + (Math.random() - 0.5) * 8,
+                        y: (i + 1) * verticalSpacing + (Math.random() - 0.5) * 8,
+                        baseX: x,
+                        baseY: (i + 1) * verticalSpacing,
+                        layer: layerIndex,
+                        pulsePhase: Math.random() * Math.PI * 2,
+                        pulseSpeed: 0.03 + Math.random() * 0.04
+                    });
+                }
+            });
+        }
+        initAiNodes();
+
+        function drawAiNeuralEngine() {
+            aiCtx.fillStyle = '#02040a'; aiCtx.fillRect(0, 0, aiCanvas.width, aiCanvas.height);
+
+            // Draw synaptic signal pathways
+            aiNodes.forEach((node) => {
+                node.pulsePhase += node.pulseSpeed;
+                
+                // Mouse magnetism pull effect
+                if (aiMouse.active) {
+                    let dx = aiMouse.x - node.x; let dy = aiMouse.y - node.y; let dist = Math.hypot(dx, dy);
+                    if (dist < 80) {
+                        let force = (80 - dist) / 80;
+                        node.x += (dx / dist) * force * 2; node.y += (dy / dist) * force * 2;
+                    }
+                } else {
+                    node.x += (node.baseX - node.x) * 0.08; node.y += (node.baseY - node.y) * 0.08;
+                }
+
+                // Connect forward synapses lines
+                aiNodes.forEach((target) => {
+                    if (target.layer === node.layer + 1) {
+                        let distance = Math.hypot(target.x - node.x, target.y - node.y);
+                        if (distance < 85) {
+                            let alpha = 0.15 * (1 - distance / 85);
+                            aiCtx.strokeStyle = `rgba(0, 255, 102, ${alpha})`;
+                            aiCtx.lineWidth = 1;
+                            aiCtx.beginPath(); aiCtx.moveTo(node.x, node.y); aiCtx.lineTo(target.x, target.y); aiCtx.stroke();
+                            
+                            // Synaptic data impulse animation along lines
+                            let travelPercent = (Date.now() * 0.0015 + node.pulsePhase) % 1;
+                            let pulseX = node.x + (target.x - node.x) * travelPercent;
+                            let pulseY = node.y + (target.y - node.y) * travelPercent;
+                            aiCtx.fillStyle = 'rgba(56, 189, 248, 0.6)';
+                            aiCtx.beginPath(); aiCtx.arc(pulseX, pulseY, 1.5, 0, Math.PI * 2); aiCtx.fill();
+                        }
+                    }
+                });
+
+                // Render individual neuron nodes
+                let sizeRad = 2.5 + Math.sin(node.pulsePhase) * 1;
+                let isHovered = aiMouse.active && Math.hypot(aiMouse.x - node.x, aiMouse.y - node.y) < 40;
+                
+                aiCtx.fillStyle = isHovered ? '#00ff66' : 'rgba(56, 189, 248, 0.85)';
+                aiCtx.beginPath(); aiCtx.arc(node.x, node.y, sizeRad, 0, Math.PI * 2); aiCtx.fill();
+                
+                if (isHovered || node.pulsePhase % 5 < 0.2) {
+                    aiCtx.strokeStyle = 'rgba(0, 255, 102, 0.4)'; aiCtx.lineWidth = 0.5;
+                    aiCtx.beginPath(); aiCtx.arc(node.x, node.y, sizeRad + 4, 0, Math.PI * 2); aiCtx.stroke();
+                }
+            });
+
+            requestAnimationFrame(drawAiNeuralEngine);
+        }
+
+        // Initialize all stable rendering engines together
+        setTimeout(() => { 
+            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas();
+            initAiNodes();
+            drawMindPalace(); drawVoiceSynthEngine(); drawAiNeuralEngine(); 
+        }, 150);
+
+        window.addEventListener('resize', () => { 
+            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas(); initAiNodes();
+        });
     </script>
 </body>
 </html>
