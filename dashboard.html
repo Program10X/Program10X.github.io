@@ -56,37 +56,38 @@
         .content-area { flex: 3; }
         .content-area h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 30px; }
         
-        /* UNIFORM GRID SYSTEM FOR ALL CARDS */
+        /* UNIFORM GRID SYSTEM */
         .courses-grid {
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
             gap: 25px;
         }
 
-        /* STRUCTURE FOR DASHBOARD GLASS CARDS */
+        /* MODIFIED CYBER CARDS (POORE CARD ME IMAGE WALA LOOK) */
         .course-card {
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 18px; 
             overflow: hidden; 
             transition: 0.3s;
             display: flex;
             flex-direction: column;
-            height: 100%; /* Saare cards ek barabar height ke rahenge */
+            justify-content: flex-end;
+            min-height: 340px; /* Thoda depth badha diya premium look ke liye */
+            position: relative;
         }
 
         .course-card:hover {
             transform: translateY(-8px); border-color: #00ff66;
-            box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 255, 102, 0.2);
         }
 
-        /* UNIFORM STATIC CARDS IMAGES CONTAINER */
+        /* IMAGE STRETCHED TO FULL CARD BACKGROUND */
         .card-img {
-            height: 150px; 
-            width: 100%; 
-            position: relative; 
-            overflow: hidden;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+            position: absolute;
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            z-index: 1;
             background: #060b13;
         }
 
@@ -94,29 +95,47 @@
             width: 100%; 
             height: 100%; 
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s ease, filter 0.3s ease;
+            filter: brightness(0.35) contrast(1.1); /* Image thodi dark rakhi taaki upar ka text saaf chamke */
         }
-        .course-card:hover .card-img img { transform: scale(1.06); }
+        .course-card:hover .card-img img { 
+            transform: scale(1.05); 
+            filter: brightness(0.45) contrast(1.15);
+        }
         
+        /* DARK GRADIENT OVERLAY SO TEXT IS ALWAYS READABLE */
+        .card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 15, 28, 0.95) 40%, rgba(15, 23, 42, 0.4) 100%);
+            pointer-events: none;
+        }
+        
+        /* CONTENT OVERLAY LAYER */
         .card-body { 
             padding: 20px; 
-            flex-grow: 1; 
+            position: relative;
+            z-index: 2; /* Content ko image aur gradient ke upar rakhne ke liye */
+            width: 100%;
+            height: 100%;
             display: flex; 
             flex-direction: column; 
-            justify-content: space-between; 
+            justify-content: flex-end; 
         }
         
         .card-title {
-            font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700;
-            margin-bottom: 10px; min-height: 52px; display: flex; align-items: center; color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700;
+            margin-bottom: 8px; min-height: 52px; display: flex; align-items: center; color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .tech-badge {
             display: inline-block; padding: 4px 10px; font-size: 10px; font-weight: 800;
-            background: rgba(26, 115, 232, 0.15); color: #38bdf8; border: 1px solid rgba(26, 115, 232, 0.3);
+            background: rgba(26, 115, 232, 0.25); color: #38bdf8; border: 1px solid rgba(26, 115, 232, 0.4);
             border-radius: 6px; margin-bottom: 15px; text-transform: uppercase; align-self: flex-start;
         }
-        .course-card:hover .tech-badge { background: rgba(0, 255, 102, 0.1); color: #00ff66; border-color: rgba(0, 255, 102, 0.3); }
+        .course-card:hover .tech-badge { background: rgba(0, 255, 102, 0.15); color: #00ff66; border-color: rgba(0, 255, 102, 0.4); }
 
         .tracker-box { margin-bottom: 15px; width: 100%; }
         .tracker-text { font-size: 11px; font-weight: 800; color: #00ff66; margin-bottom: 6px; }
@@ -124,12 +143,12 @@
         .tracker-fill { height: 100%; background: #00ff66; box-shadow: 0 0 10px #00ff66; }
 
         .btn-view {
-            display: block; width: 100%; text-align: center; padding: 10px;
-            background: rgba(26, 115, 232, 0.1); border: 1px solid #1a73e8;
+            display: block; width: 100%; text-align: center; padding: 11px;
+            background: rgba(26, 115, 232, 0.15); border: 1px solid #1a73e8;
             color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 13px;
-            margin-top: auto;
+            backdrop-filter: blur(5px);
         }
-        .btn-view:hover { background: #00ff66; color: #000; border-color: #00ff66; }
+        .btn-view:hover { background: #00ff66; color: #000; border-color: #00ff66; box-shadow: 0 0 15px rgba(0,255,102,0.4); }
 
         /* RIGHT SIDEBAR */
         .sidebar { flex: 1; min-width: 320px; display: flex; flex-direction: column; gap: 25px; }
@@ -182,7 +201,7 @@
                     </div>
                 </div>
 
-                <!-- 🎙️ CARD 2: ENGLISH MOUTH DRIVEN WITH AI (PERFECTLY ALIGNED) -->
+                <!-- 🎙️ CARD 2: ENGLISH MOUTH DRIVEN WITH AI -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=600&q=80" alt="AI-Enhanced Public Speaking Robot">
