@@ -93,7 +93,7 @@
             50% { transform: translate(-50%, -50%) translateY(-4px); filter: drop-shadow(0 0 22px rgba(56, 189, 248, 0.95)); }
         }
 
-        /* UNIFORM STATIC CARDS CONTAINER */
+        /* UNIFORM STATIC CARDS CONTAINER WITH HOVER ANIMATION */
         .card-img {
             height: 140px; width: 100%; position: relative; overflow: hidden;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: #060b13;
@@ -170,9 +170,10 @@
             <h2>Course overview</h2>
             <div class="courses-grid">
                 
+                <!-- 🔮 CARD 1: MATH MAGIC WITH AI (NOW TEMPORARILY WITH STOCK MATH IMAGE + HOVER ZOOM ANIMATION) -->
                 <div class="course-card">
-                    <div class="card-img-canvas-box" id="canvasWrapper">
-                        <canvas id="mindPalaceMathCanvas"></canvas>
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=600&q=80" alt="Math Magic with AI Concept">
                     </div>
                     <div class="card-body">
                         <div class="card-title">Math Magic with AI</div>
@@ -198,7 +199,6 @@
                     </div>
                 </div>
 
-                <!-- 🔮 ARTIFICIAL INTELLIGENCE CARD UPDATED WITH YOUR NEW IMAGE LINK -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://datos.gob.es/sites/default/files/styles/wide/public/2025-09/imagen-IAcalidad.jpg?itok=T_fiwk2C" alt="Artificial Intelligence Service Quality">
@@ -329,73 +329,6 @@
         }
         setInterval(drawMatrix, 35);
 
-        // --- 🧠 MATH MAGIC INTERACTIVE CANVAS ENGINE ---
-        const mathCanvas = document.getElementById('mindPalaceMathCanvas');
-        const mCtx = mathCanvas.getContext('2d');
-        const wrapper = document.getElementById('canvasWrapper');
-        let mouse = { x: null, y: null, active: false };
-
-        function setupMathCanvas() {
-            mathCanvas.width = wrapper.clientWidth || 300;
-            mathCanvas.height = wrapper.clientHeight || 140;
-        }
-        setupMathCanvas();
-
-        wrapper.addEventListener('mousemove', (e) => {
-            const rect = mathCanvas.getBoundingClientRect();
-            mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top; mouse.active = true;
-        });
-        wrapper.addEventListener('mouseleave', () => { mouse.active = false; });
-
-        const formulas = ["f(x)=σ(Wᵀx)", "E = mc²", "∫ e^{-x²}dx", "∇ × E", "∑ xᵢ", "πr²", "λ = v/f"];
-        const nodes = [];
-        for (let i = 0; i < 28; i++) {
-            nodes.push({
-                x: Math.random() * 300, y: Math.random() * 140,
-                baseVx: (Math.random() - 0.5) * 0.7, baseVy: (Math.random() - 0.5) * 0.7,
-                vx: 0, vy: 0, formula: formulas[Math.floor(Math.random() * formulas.length)], size: Math.random() * 1.5 + 1
-            });
-        }
-
-        function drawMindPalace() {
-            mCtx.fillStyle = '#01050f'; mCtx.fillRect(0, 0, mathCanvas.width, mathCanvas.height);
-            mCtx.strokeStyle = 'rgba(26, 115, 232, 0.07)'; mCtx.lineWidth = 1;
-            for(let x = 0; x < mathCanvas.width; x += 14) { mCtx.beginPath(); mCtx.moveTo(x, 0); mCtx.lineTo(x, mathCanvas.height); mCtx.stroke(); }
-            for(let y = 0; y < mathCanvas.height; y += 14) { mCtx.beginPath(); mCtx.moveTo(0, y); mCtx.lineTo(mathCanvas.width, y); mCtx.stroke(); }
-
-            mCtx.fillStyle = 'rgba(0, 255, 102, 0.02)'; mCtx.beginPath(); mCtx.arc(45, mathCanvas.height/2, 42, 0, Math.PI*2); mCtx.fill();
-            mCtx.strokeStyle = 'rgba(0, 255, 102, 0.25)'; mCtx.stroke();
-
-            let pulseRadius = 14 + Math.sin(Date.now() * 0.006) * 4;
-            let gradient = mCtx.createRadialGradient(45, mathCanvas.height/2, 2, 45, mathCanvas.height/2, pulseRadius);
-            gradient.addColorStop(0, '#00ff66'); gradient.addColorStop(0.3, 'rgba(56, 189, 248, 0.6)'); gradient.addColorStop(1, 'transparent');
-            mCtx.fillStyle = gradient; mCtx.beginPath(); mCtx.arc(45, mathCanvas.height/2, pulseRadius, 0, Math.PI*2); mCtx.fill();
-
-            nodes.forEach((node, i) => {
-                node.vx = node.baseVx; node.vy = node.baseVy;
-                if (mouse.active) {
-                    let dx = mouse.x - node.x; let dy = mouse.y - node.y; let dist = Math.hypot(dx, dy);
-                    if (dist < 75) { let force = (75 - dist) / 75; node.vx += (dx / dist) * force * 1.5; node.vy += (dy / dist) * force * 1.5; }
-                }
-                node.x += node.vx; node.y += node.vy;
-                if (node.x < 0 || node.x > mathCanvas.width) node.baseVx *= -1;
-                if (node.y < 0 || node.y > mathCanvas.height) node.baseVy *= -1;
-
-                nodes.forEach((target, j) => {
-                    if (i === j) return;
-                    let lineDist = Math.hypot(node.x - target.x, node.y - target.y);
-                    if (lineDist < 50) { mCtx.strokeStyle = `rgba(56, 189, 248, ${0.18 * (1 - lineDist/50)})`; mCtx.beginPath(); mCtx.moveTo(node.x, node.y); mCtx.lineTo(target.x, target.y); mCtx.stroke(); }
-                });
-
-                let distanceToCore = Math.hypot(node.x - 45, node.y - (mathCanvas.height/2));
-                if (distanceToCore < 100) { mCtx.strokeStyle = `rgba(0, 255, 102, ${0.1 * (1 - distanceToCore/100)})`; mCtx.beginPath(); mCtx.moveTo(45, mathCanvas.height/2); mCtx.lineTo(node.x, node.y); mCtx.stroke(); }
-
-                if (i % 4 === 0) { mCtx.fillStyle = 'rgba(56, 189, 248, 0.9)'; mCtx.font = 'bold 9px "Space Grotesk", sans-serif'; mCtx.fillText(node.formula, node.x, node.y + Math.sin(Date.now() * 0.004 + i) * 2.5); }
-                else { mCtx.fillStyle = mouse.active && Math.hypot(mouse.x - node.x, mouse.y - node.y) < 75 ? '#00ff66' : 'rgba(0, 255, 102, 0.6)'; mCtx.beginPath(); mCtx.arc(node.x, node.y, node.size, 0, Math.PI*2); mCtx.fill(); }
-            });
-            requestAnimationFrame(drawMindPalace);
-        }
-
         // --- 🎙️ ACTIVE SCRIPT: DYNAMIC ROTATING ABCD MATRIX SWIRL ENGINE ---
         const voiceCanvas = document.getElementById('voiceSynthCanvas');
         const vCtx = voiceCanvas.getContext('2d');
@@ -461,16 +394,13 @@
             requestAnimationFrame(drawVoiceSynthEngine);
         }
 
-        // Initialize stable rendering engines together
+        // Initialize stable rendering engine
         setTimeout(() => { 
-            setupMathCanvas(); 
             setupVoiceCanvas(); 
-            drawMindPalace(); 
             drawVoiceSynthEngine(); 
         }, 150);
 
         window.addEventListener('resize', () => { 
-            setupMathCanvas(); 
             setupVoiceCanvas(); 
         });
     </script>
