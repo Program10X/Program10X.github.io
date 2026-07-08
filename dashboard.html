@@ -91,20 +91,18 @@
         .card-bg-layer img {
             width: 100%; height: 100%;
             object-fit: cover; 
-            filter: brightness(0.7) contrast(1.1); /* Image blend control */
             transition: transform 0.4s ease;
         }
         .course-card:hover .card-bg-layer img {
             transform: scale(1.06);
-            filter: brightness(0.85) contrast(1.15);
         }
 
         /* GRADIENT OVERLAY TO MAKE TEXT READABLE OVER FULL IMAGE */
         .card-bg-layer::after {
             content: '';
             position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 85%;
-            background: linear-gradient(to top, rgba(4, 7, 16, 0.98) 25%, rgba(4, 7, 16, 0.7) 65%, transparent 100%);
+            bottom: 0; left: 0; width: 100%; height: 75%;
+            background: linear-gradient(to top, rgba(4, 7, 16, 0.95) 20%, rgba(4, 7, 16, 0.6) 60%, transparent 100%);
         }
         
         /* OVERLAY TEXT BODY */
@@ -194,10 +192,10 @@
                     </div>
                 </div>
 
-                <!-- 🎙️ CARD 2: ENGLISH MOUTH DRIVEN WITH AI (UPGRADED MATURING SUITE IMAGE) -->
+                <!-- 🎙️ CARD 2: ENGLISH MOUTH DRIVEN WITH AI (UPDATED WITH BRAND NEW MIC/PHONE IMAGE) -->
                 <div class="course-card">
                     <div class="card-bg-layer">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="English Mouth Driven with AI">
+                        <img src="https://www.shutterstock.com/shutterstock/photos/2422361483/display_1500/stock-photo-voice-recording-man-touching-microphone-icon-on-smartphone-mobile-application-record-sound-audio-2422361483.jpg" alt="English Mouth Driven with AI">
                     </div>
                     <div class="card-body">
                         <div>
