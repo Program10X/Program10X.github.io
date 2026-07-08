@@ -3,359 +3,400 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program10X | Advanced Student Dashboard</title>
+    <title>Cyber Dashboard | Program10X</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=500;700&family=Inter:wght=400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=500;700&family=Inter:wght=400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* CORE LAYOUT INITIALIZATION */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background-color: #020204;
             color: #ffffff;
             font-family: 'Inter', sans-serif;
-            min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* LIVE BACKGROUND MATRIX STREAM */
-        #coderRain {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0.15; pointer-events: none; z-index: 1;
-        }
-
-        /* CYBER NAVBAR */
+        /* NAVBAR AREA */
         .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(2, 2, 4, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             position: fixed;
-            top: 0; left: 0; right: 0; height: 75px;
-            background: rgba(10, 15, 28, 0.85);
-            border-bottom: 1px solid rgba(0, 255, 102, 0.2);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 40px; z-index: 100; backdrop-filter: blur(15px);
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
-        .navbar .logo {
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-dot {
+            width: 10px;
+            height: 10px;
+            background: #00ff66;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff66;
+        }
+
+        .logo-text {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem; font-weight: 700; color: #1a73e8; letter-spacing: 2px;
-        }
-        .navbar .logo span { color: #00ff66; text-shadow: 0 0 15px rgba(0, 255, 102, 0.5); }
-        .navbar .user-profile { display: flex; align-items: center; gap: 15px; }
-        .navbar .avatar {
-            width: 40px; height: 40px; background: #1a73e8; color: white;
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-weight: 800; box-shadow: 0 0 10px rgba(26, 115, 232, 0.5);
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
         }
 
-        /* WORKSPACE MODULES HOUSING */
-        .main-container {
-            margin-top: 75px; width: 100%; display: flex;
-            padding: 40px; gap: 30px; z-index: 5; position: relative;
+        .nav-links {
+            display: flex;
+            gap: 30px;
         }
-        .content-area { flex: 3; }
-        .content-area h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 30px; }
-        
-        /* UNIFORM GRID SYSTEM */
+
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #ffffff;
+        }
+
+        /* MAIN LAYOUT */
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 120px auto 60px;
+            padding: 0 50px;
+        }
+
+        .welcome-panel {
+            margin-bottom: 40px;
+        }
+
+        .welcome-panel h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+
+        .welcome-panel p {
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        /* COGNITIVE MATRIX GRID */
         .courses-grid {
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 25px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
         }
 
-        /* FULL IMAGE BACKGROUND CARD DESIGN */
+        @media (max-width: 1200px) {
+            .courses-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .courses-grid { grid-template-columns: 1fr; }
+        }
+
         .course-card {
             background: #0b0f19;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 18px; 
-            height: 380px; 
-            overflow: hidden; 
-            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; 
-            position: relative;
+            height: 380px;
+            cursor: pointer; /* 👈 यहाँ सिर्फ यह एक लाइन जोड़ी है ताकि पूरे कार्ड पर हाथ का निशान बने */
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
         }
 
         .course-card:hover {
-            transform: translateY(-8px); border-color: #00ff66;
-            box-shadow: 0 10px 30px rgba(0, 255, 102, 0.25);
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 102, 0.3);
         }
 
-        /* BACKGROUND IMAGE CONTAINER WHICH SPANS 100% CARD */
         .card-bg-layer {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1; overflow: hidden;
-            background: #040710;
-        }
-        .card-bg-layer img {
-            width: 100%; height: 100%;
-            object-fit: cover; 
-            transition: transform 0.4s ease;
-        }
-        .course-card:hover .card-bg-layer img {
-            transform: scale(1.06);
+            height: 45%;
+            width: 100%;
+            position: relative;
+            background: #1e293b;
+            overflow: hidden;
         }
 
-        /* GRADIENT OVERLAY TO MAKE TEXT READABLE OVER FULL IMAGE */
-        .card-bg-layer::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 75%;
-            background: linear-gradient(to top, rgba(4, 7, 16, 0.95) 20%, rgba(4, 7, 16, 0.6) 60%, transparent 100%);
-        }
-        
-        /* OVERLAY TEXT BODY */
-        .card-body { 
-            padding: 20px; 
+        .card-bg-layer img {
             width: 100%;
-            display: flex; 
-            flex-direction: column; 
-            z-index: 2; 
-            position: relative;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: transform 0.5s;
         }
-        
+
+        .course-card:hover .card-bg-layer img {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(to bottom, transparent, rgba(2,2,4,0.4));
+        }
+
         .card-title {
-            font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700;
-            margin-bottom: 8px; min-height: 52px; display: flex; align-items: center; color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 8px;
+            color: #ffffff;
         }
 
         .tech-badge {
-            display: inline-block; padding: 4px 10px; font-size: 10px; font-weight: 800;
-            background: rgba(4, 7, 16, 0.8); color: #38bdf8; border: 1px solid rgba(26, 115, 232, 0.5);
-            border-radius: 6px; margin-bottom: 15px; text-transform: uppercase; align-self: flex-start;
+            display: inline-block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #00ff66;
+            background: rgba(0, 255, 102, 0.06);
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 255, 102, 0.15);
         }
-        .course-card:hover .tech-badge { background: rgba(0, 0, 0, 0.8); color: #00ff66; border-color: #00ff66; }
 
-        .tracker-box { margin-bottom: 15px; width: 100%; }
-        .tracker-text { font-size: 11px; font-weight: 800; color: #00ff66; margin-bottom: 6px; text-shadow: 0 1px 2px #000; }
-        .tracker-bg { width: 100%; height: 6px; background: rgba(0, 0, 0, 0.6); border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
-        .tracker-fill { height: 100%; background: #00ff66; box-shadow: 0 0 10px #00ff66; }
+        /* PERSISTENT TRACKER BAR */
+        .tracker-box {
+            margin: 15px 0;
+        }
+
+        .tracker-text {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .tracker-bg {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .tracker-fill {
+            height: 100%;
+            background: #00ff66;
+            box-shadow: 0 0 8px #00ff66;
+            border-radius: 2px;
+        }
 
         .btn-view {
-            display: block; width: 100%; text-align: center; padding: 11px;
-            background: rgba(10, 15, 28, 0.8); border: 1px solid rgba(26, 115, 232, 0.6);
-            color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 13px;
-            transition: 0.2s; backdrop-filter: blur(4px);
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
         }
-        .btn-view:hover { background: #00ff66; color: #000; border-color: #00ff66; box-shadow: 0 0 15px rgba(0,255,102,0.5); }
 
-        /* RIGHT SIDEBAR */
-        .sidebar { flex: 1; min-width: 320px; display: flex; flex-direction: column; gap: 25px; }
-        .widget {
-            background: rgba(15, 23, 42, 0.8); border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px; backdrop-filter: blur(10px);
+        .course-card:hover .btn-view {
+            background: #ffffff;
+            color: #020204;
+            border-color: #ffffff;
         }
-        .widget h3 { font-size: 1.1rem; margin-bottom: 15px; border-left: 4px solid #00ff66; padding-left: 10px; }
-
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
-        .day-name { font-size: 10px; font-weight: 800; color: #1a73e8; padding-bottom: 5px; }
-        .date { font-size: 12px; padding: 8px; border-radius: 6px; background: rgba(255, 255, 255, 0.03); }
-        .date.today { background: #00ff66; color: #000; font-weight: 900; box-shadow: 0 0 10px #00ff66; }
-        
-        .recent-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .recent-item i { color: #00ff66; }
-        
-        @media (max-width: 1100px) { .main-container { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
 </head>
 <body>
 
-    <canvas id="coderRain"></canvas>
-
-    <div class="navbar">
-        <div class="logo">PROGRAM<span>10X</span></div>
-        <div class="user-profile">
-            <span style="font-size: 13px; color: #94a3b8;">Welcome, Developer</span>
-            <div class="avatar">S</div>
+    <!-- CONTROL NAVIGATION -->
+    <nav class="navbar">
+        <div class="logo-section">
+            <div class="logo-dot"></div>
+            <div class="logo-text">PROGRAM10X</div>
         </div>
-    </div>
+        <div class="nav-links">
+            <a href="#" class="active">DASHBOARD</a>
+            <a href="#">LABS</a>
+            <a href="#">PROFILE</a>
+        </div>
+    </nav>
 
-    <div class="main-container">
-        <div class="content-area">
-            <h2>Course overview</h2>
-            <div class="courses-grid">
-                
-                <!-- 🔮 CARD 1: MATH MAGIC WITH AI -->
-                <div class="course-card">
-                    <div class="card-bg-layer">
-                        <img src="https://indianai.in/wp-content/uploads/2021/06/math-ai.jpg" alt="Math Magic with AI">
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <div class="card-title">Math Magic with AI</div>
-                            <div class="tech-badge">Logic Engine v1.0</div>
-                        </div>
-                        <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
-                        <a href="course-view.html?course=math" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- 🎙️ CARD 2: ENGLISH MOUTH DRIVEN WITH AI -->
-                <div class="course-card">
-                    <div class="card-bg-layer">
-                        <img src="https://glanceweb-staging.s3.ap-southeast-1.amazonaws.com/ai_3_7040b52e21.png" alt="English Mouth Driven with AI">
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <div class="card-title">English Mouth Driven with AI</div>
-                            <div class="tech-badge">Voice Synthesis</div>
-                        </div>
-                        <div class="tracker-box"><div class="tracker-text">98% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 98%;"></div></div></div>
-                        <a href="course-view.html?course=english" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- 🤖 CARD 3: ARTIFICIAL INTELLIGENCE -->
-                <div class="course-card">
-                    <div class="card-bg-layer">
-                        <img src="https://datos.gob.es/sites/default/files/styles/wide/public/2025-09/imagen-IAcalidad.jpg?itok=T_fiwk2C" alt="Artificial Intelligence">
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <div class="card-title">Artificial Intelligence</div>
-                            <div class="tech-badge">Neural Networks</div>
-                        </div>
-                        <div class="tracker-box"><div class="tracker-text">100% COMPLETE</div><div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div></div>
-                        <a href="course-view.html?course=ai" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- 🎨 CARD 4: UX/UI DESIGN WITH AI -->
-                <div class="course-card">
-                    <div class="card-bg-layer">
-                        <img src="https://erpsoftech.com/storage/service_image/service_image1701242727.png">
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <div class="card-title">UX/UI Design with AI</div>
-                            <div class="tech-badge">Interface Analytics</div>
-                        </div>
-                        <div class="tracker-box"><div class="tracker-text">85% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 85%;"></div></div></div>
-                        <a href="course-view.html?course=uxui" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- 🖥️ CARD 5: COMPUTER SCIENCE -->
-                <div class="course-card">
-                    <div class="card-bg-layer">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D12AQEEj5XkBXJyqg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1687859863115?e=2147483647&v=beta&t=TF8-xhmHGF5Hx9ze0bDUnZ_dZFAY99N5PkFz2NfUJV0" alt="Computer Science">
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <div class="card-title">Computer Science & Info. Technology</div>
-                            <div class="tech-badge">Core Infrastructure</div>
-                        </div>
-                        <div class="tracker-box"><div class="tracker-text">70% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 70%;"></div></div></div>
-                        <a href="course-view.html?course=cs" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- 💻 CARD 6: PROGRAMMING C WITH AI -->
-                <div class="course-card">
-                    <div class="card-bg-layer">
-                        <img src="https://edocti.com/assets/img/c++/adv-c.webp">
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <div class="card-title">Programming C with AI</div>
-                            <div class="tech-badge">Compiler Sandbox</div>
-                        </div>
-                        <div class="tracker-box"><div class="tracker-text">50% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 50%;"></div></div></div>
-                        <a href="course-view.html?course=cprog" class="btn-view">OPEN MODULE</a>
-                    </div>
-                </div>
-
-                <!-- 📚 CARD 7: FREE COURSES (CLEAN Futurist Open-Source Cyber Library Image) -->
-                <div class="course-card">
-                    <div class="card-bg-layer">
-                        <img src="https://img.magnific.com/premium-psd/robot-ordenando-una-libreria-grande_1030812-319.jpg?semt=ais_hybrid&w=740&q=80" alt="Free Courses">
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <div class="card-title">Open Source Library</div>
-                            <div class="tech-badge">Free Courses</div>
-                        </div>
-                        <div class="tracker-box"><div class="tracker-text">12% PROGRESS</div><div class="tracker-bg"><div class="tracker-fill" style="width: 12%;"></div></div></div>
-                        <a href="course-view.html?course=open-source" class="btn-view">EXPLORE</a>
-                    </div>
-                </div>
-
-                <!-- 🧪 CARD 8: VIRTUAL LAB -->
-                <div class="course-card">
-                    <div class="card-bg-layer">
-                        <img src="https://www.gulfuniversity.edu.bh/images/centers/center-digital-transformation.jpg" alt="Virtual Lab">
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <div class="card-title">Virtual Lab</div>
-                            <div class="tech-badge">Cloud Environment</div>
-                        </div>
-                        <div class="tracker-box"><div class="tracker-text">0% INITIALIZED</div><div class="tracker-bg"><div class="tracker-fill" style="width: 0%;"></div></div></div>
-                        <a href="course-view.html?course=virtual-lab" class="btn-view">ENTER LAB</a>
-                    </div>
-                </div>
-
-            </div>
+    <!-- CORE WORKSPACE -->
+    <div class="dashboard-container">
+        <div class="welcome-panel">
+            <h1>Operational Workspace</h1>
+            <p>Select an active neural core engine to execute courseware infrastructure.</p>
         </div>
 
-        <!-- RIGHT SIDEBAR SECTION -->
-        <div class="sidebar">
-            <div class="widget">
-                <h3>Calendar</h3>
-                <div id="monthLabel" style="font-size: 14px; font-weight: 700; color: #1a73e8; margin-bottom: 12px; text-align: center;">July 2026</div>
-                <div class="calendar-grid">
-                    <div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div><div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div>
-                    <div class="date">28</div><div class="date">29</div><div class="date">30</div><div class="date">1</div><div class="date">2</div><div class="date">3</div><div class="date today">4</div>
-                    <div class="date">5</div><div class="date">6</div><div class="date">7</div><div class="date">8</div><div class="date">9</div><div class="date">10</div><div class="date">11</div>
-                    <div class="date">12</div><div class="date">13</div><div class="date">14</div><div class="date">15</div><div class="date">16</div><div class="date">17</div><div class="date">18</div>
-                    <div class="date">19</div><div class="date">20</div><div class="date">21</div><div class="date">22</div><div class="date">23</div><div class="date">24</div><div class="date">25</div>
-                </div>
-            </div>
-
-            <div class="widget">
-                <h3>Recently Accessed</h3>
-                <div class="recent-item">
-                    <i class="fa-solid fa-file-code"></i>
-                    <div><h4>Assignment_C_Array.pdf</h4><p>Opened 2h ago</p></div>
-                </div>
-                <div class="recent-item">
-                    <i class="fa-solid fa-brain"></i>
-                    <div><h4>AI_Logic_Masterclass.mp4</h4><p>Watched 5h ago</p></div>
-                </div>
-            </div>
+        <div class="courses-grid">
             
-            <div class="widget" style="border-left: 4px solid #00ff66;">
-                <h3>Prof. Ami (AI Assistant)</h3>
-                <input type="text" placeholder="Initiate chat..." style="width: 100%; padding: 12px; background: #000; border: 1px solid #1a73e8; border-radius: 8px; color: #fff; font-size: 13px; outline: none;">
+            <!-- 🔮 CARD 1: MATH MAGIC WITH AI -->
+            <div class="course-card" onclick="location.href='course-view.html?course=math';">
+                <div class="card-bg-layer">
+                    <img src="https://indianai.in/wp-content/uploads/2021/06/math-ai.jpg" alt="Math Magic with AI">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-title">Math Magic with AI</div>
+                        <div class="tech-badge">Logic Engine v1.0</div>
+                    </div>
+                    <div class="tracker-box">
+                        <div class="tracker-text">100% COMPLETE</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div>
+                    </div>
+                    <a href="course-view.html?course=math" class="btn-view">OPEN MODULE</a>
+                </div>
             </div>
+
+            <!-- 🎙️ CARD 2: ENGLISH MOUTH DRIVEN WITH AI -->
+            <div class="course-card" onclick="location.href='course-view.html?course=english';">
+                <div class="card-bg-layer">
+                    <img src="https://glanceweb-staging.s3.ap-southeast-1.amazonaws.com/ai_3_7040b52e21.png" alt="English Mouth Driven with AI">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-title">English Mouth Driven with AI</div>
+                        <div class="tech-badge">Voice Synthesis</div>
+                    </div>
+                    <div class="tracker-box">
+                        <div class="tracker-text">98% PROGRESS</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 98%;"></div></div>
+                    </div>
+                    <a href="course-view.html?course=english" class="btn-view">OPEN MODULE</a>
+                </div>
+            </div>
+
+            <!-- 🤖 CARD 3: ARTIFICIAL INTELLIGENCE -->
+            <div class="course-card" onclick="location.href='course-view.html?course=ai';">
+                <div class="card-bg-layer">
+                    <img src="https://datos.gob.es/sites/default/files/styles/wide/public/2025-09/imagen-IAcalidad.jpg?itok=T_fiwk2C" alt="Artificial Intelligence">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-title">Artificial Intelligence</div>
+                        <div class="tech-badge">Neural Networks</div>
+                    </div>
+                    <div class="tracker-box">
+                        <div class="tracker-text">100% COMPLETE</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 100%;"></div></div>
+                    </div>
+                    <a href="course-view.html?course=ai" class="btn-view">OPEN MODULE</a>
+                </div>
+            </div>
+
+            <!-- 🎨 CARD 4: UX/UI DESIGN WITH AI -->
+            <div class="course-card" onclick="location.href='course-view.html?course=uxui';">
+                <div class="card-bg-layer">
+                    <img src="https://erpsoftech.com/storage/service_image/service_image1701242727.png">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-title">UX/UI Design with AI</div>
+                        <div class="tech-badge">Interface Analytics</div>
+                    </div>
+                    <div class="tracker-box">
+                        <div class="tracker-text">85% PROGRESS</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <a href="course-view.html?course=uxui" class="btn-view">OPEN MODULE</a>
+                </div>
+            </div>
+
+            <!-- 🖥️ CARD 5: COMPUTER SCIENCE -->
+            <div class="course-card" onclick="location.href='course-view.html?course=cs';">
+                <div class="card-bg-layer">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D12AQEEj5XkBXJyqg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1687859863115?e=2147483647&v=beta&t=TF8-xhmHGF5Hx9ze0bDUnZ_dZFAY99N5PkFz2NfUJV0" alt="Computer Science">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-title">Computer Science & Info. Technology</div>
+                        <div class="tech-badge">Core Infrastructure</div>
+                    </div>
+                    <div class="tracker-box">
+                        <div class="tracker-text">70% PROGRESS</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 70%;"></div></div>
+                    </div>
+                    <a href="course-view.html?course=cs" class="btn-view">OPEN MODULE</a>
+                </div>
+            </div>
+
+            <!-- 💻 CARD 6: PROGRAMMING C WITH AI -->
+            <div class="course-card" onclick="location.href='course-view.html?course=cprog';">
+                <div class="card-bg-layer">
+                    <img src="https://edocti.com/assets/img/c++/adv-c.webp">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-title">Programming C with AI</div>
+                        <div class="tech-badge">Compiler Sandbox</div>
+                    </div>
+                    <div class="tracker-box">
+                        <div class="tracker-text">50% PROGRESS</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 50%;"></div></div>
+                    </div>
+                    <a href="course-view.html?course=cprog" class="btn-view">OPEN MODULE</a>
+                </div>
+            </div>
+
+            <!-- 📚 CARD 7: FREE COURSES -->
+            <div class="course-card" onclick="location.href='course-view.html?course=open-source';">
+                <div class="card-bg-layer">
+                    <img src="https://img.magnific.com/premium-psd/robot-ordenando-una-libreria-grande_1030812-319.jpg?semt=ais_hybrid&w=740&q=80" alt="Free Courses">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-title">Open Source Library</div>
+                        <div class="tech-badge">Free Courses</div>
+                    </div>
+                    <div class="tracker-box">
+                        <div class="tracker-text">12% PROGRESS</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 12%;"></div></div>
+                    </div>
+                    <a href="course-view.html?course=open-source" class="btn-view">EXPLORE</a>
+                </div>
+            </div>
+
+            <!-- 🧪 CARD 8: VIRTUAL LAB -->
+            <div class="course-card" onclick="location.href='course-view.html?course=virtual-lab';">
+                <div class="card-bg-layer">
+                    <img src="https://www.gulfuniversity.edu.bh/images/centers/center-digital-transformation.jpg" alt="Virtual Lab">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-title">Virtual Lab</div>
+                        <div class="tech-badge">Cloud Environment</div>
+                    </div>
+                    <div class="tracker-box">
+                        <div class="tracker-text">0% INITIALIZED</div>
+                        <div class="tracker-bg"><div class="tracker-fill" style="width: 0%;"></div></div>
+                    </div>
+                    <a href="course-view.html?course=virtual-lab" class="btn-view">ENTER LAB</a>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <script>
-        // --- MATRIX RAIN BACKGROUND ---
-        const canvas = document.getElementById('coderRain');
-        const ctx = canvas.getContext('2d');
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        resize();
-        window.onresize = resize;
-        const chars = "01010101ABCDEF<>/[]{}";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-        function drawMatrix() {
-            ctx.fillStyle = "rgba(2, 2, 4, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#00ff66"; ctx.font = fontSize + "px monospace";
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(drawMatrix, 35);
-    </script>
 </body>
 </html>
