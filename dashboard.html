@@ -170,7 +170,6 @@
             <h2>Course overview</h2>
             <div class="courses-grid">
                 
-                <!-- Card 1 -->
                 <div class="course-card">
                     <div class="card-img-canvas-box" id="canvasWrapper">
                         <canvas id="mindPalaceMathCanvas"></canvas>
@@ -183,7 +182,6 @@
                     </div>
                 </div>
 
-                <!-- Card 2 -->
                 <div class="course-card">
                     <div class="card-img-canvas-box" id="voiceWrapper">
                         <svg class="neon-mic-overlay-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -200,7 +198,6 @@
                     </div>
                 </div>
 
-                <!-- Card 3 (Upgraded to Interactive Canvas Engine) -->
                 <div class="course-card">
                     <div class="card-img-canvas-box" id="aiWrapper">
                         <canvas id="aiNeuralCanvas"></canvas>
@@ -213,7 +210,6 @@
                     </div>
                 </div>
 
-                <!-- Card 4 -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1626544827763-d516dce335e2?auto=format&fit=crop&w=600&q=80" alt="UX/UI Design Platform on Tablet">
@@ -226,7 +222,6 @@
                     </div>
                 </div>
 
-                <!-- Card 5 -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&q=80" alt="Computer Science and Server Rack Infrastructure">
@@ -239,7 +234,6 @@
                     </div>
                 </div>
 
-                <!-- Card 6 -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=600&q=80" alt="C Programming Language with AI code assist">
@@ -252,7 +246,6 @@
                     </div>
                 </div>
 
-                <!-- Card 7 -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80" alt="Free Courses Open Source Book Stack">
@@ -265,7 +258,6 @@
                     </div>
                 </div>
 
-                <!-- Card 8 -->
                 <div class="course-card">
                     <div class="card-img">
                         <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=80" alt="Virtual Lab environment with AI diagnostics">
@@ -281,7 +273,6 @@
             </div>
         </div>
 
-        <!-- SIDEBAR -->
         <div class="sidebar">
             <div class="widget">
                 <h3>Calendar</h3>
@@ -314,7 +305,6 @@
         </div>
     </div>
 
-    <!-- SYSTEM RENDER SCRIPTS -->
     <script>
         // --- MATRIX RAIN BACKGROUND ---
         const canvas = document.getElementById('coderRain');
@@ -425,6 +415,7 @@
 
         const abcdTokens = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         const abcdParticles = [];
+        
         for (let i = 0; i < 45; i++) {
             let radiusDist = Math.random() * 45 + 25;
             abcdParticles.push({
@@ -448,6 +439,7 @@
             let pulseScale = 45 + Math.sin(Date.now() * 0.005) * 8;
             vCtx.strokeStyle = 'rgba(56, 189, 248, 0.12)'; vCtx.lineWidth = 1;
             vCtx.beginPath(); vCtx.arc(midX, midY, pulseScale, 0, Math.PI * 2); vCtx.stroke();
+            
             vCtx.strokeStyle = 'rgba(0, 255, 102, 0.06)';
             vCtx.beginPath(); vCtx.arc(midX, midY, pulseScale + 20, 0, Math.PI * 2); vCtx.stroke();
 
@@ -468,7 +460,7 @@
             requestAnimationFrame(drawVoiceSynthEngine);
         }
 
-        // --- 🧠 ARTIFICIAL INTELLIGENCE NEURAL ENGINE (CARD 3) ---
+        // --- 🧠 ARTIFICIAL INTELLIGENCE NEURAL ENGINE ---
         const aiCanvas = document.getElementById('aiNeuralCanvas');
         const aiCtx = aiCanvas.getContext('2d');
         const aiWrapper = document.getElementById('aiWrapper');
@@ -482,9 +474,7 @@
         function initAiNodes() {
             aiNodes = [];
             for(let i=0; i<4; i++) {
-                for(let j=0; j<4; j++) {
-                    aiNodes.push({x: 40 + i*65, y: 20 + j*32});
-                }
+                for(let j=0; j<4; j++) aiNodes.push({x: 40 + i*65, y: 20 + j*32});
             }
         }
 
