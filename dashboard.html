@@ -130,6 +130,36 @@
             letter-spacing: 1px; background: linear-gradient(90deg, #fff, var(--text-muted));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+
+        /* 🏫 NEW STYLE: CAMPUS HUB GRID */
+        .campus-hub {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .campus-btn {
+            background: rgba(255,255,255,0.02); 
+            padding: 16px; 
+            border-radius: 14px; 
+            text-decoration: none; 
+            color: #fff; 
+            text-align: center; 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(5px);
+        }
+        .campus-btn:hover {
+            background: rgba(56, 189, 248, 0.08);
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.1);
+        }
+        .campus-btn i {
+            font-size: 22px;
+            margin-bottom: 8px;
+            display: block;
+        }
         
         /* SELF-ADJUSTING AUTO GRID SYSTEM */
         .courses-grid {
@@ -306,6 +336,31 @@
 
     <div class="main-container">
         <div class="content-area">
+            
+            <!-- 🏫 NEW ADDED SECTION: DIGITAL CAMPUS HUB -->
+            <div id="digital-campus" class="widget" style="margin-bottom: 30px;">
+                <h3><i class="fa-solid fa-network-wired" style="color: #38bdf8;"></i> Digital Campus Hub</h3>
+                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 15px;">Your personal command center. Track daily schedule, resources, and notices.</p>
+                
+                <div class="campus-hub">
+                    <a href="#timetable" class="campus-btn">
+                        <i class="fa-solid fa-clock-seven" style="color: #38bdf8;"></i>
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">Class Routine</div>
+                        <div style="font-size: 10px; color: var(--text-muted);">Check Today's Schedule</div>
+                    </a>
+                    <a href="#resources" class="campus-btn">
+                        <i class="fa-solid fa-folder-open" style="color: #a855f7;"></i>
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">Study Material</div>
+                        <div style="font-size: 10px; color: var(--text-muted);">Drive & Notes Links</div>
+                    </a>
+                    <a href="#notices" class="campus-btn">
+                        <i class="fa-solid fa-circle-exclamation" style="color: #ec4899;"></i>
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">Notice Board</div>
+                        <div style="font-size: 10px; color: var(--text-muted);">Platform Updates</div>
+                    </a>
+                </div>
+            </div>
+
             <h2>Course overview</h2>
             <div class="courses-grid">
                 
