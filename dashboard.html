@@ -593,42 +593,114 @@ for (let i = 0; i < 20; i++) {
 }
 
 function drawUxuiPortfolioEngine() {
-    uxCtx.fillStyle = '#050a14'; uxCtx.fillRect(0, 0, uxuiCanvas.width, uxuiCanvas.height);
-    let w = uxuiCanvas.width, h = uxuiCanvas.height;
+    // Premium dark sci-fi background
+    uxCtx.fillStyle = '#020617'; 
+    uxCtx.fillRect(0, 0, uxuiCanvas.width, uxuiCanvas.height);
+    
+    let w = uxuiCanvas.width;
+    let h = uxuiCanvas.height;
+    let time = Date.now() * 0.002;
 
-    // Grid System
-    uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.03)'; uxCtx.lineWidth = 0.5;
-    for(let g = 0; g < w; g += 20) { uxCtx.beginPath(); uxCtx.moveTo(g, 0); uxCtx.lineTo(g, h); uxCtx.stroke(); }
-    for(let g = 0; g < h; g += 20) { uxCtx.beginPath(); uxCtx.moveTo(0, g); uxCtx.lineTo(w, g); uxCtx.stroke(); }
+    // 1. Cyberpunk Grid Layer with subtle animation
+    uxCtx.strokeStyle = 'rgba(6, 182, 212, 0.04)';
+    uxCtx.lineWidth = 1;
+    for(let g = 0; g < w; g += 15) {
+        uxCtx.beginPath(); uxCtx.moveTo(g, 0); uxCtx.lineTo(g, h); uxCtx.stroke();
+    }
+    for(let g = 0; g < h; g += 15) {
+        uxCtx.beginPath(); uxCtx.moveTo(0, g); uxCtx.lineTo(w, g); uxCtx.stroke();
+    }
 
-    // Center Panel Box
-    uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.2)'; uxCtx.lineWidth = 1;
-    uxCtx.strokeRect(40, 25, w - 80, h - 50);
+    // 2. Central Target Reticle & Circular HUD (Mockup Core)
+    uxCtx.shadowBlur = 0;
+    uxCtx.strokeStyle = 'rgba(6, 182, 212, 0.15)';
+    uxCtx.lineWidth = 1;
+    
+    // Outer dashed tech circle
+    uxCtx.setLineDash([4, 8]);
+    uxCtx.beginPath(); uxCtx.arc(w / 2, h / 2, 45, 0, Math.PI * 2); uxCtx.stroke();
+    
+    // Inner solid precision circle
+    uxCtx.setLineDash([]);
+    uxCtx.strokeStyle = 'rgba(0, 245, 255, 0.25)';
+    uxCtx.beginPath(); uxCtx.arc(w / 2, h / 2, 35, time, time + Math.PI * 1.2); uxCtx.stroke();
 
-    // Glowing Headers
-    uxCtx.font = '900 14px "Orbitron", sans-serif'; uxCtx.fillStyle = '#38bdf8';
+    // Center Crosshair lines
+    uxCtx.strokeStyle = 'rgba(6, 182, 212, 0.3)';
+    uxCtx.beginPath(); uxCtx.moveTo(w/2 - 5, h/2); uxCtx.lineTo(w/2 + 5, h/2); uxCtx.stroke();
+    uxCtx.beginPath(); uxCtx.moveTo(w/2, h/2 - 5); uxCtx.lineTo(w/2, h/2 + 5); uxCtx.stroke();
+
+    // 3. Glowing Bold UI/UX Text Branding
+    uxCtx.font = '900 15px "Orbitron", sans-serif';
+    uxCtx.shadowColor = 'rgba(6, 182, 212, 0.8)';
+    uxCtx.shadowBlur = 8;
+    uxCtx.fillStyle = '#06b6d4';
     uxCtx.fillText("UI", w / 2 - 28, h / 2 + 5);
-    uxCtx.fillStyle = '#00ffcc'; uxCtx.fillText("UX", w / 2 + 4, h / 2 + 5);
+    
+    uxCtx.shadowColor = 'rgba(16, 185, 129, 0.8)';
+    uxCtx.fillStyle = '#10b981';
+    uxCtx.fillText("UX", w / 2 + 6, h / 2 + 5);
+    uxCtx.shadowBlur = 0; // Reset blur
 
-    // Sidebar Data Mockup
-    uxCtx.strokeStyle = 'rgba(56, 189, 248, 0.15)'; uxCtx.strokeRect(46, 32, 24, 26);
-    uxCtx.fillStyle = 'rgba(56, 189, 248, 0.2)'; uxCtx.fillRect(46, 64, 24, 2); uxCtx.fillRect(46, 69, 16, 2);
+    // 4. Left Sidebar: Tech Interface Nodes & Data Blocks
+    uxCtx.strokeStyle = 'rgba(6, 182, 212, 0.2)';
+    uxCtx.strokeRect(25, 25, 30, 35); // Profile Box Mock
+    uxCtx.fillStyle = 'rgba(6, 182, 212, 0.1)';
+    uxCtx.fillRect(28, 28, 24, 12);
+    
+    // Audio/Data waves mockup on left
+    uxCtx.fillStyle = 'rgba(6, 182, 212, 0.4)';
+    for(let i = 0; i < 4; i++) {
+        let barH = 10 + Math.sin(time + i) * 6;
+        uxCtx.fillRect(25 + (i * 8), 75, 5, barH);
+    }
 
-    // Analytics Right Bars
-    uxCtx.strokeStyle = 'rgba(0, 255, 204, 0.15)'; uxCtx.strokeRect(w - 70, 32, 24, 38);
-    uxCtx.fillStyle = '#00ffcc';
-    let chartValues = [10, 22, 14, 28];
-    chartValues.forEach((val, index) => {
-        if (uxMouse.active) val += Math.sin(Date.now() * 0.005 + index) * 4;
-        uxCtx.fillRect(w - 66 + (index * 5), 66 - val, 3, val);
+    // 5. Right Sidebar: Futuristic Analytics Charts (Shutterstock Style)
+    let chartX = w - 65;
+    uxCtx.strokeStyle = 'rgba(16, 185, 129, 0.2)';
+    uxCtx.strokeRect(chartX, 25, 45, 50); // Container
+    
+    // Diagonal scanning line inside chart
+    uxCtx.strokeStyle = 'rgba(16, 185, 129, 0.1)';
+    uxCtx.beginPath(); uxCtx.moveTo(chartX, 25); uxCtx.lineTo(chartX + 45, 75); uxCtx.stroke();
+
+    // Equalizer style tech chart bars
+    let mockMetrics = [15, 32, 22, 40, 18];
+    mockMetrics.forEach((val, idx) => {
+        // Continuous animation loop for realism
+        let dynamicVal = val + Math.sin(time * 2 + idx) * 6;
+        if (uxMouse.active) dynamicVal += 5; // Interaction shift
+        
+        uxCtx.fillStyle = `rgba(16, 185, 129, ${0.4 + (idx*0.1)})`;
+        uxCtx.fillRect(chartX + 4 + (idx * 8), 70 - dynamicVal, 5, dynamicVal);
     });
 
-    // Floating Lights
+    // 6. Floating Cyber Matrix Particles
     uiGlowElements.forEach((el) => {
-        el.y += el.speedY; if (el.y < 20) el.y = h - 20;
-        uxCtx.fillStyle = `rgba(0, 255, 204, ${el.alpha})`;
+        el.y += el.speedY;
+        if (el.y < 15) {
+            el.y = h - 15;
+            el.x = Math.random() * (w - 20) + 10;
+        }
+        uxCtx.shadowColor = '#10b981';
+        uxCtx.shadowBlur = 4;
+        uxCtx.fillStyle = `rgba(16, 185, 129, ${el.alpha})`;
         uxCtx.beginPath(); uxCtx.arc(el.x, el.y, el.size, 0, Math.PI * 2); uxCtx.fill();
     });
+    uxCtx.shadowBlur = 0;
+
+    // Interactive Mouse HUD Tracker
+    if (uxMouse.active) {
+        uxCtx.strokeStyle = '#06b6d4';
+        uxCtx.lineWidth = 0.5;
+        // Drawing crosshair lines tracking the cursor
+        uxCtx.beginPath(); uxCtx.moveTo(0, uxMouse.y); uxCtx.lineTo(w, uxMouse.y); uxCtx.stroke();
+        uxCtx.beginPath(); uxCtx.moveTo(uxMouse.x, 0); uxCtx.lineTo(uxMouse.x, h); uxCtx.stroke();
+        
+        // Ring around cursor
+        uxCtx.strokeStyle = '#10b981';
+        uxCtx.beginPath(); uxCtx.arc(uxMouse.x, uxMouse.y, 12, 0, Math.PI * 2); uxCtx.stroke();
+    }
 
     requestAnimationFrame(drawUxuiPortfolioEngine);
 }
