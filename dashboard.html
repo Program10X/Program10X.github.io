@@ -63,6 +63,13 @@
             gap: 25px;
         }
 
+        /* GEMINI GRADIENT ANIMATION KEYFRAMES */
+        @keyframes geminiGlow {
+            0% { border-color: #38bdf8; box-shadow: 0 10px 30px rgba(56, 189, 248, 0.25); }
+            50% { border-color: #a855f7; box-shadow: 0 10px 30px rgba(168, 85, 247, 0.25); }
+            100% { border-color: #ec4899; box-shadow: 0 10px 30px rgba(236, 72, 153, 0.25); }
+        }
+
         /* FULL IMAGE BACKGROUND CARD DESIGN */
         .course-card {
             background: #0b0f19;
@@ -70,7 +77,7 @@
             border-radius: 18px; 
             height: 380px; 
             overflow: hidden; 
-            transition: 0.3s;
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: flex-end; 
@@ -78,9 +85,10 @@
             cursor: pointer;
         }
 
+        /* GREEN EFFECT REPLACED WITH GEMINI ANIMATION */
         .course-card:hover {
-            transform: translateY(-8px); border-color: #00ff66;
-            box-shadow: 0 10px 30px rgba(0, 255, 102, 0.25);
+            transform: translateY(-8px);
+            animation: geminiGlow 3s linear infinite alternate;
         }
 
         /* BACKGROUND IMAGE CONTAINER WHICH SPANS 100% CARD */
@@ -127,8 +135,10 @@
             display: inline-block; padding: 4px 10px; font-size: 10px; font-weight: 800;
             background: rgba(4, 7, 16, 0.8); color: #38bdf8; border: 1px solid rgba(26, 115, 232, 0.5);
             border-radius: 6px; margin-bottom: 15px; text-transform: uppercase; align-self: flex-start;
+            transition: 0.3s;
         }
-        .course-card:hover .tech-badge { background: rgba(0, 0, 0, 0.8); color: #00ff66; border-color: #00ff66; }
+        /* Hover state badge updates dynamically to match Gemini themes instead of hardcoded green */
+        .course-card:hover .tech-badge { background: rgba(0, 0, 0, 0.8); color: #a855f7; border-color: #a855f7; }
 
         .tracker-box { margin-bottom: 15px; width: 100%; }
         .tracker-text { font-size: 11px; font-weight: 800; color: #00ff66; margin-bottom: 6px; text-shadow: 0 1px 2px #000; }
@@ -141,7 +151,13 @@
             color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 13px;
             transition: 0.2s; backdrop-filter: blur(4px);
         }
-        .course-card:hover .btn-view { background: #00ff66; color: #000; border-color: #00ff66; box-shadow: 0 0 15px rgba(0,255,102,0.5); }
+        /* Smooth Gemini gradient background shift on button hover */
+        .course-card:hover .btn-view { 
+            background: linear-gradient(90deg, #38bdf8, #a855f7, #ec4899); 
+            color: #fff; 
+            border-color: transparent; 
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); 
+        }
 
         /* RIGHT SIDEBAR */
         .sidebar { flex: 1; min-width: 320px; display: flex; flex-direction: column; gap: 25px; }
@@ -149,15 +165,15 @@
             background: rgba(15, 23, 42, 0.8); border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 20px; backdrop-filter: blur(10px);
         }
-        .widget h3 { font-size: 1.1rem; margin-bottom: 15px; border-left: 4px solid #00ff66; padding-left: 10px; }
+        .widget h3 { font-size: 1.1rem; margin-bottom: 15px; border-left: 4px solid #1a73e8; padding-left: 10px; }
 
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
         .day-name { font-size: 10px; font-weight: 800; color: #1a73e8; padding-bottom: 5px; }
         .date { font-size: 12px; padding: 8px; border-radius: 6px; background: rgba(255, 255, 255, 0.03); }
-        .date.today { background: #00ff66; color: #000; font-weight: 900; box-shadow: 0 0 10px #00ff66; }
+        .date.today { background: #1a73e8; color: #fff; font-weight: 900; box-shadow: 0 0 10px rgba(26, 115, 232, 0.5); }
         
         .recent-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .recent-item i { color: #00ff66; }
+        .recent-item i { color: #38bdf8; }
         
         @media (max-width: 1100px) { .main-container { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
@@ -328,7 +344,7 @@
                 </div>
             </div>
             
-            <div class="widget" style="border-left: 4px solid #00ff66;">
+            <div class="widget" style="border-left: 4px solid #1a73e8;">
                 <h3>Prof. Ami (AI Assistant)</h3>
                 <input type="text" placeholder="Initiate chat..." style="width: 100%; padding: 12px; background: #000; border: 1px solid #1a73e8; border-radius: 8px; color: #fff; font-size: 13px; outline: none;">
             </div>
