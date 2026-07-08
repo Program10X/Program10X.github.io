@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program10X | Advanced Student Dashboard</title>
+    <title>Program10X | Modern Student Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=500;700&family=Inter:wght=400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=500;700&family=Inter:wght=400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* CORE LAYOUT INITIALIZATION */
+        /* 🎨 GLOBAL STYLING & VARIABLES */
+        :root {
+            --bg-primary: #030712;
+            --card-bg: rgba(15, 23, 42, 0.65);
+            --border-glow: linear-gradient(135deg, #38bdf8, #a855f7, #ec4899);
+            --text-muted: #94a3b8;
+            --neon-green: #00ff66;
+            --accent-blue: #1a73e8;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background-color: #020204;
+            background-color: var(--bg-primary);
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
@@ -20,21 +30,28 @@
             position: relative;
         }
 
+        /* 🌌 STYLISH CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar { width: 8px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #020204; }
+        ::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.3); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(168, 85, 247, 0.6); }
+
         /* LIVE BACKGROUND MATRIX STREAM */
         #coderRain {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0.15; pointer-events: none; z-index: 1;
+            opacity: 0.12; pointer-events: none; z-index: 1;
         }
 
-        /* 🌐 ADVANCED CYBER NAVBAR WITH HORIZONTAL SCROLL FOR MENUS */
+        /* 🌐 PREMIUM GLASSMORPHISM NAVBAR */
         .navbar {
             position: fixed;
             top: 0; left: 0; right: 0; height: 75px;
-            background: rgba(10, 15, 28, 0.85);
-            border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+            background: rgba(3, 7, 18, 0.8);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 30px; z-index: 100; backdrop-filter: blur(15px);
+            padding: 0 30px; z-index: 100; backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
         .nav-left { display: flex; align-items: center; gap: 35px; flex: 1; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
@@ -49,51 +66,53 @@
         }
         .navbar .logo {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.6rem; font-weight: 700; color: #1a73e8; letter-spacing: 2px;
-            transition: all 0.4s ease;
+            font-size: 1.6rem; font-weight: 700; color: #38bdf8; letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .navbar .logo span { color: #00ff66; text-shadow: 0 0 15px rgba(0, 255, 102, 0.5); transition: all 0.4s ease; }
+        .navbar .logo span { color: var(--neon-green); text-shadow: 0 0 15px rgba(0, 255, 102, 0.6); transition: all 0.4s ease; }
         
         .navbar .logo-link:hover .logo {
-            color: #38bdf8;
-            transform: scale(1.03);
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+            color: #ffffff;
+            transform: scale(1.05);
+            text-shadow: 0 0 25px rgba(56, 189, 248, 0.8);
         }
         .navbar .logo-link:hover .logo span {
             color: #ec4899;
-            text-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+            text-shadow: 0 0 25px rgba(236, 72, 153, 0.8);
         }
 
         /* MODERNIZED NAVIGATION LINKS */
         .nav-links { display: flex; align-items: center; gap: 12px; list-style: none; }
         .nav-links a {
-            color: #94a3b8; text-decoration: none; font-size: 13px; font-weight: 600;
-            padding: 8px 14px; border-radius: 9px; transition: all 0.3s ease;
-            display: flex; align-items: center; gap: 6px; border: 1px solid transparent;
+            color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600;
+            padding: 10px 16px; border-radius: 12px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; align-items: center; gap: 8px; border: 1px solid transparent;
         }
         .nav-links a:hover, .nav-links a.active {
-            color: #ffffff; background: rgba(26, 115, 232, 0.12); 
-            border-color: rgba(26, 115, 232, 0.3);
-            box-shadow: 0 0 15px rgba(26, 115, 232, 0.15);
+            color: #ffffff; background: rgba(56, 189, 248, 0.1); 
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
         }
         .nav-links a.highlight {
             color: #ffcc00; background: rgba(255, 204, 0, 0.06);
             border-color: rgba(255, 204, 0, 0.25);
         }
         .nav-links a.highlight:hover {
-            background: rgba(255, 204, 0, 0.12); box-shadow: 0 0 15px rgba(255, 204, 0, 0.15);
-            color: #fff;
+            background: rgba(255, 204, 0, 0.15); box-shadow: 0 0 20px rgba(255, 204, 0, 0.25);
+            color: #fff; border-color: #ffcc00;
         }
 
         .nav-right { display: flex; align-items: center; gap: 15px; flex-shrink: 0; margin-left: 15px; }
         .navbar .user-profile { display: flex; align-items: center; gap: 12px; }
         .navbar .user-profile span { display: none; } 
-        @media (min-width: 1100px) { .navbar .user-profile span { display: inline; font-size: 13px; color: #94a3b8; } }
+        @media (min-width: 1100px) { .navbar .user-profile span { display: inline; font-size: 13px; color: var(--text-muted); font-weight: 500; } }
         
         .navbar .avatar {
-            width: 38px; height: 38px; background: #1a73e8; color: white;
+            width: 40px; height: 40px; 
+            background: linear-gradient(135deg, #1a73e8, #38bdf8); color: white;
             border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-weight: 800; box-shadow: 0 0 10px rgba(26, 115, 232, 0.5);
+            font-weight: 700; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         /* RESPONSIVE MAIN HOUSING CONTAINER */
@@ -106,20 +125,24 @@
         }
         
         .content-area { flex: 3; width: 100%; }
-        .content-area h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; margin-bottom: 25px; }
+        .content-area h2 { 
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 25px; 
+            letter-spacing: 1px; background: linear-gradient(90deg, #fff, var(--text-muted));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
         
         /* SELF-ADJUSTING AUTO GRID SYSTEM */
         .courses-grid {
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
+            gap: 25px;
         }
 
         /* GEMINI GRADIENT SHIFT ANIMATIONS */
         @keyframes geminiGlow {
-            0% { border-color: #38bdf8; box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3); }
-            50% { border-color: #a855f7; box-shadow: 0 8px 20px rgba(168, 85, 247, 0.3); }
-            100% { border-color: #ec4899; box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); }
+            0% { border-color: rgba(56, 189, 248, 0.6); box-shadow: 0 8px 25px rgba(56, 189, 248, 0.25); }
+            50% { border-color: rgba(168, 85, 247, 0.6); box-shadow: 0 8px 25px rgba(168, 85, 247, 0.25); }
+            100% { border-color: rgba(236, 72, 153, 0.6); box-shadow: 0 8px 25px rgba(236, 72, 153, 0.25); }
         }
 
         @keyframes geminiButtonBg {
@@ -130,23 +153,25 @@
 
         /* COMPACT & RESPONSIVE IMAGE BACKGROUND CARD */
         .course-card {
-            background: #0b0f19;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 16px; 
-            height: 310px; 
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px; 
+            height: 330px; 
             overflow: hidden; 
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
             justify-content: flex-end; 
             position: relative;
             cursor: pointer;
             width: 100%;
+            backdrop-filter: blur(10px);
         }
 
         .course-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-8px);
             animation: geminiGlow 3s ease-in-out infinite alternate;
+            border-width: 1.5px;
         }
 
         .card-bg-layer {
@@ -158,21 +183,21 @@
         .card-bg-layer img {
             width: 100%; height: 100%;
             object-fit: cover; 
-            transition: transform 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .course-card:hover .card-bg-layer img {
-            transform: scale(1.08);
+            transform: scale(1.1);
         }
 
         .card-bg-layer::after {
             content: '';
             position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 85%;
-            background: linear-gradient(to top, rgba(4, 7, 16, 0.99) 30%, rgba(4, 7, 16, 0.6) 70%, transparent 100%);
+            bottom: 0; left: 0; width: 100%; height: 90%;
+            background: linear-gradient(to top, rgba(3, 7, 18, 1) 35%, rgba(3, 7, 18, 0.6) 70%, transparent 100%);
         }
         
         .card-body { 
-            padding: 16px; 
+            padding: 20px; 
             width: 100%;
             display: flex; 
             flex-direction: column; 
@@ -181,29 +206,30 @@
         }
         
         .card-title {
-            font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700;
-            margin-bottom: 6px; min-height: 44px; display: flex; align-items: center; color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700;
+            margin-bottom: 8px; min-height: 48px; display: flex; align-items: center; color: #ffffff;
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            line-height: 1.3;
         }
 
         .tech-badge {
-            display: inline-block; padding: 3px 8px; font-size: 9px; font-weight: 800;
-            background: rgba(4, 7, 16, 0.8); color: #38bdf8; border: 1px solid rgba(26, 115, 232, 0.5);
-            border-radius: 5px; margin-bottom: 12px; text-transform: uppercase; align-self: flex-start;
-            transition: 0.3s ease;
+            display: inline-block; padding: 4px 10px; font-size: 9px; font-weight: 800;
+            background: rgba(3, 7, 18, 0.8); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);
+            border-radius: 6px; margin-bottom: 14px; text-transform: uppercase; align-self: flex-start;
+            transition: all 0.3s ease; letter-spacing: 0.5px;
         }
-        .course-card:hover .tech-badge { background: rgba(0, 0, 0, 0.8); color: #a855f7; border-color: #a855f7; }
+        .course-card:hover .tech-badge { background: #000; color: #a855f7; border-color: #a855f7; box-shadow: 0 0 10px rgba(168, 85, 247, 0.2); }
 
-        .tracker-box { margin-bottom: 12px; width: 100%; }
-        .tracker-text { font-size: 10px; font-weight: 800; color: #00ff66; margin-bottom: 5px; text-shadow: 0 1px 2px #000; }
-        .tracker-bg { width: 100%; height: 5px; background: rgba(0, 0, 0, 0.6); border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
-        .tracker-fill { height: 100%; background: #00ff66; box-shadow: 0 0 10px #00ff66; }
+        .tracker-box { margin-bottom: 14px; width: 100%; }
+        .tracker-text { font-size: 10px; font-weight: 800; color: var(--neon-green); margin-bottom: 6px; text-shadow: 0 1px 2px #000; letter-spacing: 0.5px; }
+        .tracker-bg { width: 100%; height: 6px; background: rgba(0, 0, 0, 0.6); border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.03); }
+        .tracker-fill { height: 100%; background: linear-gradient(90deg, #00ff66, #00ffcc); box-shadow: 0 0 10px var(--neon-green); }
 
         .btn-view {
-            display: block; width: 100%; text-align: center; padding: 10px;
-            background: rgba(10, 15, 28, 0.8); border: 1px solid rgba(26, 115, 232, 0.6);
-            color: #38bdf8; text-decoration: none; border-radius: 7px; font-weight: 700; font-size: 12px;
-            transition: 0.3s ease; backdrop-filter: blur(4px);
+            display: block; width: 100%; text-align: center; padding: 11px;
+            background: rgba(3, 7, 18, 0.7); border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #38bdf8; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 12.5px;
+            transition: all 0.3s ease; backdrop-filter: blur(4px); letter-spacing: 0.5px;
         }
         
         .course-card:hover .btn-view { 
@@ -212,26 +238,41 @@
             animation: geminiButtonBg 4s ease infinite;
             color: #fff; 
             border-color: transparent; 
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.6); 
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5); 
         }
 
         /* FLEXIBLE SIDEBAR SYSTEM */
-        .sidebar { flex: 1; width: 100%; display: flex; flex-direction: column; gap: 20px; }
-        @media (min-width: 1024px) { .sidebar { min-width: 310px; max-width: 360px; } }
+        .sidebar { flex: 1; width: 100%; display: flex; flex-direction: column; gap: 25px; }
+        @media (min-width: 1024px) { .sidebar { min-width: 320px; max-width: 360px; } }
 
         .widget {
-            background: rgba(15, 23, 42, 0.8); border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px; backdrop-filter: blur(10px); width: 100%;
+            background: var(--card-bg); border-radius: 22px; border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 22px; backdrop-filter: blur(15px); width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: border-color 0.3s ease;
         }
-        .widget h3 { font-size: 1.05rem; margin-bottom: 15px; border-left: 4px solid #1a73e8; padding-left: 10px; }
+        .widget:hover { border-color: rgba(56, 189, 248, 0.2); }
+        .widget h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 18px; border-left: 4px solid #38bdf8; padding-left: 12px; font-weight: 700; letter-spacing: 0.5px; }
 
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; }
-        .day-name { font-size: 10px; font-weight: 800; color: #1a73e8; padding-bottom: 5px; }
-        .date { font-size: 11px; padding: 8px; border-radius: 6px; background: rgba(255, 255, 255, 0.03); }
-        .date.today { background: #1a73e8; color: #fff; font-weight: 900; box-shadow: 0 0 10px rgba(26, 115, 232, 0.5); }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; }
+        .day-name { font-size: 11px; font-weight: 800; color: #38bdf8; padding-bottom: 6px; }
+        .date { font-size: 11.5px; padding: 9px; border-radius: 8px; background: rgba(255, 255, 255, 0.02); color: #cbd5e1; transition: all 0.2s ease; }
+        .date:hover:not(.today) { background: rgba(255, 255, 255, 0.08); color: #fff; }
+        .date.today { background: linear-gradient(135deg, #1a73e8, #38bdf8); color: #fff; font-weight: 900; box-shadow: 0 0 15px rgba(56, 189, 248, 0.5); border: 1px solid rgba(255,255,255,0.2); }
         
-        .recent-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .recent-item i { color: #38bdf8; }
+        .recent-item { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.04); }
+        .recent-item:last-child { border-bottom: none; }
+        .recent-item i { color: #38bdf8; font-size: 1.1rem; background: rgba(56, 189, 248, 0.1); padding: 10px; border-radius: 10px; }
+        .recent-item h4 { font-size: 13px; font-weight: 600; color: #f1f5f9; margin-bottom: 2px; }
+        .recent-item p { font-size: 11px; color: var(--text-muted); }
+
+        .widget input[type="text"] {
+            width: 100%; padding: 14px; background: rgba(3, 7, 18, 0.6); border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px; color: #fff; font-size: 13px; outline: none; transition: all 0.3s ease;
+        }
+        .widget input[type="text"]:focus {
+            border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.3); background: #000;
+        }
     </style>
 </head>
 <body>
@@ -395,7 +436,7 @@
         <div class="sidebar">
             <div class="widget">
                 <h3>Calendar</h3>
-                <div id="monthLabel" style="font-size: 14px; font-weight: 700; color: #1a73e8; margin-bottom: 12px; text-align: center;">July 2026</div>
+                <div id="monthLabel" style="font-size: 14px; font-weight: 700; color: #38bdf8; margin-bottom: 12px; text-align: center; font-family: 'Space Grotesk', sans-serif;">July 2026</div>
                 <div class="calendar-grid">
                     <div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div><div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div>
                     <div class="date">28</div><div class="date">29</div><div class="date">30</div><div class="date">1</div><div class="date">2</div><div class="date">3</div><div class="date today">4</div>
@@ -417,9 +458,9 @@
                 </div>
             </div>
             
-            <div class="widget" style="border-left: 4px solid #1a73e8;">
+            <div class="widget" style="border-left: 4px solid #a855f7;">
                 <h3>Prof. Ami (AI Assistant)</h3>
-                <input type="text" placeholder="Initiate chat..." style="width: 100%; padding: 12px; background: #000; border: 1px solid #1a73e8; border-radius: 8px; color: #fff; font-size: 13px; outline: none;">
+                <input type="text" placeholder="Initiate chat with Ami..." style="width: 100%;">
             </div>
         </div>
     </div>
@@ -436,7 +477,7 @@
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
         function drawMatrix() {
-            ctx.fillStyle = "rgba(2, 2, 4, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "rgba(3, 7, 18, 0.06)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "#00ff66"; ctx.font = fontSize + "px monospace";
             for (let i = 0; i < drops.length; i++) {
                 const text = chars[Math.floor(Math.random() * chars.length)];
