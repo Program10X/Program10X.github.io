@@ -6,7 +6,7 @@
     <title>Program10X | Advanced Student Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=500;700&family=Inter:wght=400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* CORE LAYOUT INITIALIZATION */
@@ -183,7 +183,7 @@
                     </div>
                 </div>
 
-                <!-- Card 2: English Mouth Driven with AI -->
+                <!-- Card 2: English Mouth Driven with AI (Active Script Activated Swirl Canvas) -->
                 <div class="course-card">
                     <div class="card-img-canvas-box" id="voiceWrapper">
                         <svg class="neon-mic-overlay-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -200,7 +200,7 @@
                     </div>
                 </div>
 
-                <!-- Card 3: Artificial Intelligence (NEW DYNAMIC INTERACTIVE NEURAL NETWORK CANVAS) -->
+                <!-- Card 3: Artificial Intelligence (Interactive Neural Network Connected Data Canvas) -->
                 <div class="course-card">
                     <div class="card-img-canvas-box" id="aiNetworkWrapper">
                         <canvas id="aiNeuralNetworkCanvas"></canvas>
@@ -213,10 +213,10 @@
                     </div>
                 </div>
 
-                <!-- Card 4 -->
+                <!-- Card 4: UX/UI Design with Cloud AI ML (NEW DYNAMIC INTERACTIVE INTERFACE ANALYTICS CANVA) -->
                 <div class="course-card">
-                    <div class="card-img">
-                        <img src="https://images.unsplash.com/photo-1626544827763-d516dce335e2?auto=format&fit=crop&w=600&q=80" alt="UX/UI Design Platform on Tablet">
+                    <div class="card-img-canvas-box" id="uxuiWrapper">
+                        <canvas id="uxuiInterfaceCanvas"></canvas>
                     </div>
                     <div class="card-body">
                         <div class="card-title">UX/UI Design with Cloud AI ML</div>
@@ -403,7 +403,7 @@
             requestAnimationFrame(drawMindPalace);
         }
 
-        // --- 🎙️ ENGLISH MOUTH DRIVEN WITH AI ENGINE ---
+        // --- 🎙️ ACTIVE SCRIPT: DYNAMIC ROTATING ABCD MATRIX SWIRL ENGINE ---
         const voiceCanvas = document.getElementById('voiceSynthCanvas');
         const vCtx = voiceCanvas.getContext('2d');
         const voiceWrapper = document.getElementById('voiceWrapper');
@@ -486,9 +486,8 @@
         });
         aiWrapper.addEventListener('mouseleave', () => { aiMouse.active = false; });
 
-        // Build Multi-layered Connected Neural Network System
         const aiNodes = [];
-        const layers = [4, 6, 6, 4]; // Neural layers structure
+        const layers = [4, 6, 6, 4];
         const layerSpacing = 300 / (layers.length + 1);
 
         function initAiNodes() {
@@ -513,12 +512,8 @@
 
         function drawAiNeuralEngine() {
             aiCtx.fillStyle = '#02040a'; aiCtx.fillRect(0, 0, aiCanvas.width, aiCanvas.height);
-
-            // Draw synaptic signal pathways
             aiNodes.forEach((node) => {
                 node.pulsePhase += node.pulseSpeed;
-                
-                // Mouse magnetism pull effect
                 if (aiMouse.active) {
                     let dx = aiMouse.x - node.x; let dy = aiMouse.y - node.y; let dist = Math.hypot(dx, dy);
                     if (dist < 80) {
@@ -528,8 +523,6 @@
                 } else {
                     node.x += (node.baseX - node.x) * 0.08; node.y += (node.baseY - node.y) * 0.08;
                 }
-
-                // Connect forward synapses lines
                 aiNodes.forEach((target) => {
                     if (target.layer === node.layer + 1) {
                         let distance = Math.hypot(target.x - node.x, target.y - node.y);
@@ -538,8 +531,6 @@
                             aiCtx.strokeStyle = `rgba(0, 255, 102, ${alpha})`;
                             aiCtx.lineWidth = 1;
                             aiCtx.beginPath(); aiCtx.moveTo(node.x, node.y); aiCtx.lineTo(target.x, target.y); aiCtx.stroke();
-                            
-                            // Synaptic data impulse animation along lines
                             let travelPercent = (Date.now() * 0.0015 + node.pulsePhase) % 1;
                             let pulseX = node.x + (target.x - node.x) * travelPercent;
                             let pulseY = node.y + (target.y - node.y) * travelPercent;
@@ -548,32 +539,92 @@
                         }
                     }
                 });
-
-                // Render individual neuron nodes
                 let sizeRad = 2.5 + Math.sin(node.pulsePhase) * 1;
                 let isHovered = aiMouse.active && Math.hypot(aiMouse.x - node.x, aiMouse.y - node.y) < 40;
-                
                 aiCtx.fillStyle = isHovered ? '#00ff66' : 'rgba(56, 189, 248, 0.85)';
                 aiCtx.beginPath(); aiCtx.arc(node.x, node.y, sizeRad, 0, Math.PI * 2); aiCtx.fill();
-                
                 if (isHovered || node.pulsePhase % 5 < 0.2) {
                     aiCtx.strokeStyle = 'rgba(0, 255, 102, 0.4)'; aiCtx.lineWidth = 0.5;
                     aiCtx.beginPath(); aiCtx.arc(node.x, node.y, sizeRad + 4, 0, Math.PI * 2); aiCtx.stroke();
                 }
             });
-
             requestAnimationFrame(drawAiNeuralEngine);
+        }
+
+        // --- 📊 UX/UI DESIGN WITH CLOUD AI ML (ACTIVE CANVAS PORTFOLIO ANALYTICS CANVAS) ---
+        const uxuiCanvas = document.getElementById('uxuiInterfaceCanvas');
+        const uxCtx = uxuiCanvas.getContext('2d');
+        const uxuiWrapper = document.getElementById('uxuiWrapper');
+        let uxMouse = { x: null, y: null, active: false };
+
+        function setupUxuiCanvas() {
+            uxuiCanvas.width = uxuiWrapper.clientWidth || 300;
+            uxuiCanvas.height = uxuiWrapper.clientHeight || 140;
+        }
+        setupUxuiCanvas();
+
+        uxuiWrapper.addEventListener('mousemove', (e) => {
+            const rect = uxuiCanvas.getBoundingClientRect();
+            uxMouse.x = e.clientX - rect.left; uxMouse.y = e.clientY - rect.top; uxMouse.active = true;
+        });
+        uxuiWrapper.addEventListener('mouseleave', () => { uxMouse.active = false; });
+
+        const uiWidgets = [];
+        for (let i = 0; i < 9; i++) {
+            uiWidgets.push({
+                x: Math.random() * (300 - 60) + 30,
+                y: Math.random() * (140 - 40) + 20,
+                w: Math.random() * 30 + 30,
+                h: Math.random() * 20 + 15,
+                hue: Math.random() < 0.5 ? '#38bdf8' : '#00ff66',
+                velocity: { x: (Math.random() - 0.5) * 0.6, y: (Math.random() - 0.5) * 0.6 },
+                growth: Math.random() * 0.1
+            });
+        }
+
+        function drawUxuiPortfolioEngine() {
+            uxCtx.fillStyle = '#01050f'; uxCtx.fillRect(0, 0, uxuiCanvas.width, uxuiCanvas.height);
+            uxCtx.strokeStyle = 'rgba(255, 255, 255, 0.03)'; uxCtx.lineWidth = 0.5;
+            for(let x = 0; x < uxuiCanvas.width; x += 20) { uxCtx.beginPath(); uxCtx.moveTo(x, 0); uxCtx.lineTo(x, uxuiCanvas.height); uxCtx.stroke(); }
+            for(let y = 0; y < uxuiCanvas.height; y += 20) { uxCtx.beginPath(); uxCtx.moveTo(0, y); uxCtx.lineTo(uxuiCanvas.width, y); uxCtx.stroke(); }
+
+            uiWidgets.forEach((widget) => {
+                widget.x += widget.velocity.x; widget.y += widget.velocity.y;
+                if (widget.x < 0 || widget.x + widget.w > uxuiCanvas.width) widget.velocity.x *= -1;
+                if (widget.y < 0 || widget.y + widget.h > uxuiCanvas.height) widget.velocity.y *= -1;
+                
+                let scaleW = 1, scaleH = 1;
+                if (uxMouse.active) {
+                    let mouseDist = Math.hypot(uxMouse.x - (widget.x + widget.w/2), uxMouse.y - (widget.y + widget.h/2));
+                    if (mouseDist < 60) {
+                        scaleW = 1.3; scaleH = 1.3; widget.velocity.x *= 1.02; widget.velocity.y *= 1.02;
+                    } else {
+                        widget.velocity.x *= 0.999; widget.velocity.y *= 0.999;
+                    }
+                }
+
+                uxCtx.fillStyle = widget.hue === '#38bdf8' ? 'rgba(56, 189, 248, 0.05)' : 'rgba(0, 255, 102, 0.04)';
+                uxCtx.strokeStyle = widget.hue; uxCtx.lineWidth = 1;
+                uxCtx.beginPath(); uxCtx.roundRect(widget.x - (widget.w*(scaleW-1)/2), widget.y - (widget.h*(scaleH-1)/2), widget.w * scaleW, widget.h * scaleH, 5); uxCtx.fill(); uxCtx.stroke();
+                
+                let lineCount = Math.floor(widget.h / 5);
+                for(let l=1; l<=lineCount; l++) {
+                    uxCtx.strokeStyle = `rgba(255, 255, 255, ${l%2===0 ? 0.08 : 0.03})`;
+                    uxCtx.beginPath(); uxCtx.moveTo(widget.x + 5, widget.y + (l*5)); uxCtx.lineTo(widget.x + widget.w - 5, widget.y + (l*5)); uxCtx.stroke();
+                }
+            });
+            requestAnimationFrame(drawUxuiPortfolioEngine);
         }
 
         // Initialize all stable rendering engines together
         setTimeout(() => { 
-            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas();
+            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas(); setupUxuiCanvas();
             initAiNodes();
-            drawMindPalace(); drawVoiceSynthEngine(); drawAiNeuralEngine(); 
+            drawMindPalace(); drawVoiceSynthEngine(); drawAiNeuralEngine(); drawUxuiPortfolioEngine();
         }, 150);
 
         window.addEventListener('resize', () => { 
-            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas(); initAiNodes();
+            setupMathCanvas(); setupVoiceCanvas(); setupAiCanvas(); setupUxuiCanvas(); initAiNodes();
         });
     </script>
 </body>
