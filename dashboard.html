@@ -20,14 +20,14 @@
             position: relative;
         }
 
-        /* 🟩 LIVE BACKGROUND MATRIX STREAM */
+        /* LIVE BACKGROUND MATRIX STREAM */
         #coderRain {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             opacity: 0.15; pointer-events: none; z-index: 1;
         }
 
-        /* 📋 CYBER NAVBAR */
+        /* CYBER NAVBAR */
         .navbar {
             position: fixed;
             top: 0; left: 0; right: 0; height: 75px;
@@ -65,15 +65,15 @@
             background: rgba(15, 23, 42, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 18px; overflow: hidden; transition: 0.3s;
-            position: relative; /* Base for layout management */
+            position: relative;
         }
         
-        /* 🛠️ SPECIAL FULL-BACKGROUND CARD MODIFIER FOR CARD 1 */
+        /* SPECIAL FULL-BACKGROUND CARD MODIFIER FOR CARD 1 & CARD 2 */
         .full-bg-card {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            min-height: 330px; /* Uniform height with other cards */
+            min-height: 330px;
         }
 
         .course-card:hover {
@@ -81,35 +81,13 @@
             box-shadow: 0 10px 30px rgba(0, 255, 102, 0.15);
         }
 
-        /* 📸 CANVAS MULTI-CONTAINER FOR VOICE SCIFI MODULE */
-        .card-img-canvas-box {
-            height: 140px; width: 100%; position: relative; background: #01040a;
-            border-bottom: 1px solid rgba(26, 115, 232, 0.15); overflow: hidden;
-            cursor: pointer;
-        }
-        .card-img-canvas-box canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        }
-
-        /* 🎙️ CUSTOM STYLING TO KEEP SVG MIC FLOAT ON CANVAS */
-        .neon-mic-overlay-icon {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 70px; height: 70px; filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.85));
-            pointer-events: none; z-index: 10; animation: micFloating 4s ease-in-out infinite;
-        }
-
-        @keyframes micFloating {
-            0%, 100% { transform: translate(-50%, -50%) translateY(0); filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.7)); }
-            50% { transform: translate(-50%, -50%) translateY(-4px); filter: drop-shadow(0 0 22px rgba(56, 189, 248, 0.95)); }
-        }
-
-        /* UNIFORM STATIC CARDS CONTAINER WITH HOVER ANIMATION */
+        /* UNIFORM STATIC CARDS CONTAINER */
         .card-img {
             height: 140px; width: 100%; position: relative; overflow: hidden;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: #060b13;
         }
         
-        /* 🛠️ OVERRIDE: Makes image cover the ENTIRE space for Card 1 */
+        /* OVERRIDE: Makes image cover the ENTIRE space for Full BG Cards */
         .full-bg-card .card-img {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -119,14 +97,14 @@
         .card-img img {
             width: 100%; height: 100%; object-fit: cover;
             transition: transform 0.5s ease, filter 0.3s ease;
-            filter: brightness(0.7) contrast(1.05); /* Slightly darker for text legibility */
+            filter: brightness(0.55) contrast(1.1); /* Forbes image high-quality hai, text contrast perfect aayega */
         }
-        .course-card:hover .card-img img { transform: scale(1.06); filter: brightness(0.85); }
+        .course-card:hover .card-img img { transform: scale(1.06); filter: brightness(0.7); }
         
         /* Dark gradient shade layer so the white text pops out perfectly */
         .card-img::after {
             content: ''; position: absolute; inset: 0;
-            background: linear-gradient(to bottom, transparent 10%, rgba(10, 15, 28, 0.6) 50%, rgba(15, 23, 42, 0.95) 90%);
+            background: linear-gradient(to bottom, transparent 10%, rgba(10, 15, 28, 0.4) 50%, rgba(15, 23, 42, 0.95) 90%);
         }
 
         .card-body { padding: 20px; position: relative; z-index: 2; }
@@ -190,7 +168,7 @@
             <h2>Course overview</h2>
             <div class="courses-grid">
                 
-                <!-- 🔮 CARD 1: MATH MAGIC WITH AI (NOW WITH PERFECT FULL RECTANGLE BACKGROUND IMAGE) -->
+                <!-- 🔮 CARD 1: MATH MAGIC WITH AI -->
                 <div class="course-card full-bg-card">
                     <div class="card-img">
                         <img src="https://indianai.in/wp-content/uploads/2021/06/math-ai.jpg" alt="Math Magic with AI Cyber Concepts">
@@ -203,13 +181,10 @@
                     </div>
                 </div>
 
-                <div class="course-card">
-                    <div class="card-img-canvas-box" id="voiceWrapper">
-                        <svg class="neon-mic-overlay-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" fill="rgba(56, 189, 248, 0.15)"/>
-                            <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 19v3M8 22h8"/>
-                        </svg>
-                        <canvas id="voiceSynthCanvas"></canvas>
+                <!-- 🎙️ CARD 2: ENGLISH MOUTH DRIVEN WITH AI (FORBES ROBOT IMAGE BACKGROUND) -->
+                <div class="course-card full-bg-card">
+                    <div class="card-img">
+                        <img src="https://imageio.forbes.com/specials-images/imageserve/663aa48e0291cc99986bbcf2/The-Future-Of-Oratory--AI-Enhanced-Public-Speaking/960x0.jpg" alt="AI-Enhanced Public Speaking Robot">
                     </div>
                     <div class="card-body">
                         <div class="card-title">English Mouth Driven with AI</div>
@@ -348,81 +323,6 @@
             }
         }
         setInterval(drawMatrix, 35);
-
-        // --- 🎙️ ACTIVE SCRIPT: DYNAMIC ROTATING ABCD MATRIX SWIRL ENGINE ---
-        const voiceCanvas = document.getElementById('voiceSynthCanvas');
-        const vCtx = voiceCanvas.getContext('2d');
-        const voiceWrapper = document.getElementById('voiceWrapper');
-        let voiceMouse = { x: null, y: null, active: false };
-
-        function setupVoiceCanvas() {
-            voiceCanvas.width = voiceWrapper.clientWidth || 300;
-            voiceCanvas.height = voiceWrapper.clientHeight || 140;
-        }
-        setupVoiceCanvas();
-
-        voiceWrapper.addEventListener('mousemove', (e) => {
-            const rect = voiceCanvas.getBoundingClientRect();
-            voiceMouse.x = e.clientX - rect.left; voiceMouse.y = e.clientY - rect.top; voiceMouse.active = true;
-        });
-        voiceWrapper.addEventListener('mouseleave', () => { voiceMouse.active = false; });
-
-        const abcdTokens = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        const abcdParticles = [];
-        
-        for (let i = 0; i < 45; i++) {
-            let radiusDist = Math.random() * 45 + 25;
-            abcdParticles.push({
-                char: abcdTokens[Math.floor(Math.random() * abcdTokens.length)],
-                angle: Math.random() * Math.PI * 2,
-                orbitRadius: radiusDist,
-                baseOrbit: radiusDist,
-                rotSpeed: (Math.random() * 0.015 + 0.005) * (Math.random() > 0.5 ? 1 : -1),
-                opacity: Math.random() * 0.5 + 0.3,
-                fontSize: Math.floor(Math.random() * 3) + 9
-            });
-        }
-
-        function drawVoiceSynthEngine() {
-            vCtx.fillStyle = '#01040a'; vCtx.fillRect(0, 0, voiceCanvas.width, voiceCanvas.height);
-            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.04)'; vCtx.lineWidth = 1;
-            for(let x = 0; x < voiceCanvas.width; x += 15) { vCtx.beginPath(); vCtx.moveTo(x, 0); vCtx.lineTo(x, voiceCanvas.height); vCtx.stroke(); }
-
-            let midX = voiceCanvas.width / 2;
-            let midY = voiceCanvas.height / 2;
-            let pulseScale = 45 + Math.sin(Date.now() * 0.005) * 8;
-            vCtx.strokeStyle = 'rgba(56, 189, 248, 0.12)'; vCtx.lineWidth = 1;
-            vCtx.beginPath(); vCtx.arc(midX, midY, pulseScale, 0, Math.PI * 2); vCtx.stroke();
-            
-            vCtx.strokeStyle = 'rgba(0, 255, 102, 0.06)';
-            vCtx.beginPath(); vCtx.arc(midX, midY, pulseScale + 20, 0, Math.PI * 2); vCtx.stroke();
-
-            abcdParticles.forEach((p) => {
-                p.angle += voiceMouse.active ? p.rotSpeed * 2.2 : p.rotSpeed;
-                if (voiceMouse.active) {
-                    let mouseDist = Math.hypot(voiceMouse.x - midX, voiceMouse.y - midY);
-                    p.orbitRadius = p.baseOrbit + (mouseDist * 0.12);
-                } else {
-                    p.orbitRadius += (p.baseOrbit - p.orbitRadius) * 0.05;
-                }
-                let x = midX + Math.cos(p.angle) * p.orbitRadius;
-                let y = midY + Math.sin(p.angle) * p.orbitRadius + 4;
-                vCtx.fillStyle = p.orbitRadius % 2 === 0 ? `rgba(56, 189, 248, ${p.opacity})` : `rgba(0, 255, 102, ${p.opacity * 0.8})`;
-                vCtx.font = `${p.fontSize}px 'Space Grotesk', sans-serif`;
-                vCtx.fillText(p.char, x, y);
-            });
-            requestAnimationFrame(drawVoiceSynthEngine);
-        }
-
-        // Initialize stable rendering engine
-        setTimeout(() => { 
-            setupVoiceCanvas(); 
-            drawVoiceSynthEngine(); 
-        }, 150);
-
-        window.addEventListener('resize', () => { 
-            setupVoiceCanvas(); 
-        });
     </script>
 </body>
 </html>
