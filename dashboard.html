@@ -78,7 +78,7 @@
             cursor: pointer;
         }
         .card-img-canvas-box canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;
         }
 
         /* 🎙️ CUSTOM STYLING TO KEEP SVG MIC FLOAT ON CANVAS */
@@ -92,6 +92,14 @@
             0%, 100% { transform: translate(-50%, -50%) translateY(0); filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.7)); }
             50% { transform: translate(-50%, -50%) translateY(-4px); filter: drop-shadow(0 0 22px rgba(56, 189, 248, 0.95)); }
         }
+
+        /* SPECIAL CONTAINER FOR AI WITH IMAGE BACKGROUND + CANVAS OVERLAY */
+        .ai-image-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; filter: brightness(0.5) contrast(1.2); z-index: 1;
+            transition: transform 0.5s ease;
+        }
+        .course-card:hover .ai-image-bg { transform: scale(1.06); filter: brightness(0.65); }
 
         /* UNIFORM STATIC CARDS CONTAINER */
         .card-img {
@@ -200,7 +208,10 @@
 
                 <div class="course-card">
                     <div class="card-img-canvas-box" id="aiWrapper">
-                        <canvas id="aiNeuralCanvas"></canvas>
+                        <!-- 🌌 KEEPING THE ORIGINAL EXACT IMAGE SAFE HERE -->
+                        <img class="ai-image-bg" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Artificial Intelligence Neural Network Grid">
+                        <!-- ⚡ TRANSPARENT ANIMATION CANVAS ON TOP -->
+                        <canvas id="aiNeuralCanvas" style="background: transparent;"></canvas>
                     </div>
                     <div class="card-body">
                         <div class="card-title">Artificial Intelligence</div>
@@ -460,7 +471,7 @@
             requestAnimationFrame(drawVoiceSynthEngine);
         }
 
-        // --- 🧠 ARTIFICIAL INTELLIGENCE NEURAL ENGINE ---
+        // --- 🧠 ARTIFICIAL INTELLIGENCE NEURAL ENGINE (WITH OVERLAY SUPPORT) ---
         const aiCanvas = document.getElementById('aiNeuralCanvas');
         const aiCtx = aiCanvas.getContext('2d');
         const aiWrapper = document.getElementById('aiWrapper');
@@ -473,24 +484,42 @@
 
         function initAiNodes() {
             aiNodes = [];
-            for(let i=0; i<4; i++) {
-                for(let j=0; j<4; j++) aiNodes.push({x: 40 + i*65, y: 20 + j*32});
+            // Generates an interactive floating cloud grid
+            for(let i=0; i<5; i++) {
+                for(let j=0; j<4; j++) {
+                    aiNodes.push({
+                        x: 25 + i * (aiCanvas.width / 5.2),
+                        y: 18 + j * (aiCanvas.height / 4.5),
+                        seed: Math.random() * 100
+                    });
+                }
             }
         }
 
         function drawAiNeuralEngine() {
-            aiCtx.fillStyle = '#01040a'; aiCtx.fillRect(0, 0, aiCanvas.width, aiCanvas.height);
-            aiCtx.strokeStyle = 'rgba(56, 189, 248, 0.15)'; aiCtx.lineWidth = 0.8;
+            // Clear rect transparently to let original image look crystal clear behind it
+            aiCtx.clearRect(0, 0, aiCanvas.width, aiCanvas.height);
+            
+            aiCtx.strokeStyle = 'rgba(0, 255, 102, 0.2)'; aiCtx.lineWidth = 0.9;
             
             aiNodes.forEach((n, idx) => {
-                let floatY = n.y + Math.sin(Date.now() * 0.002 + idx) * 3;
+                let floatY = n.y + Math.sin(Date.now() * 0.0025 + n.seed) * 5;
+                let floatX = n.x + Math.cos(Date.now() * 0.0015 + n.seed) * 3;
+                
                 aiNodes.forEach((t, tIdx) => {
-                    if(t.x > n.x && t.x - n.x < 75) {
-                        let targetFloatY = t.y + Math.sin(Date.now() * 0.002 + tIdx) * 3;
-                        aiCtx.beginPath(); aiCtx.moveTo(n.x, floatY); aiCtx.lineTo(t.x, targetFloatY); aiCtx.stroke();
+                    if(t.x > n.x && t.x - n.x < 85) {
+                        let targetFloatY = t.y + Math.sin(Date.now() * 0.0025 + t.seed) * 5;
+                        let targetFloatX = t.x + Math.cos(Date.now() * 0.0015 + t.seed) * 3;
+                        aiCtx.beginPath(); aiCtx.moveTo(floatX, floatY); aiCtx.lineTo(targetFloatX, targetFloatY); aiCtx.stroke();
                     }
                 });
-                aiCtx.fillStyle = '#38bdf8'; aiCtx.beginPath(); aiCtx.arc(n.x, floatY, 2.5, 0, Math.PI*2); aiCtx.fill();
+                
+                // Cyan/Green pulsing network nodes
+                aiCtx.fillStyle = idx % 2 === 0 ? '#38bdf8' : '#00ff66';
+                aiCtx.shadowColor = aiCtx.fillStyle;
+                aiCtx.shadowBlur = 6;
+                aiCtx.beginPath(); aiCtx.arc(floatX, floatY, 2.5, 0, Math.PI*2); aiCtx.fill();
+                aiCtx.shadowBlur = 0; // Reset blur
             });
             requestAnimationFrame(drawAiNeuralEngine);
         }
