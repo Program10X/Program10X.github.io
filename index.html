@@ -1,20 +1,17 @@
 <!-- DISCOVER IN-DEMAND PROGRAMS SECTION -->
 <section class="indemand-section">
     <div class="indemand-header">
-        <div>
-            <span class="scholarship-badge">🎓 Up to 45% Merit-Based Scholarship | Limited Seats</span>
-            <h2>Discover Our In-Demand Online Programs</h2>
-        </div>
-        <button class="btn-explore-all" onclick="toggleProgramModal()">Explore All Programs ➔</button>
+        <h2>Discover Our In-Demand Online Programs</h2>
+        <button class="btn-explore-all" onclick="toggleAmityMegaMenu()">Explore All Programs</button>
     </div>
 
     <!-- MAIN FILTER TABS -->
     <div class="indemand-tabs">
         <button class="in-tab active" onclick="filterDemandCards('all', this)">All Courses</button>
-        <button class="in-tab" onclick="filterDemandCards('ug', this)">UG Programs</button>
-        <button class="in-tab" onclick="filterDemandCards('pg', this)">PG Programs</button>
+        <button class="in-tab" onclick="filterDemandCards('pg', this)">PG Courses</button>
+        <button class="in-tab" onclick="filterDemandCards('ug', this)">UG Courses</button>
         <button class="in-tab" onclick="filterDemandCards('spec', this)">Specializations</button>
-        <button class="in-tab" onclick="filterDemandCards('regional', this)">Regional Media</button>
+        <button class="in-tab" onclick="filterDemandCards('cert', this)">Certifications</button>
     </div>
 
     <!-- CAROUSEL CONTAINER WITH ARROWS -->
@@ -22,101 +19,83 @@
         <button class="scroll-btn left" onclick="scrollDemandGrid(-320)">❮</button>
 
         <div class="indemand-cards-grid" id="indemandCardsGrid">
-            <!-- Program 1 -->
-            <div class="demand-card" data-cat="ug">
-                <div class="card-badge gold">Top UG Program</div>
-                <div class="card-body">
-                    <h3>Bachelor of Business Administration (BBA)</h3>
-                    <p class="desc">Learn core business concepts, gain practical insights from expert faculty, and study with flexibility.</p>
-                    <div class="card-details">
-                        <span>⏱ 3 Years</span>
-                        <span class="fee">₹1,99,000</span>
-                    </div>
-                    <button class="btn-brochure">Apply Now</button>
-                </div>
-            </div>
-
-            <!-- Program 2 -->
-            <div class="demand-card" data-cat="pg">
-                <div class="card-badge gold">QS Ranked</div>
-                <div class="card-body">
-                    <h3>Master of Business Administration (MBA)</h3>
-                    <p class="desc">A dynamic blend of academic excellence, AI-powered tools, and real-world industry projects.</p>
-                    <div class="card-details">
-                        <span>⏱ 2 Years</span>
-                        <span class="fee">₹2,25,000</span>
-                    </div>
-                    <button class="btn-brochure">Apply Now</button>
-                </div>
-            </div>
-
-            <!-- Program 3 -->
-            <div class="demand-card" data-cat="ug">
-                <div class="card-badge gold">Top UG Program</div>
-                <div class="card-body">
-                    <h3>Bachelor of Computer Applications (BCA)</h3>
-                    <p class="desc">Master in-demand programming and software development skills with hands-on projects.</p>
-                    <div class="card-details">
-                        <span>⏱ 3 Years</span>
-                        <span class="fee">₹1,75,000</span>
-                    </div>
-                    <button class="btn-brochure">Apply Now</button>
-                </div>
-            </div>
-
-            <!-- Program 4 -->
-            <div class="demand-card" data-cat="pg">
-                <div class="card-badge gold">Top PG Program</div>
-                <div class="card-body">
-                    <h3>Master of Computer Applications (MCA)</h3>
-                    <p class="desc">Build strong programming and application development skills through flexible learning.</p>
-                    <div class="card-details">
-                        <span>⏱ 2 Years</span>
-                        <span class="fee">₹1,99,000</span>
-                    </div>
-                    <button class="btn-brochure">Apply Now</button>
-                </div>
-            </div>
-
-            <!-- Program 5 -->
+            <!-- Card 1 -->
             <div class="demand-card" data-cat="pg spec">
                 <div class="card-badge gold">QS Ranked</div>
+                <div class="card-img-placeholder">
+                    <span class="partner-overlay">Apollo / Medvarsity</span>
+                </div>
+                <div class="card-body">
+                    <h3>MBA in Hospital and Healthcare Management</h3>
+                    <div class="card-details">
+                        <span>⏱ 24 months</span>
+                        <span class="fee">INR 3,29,000</span>
+                    </div>
+                    <button class="btn-brochure">Get Brochure</button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="demand-card" data-cat="ug">
+                <div class="card-badge trending">Trending</div>
+                <div class="card-img-placeholder">
+                    <span class="partner-overlay">Paytm</span>
+                </div>
+                <div class="card-body">
+                    <h3>BCA with Specialization in Fintech and AI</h3>
+                    <div class="card-details">
+                        <span>⏱ 36 months</span>
+                        <span class="fee">INR 2,75,000</span>
+                    </div>
+                    <button class="btn-brochure">Get Brochure</button>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="demand-card" data-cat="pg">
+                <div class="card-badge trending">Trending</div>
+                <div class="card-img-placeholder">
+                    <span class="partner-overlay">Paytm</span>
+                </div>
+                <div class="card-body">
+                    <h3>MCA with Specialization in Fintech and AI</h3>
+                    <div class="card-details">
+                        <span>⏱ 24 months</span>
+                        <span class="fee">INR 2,75,000</span>
+                    </div>
+                    <button class="btn-brochure">Get Brochure</button>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="demand-card" data-cat="pg spec">
+                <div class="card-badge trending">Trending</div>
+                <div class="card-img-placeholder">
+                    <span class="partner-overlay">RICS SBE</span>
+                </div>
+                <div class="card-body">
+                    <h3>MBA in Construction Project Management</h3>
+                    <div class="card-details">
+                        <span>⏱ 24 months</span>
+                        <span class="fee">INR 4,13,000</span>
+                    </div>
+                    <button class="btn-brochure">Get Brochure</button>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="demand-card" data-cat="pg spec">
+                <div class="card-badge gold">QS Ranked</div>
+                <div class="card-img-placeholder">
+                    <span class="partner-overlay">Amity University</span>
+                </div>
                 <div class="card-body">
                     <h3>MBA with Dual Specialization</h3>
-                    <p class="desc">Finance, Marketing, HR, Business Analytics, Production & Digital Marketing options.</p>
                     <div class="card-details">
-                        <span>⏱ 2 Years</span>
-                        <span class="fee">₹3,29,000</span>
+                        <span>⏱ 24 months</span>
+                        <span class="fee">INR 3,29,000</span>
                     </div>
-                    <button class="btn-brochure">Apply Now</button>
-                </div>
-            </div>
-
-            <!-- Program 6 -->
-            <div class="demand-card" data-cat="ug spec">
-                <div class="card-badge partner">HCLTech Partnered</div>
-                <div class="card-body">
-                    <h3>BBA with Specialization in Data Analytics</h3>
-                    <p class="desc">Combines business fundamentals with analytical skills like Python, R, and statistical visualization.</p>
-                    <div class="card-details">
-                        <span>⏱ 3 Years</span>
-                        <span class="fee">₹2,50,000</span>
-                    </div>
-                    <button class="btn-brochure">Apply Now</button>
-                </div>
-            </div>
-
-            <!-- Program 7 -->
-            <div class="demand-card" data-cat="pg spec">
-                <div class="card-badge">Cyber Tech</div>
-                <div class="card-body">
-                    <h3>MCA in Cyber Security</h3>
-                    <p class="desc">Equips learners with ethical hacking, cryptography, network security, and risk management.</p>
-                    <div class="card-details">
-                        <span>⏱ 2 Years</span>
-                        <span class="fee">₹2,75,000</span>
-                    </div>
-                    <button class="btn-brochure">Apply Now</button>
+                    <button class="btn-brochure">Get Brochure</button>
                 </div>
             </div>
         </div>
@@ -125,92 +104,43 @@
     </div>
 </section>
 
-<!-- MODAL OVERLAY FOR "EXPLORE ALL PROGRAMS" -->
-<div class="program-modal-overlay" id="programModal">
-    <div class="program-modal-content">
-        <div class="modal-header">
-            <h3>Explore All 48 Programs & 29 Certifications</h3>
-            <span class="close-btn" onclick="toggleProgramModal()">&times;</span>
-        </div>
-        <div class="modal-body">
-            <div class="program-grid-all">
-                <div class="p-item"><h4>Bachelor of Business Administration (BBA)</h4><span>3 Years | ₹1,99,000</span></div>
-                <div class="p-item"><h4>Master of Business Administration (MBA)</h4><span>2 Years | ₹2,25,000</span></div>
-                <div class="p-item"><h4>Bachelor of Computer Applications (BCA)</h4><span>3 Years | ₹1,75,000</span></div>
-                <div class="p-item"><h4>Master of Computer Applications (MCA)</h4><span>2 Years | ₹1,99,000</span></div>
-                <div class="p-item"><h4>Bachelor of Commerce (B.Com)</h4><span>3 Years | ₹1,15,000</span></div>
-                <div class="p-item"><h4>MCA in Cyber Security</h4><span>2 Years | ₹2,75,000</span></div>
-                <div class="p-item"><h4>MBA with Dual Specialization</h4><span>2 Years | ₹3,29,000</span></div>
-                <div class="p-item"><h4>BBA in Data Analytics (HCLTech)</h4><span>3 Years | ₹2,50,000</span></div>
-                <div class="p-item"><h4>BCA in Cloud and Security</h4><span>3 Years | ₹2,50,000</span></div>
-                <div class="p-item"><h4>Bachelor of Arts (BA)</h4><span>3 Years | ₹1,15,000</span></div>
-                <div class="p-item"><h4>BA Journalism & Mass Comm</h4><span>3 Years | ₹1,90,000</span></div>
-                <div class="p-item"><h4>M.Com in Financial Management</h4><span>2 Years | ₹1,50,000</span></div>
-                <div class="p-item"><h4>MA Journalism & Mass Comm</h4><span>2 Years | ₹1,90,000</span></div>
-                <div class="p-item"><h4>MA Public Policy & Governance</h4><span>2 Years | ₹1,50,000</span></div>
-                <div class="p-item"><h4>BA General (Malayalam Medium)</h4><span>3 Years | ₹90,000</span></div>
-                <div class="p-item"><h4>BA General (Tamil Medium)</h4><span>3 Years | ₹90,000</span></div>
-                <div class="p-item"><h4>BA General (Kannada Medium)</h4><span>3 Years | ₹90,000</span></div>
-                <div class="p-item"><h4>BA General (Telugu Medium)</h4><span>3 Years | ₹90,000</span></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- STYLES -->
+<!-- CSS STYLING -->
 <style>
 .indemand-section {
-    padding: 50px 5%;
-    background: #0b0f19;
+    padding: 60px 5%;
+    background: #070913;
     color: #ffffff;
-    font-family: Arial, sans-serif;
-}
-
-.scholarship-badge {
-    background: rgba(234, 179, 8, 0.15);
-    color: #facc15;
-    font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-weight: 600;
 }
 
 .indemand-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    margin-top: 10px;
+    align-items: center;
     margin-bottom: 25px;
 }
 
 .indemand-header h2 {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 800;
-    margin-top: 8px;
     color: #ffffff;
 }
 
 .btn-explore-all {
-    background: #2563eb;
-    border: none;
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
     padding: 10px 20px;
     border-radius: 6px;
     font-weight: 700;
     cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-explore-all:hover {
-    background: #1d4ed8;
 }
 
 .indemand-tabs {
     display: flex;
-    gap: 12px;
-    margin-bottom: 25px;
+    gap: 15px;
+    margin-bottom: 30px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 8px;
+    padding-bottom: 10px;
     overflow-x: auto;
 }
 
@@ -221,14 +151,15 @@
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    padding: 6px 14px;
+    padding: 6px 12px;
     border-radius: 4px;
     white-space: nowrap;
 }
 
 .in-tab.active {
-    color: #60a5fa;
-    background: rgba(96, 165, 250, 0.1);
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+    border-bottom: 2px solid #3b82f6;
 }
 
 .carousel-wrapper {
@@ -243,7 +174,7 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 10px 5px;
-    scrollbar-width: none;
+    scrollbar-width: none; /* Hide Scrollbar */
 }
 
 .indemand-cards-grid::-webkit-scrollbar {
@@ -251,16 +182,15 @@
 }
 
 .demand-card {
-    min-width: 280px;
-    max-width: 280px;
-    background: #1e293b;
+    min-width: 290px;
+    max-width: 290px;
+    background: #0f172a;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
+    overflow: hidden;
     position: relative;
-    transition: transform 0.3s, border-color 0.3s;
+    transition: transform 0.3s ease, border-color 0.3s ease;
     flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
 }
 
 .demand-card:hover {
@@ -271,77 +201,83 @@
 .card-badge {
     position: absolute;
     top: 12px;
-    right: 12px;
-    background: #334155;
-    color: #fff;
-    padding: 3px 8px;
+    left: 12px;
+    padding: 4px 10px;
     border-radius: 4px;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 800;
+    z-index: 2;
 }
 
 .card-badge.gold {
-    background: #eab308;
+    background: #f59e0b;
     color: #000;
 }
 
-.card-badge.partner {
-    background: #0284c7;
-    color: #fff;
+.card-badge.trending {
+    background: #fbbf24;
+    color: #000;
+}
+
+.card-img-placeholder {
+    height: 160px;
+    background: linear-gradient(135deg, #1e293b, #334155);
+    display: flex;
+    align-items: flex-end;
+    padding: 15px;
+}
+
+.partner-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #3b82f6;
 }
 
 .card-body {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    gap: 12px;
 }
 
 .card-body h3 {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
-    margin-top: 15px;
-    margin-bottom: 10px;
     color: #ffffff;
-    line-height: 1.3;
-}
-
-.desc {
-    font-size: 12px;
-    color: #94a3b8;
     line-height: 1.4;
-    margin-bottom: 15px;
+    height: 42px;
+    overflow: hidden;
 }
 
 .card-details {
     display: flex;
     justify-content: space-between;
-    font-size: 13px;
-    color: #cbd5e1;
+    font-size: 12px;
+    color: #94a3b8;
     font-weight: 600;
-    margin-bottom: 15px;
 }
 
 .fee {
-    color: #4ade80;
+    color: #ffffff;
 }
 
 .btn-brochure {
-    background: transparent;
-    border: 1px solid #3b82f6;
-    color: #3b82f6;
-    padding: 8px;
+    background: #1e3a8a;
+    border: none;
+    color: #ffffff;
+    padding: 10px;
     border-radius: 6px;
     font-size: 13px;
     font-weight: 700;
     cursor: pointer;
-    transition: 0.2s;
+    transition: background 0.2s;
 }
 
 .btn-brochure:hover {
-    background: #3b82f6;
-    color: #ffffff;
+    background: #2563eb;
 }
 
 .scroll-btn {
@@ -351,82 +287,23 @@
     background: rgba(15, 23, 42, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
     z-index: 10;
+    font-size: 16px;
 }
 
-.scroll-btn.left { left: -15px; }
-.scroll-btn.right { right: -15px; }
-
-/* MODAL STYLES */
-.program-modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-.program-modal-content {
-    background: #0f172a;
-    width: 80%;
-    max-width: 900px;
-    max-height: 80vh;
-    border-radius: 12px;
-    padding: 25px;
-    color: #fff;
-    overflow-y: auto;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #334155;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-}
-
-.close-btn {
-    font-size: 24px;
-    cursor: pointer;
-    color: #94a3b8;
-}
-
-.program-grid-all {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
-}
-
-.p-item {
-    background: #1e293b;
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 1px solid #334155;
-}
-
-.p-item h4 {
-    font-size: 14px;
-    margin: 0 0 5px 0;
-    color: #38bdf8;
-}
-
-.p-item span {
-    font-size: 12px;
-    color: #94a3b8;
-}
+.scroll-btn.left { left: -20px; }
+.scroll-btn.right { right: -20px; }
 </style>
 
-<!-- SCRIPTS -->
+<!-- JAVASCRIPT LOGIC -->
 <script>
 function scrollDemandGrid(distance) {
-    document.getElementById('indemandCardsGrid').scrollBy({ left: distance, behavior: 'smooth' });
+    const container = document.getElementById('indemandCardsGrid');
+    container.scrollBy({ left: distance, behavior: 'smooth' });
 }
 
 function filterDemandCards(category, btn) {
@@ -442,10 +319,5 @@ function filterDemandCards(category, btn) {
             card.style.display = 'none';
         }
     });
-}
-
-function toggleProgramModal() {
-    const modal = document.getElementById('programModal');
-    modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
 }
 </script>
