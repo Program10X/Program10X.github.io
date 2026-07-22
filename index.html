@@ -1,100 +1,2035 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Specific Highlighted Area</title>
-    <!-- FontAwesome Icons ke liye -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <title>Program10X | India's No. 1 Online Coding & AI University</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        body {
+            background-color: #070913;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        #coderRain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.18;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .top-announcement {
+            background: linear-gradient(90deg, #1e1b4b 0%, #0f172a 100%);
+            color: #e2e8f0;
+            font-size: 13px;
+            text-align: center;
+            padding: 10px 20px;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            z-index: 20;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        .top-announcement span {
+            color: #fbbf24;
+            font-weight: 700;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 40px;
+            background: rgba(10, 15, 30, 0.92);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 20;
+            backdrop-filter: blur(16px);
+            gap: 24px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #3b82f6;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+        }
+        .nav-logo span { color: #10b981; text-shadow: 0 0 12px rgba(16, 185, 129, 0.4); }
+
+        .nav-links-menu {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        .nav-links-menu a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+        .nav-links-menu a:hover { color: #ffffff; }
+
+        .search-container {
+            position: relative;
+            flex: 0 0 340px;
+        }
+        .search-container input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 8px;
+            padding: 9px 14px 9px 38px;
+            color: #ffffff;
+            font-size: 13px;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .search-container input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        .nav-right-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .btn-outline:hover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.05);
+        }
+        .btn-apply {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: #ffffff;
+            border: none;
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .btn-apply:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 40px;
+            gap: 40px;
+            z-index: 5;
+            background: linear-gradient(180deg, #0a0f1d 0%, #070913 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .hero-left {
+            flex: 1;
+            max-width: 680px;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12.5px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .hero-left h1 {
+            font-size: 3.4rem;
+            font-weight: 800;
+            line-height: 1.15;
+            color: #ffffff;
+            margin-bottom: 18px;
+            letter-spacing: -1px;
+        }
+        .hero-left h1 span {
+            color: #3b82f6;
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-left p {
+            font-size: 1.05rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        /* Lead Card Right */
+        .hero-right {
+            flex: 0 0 420px;
+        }
+        .lead-card {
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            position: relative;
+        }
+        .lead-card h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+        .lead-card p.subtitle {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 6px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 11px 14px;
+            color: #ffffff;
+            font-size: 13.5px;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .btn-submit-lead {
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            border: none;
+            padding: 13px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+        .btn-submit-lead:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: #090d19;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 5;
+        }
+        .stat-item {
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .stat-item:last-child { border-right: none; }
+        .stat-icon {
+            font-size: 28px;
+            background: rgba(59, 130, 246, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .stat-info h4 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+        .stat-info p {
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        @media (max-width: 992px) {
+            .hero-section { flex-direction: column; }
+            .hero-left h1 { font-size: 2.8rem; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .stat-item { border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+        }
+
+        /* New Amity-style Sections CSS */
+        .accreditation-showcase-section {
+            padding: 60px 40px;
+            background: #090d19;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .section-title-container h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+        .acc-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .acc-card {
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 24px 20px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .acc-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-5px);
+        }
+        .acc-logo-box {
+            width: 100%;
+            height: 90px;
+            background: #1e293b;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #ffffff;
+        }
+        .acc-badge-pill.qs {
+            background: #fbbf24;
+            color: #0f172a;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 1.5rem;
+        }
+        .acc-logo-box.wasc { color: #3b82f6; letter-spacing: -1px; }
+        .acc-logo-box.the { color: #f43f5e; }
+        .acc-logo-box.qaa { color: #10b981; }
+        .acc-logo-box.wes { color: #34d399; }
+        .acc-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        .acc-card p {
+            font-size: 12.5px;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        .why-us-section {
+            padding: 60px 40px;
+            background: #070913;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .why-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .why-header-row h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+        .why-header-row p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+        .why-card {
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .why-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-5px);
+        }
+        .why-icon-circle {
+            width: 50px;
+            height: 50px;
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        .why-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+        .why-card h4 {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #3b82f6;
+            margin-bottom: 12px;
+        }
+        .why-card p {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* Amity-style Light Sections Override for exact match */
+        .accreditation-showcase-section, .why-us-section {
+            background: #ffffff !important;
+            color: #0f172a !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+        .section-title-container h2, .why-header-row h2 {
+            color: #0f172a !important;
+        }
+        .why-header-row p {
+            color: #64748b !important;
+        }
+        .acc-card, .why-card {
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+        }
+        .acc-card:hover, .why-card:hover {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1) !important;
+        }
+        .acc-logo-box {
+            background: #f8fafc !important;
+            border: 1px solid #f1f5f9 !important;
+        }
+        .acc-card h3 {
+            color: #0f172a !important;
+        }
+        .acc-card p, .why-card p {
+            color: #64748b !important;
+        }
+        .why-card h3 {
+            color: #0f172a !important;
+        }
+        .why-card h4 {
+            color: #1e3a8a !important;
+        }
+        .why-icon-circle {
+            background: #e0f2fe !important;
+            color: #0284c7 !important;
+            border-color: #bae6fd !important;
+        }
+
+        /* Wondering Section (FAQ Interactive Bubble layout) */
+        .wondering-section {
+            padding: 80px 40px;
+            background: #ffffff;
+            color: #0f172a;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+        }
+        .wondering-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 30px;
+        }
+        .wondering-title span {
+            color: #3b82f6;
+        }
+        .wondering-container {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            padding: 40px 20px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+        .wondering-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .w-tab-btn {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #475569;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .w-tab-btn.active, .w-tab-btn:hover {
+            background: #1e293b;
+            color: #ffffff;
+            border-color: #1e293b;
+            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
+        }
+        .wondering-stage {
+            position: relative;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .central-person-img {
+            width: 220px;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 120px 120px 0 0;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+        .central-person-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 120px 120px 0 0;
+        }
+        /* Thought Bubbles */
+        .bubble-grid-left, .bubble-grid-right {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            z-index: 3;
+        }
+        .bubble-grid-left { left: 20px; }
+        .bubble-grid-right { right: 20px; }
+
+        .thought-bubble {
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .thought-bubble:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+        }
+        .thought-bubble.highlight {
+            border-color: #f43f5e;
+            box-shadow: 0 8px 25px rgba(244, 63, 94, 0.15);
+        }
+        .thought-bubble.highlight:hover {
+            border-color: #e11d48;
+        }
+
+        /* Modal for FAQ answer */
+        .faq-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .faq-modal-card {
+            background: #111827;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 35px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            position: relative;
+            animation: modalPop 0.3s ease;
+        }
+        @keyframes modalPop {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .faq-modal-close {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .faq-modal-card h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #60a5fa;
+            margin-bottom: 14px;
+        }
+        .faq-modal-card p {
+            font-size: 14.5px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        /* Course Catalog Section */
+        .catalog-section {
+            padding: 80px 40px;
+            background: #070913;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+        .catalog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .catalog-header h2 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        .catalog-header p {
+            color: #94a3b8;
+            font-size: 14.5px;
+        }
+        .catalog-filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #94a3b8;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #3b82f6;
+            color: #ffffff;
+            border-color: #3b82f6;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 28px;
+        }
+        .course-card {
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .course-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.2);
+        }
+        .course-header-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+        .course-tag {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .course-header-banner h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+        .course-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: space-between;
+        }
+        .course-specs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            font-size: 12.5px;
+            color: #94a3b8;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 12px;
+        }
+        .course-specs span strong {
+            color: #ffffff;
+        }
+        .course-desc {
+            font-size: 13.5px;
+            color: #94a3b8;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .course-footer {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-course-details {
+            flex: 1;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .btn-course-details:hover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.08);
+        }
+        .btn-course-apply {
+            flex: 1;
+            background: #3b82f6;
+            border: none;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transition: all 0.2s;
+        }
+        .btn-course-apply:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        /* Floating AI Chat Assistant Widget */
+        .ai-chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+        .ai-chat-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: #ffffff;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .ai-chat-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.7);
+        }
+        .ai-chat-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #10b981;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 6px;
+            border-radius: 10px;
+            border: 2px solid #070913;
+        }
+        .ai-chat-box {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            width: 360px;
+            height: 480px;
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: modalPop 0.3s ease;
+        }
+        .ai-chat-header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ai-chat-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .ai-avatar {
+            width: 36px;
+            height: 36px;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .ai-chat-title h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .ai-chat-title span {
+            font-size: 11px;
+            color: #10b981;
+            display: block;
+        }
+        .ai-chat-close {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .ai-chat-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 13px;
+        }
+        .ai-message {
+            background: #1e293b;
+            color: #cbd5e1;
+            padding: 10px 14px;
+            border-radius: 12px;
+            max-width: 85%;
+            line-height: 1.4;
+        }
+        .ai-message.user {
+            background: #3b82f6;
+            color: #ffffff;
+            align-self: flex-end;
+            border-radius: 12px 12px 0 12px;
+        }
+        .ai-chat-input-area {
+            padding: 14px;
+            background: #0f172a;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            gap: 8px;
+        }
+        .ai-chat-input-area input {
+            flex: 1;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #ffffff;
+            font-size: 13px;
+            outline: none;
+        }
+        .ai-chat-input-area input:focus {
+            border-color: #3b82f6;
+        }
+        .ai-send-btn {
+            background: #3b82f6;
+            color: #ffffff;
+            border: none;
+            padding: 0 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Unlock More Experience Section CSS */
+        .unlock-experience-section {
+            padding: 70px 40px;
+            background: #ffffff;
+            color: #0f172a;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .unlock-header-title {
+            font-size: 2.1rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 30px;
+        }
+        .unlock-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+        .unlock-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        .unlock-card:hover {
+            transform: translateY(-6px);
+            border-color: #3b82f6;
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.12);
+        }
+        .unlock-card-img-box {
+            width: 100%;
+            height: 200px;
+            background: #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+        .unlock-card-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .unlock-card:hover .unlock-card-img-box img {
+            transform: scale(1.05);
+        }
+        .unlock-card-body {
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: space-between;
+        }
+        .unlock-card-body h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+        .unlock-card-body p {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .btn-unlock-action {
+            display: inline-block;
+            background: #111827;
+            color: #ffffff;
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.2s;
+            align-self: flex-start;
+        }
+        .btn-unlock-action:hover {
+            background: #3b82f6;
+        }
+
+        /* Partner Logos & Global Career Impact Section CSS */
+        .partners-trust-section {
+            padding: 50px 40px;
+            background: #ffffff;
+            color: #0f172a;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .partners-trust-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+        }
+        .partners-marquee {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+        .partners-marquee::-webkit-scrollbar { display: none; }
+        .partner-logo-pill {
+            flex: 0 0 160px;
+            height: 65px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: #1e293b;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: all 0.2s;
+        }
+        .partner-logo-pill:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+        }
+
+        .career-impact-section {
+            padding: 70px 40px;
+            background: #ffffff;
+            color: #0f172a;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .career-impact-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .career-impact-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+        .btn-career-counselling {
+            background: #0f172a;
+            color: #ffffff;
+            border: none;
+            padding: 11px 24px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+            transition: all 0.2s;
+        }
+        .btn-career-counselling:hover {
+            background: #3b82f6;
+        }
+
+        .career-impact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 28px;
+            align-items: stretch;
+        }
+        .career-stats-col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .c-stat-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s;
+        }
+        .c-stat-card.dark {
+            background: #0f172a;
+            color: #ffffff;
+            border-color: #0f172a;
+        }
+        .c-stat-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-3px);
+        }
+        .c-stat-card h4 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+        .c-stat-card.dark h4 {
+            color: #fbbf24;
+        }
+        .c-stat-card p {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 600;
+        }
+        .c-stat-card.dark p {
+            color: #cbd5e1;
+        }
+        .c-stat-icon {
+            font-size: 22px;
+            align-self: flex-end;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        .coaching-banner-card {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+        }
+        .coaching-img-side {
+            flex: 0 0 42%;
+            background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+            position: relative;
+        }
+        .coaching-img-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .coaching-content-side {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .coaching-content-side h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 16px;
+        }
+        .coaching-points {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .coaching-point-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+        .coaching-point-item span {
+            color: #3b82f6;
+            font-weight: 800;
+        }
+        .coaching-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 5;
+            font-weight: 800;
+            color: #0f172a;
+        }
+        .coaching-nav-btn.left { left: 14px; }
+        .coaching-nav-btn.right { right: 14px; }
+
+        @media (max-width: 992px) {
+            .career-impact-grid { grid-template-columns: 1fr; }
+            .coaching-banner-card { flex-direction: column; }
+            .coaching-img-side { height: 240px; }
+        }
+
+        @media (max-width: 992px) {
+            .ai-chat-box { width: 300px; right: -10px; }
+        }
+    </style>
 </head>
 <body>
+    <canvas id="coderRain"></canvas>
 
-    <!-- Highlights Section (Hero + Stats) -->
-    <section class="highlights-container">
-        
-        <!-- 1. Deep Blue Hero Area -->
-        <div class="hero-deep-blue">
-            <div class="hero-text-content">
-                <!-- Top Small Badges -->
-                <div class="hero-badges">
-                    <span class="badge-item"><i class="fa-solid fa-graduation-cap"></i> UGC Entitled</span>
-                    <span class="badge-item"><i class="fa-solid fa-globe"></i> Globally Recognized</span>
-                </div>
+    <div class="top-announcement">
+        🎉 <span>Admissions Open for 2026 Batch!</span> QS Ranked & Globally Accredited Online Programs. <a href="#discoverySection" style="color: #fbbf24; text-decoration: underline; margin-left: 6px;">Apply Now</a>
+    </div>
 
-                <!-- Main Headlines -->
-                <h1>India's No. #1<br>Online University</h1>
-                <p class="sub-headline">
-                    <span><i class="fa-solid fa-hand-holding-dollar"></i> On-Campus Degree Equivalence</span>
-                    <span><i class="fa-solid fa-brain"></i> AI-Powered Immersive Learning</span>
-                </p>
-
-                <!-- 4 Course Thumbnails (Exact Layout) -->
-                <div class="course-cards-mini">
-                    <div class="mini-card active">
-                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=300" alt="BBA">
-                        <div class="card-desc">BBA <span>2 Specializations</span></div>
-                    </div>
-                    <div class="mini-card">
-                        <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=300" alt="MCA">
-                        <div class="card-desc">MCA <span>6 Specializations</span></div>
-                    </div>
-                    <div class="mini-card">
-                        <img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=300" alt="MBA CPM">
-                        <div class="card-desc">MBA <span>Construction Project Mgmt.</span></div>
-                    </div>
-                    <div class="mini-card">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=300" alt="BCA">
-                        <div class="card-desc">BCA <span>6 Specializations</span></div>
-                    </div>
-                </div>
-
-                <!-- CTA Action Buttons -->
-                <div class="hero-actions">
-                    <button class="btn-counselling">Get Free Counselling</button>
-                    <button class="btn-explore">Explore All Programs <i class="fa-solid fa-chevron-right"></i></button>
-                </div>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="#" class="nav-logo">Program<span>10X</span></a>
+            <div class="nav-links-menu">
+                <a href="#">Programs</a>
+                <a href="#">Accreditations</a>
+                <a href="#">Why Us</a>
+                <a href="#">Placements</a>
             </div>
+        </div>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search MBA, B.Tech, AI & Data Science..." id="courseSearchInput">
+        </div>
+        <div class="nav-right-actions">
+            <a href="#" class="btn-outline">Student Login</a>
+            <a href="#discoverySection" class="btn-apply">Enquire Now</a>
+        </div>
+    </nav>
 
-            <!-- Right Side Main Image (Graduation Photo) -->
-            <div class="hero-image-main">
-                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000" alt="Graduation Group">
+    <header class="hero-section">
+        <div class="hero-left">
+            <div class="hero-badge">⚡ India's No. 1 Online Coding & AI University</div>
+            <h1>Future-Ready Degrees Powered by <span>AI & Global Excellence</span></h1>
+            <p>Earn world-renowned Online Degrees with 100% placement support, 24/7 AI academic guidance from Prof. AMI 3.0, and live industry projects.</p>
+            <div class="hero-cta-group">
+                <a href="#discoverySection" class="btn-apply" style="padding: 13px 28px; font-size: 15px;">Explore Programs</a>
+                <a href="#" class="btn-outline" style="padding: 13px 28px; font-size: 15px;">Download Brochure</a>
             </div>
         </div>
 
-        <!-- 2. White Stats Counter Bar -->
-        <div class="stats-bar-white">
-            <div class="stat-box">
-                <i class="fa-solid fa-people-line icon-stat"></i>
-                <div class="stat-info">
-                    <h2>250,000+</h2>
-                    <p>Learners</p>
-                </div>
+        <div class="hero-right">
+            <div class="lead-card">
+                <h3>Start Your Journey</h3>
+                <p class="subtitle">Fill in your details to get instant counseling & brochure.</p>
+                <form id="leadCaptureForm" onsubmit="handleLeadSubmit(event)">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="leadName" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="leadEmail" required placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input type="tel" id="leadPhone" required placeholder="+91 98765 43210">
+                    </div>
+                    <div class="form-group">
+                        <label>Select Program of Interest</label>
+                        <select id="leadProgram">
+                            <option>Online MBA in AI & Tech Leadership</option>
+                            <option>Online MCA / B.Tech (Full Stack & Cloud)</option>
+                            <option>Executive PG in Data Science & GenAI</option>
+                            <option>Online BBA / BCA Program</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-submit-lead">Get Free Career Counseling</button>
+                </form>
             </div>
-            <div class="stat-box">
-                <i class="fa-solid fa-map-location-dot icon-stat"></i>
-                <div class="stat-info">
-                    <h2>150+</h2>
-                    <p>Countries</p>
-                </div>
+        </div>
+    </header>
+
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-icon">🎓</div>
+            <div class="stat-info">
+                <h4>1,50,000+</h4>
+                <p>Global Learners</p>
             </div>
-            <div class="stat-box">
-                <i class="fa-solid fa-truck-ramp-box icon-stat"></i>
-                <div class="stat-info">
-                    <h2>16,500+</h2>
-                    <p>Pincodes</p>
-                </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">💼</div>
+            <div class="stat-info">
+                <h4>500+</h4>
+                <p>Hiring Partners</p>
             </div>
-            <div class="stat-box">
-                <i class="fa-solid fa-id-card-clip icon-stat"></i>
-                <div class="stat-info">
-                    <h2>30+</h2>
-                    <p>Years Excellence</p>
-                </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">📈</div>
+            <div class="stat-info">
+                <h4>48%</h4>
+                <p>Average Salary Hike</p>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-info">
+                <h4>30+</h4>
+                <p>Years Excellence</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Course Catalog Section -->
+    <section class="catalog-section" id="courseCatalogSection">
+        <div class="catalog-header">
+            <div>
+                <h2>Explore Flagship Programs</h2>
+                <p>Industry-aligned online degrees & certifications powered by AI & global universities.</p>
+            </div>
+            <div class="catalog-filters">
+                <button class="filter-btn active" onclick="filterCourses('all', this)">All Programs</button>
+                <button class="filter-btn" onclick="filterCourses('mba', this)">MBA & Management</button>
+                <button class="filter-btn" onclick="filterCourses('tech', this)">B.Tech & MCA</button>
+                <button class="filter-btn" onclick="filterCourses('ai', this)">Data Science & AI</button>
             </div>
         </div>
 
+        <div class="courses-grid" id="coursesGridContainer">
+            <!-- Dynamically populated or rendered -->
+            <div class="course-card" data-category="mba">
+                <div class="course-header-banner">
+                    <span class="course-tag">QS Ranked #1</span>
+                    <h3>Online MBA in AI & Tech Leadership</h3>
+                </div>
+                <div class="course-body">
+                    <div>
+                        <div class="course-specs">
+                            <span>Duration: <strong>2 Years</strong></span>
+                            <span>Mode: <strong>Online / Live</strong></span>
+                        </div>
+                        <p class="course-desc">Master future-ready leadership skills, strategic decision making, and AI integration for enterprise transformation.</p>
+                    </div>
+                    <div class="course-footer">
+                        <button class="btn-course-details" onclick="openCourseModal('Online MBA in AI & Tech Leadership', '2 Years', 'Online / Live', 'Master future-ready leadership skills, strategic decision making, and AI integration for enterprise transformation. Includes international immersion and Harvard case studies.')">Syllabus</button>
+                        <button class="btn-course-apply" onclick="selectProgramForm('Online MBA in AI & Tech Leadership')">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-card" data-category="tech">
+                <div class="course-header-banner">
+                    <span class="course-tag">High Demand</span>
+                    <h3>Online MCA in Full Stack & Cloud Computing</h3>
+                </div>
+                <div class="course-body">
+                    <div>
+                        <div class="course-specs">
+                            <span>Duration: <strong>2 Years</strong></span>
+                            <span>Mode: <strong>100% Online</strong></span>
+                        </div>
+                        <p class="course-desc">Build advanced scalable applications, master cloud architecture on AWS/Azure, and practice modern DevOps pipelines.</p>
+                    </div>
+                    <div class="course-footer">
+                        <button class="btn-course-details" onclick="openCourseModal('Online MCA in Full Stack & Cloud Computing', '2 Years', '100% Online', 'Build advanced scalable applications, master cloud architecture on AWS/Azure, and practice modern DevOps pipelines with live capstones.')">Syllabus</button>
+                        <button class="btn-course-apply" onclick="selectProgramForm('Online MCA / B.Tech (Full Stack & Cloud)')">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-card" data-category="ai">
+                <div class="course-header-banner">
+                    <span class="course-tag">GenAI Specialization</span>
+                    <h3>Executive PG in Data Science & GenAI</h3>
+                </div>
+                <div class="course-body">
+                    <div>
+                        <div class="course-specs">
+                            <span>Duration: <strong>11 Months</strong></span>
+                            <span>Mode: <strong>Weekend Live</strong></span>
+                        </div>
+                        <p class="course-desc">Deep dive into LLMs, prompt engineering, computer vision, and predictive modeling with top industry mentors.</p>
+                    </div>
+                    <div class="course-footer">
+                        <button class="btn-course-details" onclick="openCourseModal('Executive PG in Data Science & GenAI', '11 Months', 'Weekend Live', 'Deep dive into LLMs, prompt engineering, computer vision, and predictive modeling with top industry mentors and real-world AI projects.')">Syllabus</button>
+                        <button class="btn-course-apply" onclick="selectProgramForm('Executive PG in Data Science & GenAI')">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-card" data-category="mba">
+                <div class="course-header-banner">
+                    <span class="course-tag">Undergraduate</span>
+                    <h3>Online BBA in Digital Business & Fintech</h3>
+                </div>
+                <div class="course-body">
+                    <div>
+                        <div class="course-specs">
+                            <span>Duration: <strong>3 Years</strong></span>
+                            <span>Mode: <strong>Online</strong></span>
+                        </div>
+                        <p class="course-desc">Designed for aspiring entrepreneurs and business leaders to master modern digital marketing, e-commerce, and fintech.</p>
+                    </div>
+                    <div class="course-footer">
+                        <button class="btn-course-details" onclick="openCourseModal('Online BBA in Digital Business & Fintech', '3 Years', 'Online', 'Designed for aspiring entrepreneurs and business leaders to master modern digital marketing, e-commerce, and fintech.')">Syllabus</button>
+                        <button class="btn-course-apply" onclick="selectProgramForm('Online BBA / BCA Program')">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
+    <section class="accreditation-showcase-section">
+        <div class="section-title-container">
+            <h2>Global Accredited. Trusted. Future-Ready.</h2>
+        </div>
+        <div class="acc-slider-wrapper">
+            <div class="acc-cards-container">
+                <div class="acc-card">
+                    <div class="acc-logo-box">
+                        <span class="acc-badge-pill qs">QS</span>
+                    </div>
+                    <h3>QS Ranked Online MBA 2024</h3>
+                    <p>India's only Online MBA ranked by QS among the Asia Pacific Top 10.</p>
+                </div>
+                <div class="acc-card">
+                    <div class="acc-logo-box wasc">
+                        <h4>WASC</h4>
+                    </div>
+                    <h3>WASC Accreditation (USA)</h3>
+                    <p>Accredited by the Western Association of Schools and Colleges (WASC), a globally respected recognition of academic quality.</p>
+                </div>
+                <div class="acc-card">
+                    <div class="acc-logo-box the">
+                        <h4>THE</h4>
+                    </div>
+                    <h3>Times Higher Education</h3>
+                    <p>Ranked by Times Higher Education for strong graduate employability and employer reputation.</p>
+                </div>
+                <div class="acc-card">
+                    <div class="acc-logo-box qaa">
+                        <h4>QAA</h4>
+                    </div>
+                    <h3>QAA (UK) Accreditation</h3>
+                    <p>Accredited by the UK's Quality Assurance Agency (QAA), reflecting internationally benchmarked academic standards.</p>
+                </div>
+                <div class="acc-card">
+                    <div class="acc-logo-box wes">
+                        <h4>WES</h4>
+                    </div>
+                    <h3>WES Recognition</h3>
+                    <p>Recognized by World Education Services (WES) for degree evaluation in Canada and the USA.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-us-section">
+        <div class="why-header-row">
+            <div>
+                <h2>Why Say Yes to Program10X</h2>
+                <p>Globally recognized | Digitally advanced | Deeply personalized</p>
+            </div>
+            <a href="#discoverySection" class="btn-apply">Start Your Learning Journey</a>
+        </div>
+
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon-circle">🎓</div>
+                <h3>Learn Your Way. Anywhere.</h3>
+                <h4>Flexible. Structured. Effective.</h4>
+                <p>Study in formats that suit you — videos, visuals, interactive exercises — designed for faster understanding and real-world application.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon-circle">🤖</div>
+                <h3>Smarter Learning, Powered by AI</h3>
+                <h4>Everything You Need. One Platform.</h4>
+                <p>AI summaries, smart practice questions, built-in note tools — all in one intuitive, immersive learning environment built to keep you ahead.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon-circle">⚡</div>
+                <h3>24/7 AI Academic Support</h3>
+                <h4>Never Study Alone.</h4>
+                <p>Prof. AMI 3.0 guides you through assignments, clears doubts instantly, and keeps you on track — anytime, anywhere.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon-circle">💼</div>
+                <h3>Learn by Doing</h3>
+                <h4>Live Industry Projects. Real Impact.</h4>
+                <p>Solve real business challenges with industry experts. Earn project certifications and build a recruiter-ready portfolio before you graduate.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Wondering Section -->
+    <section class="wondering-section" id="wonderingSection">
+        <div class="wondering-title">
+            Everything You're Wondering About—<span>Answered</span>
+        </div>
+        <div class="wondering-container">
+            <div class="wondering-tabs">
+                <button class="w-tab-btn active" onclick="switchWonderTab('student', this)">👤 I'm a Student</button>
+                <button class="w-tab-btn" onclick="switchWonderTab('parent', this)">👥 I'm a Parent</button>
+                <button class="w-tab-btn" onclick="switchWonderTab('professional', this)">💼 I'm a Working Professional</button>
+                <button class="w-tab-btn" onclick="switchWonderTab('entrepreneur', this)">🚀 I'm a budding entrepreneur</button>
+            </div>
+
+            <div class="wondering-stage" id="wonderingStageContainer">
+                <!-- Left Bubbles -->
+                <div class="bubble-grid-left" id="leftBubbles">
+                    <div class="thought-bubble" onclick="openFaqModal('Is an online degree as credible as a regular degree?', 'Yes! Degrees from Program10X are fully recognized, QS ranked, and UGC-entitled, holding equal weight to on-campus degrees for jobs and higher education worldwide.')">
+                        💭 Is an online degree as credible as a regular degree?
+                    </div>
+                    <div class="thought-bubble" onclick="openFaqModal('Can I pursue internships, work, or certifications alongside my degree?', 'Absolutely! The flexible online structure allows you to gain real work experience and professional certifications while completing your degree.')">
+                        💡 Can I pursue internships, work, or certifications alongside my degree?
+                    </div>
+                    <div class="thought-bubble" onclick="openFaqModal('Who do I reach out to if I’m stuck?', 'You have 24/7 access to Prof. AMI 3.0 (our advanced AI academic assistant) as well as dedicated faculty mentors and student success coaches.')">
+                        ❓ Who do I reach out to if I’m stuck?
+                    </div>
+                    <div class="thought-bubble" onclick="openFaqModal('Will I have opportunities beyond India?', 'Yes, our global university partners, WES recognition, and international hiring network open doors to careers globally.')">
+                        🌐 Will I have opportunities beyond India?
+                    </div>
+                </div>
+
+                <!-- Central Image Person -->
+                <div class="central-person-img">
+                    <img src="https://placehold.co/300x500/1e293b/ffffff?text=Student+Mind" alt="Student Thinking" onerror="this.src='https://placehold.co/300x500/3b82f6/ffffff?text=Learner'">
+                </div>
+
+                <!-- Right Bubbles -->
+                <div class="bubble-grid-right" id="rightBubbles">
+                    <div class="thought-bubble highlight" onclick="openFaqModal('Will I miss out on the college experience?', 'Not at all! You get access to vibrant online student clubs, hackathons, global tech summits, and live interactive networking events.')">
+                        🎯 Will I miss out on the “college experience”?
+                    </div>
+                    <div class="thought-bubble" onclick="openFaqModal('Will I still have career opportunities after graduation?', 'Yes! With our dedicated placement cell, 500+ hiring partners, and mock interviews, our grads secure top roles with average 48% hikes.')">
+                        💼 Will I still have career opportunities after graduation?
+                    </div>
+                    <div class="thought-bubble highlight" onclick="openFaqModal('What if I’m not academically confident?', 'Our adaptive learning platform breaks down complex coding and AI concepts into bite-sized visual modules with continuous AI tutoring support.')">
+                        💡 What if I’m not academically confident?
+                    </div>
+                    <div class="thought-bubble" onclick="openFaqModal('Can I interact with faculty and classmates?', 'Yes, through live doubt-clearing sessions, peer collaborative coding rooms, and active community forums.')">
+                        💬 Can I interact with faculty and classmates?
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Detail Modal -->
+    <div class="faq-modal-overlay" id="faqModalOverlay" onclick="closeFaqModal(event)">
+        <div class="faq-modal-card" id="faqModalCard">
+            <button class="faq-modal-close" onclick="closeFaqModalDirect()">×</button>
+            <h3 id="faqModalTitle">Question Title</h3>
+            <p id="faqModalAnswer">Answer details will appear here...</p>
+        </div>
+    </div>
+
+    <!-- Floating AI Chat Widget -->
+    <div class="ai-chat-widget">
+        <button class="ai-chat-btn" onclick="toggleAiChat()">
+            🤖
+            <span class="ai-chat-badge">AMI 3.0</span>
+        </button>
+        <div class="ai-chat-box" id="aiChatBox">
+            <div class="ai-chat-header">
+                <div class="ai-chat-title">
+                    <div class="ai-avatar">🎓</div>
+                    <div>
+                        <h4>Prof. AMI 3.0</h4>
+                        <span>● Online & Ready to Help</span>
+                    </div>
+                </div>
+                <button class="ai-chat-close" onclick="toggleAiChat()">×</button>
+            </div>
+            <div class="ai-chat-messages" id="aiChatMessages">
+                <div class="ai-message">Hello! I am Prof. AMI 3.0, your 24/7 AI academic advisor at Program10X. How can I help you choose the right course today?</div>
+            </div>
+            <div class="ai-chat-input-area">
+                <input type="text" id="aiChatInput" placeholder="Ask anything about courses, fees..." onkeypress="handleAiChatKey(event)">
+                <button class="ai-send-btn" onclick="sendAiMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Coder rain background effect
+        const canvas = document.getElementById('coderRain');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>/*{}[]=+-#$_@';
+        const fontSize = 14;
+        let columns = Math.floor(canvas.width / fontSize);
+        let drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function drawRain() {
+            ctx.fillStyle = 'rgba(7, 9, 19, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#3b82f6';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawRain, 35);
+
+        function handleLeadSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('leadName').value;
+            const program = document.getElementById('leadProgram').value;
+            alert(`Thank you, ${name}! Your application / inquiry for "${program}" has been successfully submitted. Our senior academic counselor will reach out to you within 24 hours.`);
+            document.getElementById('leadCaptureForm').reset();
+        }
+
+        function scrollToDiscovery() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Filter Course Catalog
+        function filterCourses(category, btnElement) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            const cards = document.querySelectorAll('.course-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openCourseModal(title, duration, mode, details) {
+            openFaqModal(title + ` (${duration} | ${mode})`, details);
+        }
+
+        function selectProgramForm(programName) {
+            const selectEl = document.getElementById('leadProgram');
+            for (let i = 0; i < selectEl.options.length; i++) {
+                if (selectEl.options[i].text.includes(programName.split(' ')[0])) {
+                    selectEl.selectedIndex = i;
+                    break;
+                }
+            }
+            window.scrollTo({ top: 400, behavior: 'smooth' });
+            document.getElementById('leadName').focus();
+        }
+
+        // Floating AI Chat Toggle & Simulation
+        function toggleAiChat() {
+            const box = document.getElementById('aiChatBox');
+            box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function handleAiChatKey(e) {
+            if (e.key === 'Enter') {
+                sendAiMessage();
+            }
+        }
+
+        function sendAiMessage() {
+            const input = document.getElementById('aiChatInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            const msgContainer = document.getElementById('aiChatMessages');
+            
+            // User bubble
+            const userDiv = document.createElement('div');
+            userDiv.className = 'ai-message user';
+            userDiv.innerText = msg;
+            msgContainer.appendChild(userDiv);
+            input.value = '';
+            msgContainer.scrollTop = msgContainer.scrollHeight;
+
+            // AI Response simulation
+            setTimeout(() => {
+                const aiDiv = document.createElement('div');
+                aiDiv.className = 'ai-message';
+                
+                const lower = msg.toLowerCase();
+                if (lower.includes('fee') || lower.includes('cost') || lower.includes('price')) {
+                    aiDiv.innerText = "Our online degree fees are up to 60% lower than traditional campus programs with easy 0% EMI options available starting at ₹4,500/month!";
+                } else if (lower.includes('placement') || lower.includes('job') || lower.includes('salary')) {
+                    aiDiv.innerText = "We offer 100% placement support with 500+ hiring partners. Our graduates get an average salary hike of 48%!";
+                } else if (lower.includes('mba') || lower.includes('bca') || lower.includes('mca') || lower.includes('course')) {
+                    aiDiv.innerText = "We offer QS-ranked Online MBAs, MCA, B.Tech, and Executive PG programs in GenAI. You can explore them in our course catalog above!";
+                } else {
+                    aiDiv.innerText = "That's a great question! Our senior academic counselors can provide a detailed PDF brochure tailored to your profile. Feel free to fill out the inquiry form above!";
+                }
+
+                msgContainer.appendChild(aiDiv);
+                msgContainer.scrollTop = msgContainer.scrollHeight;
+            }, 600);
+        }
+
+        // Wondering Section Interactive Tab Data
+        const wonderData = {
+            student: {
+                left: [
+                    { q: "Is an online degree as credible as a regular degree?", a: "Yes! Degrees from Program10X are fully recognized, QS ranked, and UGC-entitled, holding equal weight to on-campus degrees for jobs and higher education worldwide." },
+                    { q: "Can I pursue internships, work, or certifications alongside my degree?", a: "Absolutely! The flexible online structure allows you to gain real work experience and professional certifications while completing your degree." },
+                    { q: "Who do I reach out to if I’m stuck?", a: "You have 24/7 access to Prof. AMI 3.0 (our advanced AI academic assistant) as well as dedicated faculty mentors and student success coaches." },
+                    { q: "Will I have opportunities beyond India?", a: "Yes, our global university partners, WES recognition, and international hiring network open doors to careers globally." }
+                ],
+                right: [
+                    { q: "Will I miss out on the “college experience”?", a: "Not at all! You get access to vibrant online student clubs, hackathons, global tech summits, and live interactive networking events.", highlight: true },
+                    { q: "Will I still have career opportunities after graduation?", a: "Yes! With our dedicated placement cell, 500+ hiring partners, and mock interviews, our grads secure top roles with average 48% hikes." },
+                    { q: "What if I’m not academically confident?", a: "Our adaptive learning platform breaks down complex coding and AI concepts into bite-sized visual modules with continuous AI tutoring support.", highlight: true },
+                    { q: "Can I interact with faculty and classmates?", a: "Yes, through live doubt-clearing sessions, peer collaborative coding rooms, and active community forums." }
+                ]
+            },
+            parent: {
+                left: [
+                    { q: "Is my child’s future safe with an online degree?", a: "100%. Program10X offers UGC-entitled degrees with rigorous academic standards and top corporate acceptance." },
+                    { q: "How is student progress monitored?", a: "Parents receive regular AI-driven performance dashboards tracking attendance, quiz scores, and project completions." },
+                    { q: "Are there placement assurances?", a: "Yes, our dedicated Career Cell guarantees 100% placement support with top tech & corporate giants." }
+                ],
+                right: [
+                    { q: "What is the fee structure and ROI?", a: "Online degrees cost up to 60% less than traditional campus programs while delivering industry-leading salaries." },
+                    { q: "Is student safety & mental wellbeing supported?", a: "We provide dedicated student mentors and 24/7 counseling support to ensure a balanced, stress-free learning journey." },
+                    { q: "Can my child study from home safely?", a: "Yes, they can earn a world-class degree right from home without relocating or incurring hostel expenses." }
+                ]
+            },
+            professional: {
+                left: [
+                    { q: "Can I study while working full-time?", a: "Yes! Our programs feature flexible evening classes, weekend live mentoring, and self-paced modules." },
+                    { q: "Will this help me get a promotion or salary hike?", a: "Over 85% of working professional learners report immediate promotions or lateral shifts with 48% average hikes." },
+                    { q: "How are exams conducted for working professionals?", a: "Exams are conducted securely online with flexible proctored slots designed to fit busy work schedules." }
+                ],
+                right: [
+                    { q: "Do I get recognized executive credentials?", a: "Yes, you earn specialized Executive PG Diplomas or Online MBAs tailored for senior tech and management roles." },
+                    { q: "Can I apply what I learn immediately at my job?", a: "Our curriculum focuses on practical GenAI, Cloud, and Tech Leadership projects that you can apply at work the next day." }
+                ]
+            },
+            entrepreneur: {
+                left: [
+                    { q: "How does this help me build my startup?", a: "You learn cutting-edge AI, Full Stack development, and Tech Leadership directly from industry founders and tech pioneers." },
+                    { q: "Are there incubation or networking opportunities?", a: "Yes! Program10X connects student entrepreneurs with top angel investors, venture mentors, and incubation cells." },
+                    { q: "Can I build real tech products during the degree?", a: "Every semester includes live venture building capstones where you launch functional MVPs." }
+                ],
+                right: [
+                    { q: "Will I learn modern AI tools for business automation?", a: "You will master GenAI integration, workflow automation, and data analytics to scale startups efficiently." },
+                    { q: "Is there a founder community?", a: "Join an exclusive peer network of like-minded student founders and tech innovators across India." }
+                ]
+            }
+        };
+
+        function switchWonderTab(category, btnElement) {
+            document.querySelectorAll('.w-tab-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            const data = wonderData[category];
+            const leftContainer = document.getElementById('leftBubbles');
+            const rightContainer = document.getElementById('rightBubbles');
+
+            leftContainer.innerHTML = '';
+            rightContainer.innerHTML = '';
+
+            data.left.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'thought-bubble';
+                div.innerHTML = `💭 ${item.q}`;
+                div.onclick = () => openFaqModal(item.q, item.a);
+                leftContainer.appendChild(div);
+            });
+
+            data.right.forEach(item => {
+                const div = document.createElement('div');
+                div.className = item.highlight ? 'thought-bubble highlight' : 'thought-bubble';
+                div.innerHTML = `💡 ${item.q}`;
+                div.onclick = () => openFaqModal(item.q, item.a);
+                rightContainer.appendChild(div);
+            });
+        }
+
+        function openFaqModal(question, answer) {
+            document.getElementById('faqModalTitle').innerText = question;
+            document.getElementById('faqModalAnswer').innerText = answer;
+            document.getElementById('faqModalOverlay').style.display = 'flex';
+        }
+
+        function closeFaqModal(e) {
+            if (e.target.id === 'faqModalOverlay') {
+                document.getElementById('faqModalOverlay').style.display = 'none';
+            }
+        }
+
+        function closeFaqModalDirect() {
+            document.getElementById('faqModalOverlay').style.display = 'none';
+        }
+    </script>
+
+    <!-- Partner Logos Trust Section (Exact Amity Match) - Moved to Bottom -->
+    <section class="partners-trust-section">
+        <div class="partners-trust-title">
+            Employees From Leading Organizations Trust Program10X For Lifelong Learning
+        </div>
+        <div class="partners-marquee">
+            <div class="partner-logo-pill" style="color: #2563eb;">Infosys</div>
+            <div class="partner-logo-pill" style="color: #4f46e5;">accenture</div>
+            <div class="partner-logo-pill" style="color: #f59e0b;">Flipkart</div>
+            <div class="partner-logo-pill" style="color: #0284c7;">BARCLAYS</div>
+            <div class="partner-logo-pill" style="color: #059669;">SIEMENS</div>
+            <div class="partner-logo-pill" style="color: #0284c7;">CISCO</div>
+            <div class="partner-logo-pill" style="color: #dc2626;">Vi</div>
+            <div class="partner-logo-pill" style="color: #e11d48;">mahindra</div>
+            <div class="partner-logo-pill" style="color: #1e3a8a;">TATA POWER</div>
+            <div class="partner-logo-pill" style="color: #0891b2;">HERO</div>
+            <div class="partner-logo-pill" style="color: #b91c1c;">HSBC</div>
+        </div>
+    </section>
+
+    <!-- Global Career Impact Section (Exact Amity Match) - Moved to Bottom -->
+    <section class="career-impact-section">
+        <div class="career-impact-header">
+            <h2 class="career-impact-title">Global Career Impact That Speaks For Itself</h2>
+            <button class="btn-career-counselling" onclick="openFaqModal('Get Career Counselling', 'Connect with our elite career coaches for a 1-on-1 session to map your professional trajectory.')">Get Career Counselling</button>
+        </div>
+
+        <div class="career-impact-grid">
+            <div class="career-stats-col">
+                <div class="c-stat-card">
+                    <div>
+                        <h4>1,00,000+</h4>
+                        <p>Job opportunities created</p>
+                    </div>
+                    <div class="c-stat-icon">💼</div>
+                </div>
+                <div class="c-stat-card dark">
+                    <div>
+                        <h4>450+</h4>
+                        <p>Top hiring partners</p>
+                    </div>
+                    <div class="c-stat-icon">🤝</div>
+                </div>
+                <div class="c-stat-card">
+                    <div>
+                        <h4>100%</h4>
+                        <p>Placement assistance</p>
+                    </div>
+                    <div class="c-stat-icon">🎓</div>
+                </div>
+                <div class="c-stat-card">
+                    <div>
+                        <h4>AI Powered</h4>
+                        <p>Career support</p>
+                    </div>
+                    <div class="c-stat-icon">🤖</div>
+                </div>
+            </div>
+
+            <div class="coaching-banner-card">
+                <div class="coaching-nav-btn left" onclick="alert('Showing previous career coaching module')">‹</div>
+                <div class="coaching-nav-btn right" onclick="alert('Showing next career coaching module')">›</div>
+                <div class="coaching-img-side">
+                    <img src="https://placehold.co/400x350/1e293b/ffffff?text=Career+Coaching" alt="Personalized Career Coaching" onerror="this.src='https://placehold.co/400x350/3b82f6/ffffff?text=Coach'">
+                </div>
+                <div class="coaching-content-side">
+                    <h3>Personalized Career Coaching & Counselling</h3>
+                    <div class="coaching-points">
+                        <div class="coaching-point-item"><span>▪</span> 1-on-1 sessions with certified career coaches.</div>
+                        <div class="coaching-point-item"><span>▪</span> In-depth assessments to map your strengths and traits.</div>
+                        <div class="coaching-point-item"><span>▪</span> Guidance on goals, strengths, and next steps.</div>
+                        <div class="coaching-point-item"><span>▪</span> Customized career roadmap and action plan.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Unlock More From Your Program10X Experience Section -->
+    <section class="unlock-experience-section">
+        <div class="unlock-header-title">
+            Unlock More From Your Program10X Experience
+        </div>
+        <div class="unlock-cards-grid">
+            <!-- Card 1: Refer Friends -->
+            <div class="unlock-card">
+                <div class="unlock-card-img-box">
+                    <img src="https://placehold.co/400x250/1e293b/fbbf24?text=Refer+Friends+Earn+Rewards" alt="Refer Friends" onerror="this.src='https://placehold.co/400x250/3b82f6/ffffff?text=Refer+Earn'">
+                </div>
+                <div class="unlock-card-body">
+                    <div>
+                        <h3>Refer Friends. Earn Rewards.</h3>
+                        <p>Invite your friends to Program10X and earn exciting rewards when they enroll successfully.</p>
+                    </div>
+                    <button class="btn-unlock-action" onclick="openFaqModal('Refer Friends & Earn Rewards', 'Share your referral code with friends and fellow tech enthusiasts. Earn cash rewards and tuition fee credits for every successful enrollment!')">Refer Now</button>
+                </div>
+            </div>
+
+            <!-- Card 2: AI-Ready Career Programs -->
+            <div class="unlock-card">
+                <div class="unlock-card-img-box">
+                    <img src="https://placehold.co/400x250/0f172a/60a5fa?text=AI-Ready+Career+Programs" alt="AI Career Programs" onerror="this.src='https://placehold.co/400x250/10b981/ffffff?text=AI+Programs'">
+                </div>
+                <div class="unlock-card-body">
+                    <div>
+                        <h3>AI-Ready Career Programs</h3>
+                        <p>Build future-ready skills with industry-aligned AI certifications and career-focused learning paths.</p>
+                    </div>
+                    <button class="btn-unlock-action" onclick="openFaqModal('AI-Ready Career Programs', 'Master cutting-edge Generative AI, LLMs, and prompt engineering integrated directly into your degree curriculum.')">Explore AI Certifications</button>
+                </div>
+            </div>
+
+            <!-- Card 3: Scholarships for Achievers -->
+            <div class="unlock-card">
+                <div class="unlock-card-img-box">
+                    <img src="https://placehold.co/400x250/1e1b4b/f43f5e?text=Scholarships+for+Achievers" alt="Scholarships" onerror="this.src='https://placehold.co/400x250/f59e0b/ffffff?text=Scholarships'">
+                </div>
+                <div class="unlock-card-body">
+                    <div>
+                        <h3>Scholarships for Achievers</h3>
+                        <p>Unlock exclusive scholarship opportunities designed to make quality education more accessible.</p>
+                    </div>
+                    <button class="btn-unlock-action" onclick="openFaqModal('Scholarships for Achievers', 'Merit-based scholarships offer up to 50% tuition fee waivers for academic toppers, defense personnel, and women in tech.')">View Scholarships</button>
+                </div>
+            </div>
+
+            <!-- Card 4: Campus Merch Store -->
+            <div class="unlock-card">
+                <div class="unlock-card-img-box">
+                    <img src="https://placehold.co/400x250/111827/34d399?text=Campus+Merch+Store" alt="Campus Merch" onerror="this.src='https://placehold.co/400x250/6366f1/ffffff?text=Merch+Store'">
+                </div>
+                <div class="unlock-card-body">
+                    <div>
+                        <h3>Campus Merch Store</h3>
+                        <p>Shop official Program10X merch and represent your learner journey with pride.</p>
+                    </div>
+                    <button class="btn-unlock-action" onclick="openFaqModal('Campus Merch Store', 'Get your exclusive hoodies, customized laptop sleeves, smart bottles, and student tees delivered straight to your doorstep.')">Shop Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
