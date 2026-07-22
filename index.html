@@ -1,288 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program10X | Amity Style Portal</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
-        
-        body {
-            background-color: #0b132b; /* Amity Dark Navy Background */
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Top Amity Style Header/Navbar */
-        header {
-            width: 100%;
-            padding: 15px 50px;
-            background: rgba(11, 19, 43, 0.95);
-            border-bottom: 3px solid #ffc107; /* Amity Gold Border */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .brand-logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #ffffff;
-            letter-spacing: 1px;
-        }
-        .brand-logo span { color: #ffc107; } /* Gold Highlight */
-
-        .header-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 500;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-        .header-links a:hover { color: #ffc107; }
-
-        /* Main Container Split Layout */
-        .main-container {
-            flex: 1;
-            display: flex;
-            z-index: 5;
-        }
-
-        /* Left Side: Amity Hero Section */
-        .left-side {
-            flex: 1.2;
-            padding: 60px 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: radial-gradient(circle at top left, rgba(255, 193, 7, 0.08), transparent 50%);
-        }
-
-        .banner-content h1 {
-            font-size: 3.2rem;
-            color: #ffffff;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 15px;
-        }
-        .banner-content h1 span {
-            color: #ffc107; /* Amity Gold */
-        }
-
-        .banner-content p {
-            color: #cbd5e1;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        /* Amity Style Badge Chips */
-        .features-badges {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        .badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 193, 7, 0.4);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #ffc107;
-        }
-
-        /* Right Side: Amity Card Styled Auth Form */
-        .right-side {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-        }
-
-        .auth-container {
-            width: 100%;
-            max-width: 420px;
-            background: #1c2541; /* Dark Card Surface */
-            border-top: 4px solid #ffc107; /* Amity Accent Bar */
-            border-radius: 12px;
-            padding: 35px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Tabs */
-        .auth-tabs {
-            display: flex;
-            background: #0b132b;
-            padding: 4px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-        }
-        .tab-btn {
-            flex: 1;
-            background: none;
-            border: none;
-            color: #94a3b8;
-            padding: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-        .tab-btn.active {
-            background: #ffc107;
-            color: #0b132b;
-            font-weight: 700;
-        }
-
-        /* Forms */
-        .auth-form { display: none; }
-        .auth-form.active { display: block; }
-        .auth-container h2 { font-size: 1.8rem; margin-bottom: 6px; color: #ffffff; }
-        .auth-container p.subtitle { color: #94a3b8; font-size: 13px; margin-bottom: 20px; }
-
-        .input-group { margin-bottom: 18px; }
-        .input-group label { display: block; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; }
-        .input-group input {
-            width: 100%;
-            padding: 12px 14px;
-            background: #0b132b;
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 14px;
-        }
-        .input-group input:focus {
-            outline: none;
-            border-color: #ffc107;
-            box-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 13px;
-            background: #ffc107;
-            color: #0b132b;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .submit-btn:hover {
-            background: #e0a800;
-            box-shadow: 0 0 15px rgba(255, 193, 7, 0.4);
-        }
-
-        @media (max-width: 768px) {
-            .main-container { flex-direction: column; }
-            .left-side { padding: 30px; }
-            header { padding: 15px 20px; }
-        }
-    </style>
+    <title>Specific Highlighted Area</title>
+    <!-- FontAwesome Icons ke liye -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Amity Style Top Header -->
-    <header>
-        <div class="brand-logo">PROGRAM<span>10X</span></div>
-        <div class="header-links">
-            <a href="#">Courses</a>
-            <a href="#">AI Agents</a>
-            <a href="#">Placements</a>
-            <a href="#">Help Desk</a>
-        </div>
-    </header>
+    <!-- Highlights Section (Hero + Stats) -->
+    <section class="highlights-container">
+        
+        <!-- 1. Deep Blue Hero Area -->
+        <div class="hero-deep-blue">
+            <div class="hero-text-content">
+                <!-- Top Small Badges -->
+                <div class="hero-badges">
+                    <span class="badge-item"><i class="fa-solid fa-graduation-cap"></i> UGC Entitled</span>
+                    <span class="badge-item"><i class="fa-solid fa-globe"></i> Globally Recognized</span>
+                </div>
 
-    <div class="main-container">
-        <!-- Left Banner Section -->
-        <div class="left-side">
-            <div class="banner-content">
-                <h1>Amity Tech Portal.<br><span>Master Coding to AI.</span></h1>
-                <p>One unified portal for modern developers. Master industry-ready languages, logic, and build next-gen AI agents.</p>
-                <div class="features-badges">
-                    <span class="badge">🚀 Full-Stack Tech</span>
-                    <span class="badge">🧠 AI & Automation</span>
-                    <span class="badge">⚡ Placement Ready</span>
+                <!-- Main Headlines -->
+                <h1>India's No. #1<br>Online University</h1>
+                <p class="sub-headline">
+                    <span><i class="fa-solid fa-hand-holding-dollar"></i> On-Campus Degree Equivalence</span>
+                    <span><i class="fa-solid fa-brain"></i> AI-Powered Immersive Learning</span>
+                </p>
+
+                <!-- 4 Course Thumbnails (Exact Layout) -->
+                <div class="course-cards-mini">
+                    <div class="mini-card active">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=300" alt="BBA">
+                        <div class="card-desc">BBA <span>2 Specializations</span></div>
+                    </div>
+                    <div class="mini-card">
+                        <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=300" alt="MCA">
+                        <div class="card-desc">MCA <span>6 Specializations</span></div>
+                    </div>
+                    <div class="mini-card">
+                        <img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=300" alt="MBA CPM">
+                        <div class="card-desc">MBA <span>Construction Project Mgmt.</span></div>
+                    </div>
+                    <div class="mini-card">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=300" alt="BCA">
+                        <div class="card-desc">BCA <span>6 Specializations</span></div>
+                    </div>
+                </div>
+
+                <!-- CTA Action Buttons -->
+                <div class="hero-actions">
+                    <button class="btn-counselling">Get Free Counselling</button>
+                    <button class="btn-explore">Explore All Programs <i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Right Side Main Image (Graduation Photo) -->
+            <div class="hero-image-main">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000" alt="Graduation Group">
+            </div>
+        </div>
+
+        <!-- 2. White Stats Counter Bar -->
+        <div class="stats-bar-white">
+            <div class="stat-box">
+                <i class="fa-solid fa-people-line icon-stat"></i>
+                <div class="stat-info">
+                    <h2>250,000+</h2>
+                    <p>Learners</p>
+                </div>
+            </div>
+            <div class="stat-box">
+                <i class="fa-solid fa-map-location-dot icon-stat"></i>
+                <div class="stat-info">
+                    <h2>150+</h2>
+                    <p>Countries</p>
+                </div>
+            </div>
+            <div class="stat-box">
+                <i class="fa-solid fa-truck-ramp-box icon-stat"></i>
+                <div class="stat-info">
+                    <h2>16,500+</h2>
+                    <p>Pincodes</p>
+                </div>
+            </div>
+            <div class="stat-box">
+                <i class="fa-solid fa-id-card-clip icon-stat"></i>
+                <div class="stat-info">
+                    <h2>30+</h2>
+                    <p>Years Excellence</p>
                 </div>
             </div>
         </div>
 
-        <!-- Right Auth Section -->
-        <div class="right-side">
-            <div class="auth-container">
-                <div class="auth-tabs">
-                    <button class="tab-btn active" onclick="switchAuthTab('login')">Student Login</button>
-                    <button class="tab-btn" onclick="switchAuthTab('register')">Register Now</button>
-                </div>
+    </section>
 
-                <div id="loginForm" class="auth-form active">
-                    <h2>Welcome Back</h2>
-                    <p class="subtitle">Enter your credentials to access your portal</p>
-                    <form onsubmit="directToDashboard(event)">
-                        <div class="input-group">
-                            <label>Username / Email *</label>
-                            <input type="email" placeholder="name@program10x.com" required>
-                        </div>
-                        <div class="input-group">
-                            <label>Password *</label>
-                            <input type="password" placeholder="Enter password" required>
-                        </div>
-                        <button type="submit" class="submit-btn">Login to Portal</button>
-                    </form>
-                </div>
-
-                <div id="registerForm" class="auth-form">
-                    <h2>Create Account</h2>
-                    <p class="subtitle">Join the 10X learning space</p>
-                    <form onsubmit="directToDashboard(event)">
-                        <div class="input-group">
-                            <label>Full Name *</label>
-                            <input type="text" placeholder="Enter full name" required>
-                        </div>
-                        <div class="input-group">
-                            <label>Email Address *</label>
-                            <input type="email" placeholder="you@example.com" required>
-                        </div>
-                        <div class="input-group">
-                            <label>Password *</label>
-                            <input type="password" placeholder="Minimum 6 characters" required>
-                        </div>
-                        <button type="submit" class="submit-btn">Register Account</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function switchAuthTab(type) {
-            const tabs = document.querySelectorAll('.tab-btn');
-            const forms = document.querySelectorAll('.auth-form');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            forms.forEach(form => form.classList.remove('active'));
-            if (type === 'login') {
-                tabs[0].classList.add('active');
-                document.getElementById('loginForm').classList.add('active');
-            } else {
-                tabs[1].classList.add('active');
-                document.getElementById('registerForm').classList.add('active');
-            }
-        }
-
-        function directToDashboard(e) {
-            e.preventDefault();
-            window.location.href = "dashboard.html";
-        }
-    </script>
 </body>
 </html>
