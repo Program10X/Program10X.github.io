@@ -155,6 +155,7 @@
             font-weight: 700;
             font-size: 13px;
             transition: transform 0.2s;
+            display: inline-block;
         }
 
         .btn-apply:hover {
@@ -168,6 +169,7 @@
             font-size: 13px;
             font-weight: 600;
             transition: background 0.2s;
+            display: inline-block;
         }
 
         .btn-login:hover {
@@ -385,6 +387,8 @@
             cursor: pointer;
             font-size: 14px;
             transition: all 0.2s ease;
+            text-align: center;
+            display: inline-block;
         }
 
         .btn-primary {
@@ -629,13 +633,13 @@
 
     <!-- SCHOLARSHIP TOP BAR -->
     <div class="top-bar">
-        Get up to 45% merit-based scholarship on semester fee. Limited Seats. Apply Now.
+        Get up to 45% merit-based scholarship on semester fee. Limited Seats. <a href="dashboard.html" style="color: #ffea79; text-decoration: underline;">Apply Now</a>.
     </div>
 
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-left">
-            <a href="#" class="brand-logo">
+            <a href="index.html" class="brand-logo">
                 PROGRAM 10X <span>WITH AMITY</span>
                 <span class="brand-badge">ONLINE</span>
             </a>
@@ -647,10 +651,10 @@
                 <input type="text" id="mainCourseSearch" placeholder="Search for MBA, AI, BBA..." onkeyup="searchPrograms(this.value)">
             </div>
         </div>
-
         <div class="nav-right">
-            <a href="#" class="btn-apply">Apply Now</a>
-            <a href="#" class="btn-login">Login / Register</a>
+            <!-- Redirects user to portal / dashboard -->
+            <a href="dashboard.html" class="btn-apply">Apply Now</a>
+            <a href="dashboard.html" class="btn-login">Login / Register</a>
         </div>
     </nav>
 
@@ -680,7 +684,6 @@
                     <h3 id="currentCategoryTitle">All Programs</h3>
                     <span class="close-mega-btn" onclick="toggleAmityMegaMenu()">×</span>
                 </div>
-
                 <div class="amity-programs-grid" id="amityProgramsGrid">
                     <!-- Core Degrees -->
                     <div class="program-card-item" data-cat="ug"><h4>Bachelor of Business Administration (BBA)</h4><div class="p-meta"><span class="badge-tag best">Best Seller</span> • 3 YEARS</div></div>
@@ -742,7 +745,7 @@
             </div>
             <div class="hero-cta">
                 <button class="btn-lg btn-primary" onclick="toggleAmityMegaMenu()">Explore All Programs</button>
-                <button class="btn-lg btn-secondary">Get Free Counselling</button>
+                <a href="dashboard.html" class="btn-lg btn-secondary">Get Free Counselling / Login</a>
             </div>
         </div>
     </section>
@@ -786,7 +789,7 @@
                 <span class="partner-logo">Infosys</span>
                 <span class="partner-logo">Accenture</span>
                 <span class="partner-logo">Flipkart</span>
-                <!-- Repeat for infinite smooth loop -->
+                <!-- Loop repeats for animation -->
                 <span class="partner-logo">Google</span>
                 <span class="partner-logo">Apple</span>
                 <span class="partner-logo">PwC</span>
@@ -816,35 +819,26 @@
         </div>
     </section>
 
-    <!-- CAREER SERVICES SECTION -->
+    <!-- CAREER SERVICES -->
     <section class="career-services">
         <div class="section-header">
-            <h2>Global Career Impact That Speaks For Itself</h2>
-            <p style="color: var(--text-muted); font-size: 14px;">100,000+ Job Opportunities Created • 450+ Top Hiring Partners</p>
+            <h2>Robust Career Assistance</h2>
         </div>
         <div class="services-grid">
             <div class="service-card">
-                <h3>Next-Gen Career Services</h3>
+                <h3>Placement Support</h3>
                 <ul>
-                    <li>Build industry-ready resumes instantly with AI</li>
-                    <li>Get job matches tailored to your profile</li>
-                    <li>Practice AI mock interviews to boost confidence</li>
+                    <li>100+ Hiring Drives</li>
+                    <li>Global Internship Portals</li>
+                    <li>Resume Building Workshops</li>
                 </ul>
             </div>
             <div class="service-card">
-                <h3>Personalized Coaching</h3>
+                <h3>Mentorship</h3>
                 <ul>
-                    <li>1-on-1 sessions with certified career coaches</li>
-                    <li>In-depth assessments to map your strengths</li>
-                    <li>Customized career roadmap & action plan</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <h3>Job Readiness Initiatives</h3>
-                <ul>
-                    <li>Industry-recognized certifications</li>
-                    <li>Real-world learning via virtual industry visits</li>
-                    <li>Expert insights & masterclasses</li>
+                    <li>1-on-1 Industry Mentors</li>
+                    <li>Mock Interviews & Feedback</li>
+                    <li>Live Industry Projects</li>
                 </ul>
             </div>
         </div>
@@ -853,39 +847,38 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-content">
-            <div>
-                <h3 style="color: #fff; margin-bottom: 8px;">PROGRAM 10X WITH AMITY</h3>
-                <p>India's No.1 Online University offering UG, PG, and certifications.</p>
+            <div class="brand-logo">
+                PROGRAM 10X <span>WITH AMITY</span>
             </div>
-            <div>
-                <p>Toll Free Admissions: <strong>1800-102-3434</strong></p>
-                <p>Student Support: <strong>+91-88-263-34455</strong></p>
-            </div>
+            <p>© Program10X in collaboration with Amity Online. All Rights Reserved.</p>
         </div>
         <div class="footer-bottom">
-            © 2026 Program 10X with Amity Online - All Rights Reserved.
+            UGC Recognized | AI-Powered Learning Ecosystem
         </div>
     </footer>
 
     <!-- INTERACTIVE JAVASCRIPT -->
     <script>
-        // Mega Menu Toggle
         function toggleAmityMegaMenu() {
             const menu = document.getElementById('amityMegaMenu');
             menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
         }
 
-        // Filter Programs in Mega Menu
         function filterPrograms(category, btnElement) {
-            document.querySelectorAll('.mega-tab-btn').forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
+            // Update active sidebar tab style
+            const tabs = document.querySelectorAll('.mega-tab-btn');
+            tabs.forEach(t => t.classList.remove('active'));
+            if(btnElement) btnElement.classList.add('active');
 
-            document.getElementById('currentCategoryTitle').innerText = btnElement.innerText;
+            // Update title
+            const titleElement = document.getElementById('currentCategoryTitle');
+            if(btnElement) titleElement.textContent = btnElement.textContent;
 
+            // Filter items
             const cards = document.querySelectorAll('.program-card-item');
             cards.forEach(card => {
-                const categories = card.getAttribute('data-cat').split(' ');
-                if (category === 'all' || categories.includes(category)) {
+                const cats = card.getAttribute('data-cat') || '';
+                if (category === 'all' || cats.includes(category)) {
                     card.style.display = 'block';
                 } else {
                     card.style.display = 'none';
@@ -893,18 +886,15 @@
             });
         }
 
-        // Real-Time Live Search Logic
         function searchPrograms(query) {
-            const filter = query.toLowerCase().trim();
             const cards = document.querySelectorAll('.program-card-item');
-            
-            if (filter.length > 0) {
-                document.getElementById('amityMegaMenu').style.display = 'block';
+            const menu = document.getElementById('amityMegaMenu');
+            if (query.trim().length > 0) {
+                menu.style.display = 'block';
             }
-
             cards.forEach(card => {
                 const text = card.innerText.toLowerCase();
-                if (text.includes(filter)) {
+                if (text.includes(query.toLowerCase())) {
                     card.style.display = 'block';
                 } else {
                     card.style.display = 'none';
