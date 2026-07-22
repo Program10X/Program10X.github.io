@@ -1,287 +1,607 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program10X | Amity Style Portal</title>
+    <title>Amity Online - Programs</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
-        
-        body {
-            background-color: #0b132b; /* Amity Dark Navy Background */
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            position: relative;
+        /* ==================== GLOBAL STYLES ==================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* Top Amity Style Header/Navbar */
-        header {
-            width: 100%;
-            padding: 15px 50px;
-            background: rgba(11, 19, 43, 0.95);
-            border-bottom: 3px solid #ffc107; /* Amity Gold Border */
+        body {
+            background-color: #070913;
+            color: #ffffff;
+            line-height: 1.5;
+        }
+
+        /* ==================== TOP BANNER & NAVBAR ==================== */
+        .top-announcement {
+            background: linear-gradient(90deg, #1e3a8a, #0284c7);
+            color: #ffffff;
+            text-align: center;
+            padding: 8px 15px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 10;
+            padding: 15px 5%;
+            background: #0f172a;
+            border-bottom: 1px solid #1e293b;
         }
 
-        .brand-logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #ffffff;
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: #facc15;
             letter-spacing: 1px;
         }
-        .brand-logo span { color: #ffc107; } /* Gold Highlight */
 
-        .header-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 500;
-            font-size: 14px;
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-nav {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-apply {
+            background: #eab308;
+            color: #000000;
+        }
+
+        .btn-login {
+            background: #1e293b;
+            color: #ffffff;
+            border: 1px solid #334155;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero-section {
+            padding: 40px 5%;
+            background: linear-gradient(180deg, #0f172a 0%, #070913 100%);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #1e293b;
+        }
+
+        .stat-card h3 {
+            font-size: 26px;
+            color: #38bdf8;
+        }
+
+        .stat-card p {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        /* ==================== DISCOVER PROGRAMS SECTION ==================== */
+        .indemand-section {
+            padding: 50px 5%;
+        }
+
+        .indemand-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .indemand-header h2 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .btn-explore-all {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
             transition: 0.3s;
         }
-        .header-links a:hover { color: #ffc107; }
 
-        /* Main Container Split Layout */
-        .main-container {
-            flex: 1;
+        .btn-explore-all:hover {
+            background: #2563eb;
+            border-color: #2563eb;
+        }
+
+        /* FILTER TABS */
+        .indemand-tabs {
             display: flex;
-            z-index: 5;
-        }
-
-        /* Left Side: Amity Hero Section */
-        .left-side {
-            flex: 1.2;
-            padding: 60px 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: radial-gradient(circle at top left, rgba(255, 193, 7, 0.08), transparent 50%);
-        }
-
-        .banner-content h1 {
-            font-size: 3.2rem;
-            color: #ffffff;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 15px;
-        }
-        .banner-content h1 span {
-            color: #ffc107; /* Amity Gold */
-        }
-
-        .banner-content p {
-            color: #cbd5e1;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        /* Amity Style Badge Chips */
-        .features-badges {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        .badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 193, 7, 0.4);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #ffc107;
-        }
-
-        /* Right Side: Amity Card Styled Auth Form */
-        .right-side {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-        }
-
-        .auth-container {
-            width: 100%;
-            max-width: 420px;
-            background: #1c2541; /* Dark Card Surface */
-            border-top: 4px solid #ffc107; /* Amity Accent Bar */
-            border-radius: 12px;
-            padding: 35px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Tabs */
-        .auth-tabs {
-            display: flex;
-            background: #0b132b;
-            padding: 4px;
-            border-radius: 8px;
+            gap: 12px;
             margin-bottom: 25px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 10px;
+            overflow-x: auto;
         }
-        .tab-btn {
-            flex: 1;
-            background: none;
+
+        .in-tab {
+            background: transparent;
             border: none;
             color: #94a3b8;
-            padding: 10px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+            padding: 6px 14px;
+            border-radius: 4px;
+            white-space: nowrap;
         }
-        .tab-btn.active {
-            background: #ffc107;
-            color: #0b132b;
+
+        .in-tab.active, .in-tab:hover {
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        /* CAROUSEL */
+        .carousel-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .indemand-cards-grid {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px 5px;
+            scrollbar-width: none;
+        }
+
+        .indemand-cards-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* PROGRAM CARDS */
+        .demand-card {
+            min-width: 280px;
+            max-width: 280px;
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s, border-color 0.3s;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .demand-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #f59e0b;
+            color: #000;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 800;
+            z-index: 2;
+        }
+
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            height: 100%;
+        }
+
+        .card-body h3 {
+            font-size: 16px;
             font-weight: 700;
-        }
-
-        /* Forms */
-        .auth-form { display: none; }
-        .auth-form.active { display: block; }
-        .auth-container h2 { font-size: 1.8rem; margin-bottom: 6px; color: #ffffff; }
-        .auth-container p.subtitle { color: #94a3b8; font-size: 13px; margin-bottom: 20px; }
-
-        .input-group { margin-bottom: 18px; }
-        .input-group label { display: block; font-size: 13px; color: #cbd5e1; margin-bottom: 6px; }
-        .input-group input {
-            width: 100%;
-            padding: 12px 14px;
-            background: #0b132b;
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            border-radius: 8px;
             color: #ffffff;
-            font-size: 14px;
-        }
-        .input-group input:focus {
-            outline: none;
-            border-color: #ffc107;
-            box-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
+            margin-top: 20px;
+            line-height: 1.3;
+            min-height: 42px;
         }
 
-        .submit-btn {
-            width: 100%;
-            padding: 13px;
-            background: #ffc107;
-            color: #0b132b;
+        .card-desc {
+            font-size: 12px;
+            color: #94a3b8;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #cbd5e1;
+            font-weight: 600;
+            padding-top: 10px;
+            border-top: 1px solid #1e293b;
+            margin-top: auto;
+        }
+
+        .fee {
+            color: #4ade80;
+        }
+
+        .btn-brochure {
+            background: #1e3a8a;
             border: none;
-            border-radius: 8px;
-            font-size: 15px;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .submit-btn:hover {
-            background: #e0a800;
-            box-shadow: 0 0 15px rgba(255, 193, 7, 0.4);
+            transition: background 0.2s;
+            margin-top: 10px;
         }
 
-        @media (max-width: 768px) {
-            .main-container { flex-direction: column; }
-            .left-side { padding: 30px; }
-            header { padding: 15px 20px; }
+        .btn-brochure:hover {
+            background: #2563eb;
+        }
+
+        /* SCROLL BUTTONS */
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid #334155;
+            color: #ffffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 16px;
+        }
+
+        .scroll-btn.left { left: -15px; }
+        .scroll-btn.right { right: -15px; }
+
+        /* ==================== POPUP MODAL ==================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #0f172a;
+            border: 1px solid #334155;
+            width: 90%;
+            max-width: 900px;
+            max-height: 80vh;
+            border-radius: 12px;
+            padding: 25px;
+            color: #fff;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            font-size: 26px;
+            cursor: pointer;
+            color: #94a3b8;
+        }
+
+        .program-grid-all {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .p-item {
+            background: #1e293b;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        .p-item h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #38bdf8;
+        }
+
+        .p-item span {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: #0f172a;
+            padding: 30px 5%;
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Amity Style Top Header -->
-    <header>
-        <div class="brand-logo">PROGRAM<span>10X</span></div>
-        <div class="header-links">
-            <a href="#">Courses</a>
-            <a href="#">AI Agents</a>
-            <a href="#">Placements</a>
-            <a href="#">Help Desk</a>
-        </div>
-    </header>
+    <!-- 1. TOP ANNOUNCEMENT -->
+    <div class="top-announcement">
+        🎓 Get up to 45% merit-based scholarship on semester fee. Limited Seats. Apply Now.
+    </div>
 
-    <div class="main-container">
-        <!-- Left Banner Section -->
-        <div class="left-side">
-            <div class="banner-content">
-                <h1>Amity Tech Portal.<br><span>Master Coding to AI.</span></h1>
-                <p>One unified portal for modern developers. Master industry-ready languages, logic, and build next-gen AI agents.</p>
-                <div class="features-badges">
-                    <span class="badge">🚀 Full-Stack Tech</span>
-                    <span class="badge">🧠 AI & Automation</span>
-                    <span class="badge">⚡ Placement Ready</span>
-                </div>
+    <!-- 2. NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">AMITY UNIVERSITY ONLINE</div>
+        <div class="nav-actions">
+            <button class="btn-nav btn-apply">Apply Now</button>
+            <button class="btn-nav btn-login">Login / Register</button>
+        </div>
+    </nav>
+
+    <!-- 3. HERO STATS SECTION -->
+    <section class="hero-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>250,000+</h3>
+                <p>Learners Worldwide</p>
+            </div>
+            <div class="stat-card">
+                <h3>150+</h3>
+                <p>Global Presence Countries</p>
+            </div>
+            <div class="stat-card">
+                <h3>16,500+</h3>
+                <p>Pincodes Reached</p>
+            </div>
+            <div class="stat-card">
+                <h3>30+</h3>
+                <p>Years Academic Excellence</p>
             </div>
         </div>
+    </section>
 
-        <!-- Right Auth Section -->
-        <div class="right-side">
-            <div class="auth-container">
-                <div class="auth-tabs">
-                    <button class="tab-btn active" onclick="switchAuthTab('login')">Student Login</button>
-                    <button class="tab-btn" onclick="switchAuthTab('register')">Register Now</button>
+    <!-- 4. DISCOVER IN-DEMAND PROGRAMS SECTION -->
+    <section class="indemand-section">
+        <div class="indemand-header">
+            <h2>Discover Our In-Demand Online Programs</h2>
+            <button class="btn-explore-all" onclick="toggleProgramModal()">Explore All Programs ➔</button>
+        </div>
+
+        <!-- FILTER TABS -->
+        <div class="indemand-tabs">
+            <button class="in-tab active" onclick="filterDemandCards('all', this)">All Courses</button>
+            <button class="in-tab" onclick="filterDemandCards('ug', this)">UG Programs</button>
+            <button class="in-tab" onclick="filterDemandCards('pg', this)">PG Programs</button>
+            <button class="in-tab" onclick="filterDemandCards('spec', this)">Specializations</button>
+            <button class="in-tab" onclick="filterDemandCards('regional', this)">Regional Media</button>
+        </div>
+
+        <!-- CAROUSEL CONTAINER -->
+        <div class="carousel-wrapper">
+            <button class="scroll-btn left" onclick="scrollDemandGrid(-300)">❮</button>
+
+            <div class="indemand-cards-grid" id="indemandCardsGrid">
+                <!-- Program 1 -->
+                <div class="demand-card" data-cat="ug">
+                    <div class="card-badge">Top UG Program</div>
+                    <div class="card-body">
+                        <h3>Bachelor of Business Administration (BBA)</h3>
+                        <p class="card-desc">Earn your Online BBA in a flexible 3-year program. Learn core business concepts and gain practical insights.</p>
+                        <div class="card-details">
+                            <span>⏱ 3 Years</span>
+                            <span class="fee">₹1,99,000</span>
+                        </div>
+                        <button class="btn-brochure">Get Brochure</button>
+                    </div>
                 </div>
 
-                <div id="loginForm" class="auth-form active">
-                    <h2>Welcome Back</h2>
-                    <p class="subtitle">Enter your credentials to access your portal</p>
-                    <form onsubmit="directToDashboard(event)">
-                        <div class="input-group">
-                            <label>Username / Email *</label>
-                            <input type="email" placeholder="name@program10x.com" required>
+                <!-- Program 2 -->
+                <div class="demand-card" data-cat="pg">
+                    <div class="card-badge">QS Ranked</div>
+                    <div class="card-body">
+                        <h3>Master of Business Administration (MBA)</h3>
+                        <p class="card-desc">A dynamic blend of academic excellence, AI-powered tools, and real-world projects designed to make you industry-ready.</p>
+                        <div class="card-details">
+                            <span>⏱ 2 Years</span>
+                            <span class="fee">₹2,25,000</span>
                         </div>
-                        <div class="input-group">
-                            <label>Password *</label>
-                            <input type="password" placeholder="Enter password" required>
-                        </div>
-                        <button type="submit" class="submit-btn">Login to Portal</button>
-                    </form>
+                        <button class="btn-brochure">Get Brochure</button>
+                    </div>
                 </div>
 
-                <div id="registerForm" class="auth-form">
-                    <h2>Create Account</h2>
-                    <p class="subtitle">Join the 10X learning space</p>
-                    <form onsubmit="directToDashboard(event)">
-                        <div class="input-group">
-                            <label>Full Name *</label>
-                            <input type="text" placeholder="Enter full name" required>
+                <!-- Program 3 -->
+                <div class="demand-card" data-cat="ug">
+                    <div class="card-badge">Top UG Program</div>
+                    <div class="card-body">
+                        <h3>Bachelor of Computer Applications (BCA)</h3>
+                        <p class="card-desc">Master in-demand programming and software development skills with hands-on projects and real-world applications.</p>
+                        <div class="card-details">
+                            <span>⏱ 3 Years</span>
+                            <span class="fee">₹1,75,000</span>
                         </div>
-                        <div class="input-group">
-                            <label>Email Address *</label>
-                            <input type="email" placeholder="you@example.com" required>
-                        </div>
-                        <div class="input-group">
-                            <label>Password *</label>
-                            <input type="password" placeholder="Minimum 6 characters" required>
-                        </div>
-                        <button type="submit" class="submit-btn">Register Account</button>
-                    </form>
+                        <button class="btn-brochure">Get Brochure</button>
+                    </div>
                 </div>
+
+                <!-- Program 4 -->
+                <div class="demand-card" data-cat="pg">
+                    <div class="card-badge">Top PG Program</div>
+                    <div class="card-body">
+                        <h3>Master of Computer Applications (MCA)</h3>
+                        <p class="card-desc">Build strong programming and application development skills through a flexible 2-year online MCA program.</p>
+                        <div class="card-details">
+                            <span>⏱ 2 Years</span>
+                            <span class="fee">₹1,99,000</span>
+                        </div>
+                        <button class="btn-brochure">Get Brochure</button>
+                    </div>
+                </div>
+
+                <!-- Program 5 -->
+                <div class="demand-card" data-cat="ug">
+                    <div class="card-body">
+                        <h3>Bachelor of Commerce (B.Com)</h3>
+                        <p class="card-desc">Provides a strong foundation in business and economics, opening up career opportunities in finance and accounting.</p>
+                        <div class="card-details">
+                            <span>⏱ 3 Years</span>
+                            <span class="fee">₹1,15,000</span>
+                        </div>
+                        <button class="btn-brochure">Get Brochure</button>
+                    </div>
+                </div>
+
+                <!-- Program 6 -->
+                <div class="demand-card" data-cat="pg spec">
+                    <div class="card-badge">Cyber Tech</div>
+                    <div class="card-body">
+                        <h3>MCA in Cyber Security</h3>
+                        <p class="card-desc">Equips learners with advanced knowledge in ethical hacking, cryptography, network security, and cyber risk management.</p>
+                        <div class="card-details">
+                            <span>⏱ 2 Years</span>
+                            <span class="fee">₹2,75,000</span>
+                        </div>
+                        <button class="btn-brochure">Get Brochure</button>
+                    </div>
+                </div>
+
+                <!-- Program 7 -->
+                <div class="demand-card" data-cat="pg spec">
+                    <div class="card-badge">QS Ranked</div>
+                    <div class="card-body">
+                        <h3>MBA with Dual Specialization</h3>
+                        <p class="card-desc">Offers specializations in Finance, Marketing, HR, Business Analytics, Production, and Digital Marketing.</p>
+                        <div class="card-details">
+                            <span>⏱ 2 Years</span>
+                            <span class="fee">₹3,29,000</span>
+                        </div>
+                        <button class="btn-brochure">Get Brochure</button>
+                    </div>
+                </div>
+
+                <!-- Program 8 -->
+                <div class="demand-card" data-cat="ug spec">
+                    <div class="card-badge">HCLTech</div>
+                    <div class="card-body">
+                        <h3>BBA in Data Analytics</h3>
+                        <p class="card-desc">Combines business fundamentals with analytical skills like Python, R, and statistical visualization.</p>
+                        <div class="card-details">
+                            <span>⏱ 3 Years</span>
+                            <span class="fee">₹2,50,000</span>
+                        </div>
+                        <button class="btn-brochure">Get Brochure</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="scroll-btn right" onclick="scrollDemandGrid(300)">❯</button>
+        </div>
+    </section>
+
+    <!-- 5. EXPLORE ALL PROGRAMS POPUP MODAL -->
+    <div class="modal-overlay" id="programModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Showing All 48 Programs & 29 Certifications</h3>
+                <span class="close-btn" onclick="toggleProgramModal()">&times;</span>
+            </div>
+            <div class="program-grid-all">
+                <div class="p-item"><h4>Bachelor of Business Administration (BBA)</h4><span>3 Years | ₹1,99,000</span></div>
+                <div class="p-item"><h4>Master of Business Administration (MBA)</h4><span>2 Years | ₹2,25,000</span></div>
+                <div class="p-item"><h4>Bachelor of Computer Applications (BCA)</h4><span>3 Years | ₹1,75,000</span></div>
+                <div class="p-item"><h4>Master of Computer Applications (MCA)</h4><span>2 Years | ₹1,99,000</span></div>
+                <div class="p-item"><h4>Bachelor of Commerce (B.Com)</h4><span>3 Years | ₹1,15,000</span></div>
+                <div class="p-item"><h4>MCA in Cyber Security</h4><span>2 Years | ₹2,75,000</span></div>
+                <div class="p-item"><h4>MBA with Dual Specialization</h4><span>2 Years | ₹3,29,000</span></div>
+                <div class="p-item"><h4>BBA in Data Analytics (HCLTech)</h4><span>3 Years | ₹2,50,000</span></div>
+                <div class="p-item"><h4>BCA in Cloud and Security</h4><span>3 Years | ₹2,50,000</span></div>
+                <div class="p-item"><h4>Bachelor of Arts (BA)</h4><span>3 Years | ₹1,15,000</span></div>
+                <div class="p-item"><h4>BA Journalism & Mass Comm</h4><span>3 Years | ₹1,90,000</span></div>
+                <div class="p-item"><h4>M.Com in Financial Management</h4><span>2 Years | ₹1,50,000</span></div>
+                <div class="p-item"><h4>MA Journalism & Mass Comm</h4><span>2 Years | ₹1,90,000</span></div>
+                <div class="p-item"><h4>MA Public Policy & Governance</h4><span>2 Years | ₹1,50,000</span></div>
+                <div class="p-item"><h4>BA General (Malayalam Medium)</h4><span>3 Years | ₹90,000</span></div>
+                <div class="p-item"><h4>BA General (Tamil Medium)</h4><span>3 Years | ₹90,000</span></div>
+                <div class="p-item"><h4>BA General (Kannada Medium)</h4><span>3 Years | ₹90,000</span></div>
+                <div class="p-item"><h4>BA General (Telugu Medium)</h4><span>3 Years | ₹90,000</span></div>
             </div>
         </div>
     </div>
 
+    <!-- 6. FOOTER -->
+    <footer>
+        <p>© 2026 Amity Online - India's No.1 Online University. All Rights Reserved.</p>
+        <p style="margin-top: 5px;">Toll Free: 1800-102-3434 | Student Support: +91-88-263-34455</p>
+    </footer>
+
+    <!-- 7. JAVASCRIPT -->
     <script>
-        function switchAuthTab(type) {
-            const tabs = document.querySelectorAll('.tab-btn');
-            const forms = document.querySelectorAll('.auth-form');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            forms.forEach(form => form.classList.remove('active'));
-            if (type === 'login') {
-                tabs[0].classList.add('active');
-                document.getElementById('loginForm').classList.add('active');
-            } else {
-                tabs[1].classList.add('active');
-                document.getElementById('registerForm').classList.add('active');
-            }
+        // HORIZONTAL SCROLL FUNCTION
+        function scrollDemandGrid(distance) {
+            document.getElementById('indemandCardsGrid').scrollBy({ left: distance, behavior: 'smooth' });
         }
 
-        function directToDashboard(e) {
-            e.preventDefault();
-            window.location.href = "dashboard.html";
+        // TAB FILTER FUNCTION
+        function filterDemandCards(category, btn) {
+            document.querySelectorAll('.in-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+
+            const cards = document.querySelectorAll('.demand-card');
+            cards.forEach(card => {
+                const cats = card.getAttribute('data-cat').split(' ');
+                if (category === 'all' || cats.includes(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // MODAL POPUP TOGGLE
+        function toggleProgramModal() {
+            const modal = document.getElementById('programModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
     </script>
 </body>
