@@ -3,670 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online University Programs</title>
-    <style>
-        /* ================= GLOBAL STYLES ================= */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: #f8fafc;
-            color: #0f172a;
-        }
-
-        /* ================= TOP OFFER BANNER ================= */
-        .top-offer-bar {
-            background: linear-gradient(90deg, #0b1f3a 0%, #1e3a8a 100%);
-            color: #ffffff;
-            text-align: center;
-            padding: 10px 15px;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        /* ================= NAVBAR ================= */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 5%;
-            background: #ffffff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: 800;
-            color: #0b1f3a;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo-badge {
-            background: #facc15;
-            color: #000;
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        .btn-apply-now {
-            background: #facc15;
-            color: #000000;
-            font-weight: 700;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: transform 0.2s;
-        }
-
-        .btn-apply-now:hover {
-            transform: scale(1.03);
-        }
-
-        /* ================= SEARCH BAR ================= */
-        .search-container {
-            padding: 15px 5%;
-            background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            border-radius: 25px;
-            padding: 10px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .search-box input {
-            border: none;
-            background: transparent;
-            width: 100%;
-            outline: none;
-            font-size: 14px;
-            color: #334155;
-        }
-
-        /* ================= HERO SECTION ================= */
-        .hero-banner {
-            margin: 20px 5%;
-            background: linear-gradient(135deg, #0b1f3a 0%, #1e3a8a 100%);
-            border-radius: 16px;
-            padding: 35px 25px;
-            color: #ffffff;
-            text-align: center;
-        }
-
-        .hero-tags {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-
-        .hero-tag {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .hero-title {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        .hero-title span {
-            color: #facc15;
-        }
-
-        .hero-subtext {
-            font-size: 13px;
-            opacity: 0.9;
-            margin-bottom: 25px;
-        }
-
-        /* Featured Thumbnails in Hero */
-        .hero-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 12px;
-            max-width: 850px;
-            margin: 0 auto 25px auto;
-        }
-
-        .hero-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 15px 10px;
-            text-align: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .hero-card h4 {
-            font-size: 14px;
-            color: #ffffff;
-            margin-bottom: 4px;
-        }
-
-        .hero-card p {
-            font-size: 11px;
-            color: #cbd5e1;
-        }
-
-        /* Hero Action Buttons */
-        .hero-actions {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .btn-yellow {
-            background: #facc15;
-            color: #000;
-            font-weight: 700;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .btn-white {
-            background: #ffffff;
-            color: #0b1f3a;
-            font-weight: 700;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        /* ================= STATS BAR ================= */
-        .stats-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 20px 5%;
-        }
-
-        .stat-box {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            padding: 15px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .stat-box h3 {
-            font-size: 18px;
-            color: #0b1f3a;
-            font-weight: 800;
-        }
-
-        .stat-box p {
-            font-size: 12px;
-            color: #64748b;
-        }
-
-        /* ================= IN-DEMAND PROGRAMS SECTION ================= */
-        .indemand-section {
-            padding: 30px 5%;
-        }
-
-        .section-title {
-            font-size: 22px;
-            color: #0b1f3a;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        .btn-explore-outer {
-            background: #0b1f3a;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-
-        /* Filter Pills */
-        .filter-scroll {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-            scrollbar-width: none;
-        }
-
-        .filter-scroll::-webkit-scrollbar { display: none; }
-
-        .filter-pill {
-            background: #e2e8f0;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #475569;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .filter-pill.active {
-            background: #0b1f3a;
-            color: #ffffff;
-        }
-
-        /* Program Cards Slider */
-        .cards-slider-wrapper {
-            position: relative;
-        }
-
-        .cards-grid {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: 10px 5px;
-            scrollbar-width: none;
-        }
-
-        .cards-grid::-webkit-scrollbar { display: none; }
-
-        .program-card {
-            min-width: 280px;
-            max-width: 280px;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .card-badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: #facc15;
-            color: #000;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 4px;
-            z-index: 2;
-        }
-
-        .card-img-placeholder {
-            height: 140px;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 700;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .card-content {
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            height: 100%;
-        }
-
-        .card-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #0f172a;
-            line-height: 1.3;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: #64748b;
-            font-weight: 600;
-            border-top: 1px solid #f1f5f9;
-            padding-top: 10px;
-            margin-top: auto;
-        }
-
-        .btn-brochure-blue {
-            background: #0b1f3a;
-            color: #ffffff;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        /* Banner Blue Dark Below Carousel */
-        .promo-banner {
-            margin-top: 30px;
-            background: #0b1f3a;
-            border-radius: 16px;
-            padding: 30px 20px;
-            color: #ffffff;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .promo-banner h3 {
-            font-size: 22px;
-            margin-bottom: 8px;
-        }
-
-        .promo-banner h3 span {
-            color: #facc15;
-        }
-
-        .promo-banner p {
-            font-size: 12px;
-            color: #cbd5e1;
-            margin-bottom: 20px;
-        }
-
-        /* ================= POPUP MODAL ================= */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-body {
-            background: #ffffff;
-            width: 90%;
-            max-width: 800px;
-            max-height: 80vh;
-            border-radius: 16px;
-            padding: 25px;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 10px;
-        }
-
-        .modal-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 12px;
-        }
-
-        .modal-item {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 12px;
-            border-radius: 8px;
-        }
-
-        .modal-item h5 {
-            font-size: 13px;
-            color: #0b1f3a;
-            margin-bottom: 4px;
-        }
-
-        .modal-item p {
-            font-size: 11px;
-            color: #64748b;
-        }
-    </style>
+    <title>Online University Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
-    <!-- 1. TOP OFFER BANNER -->
-    <div class="top-offer-bar">
-        Get up to 45% merit-based scholarship on semester fee. Limited Seats. Apply Now.
+    <!-- Top Announcement Bar -->
+    <div class="bg-blue-900 text-white text-center text-xs sm:text-sm py-2 px-4 font-medium">
+        Get up to 45% merit-based scholarship. Limited Seats. <a href="#" class="underline font-bold">Apply Now</a>
     </div>
 
-    <!-- 2. NAVBAR -->
-    <nav class="navbar">
-        <div class="logo">
-            UNIVERSITY 
-            <span class="logo-badge">ONLINE</span>
+    <!-- Header / Navbar -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="text-2xl font-bold text-blue-900">MY UNIVERSITY</div>
+            <nav class="hidden md:flex space-x-6 text-sm font-semibold">
+                <a href="#" class="hover:text-blue-600">Programs</a>
+                <a href="#" class="hover:text-blue-600">About Us</a>
+                <a href="#" class="hover:text-blue-600">Placements</a>
+                <a href="#" class="hover:text-blue-600">Support</a>
+            </nav>
+            <button class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-5 py-2 rounded-lg text-sm transition">
+                Apply Now
+            </button>
         </div>
-        <button class="btn-apply-now">Apply Now</button>
-    </nav>
+    </header>
 
-    <!-- 3. SEARCH BAR -->
-    <div class="search-container">
-        <div class="search-box">
-            <input type="text" placeholder="Search Programs (e.g. MBA, BCA, Cybersecurity)...">
-            <span>🔍</span>
-        </div>
-    </div>
+    <!-- Hero Section -->
+    <section class="bg-blue-900 text-white py-12 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-blue-800 text-yellow-400 text-xs font-semibold px-3 py-1 rounded-full border border-yellow-400">
+                UGC Entitled • Globally Recognized
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold mt-4 leading-tight">
+                India's No. #1 Online University
+            </h1>
+            <p class="text-gray-300 mt-2 text-sm sm:text-base">
+                On-Campus Degree Equivalence & AI-Powered Immersive Learning
+            </p>
 
-    <!-- 4. HERO BANNER -->
-    <section class="hero-banner">
-        <div class="hero-tags">
-            <span class="hero-tag">🎓 UGC Entitled</span>
-            <span class="hero-tag">🌐 Globally Recognized</span>
-        </div>
-        <h1 class="hero-title">India's <span>No. #1</span> Online University</h1>
-        <p class="hero-subtext">🎓 On-Campus Degree Equivalence | 🤖 AI-Powered Immersive Learning</p>
-
-        <!-- Thumbnails -->
-        <div class="hero-grid">
-            <div class="hero-card">
-                <h4>MBA</h4>
-                <p>14 Specializations</p>
+            <!-- Buttons -->
+            <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-yellow-500 text-black font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-400">
+                    Get Free Counselling
+                </button>
+                <button class="bg-white text-blue-900 font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100">
+                    Explore All Programs
+                </button>
             </div>
-            <div class="hero-card">
-                <h4>BBA</h4>
-                <p>2 Specializations</p>
-            </div>
-            <div class="hero-card">
-                <h4>MCA</h4>
-                <p>6 Specializations</p>
-            </div>
-            <div class="hero-card">
-                <h4>MBA Tech</h4>
-                <p>Construction Mgmt</p>
-            </div>
-        </div>
-
-        <div class="hero-actions">
-            <button class="btn-yellow">Get Free Counselling</button>
-            <button class="btn-white" onclick="toggleModal()">Explore All Programs</button>
         </div>
     </section>
 
-    <!-- 5. STATS BAR -->
-    <div class="stats-container">
-        <div class="stat-box">
-            <h3>16,500+</h3>
-            <p>Pincodes Reached Across India</p>
-        </div>
-        <div class="stat-box">
-            <h3>30+</h3>
-            <p>Years Academic Excellence</p>
-        </div>
-    </div>
-
-    <!-- 6. IN-DEMAND PROGRAMS SECTION -->
-    <section class="indemand-section">
-        <h2 class="section-title">Discover Our In-Demand Online Programs</h2>
-        <button class="btn-explore-outer" onclick="toggleModal()">Explore All Programs</button>
-
-        <!-- Filters -->
-        <div class="filter-scroll">
-            <button class="filter-pill active" onclick="filterCards('all', this)">Trending</button>
-            <button class="filter-pill" onclick="filterCards('management', this)">Management</button>
-            <button class="filter-pill" onclick="filterCards('tech', this)">Technology</button>
-            <button class="filter-pill" onclick="filterCards('arts', this)">Arts & Humanities</button>
-            <button class="filter-pill" onclick="filterCards('commerce', this)">Commerce</button>
-        </div>
-
-        <!-- Cards Slider -->
-        <div class="cards-slider-wrapper">
-            <div class="cards-grid" id="cardsGrid">
-
-                <!-- Card 1 -->
-                <div class="program-card" data-category="management">
-                    <span class="card-badge">Trending</span>
-                    <div class="card-img-placeholder">
-                        MBA in Hospital & Healthcare Management
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">MBA in Hospital & Healthcare Management</h3>
-                        <div class="card-meta">
-                            <span>⏱ 24 Months</span>
-                            <span>INR 3,29,000</span>
-                        </div>
-                        <button class="btn-brochure-blue">Get Brochure</button>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="program-card" data-category="tech">
-                    <span class="card-badge">Trending</span>
-                    <div class="card-img-placeholder">
-                        BCA with Specialization in FinTech & AI
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">BCA with Specialization in Financial Technology & AI</h3>
-                        <div class="card-meta">
-                            <span>⏱ 36 Months</span>
-                            <span>INR 2,75,000</span>
-                        </div>
-                        <button class="btn-brochure-blue">Get Brochure</button>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="program-card" data-category="management">
-                    <span class="card-badge">Top UG</span>
-                    <div class="card-img-placeholder">
-                        Bachelor of Business Administration (BBA)
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Bachelor of Business Administration (BBA)</h3>
-                        <div class="card-meta">
-                            <span>⏱ 36 Months</span>
-                            <span>INR 1,99,000</span>
-                        </div>
-                        <button class="btn-brochure-blue">Get Brochure</button>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="program-card" data-category="tech">
-                    <span class="card-badge">Top PG</span>
-                    <div class="card-img-placeholder">
-                        Master of Computer Applications (MCA)
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Master of Computer Applications (MCA)</h3>
-                        <div class="card-meta">
-                            <span>⏱ 24 Months</span>
-                            <span>INR 1,99,000</span>
-                        </div>
-                        <button class="btn-brochure-blue">Get Brochure</button>
-                    </div>
-                </div>
-
+    <!-- Stats Bar -->
+    <section class="bg-white py-8 border-b">
+        <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>
+                <h3 class="text-2xl font-bold text-blue-900">250,000+</h3>
+                <p class="text-xs text-gray-500 uppercase font-semibold">Learners</p>
             </div>
-        </div>
-
-        <!-- Promo Banner -->
-        <div class="promo-banner">
-            <h3>Global Education Has a New Address: <span>Yours.</span></h3>
-            <p>No matter your career path, we have programs tailored for tomorrow's global opportunities.</p>
-            <button class="btn-yellow">Find Your Program</button>
+            <div>
+                <h3 class="text-2xl font-bold text-blue-900">150+</h3>
+                <p class="text-xs text-gray-500 uppercase font-semibold">Countries</p>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold text-blue-900">16,500+</h3>
+                <p class="text-xs text-gray-500 uppercase font-semibold">Pincodes</p>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold text-blue-900">30+</h3>
+                <p class="text-xs text-gray-500 uppercase font-semibold">Years Excellence</p>
+            </div>
         </div>
     </section>
 
-    <!-- 7. POPUP MODAL -->
-    <div class="modal-overlay" id="allModal">
-        <div class="modal-body">
-            <div class="modal-header">
-                <h3>All Available Programs</h3>
-                <span style="cursor:pointer; font-size: 20px;" onclick="toggleModal()">✖</span>
-            </div>
-            <div class="modal-grid">
-                <div class="modal-item"><h5>MBA Dual Specialization</h5><p>2 Years | INR 3,29,000</p></div>
-                <div class="modal-item"><h5>BBA General</h5><p>3 Years | INR 1,99,000</p></div>
-                <div class="modal-item"><h5>BCA Cybersecurity</h5><p>3 Years | INR 2,50,000</p></div>
-                <div class="modal-item"><h5>MCA Data Science</h5><p>2 Years | INR 2,25,000</p></div>
-                <div class="modal-item"><h5>B.Com General</h5><p>3 Years | INR 1,15,000</p></div>
-                <div class="modal-item"><h5>BA Journalism</h5><p>3 Years | INR 1,90,000</p></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // Modal Toggle
-        function toggleModal() {
-            const modal = document.getElementById('allModal');
-            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
-        }
-
-        // Filter Logic
-        function filterCards(cat, element) {
-            document.querySelectorAll('.filter-pill').forEach(el => el.classList.remove('active'));
-            element.classList.add('active');
-
-            const cards = document.querySelectorAll('.program-card');
-            cards.forEach(card => {
-                if (cat === 'all' || card.getAttribute('data-category') === cat) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-    </script>
 </body>
 </html>
